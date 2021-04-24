@@ -9,7 +9,7 @@ License: private
 require_once dirname(__FILE__) . '\\emmauspag/modelo.php';
 require_once dirname(__FILE__) . '\emmauspag/functions.php';
 
-echo plugins_url();
+
 
 add_action('init', 'fkm_init', 0);
 function fkm_init() {

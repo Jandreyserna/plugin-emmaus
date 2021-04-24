@@ -30,7 +30,6 @@ function sidebar(){
 
 add_action('widgets_init', 'sidebar');
 
-echo plugins_url('/emmaus/emmauspag/style.css');
 
 
 //echo get_stylesheet_uri();

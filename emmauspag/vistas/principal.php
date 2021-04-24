@@ -1,12 +1,12 @@
   <div class="principal  col-6 mx-auto">
-    <?php $url = urlemma($_SERVER['REQUEST_URI']);
-
+    <?php $url = plugins_url();
+    echo plugins_url();
      ?>
 
 
     <div class="otro-lado text-center">
       <blockquote class="blockquote text-center">
-        <img src="<?=$url?>/img/activos.png"
+        <img src="<?=$url?>/emmaus/emmauspag/img/activos.png"
          class="img-responsive img-rounded navbar-brand " width="150px" height="150px" >
         <footer class="blockquote-footer">Estudiantes Activos <cite title="Source Title">Emmaus-pereira</cite></footer>
       </blockquote>
