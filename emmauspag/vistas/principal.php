@@ -6,7 +6,7 @@
 
     <div class="otro-lado text-center">
       <blockquote class="blockquote text-center">
-        <img src="<?=$url?>/emmaus/emmauspag/img/activos.png"
+        <img src="<?=plugins_url('/pluglin-emmaus/emmauspag/img/activos.png')?>"
          class="img-responsive img-rounded navbar-brand " width="150px" height="150px" >
         <footer class="blockquote-footer">Estudiantes Activos <cite title="Source Title">Emmaus-pereira</cite></footer>
       </blockquote>

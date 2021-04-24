@@ -37,7 +37,7 @@ add_action('widgets_init', 'sidebar');
 
 
 function enqueue_styles() {
- wp_register_style('emmaus_style', plugins_url('/emmaus/emmauspag/style.css'), array(), time());
+ wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
  wp_register_style('theme_style_2', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), time());
@@ -67,7 +67,7 @@ add_action('admin_enqueue_scripts', 'enqueue_styles');
 # ========== AJAX ==========
 # ==========================
 function emmaus_ajax() {
-  wp_enqueue_script ('emmaus_ajax_js', plugins_url('/emmaus/emmauspag/js/ajax.js'), array('jquery'), time());
+  wp_enqueue_script ('emmaus_ajax_js', plugins_url('/plugin-emmaus/emmauspag/js/ajax.js'), array('jquery'), time());
   wp_localize_script('emmaus_ajax_js', 'ajax_var', array(
     'url'    => admin_url('admin-ajax.php'),
     'nonce'  => wp_create_nonce('my-ajax-nonce'),
