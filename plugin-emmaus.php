@@ -78,7 +78,7 @@ function fkm_admin_menu(){
 
 
 function core_emmaus(){
-  require_once dirname(__FILE__) . '\\emmauspag/vistas/principal.php';
+  require_once dirname(__FILE__) . '/emmauspag/vistas/principal.php';
 }
 
 function estudent_admin()
@@ -88,21 +88,21 @@ function estudent_admin()
   $llaves_foranes = $modelo_estudiantes->get_key_foreaneas();
   $colum_name = $modelo_estudiantes->columnas_sin_llaves();
 
-  require_once dirname(__FILE__) . '\\emmauspag/vistas/visEstudiante.php';
+  require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
 }
 
 function curso_admin(){
-  require_once dirname(__FILE__). '\\emmauspag/vistas/cursos.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos.php';
 }
 
 function diploma_admin(){
-  require_once dirname(__FILE__). '\\emmauspag/vistas/diplomas.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
 }
 
 function validacion_admin(){
-  require_once dirname(__FILE__). '\\emmauspag/vistas/validacion.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
 }
 
 function certificado_admin(){
-  require_once dirname(__FILE__). '\\emmauspag/vistas/certificado.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/certificado.php';
 }

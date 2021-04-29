@@ -40,6 +40,9 @@ function enqueue_styles() {
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
+ wp_register_style('emmaus_footable', plugins_url('plugin-emmaus/emmauspag/css/footable.bootstrap.min.css'), array(), time());
+ wp_enqueue_style('emmaus_footable');
+
  wp_register_style('theme_style_2', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), time());
  wp_enqueue_style('theme_style_2');
 
@@ -54,6 +57,9 @@ function enqueue_styles() {
 
  wp_register_script('theme_style_6', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), time());
  wp_enqueue_script('theme_style_6');
+
+ wp_register_script('emmaus_footable_scripts', plugins_url('plugin-emmaus/emmauspag/js/footable.min.js'), array(''), time());
+ wp_enqueue_script('emmaus_footable_scripts');
  // wp_register_script('theme_script', '<script src="https://unpkg.com/feather-icons"></script>', array(), time(),true);
  // wp_enqueue_script('theme_script');
 
