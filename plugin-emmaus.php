@@ -31,19 +31,54 @@ function fkm_admin_menu(){
   add_submenu_page(
   'emmaus',
   'ESTUDIANTES',
-  'ESTUDIANTE ',
+  'ESTUDIANTES ',
   'administrator',
   'estudiante',
   'estudent_admin',
   1 );
+
+  add_submenu_page(
+  'emmaus',
+  'Cursos',
+  'Cursos',
+  'administrator',
+  'curso',
+  'curso_admin',
+  2 );
+
+  add_submenu_page(
+  'emmaus',
+  'Diplomas',
+  'Diplomas',
+  'administrator',
+  'diploma',
+  'diploma_admin',
+  3 );
+
+  add_submenu_page(
+  'emmaus',
+  'Validaciones',
+  'Validaciones',
+  'administrator',
+  'validación',
+  'validacion_admin',
+  4 );
+
+  add_submenu_page(
+  'emmaus',
+  'Certificados',
+  'Certificados',
+  'administrator',
+  'certificado',
+  'certificado_admin',
+  5 );
 
 }
 
 
 
 function core_emmaus(){
-  echo "aloha";
-  require_once dirname(__FILE__) . '\\emmauspag/vistas/principal.php';
+  require_once dirname(__FILE__) . '/emmauspag/vistas/principal.php';
 }
 
 function estudent_admin()
@@ -53,11 +88,21 @@ function estudent_admin()
   $llaves_foranes = $modelo_estudiantes->get_key_foreaneas();
   $colum_name = $modelo_estudiantes->columnas_sin_llaves();
 
-  // echo "<pre>";
-  // print_r($modelo_estudiantes);
-  // echo "</pre>";
+  require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
+}
 
+function curso_admin(){
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos.php';
+}
 
+function diploma_admin(){
+  require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
+}
 
-  require_once dirname(__FILE__) . '\\emmauspag/vistas/visEstudiante.php';
+function validacion_admin(){
+  require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
+}
+
+function certificado_admin(){
+  require_once dirname(__FILE__). '/emmauspag/vistas/certificado.php';
 }
