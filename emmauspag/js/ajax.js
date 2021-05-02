@@ -29,7 +29,11 @@ jQuery(document).ready(function ($) {
         });
 
 
-	         $('#tabla1').DataTable();
+	         $('#tabla1').DataTable({
+             language: {
+               url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+             }
+           });
 
 
 
