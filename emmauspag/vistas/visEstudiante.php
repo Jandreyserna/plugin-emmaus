@@ -2,6 +2,7 @@
   <div class="titulo text-center">
     <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
   </div>
+
   <form class="d-md-flex form-search-estudiantes" method="post"  >
         <input type="hidden" name="boton" value="buscador-nombre">
         <input type="hidden" name="Tabla" value="estudiantes">
@@ -12,35 +13,49 @@
   <div class="contenedor-search">
 
   </div>
-
-  <table class="table" id="tabla-buscador">
+  <?php
+  $columnas = $modelo_estudiantes->columnas();
+  $info = $modelo_estudiantes->traer_datos();
+  // echo "<pre>";
+  // print_r($info[0]);
+  // echo "</pre>";
+  ?>
+  <table class="display" id="tabla1">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Ciudad</th>
-      <th scope="col">Cursos Terminados</th>
-      <th scope="col">Ultimo Curso</th>
-      <th scope="col">Fecha</th>
+      <?php
+      $n = 0;
+      foreach ($columnas as $key => $title) {
+                  if($n < 6){
+                    echo"<th scope='col'>".$title['COLUMN_NAME']."</th>";
+                    $n++;
+                  }
+
+    }?>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">0</th>
-      <td>Jose Mario</td>
-      <td>Dosquebradas</td>
-      <td>5</td>
-      <td>el hombre perfecto</td>
-      <td>05/05/2020</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Flikimax</td>
-      <td>Dosquebradas</td>
-      <td>Todo bebe</td>
-      <td>Amado se yo mismo</td>
-      <td>01/12/2021</td>
-    </tr>
+
+      <?php
+      for ($x=0; $x < sizeof($info); $x++) {
+          echo  "<tr>";
+          $n = 0;
+          foreach ($info[$x] as $key => $dato) {
+                    if($n < 6 && $dato != 'IdEstudiante'){
+                    echo"<td>".$dato."</td>";
+
+                  }else if($dato == 'IdEstudiante'){
+                      print_r($dato[$n]);
+                        echo"<th scope='row'>".$dato[$n]."</th>";
+                  }
+                  $n++;
+
+                }
+            echo "</tr>";
+              }?>
+
+
+
   </tbody>
 </table>
 
@@ -72,9 +87,6 @@
     <input type="hidden" name="tabla" value="estudiantes"/>
     <input  type="hidden" name="boton" value="ingreso"/>
     <?php
-
-    
-
 
 
     foreach($llaves_foranes as $noimporta)

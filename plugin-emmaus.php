@@ -86,6 +86,10 @@ function estudent_admin()
   $modelo_estudiantes = new modelo('estudiantes');
   $primary_Key = $modelo_estudiantes->primary_key();
   $llaves_foranes = $modelo_estudiantes->get_key_foreaneas();
+  echo "<pre>";
+  echo "hola";
+  print_r ($llaves_foranes);
+  echo "</pre>";
   $colum_name = $modelo_estudiantes->columnas_sin_llaves();
 
   require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
