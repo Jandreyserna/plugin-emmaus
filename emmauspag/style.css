@@ -1,4 +1,8 @@
 
+#wpfooter{
+  position: relative;
+}
+
 a.class_a_href{
   cursor: default;
   color: white;

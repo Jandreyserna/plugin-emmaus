@@ -10,9 +10,7 @@
         <!-- <input id="Fbuscar" class="btn btn-outline-success" type="submit" value="BUSCAR"/> -->
   </form>
 
-  <div class="contenedor-search">
 
-  </div>
   <?php
   $columnas = $modelo_estudiantes->columnas();
   $info = $modelo_estudiantes->traer_datos();
@@ -25,7 +23,8 @@
       <th scope='col'>DOCUMENTO</th>
       <th scope='col'>NOMBRES</th>
       <th scope='col'>APELLIDOS</th>
-      <th scope='col'>INFORMACION</th>
+      <th scope='col'>info</th>
+      <th scope='col'>actu</th>
       <th></th>
     </tr>
 
@@ -43,15 +42,19 @@
                   } else if($n < 7){
                         $n++;
                         echo"<td>"."<button class='info_complete' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
+                    }else if($n == 7){
+                        $n++;
+                        echo"<td>"."<button class='actualizar-estudiantes' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
                     }
                 }
             echo "</tr>";
               }?>
   </tbody>
 </table>
+</div>
+<div class="contenedor-search">
 
 </div>
-
 <div class="crudd">
   <button class="btn btn-primary" type="button" name="button">
 

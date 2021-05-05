@@ -27,23 +27,71 @@ jQuery(document).ready(function ($) {
         //     });
         //
         // });
-
-	          var tabla = $('#tabla1').DataTable({
-             language: {
-               url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
-             }
-           });
-
-
     // }
 
+//--------------------------------------------//
+//-------------tabla con ajax-----------------//
+//--------------------------------------------//
+
+		var tabla = $('#tabla1').DataTable({
+		 language: {
+			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		 }
+	 });
+
+	 //--------------------------------------------//
+	 //-------BOTON DE INFO COMPLETA CON AJAX------//
+	 //--------------------------------------------//
+
       $("#tabla1").on("click", ".info_complete", function(){
-        var data = $('#tabla1').row( $(this).parent("tr") ).data();
-        console.log(data);
+
+				var padre = $(this).closest("tr");
+				var id = $('.sorting_1', padre).text();
+
+				console.log(id);
+
+				jQuery.ajax({
+                type: "post",
+                url: ajax_var.url,
+
+                data: {
+                    'action' : ajax_var.action,
+                    'nonce'  : ajax_var.nonce,
+										'id'     : id
+                },
+                success: function(result){
+                    console.log('Todo ok.');
+                    jQuery('.contenedor-search').html(result);
+                }
+				    });
       });
 
-  // console.log(tabla.row);
-    // listar();
+			//--------------------------------------------//
+		  //---BOTON DE ACTUALIZAR COMPLETA CON AJAX----//
+		  //--------------------------------------------//
+
+			$("#tabla1").on("click", ".actualizar-estudiantes", function(){
+
+				var padre = $(this).closest("tr");
+				var id = $('.sorting_1', padre).text();
+
+				jQuery.ajax({
+                type: "post",
+                url: ajax_var.url,
+
+                data: {
+                    'action' : 'event_list2',
+										'id' 		 : id
+
+                },
+                success: function(result){
+                    console.log('Todo ok 2.');
+                    jQuery('.contenedor-search').html(result);
+                }
+				    });
+      });
+
+
 });
 
   // var listar = function(){
