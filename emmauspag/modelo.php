@@ -77,10 +77,14 @@ class Modelo
     $results = $this->wpdb->get_results(
           "SELECT *
             FROM information_schema.KEY_COLUMN_USAGE
-            WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}' AND
-            KEY_COLUMN_USAGE.CONSTRAINT_NAME LIKE '%fk_Es-%';",
+            WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'
+            AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'dbemmaus'
+            AND KEY_COLUMN_USAGE.CONSTRAINT_NAME LIKE '%fk_Es-%'",
            'ARRAY_A'
          );
+         echo "<pre>";
+         print_r($results);
+         echo "</pre>";
 
     #if (isset($results[0])) $this->key_foreaneas = $results;
 

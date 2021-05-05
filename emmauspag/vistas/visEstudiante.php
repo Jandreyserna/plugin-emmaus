@@ -16,23 +16,19 @@
   <?php
   $columnas = $modelo_estudiantes->columnas();
   $info = $modelo_estudiantes->traer_datos();
-  // echo "<pre>";
-  // print_r($info[0]);
-  // echo "</pre>";
   ?>
   <table class="display" id="tabla1">
   <thead>
     <tr>
-      <?php
-      $n = 0;
-      foreach ($columnas as $key => $title) {
-                  if($n < 6){
-                    echo"<th scope='col'>".$title['COLUMN_NAME']."</th>";
-                    $n++;
-                  }
-
-    }?>
+      <th scope='col'>ID</th>
+      <th scope='col'>IDPROMOTOR</th>
+      <th scope='col'>DOCUMENTO</th>
+      <th scope='col'>NOMBRES</th>
+      <th scope='col'>APELLIDOS</th>
+      <th scope='col'>INFORMACION</th>
+      <th></th>
     </tr>
+
   </thead>
   <tbody>
 
@@ -41,26 +37,18 @@
           echo  "<tr>";
           $n = 0;
           foreach ($info[$x] as $key => $dato) {
-                    if($n < 6 && $dato != 'IdEstudiante'){
+                    if($n < 6 ){
                     echo"<td>".$dato."</td>";
-
-                  }else if($dato == 'IdEstudiante'){
-                      print_r($dato[$n]);
-                        echo"<th scope='row'>".$dato[$n]."</th>";
-                  }
                   $n++;
-
+                  } else if($n < 7){
+                        $n++;
+                        echo"<td>"."<button class='info_complete' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
+                    }
                 }
             echo "</tr>";
               }?>
-
-
-
   </tbody>
 </table>
-
-
-
 
 </div>
 

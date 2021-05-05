@@ -33,6 +33,7 @@ add_action('widgets_init', 'sidebar');
 
 
 //echo get_stylesheet_uri();
+
 // registro de los style para los css de la pagina
 
 
@@ -46,18 +47,11 @@ function enqueue_styles() {
  wp_register_style('emmaus_datatable', plugins_url('plugin-emmaus/emmauspag/css/jquery.dataTables.min.css'), time());
  wp_enqueue_style('emmaus_datatable');
 
- wp_register_style('emmaus_footable', plugins_url('plugin-emmaus/emmauspag/css/footable.bootstrap.min.css'), array(), time());
- wp_enqueue_style('emmaus_footable');
-
  wp_register_style('theme_style_2', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), time());
  wp_enqueue_style('theme_style_2');
 
  wp_register_script('jquery', plugins_url('\\plugin-emmaus/emmauspag/js/jquery-3.6.0.min.js'),false , time());
  wp_enqueue_script('jquery');
-
- // wp_register_script('JQUERY_AJAX', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), time());
- // wp_enqueue_script('JQUERY_AJAX');
-
 
  wp_register_script('bootstraps', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js',array('jquery','theme_style_3'), time() );
  wp_enqueue_script('bootstraps');
@@ -67,11 +61,6 @@ function enqueue_styles() {
 
  wp_register_script('theme_style_5', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), time());
  wp_enqueue_script('theme_style_5');
-
-
-
- // wp_register_script('emmaus_footable_scripts', plugins_url('\\plugin-emmaus/emmauspag/js/footable.min.js'), array(), time());
- // wp_enqueue_script('emmaus_footable_scripts');
 
  wp_register_script('emmaus_datatable_scripts',plugins_url('\\plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
  wp_enqueue_script('emmaus_datatable_scripts');
