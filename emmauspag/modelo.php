@@ -147,13 +147,16 @@ class Modelo
   }
 
   public function consulta_dato($dato){
+    print_r($dato);
     $informacion = $this->wpdb->get_results(
           "SELECT *
           FROM `estudiantes`
-          WHERE IdEstudent = '$dato'
+          WHERE `IdEstudiante` = $dato
           ",
            'ARRAY_A'
          );
     return (isset($informacion[0])) ? $informacion : null;
+
+    // return (if(!empty($informacion)) ? $informacion : null;
   }
 }

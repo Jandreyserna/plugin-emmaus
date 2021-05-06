@@ -81,11 +81,12 @@ jQuery(document).ready(function ($) {
 
                 data: {
                     'action' : 'event_list2',
+										'nonce'  : ajax_var.nonce,
 										'id' 		 : id
 
                 },
                 success: function(result){
-                    console.log('Todo ok 2.');
+                    console.log(id);
                     jQuery('.contenedor-search').html(result);
                 }
 				    });

@@ -85,16 +85,20 @@ function boton_obtener_info_ajax() {
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
 
+# ==============================================
+# ========== AJAX BOTON DE Informacion==========
+# ==============================================
+
 add_action('wp_ajax_nopriv_event-list', 'info_complete');
 add_action('wp_ajax_event-list', 'info_complete');
 
 
-# ==========================
-# ========== AJAX ==========
-# ==========================
+# ==============================================
+# ========== AJAX BOTON DE Actualizar ==========
+# ==============================================
 
-// add_action('wp_ajax_nopriv_event_list2', 'form_update');
-// add_action('wp_ajax_event_list2', 'form_update');
+ add_action('wp_ajax_nopriv_event_list2', 'form_update');
+ add_action('wp_ajax_event_list2', 'form_update');
 
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag

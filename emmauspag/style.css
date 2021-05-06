@@ -1,4 +1,8 @@
 
+.btn-primary{
+  background: #24BB14 !important;
+}
+
 #wpfooter{
   position: relative;
 }
@@ -37,7 +41,7 @@ button.btn{
 
 a.btn-crudd{
   cursor: default;
-  color: white;
+  color: #0044BB;
 }
 
 button.boton_para_volver{

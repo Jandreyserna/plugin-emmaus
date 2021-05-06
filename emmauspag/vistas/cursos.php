@@ -19,7 +19,7 @@
   </select>
 </div>
 
-<button class="btn btn-primary" type="button" name="button">
+<button class="btn btn-outline-success" type="button" name="button">
   <div class="container">
     <a href="#anadir" class="btn-crudd btn-sucess" data-toggle="collapse">Añadir Nuevo Curso</a>
   </div>
