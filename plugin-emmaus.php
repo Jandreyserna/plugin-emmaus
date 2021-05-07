@@ -6,7 +6,8 @@ Version: 0.1
 Author: Jandrey Steven Serna
 License: private
 */
-require_once dirname(__FILE__) . '/emmauspag/modelo.php';
+require_once dirname(__FILE__) . '/emmauspag/modelopromotor.php';
+require_once dirname(__FILE__) . '/emmauspag/modelogeneral.php';
 require_once dirname(__FILE__) . '/emmauspag/modeloestudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/functions_ajax.php';

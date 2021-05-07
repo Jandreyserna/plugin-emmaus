@@ -65,14 +65,23 @@ function info_complete(){
 function form_update(){
   if (!empty($_POST['id'])){
      $modelo = new modelo('estudiantes');
-
+     $promotor = new Modelo_promotor;
+     $promotores = $promotor-> traer_promotor();
       $datos = $modelo->consulta_dato($_POST['id']);
+      foreach ($datos as $iglesias => $iglesia) {
+        $datosiglesia = $iglesia['NombreIglesia'];
+        unset($iglesia['NombreIglesia']);
+      }
      ?>
      <form id="form-updata-student"  method="post">
        <input type="hidden" name="update" value="entre"/>
        <input type="hidden" name="IdEstudent" value="<?= $_POST['id']  ?>"/>
-       <label for="update1">promotor</label>
-       <input id="update1"  type="text" name="IdContacto"  placeholder="<?= $datos[0]['IdContacto'] ?>"/>
+       <select class="id_promotor" name="IdContacto">
+         <?php foreach ($promotores as $columnas=> $dato): ?>
+            <option value="<?= $dato['IdContacto'] ?>"> <?= $dato['Nombre'] ?></option>
+         <?php endforeach; ?>
+         <option value=""></option>
+       </select>
        <label for="update2">Documento</label>
        <input  id="update2" type="text" name="DocIdentidad"  placeholder="<?= $datos[0]['DocIdentidad'] ?>"/>
        <label for="update3">Nombres</label>
@@ -95,8 +104,7 @@ function form_update(){
        <input  id="update11" type="text" name="CorreoElectronico"  placeholder="<?= $datos[0]['CorreoElectronico'] ?>"/>
        <label for="update12">Ciudad</label>
        <input  id="update12" type="text" name="Ciudad"  placeholder="<?= $datos[0]['Ciudad'] ?>"/>
-       <label for="update13">Iglesia</label>
-       <input  id="update13" type="text" name="Iglesia"  placeholder="<?= $datos[0]['Iglesia'] ?>"/>
+       <input  id="update13" type="hidden" name="Iglesia"  value="<?= $datosiglesia['Iglesia'] ?>"/>
        <label for="update14">Estado Civil</label>
        <input  id="update14" type="text" name="EstadoCivil"  placeholder="<?= $datos[0]['EstadoCivil'] ?>"/>
        <label for="update15">Barrio</label>
@@ -120,8 +128,4 @@ function update_student_funtion(){
 
   $modelo->update_estudent(array_filter($_POST), $id);
 
-
-  echo "<pre>$id: ";
-  print_r( array_filter($_POST) );
-  echo "</pre>";
 }
