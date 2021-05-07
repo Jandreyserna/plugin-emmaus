@@ -14,7 +14,6 @@
   <?php
   $columnas = $modelo_estudiantes->columnas();
   $info = $modelo_estudiantes->traer_datos();
-  print_r
   ?>
   <table class="display" id="tabla1">
   <thead>
@@ -42,10 +41,10 @@
                   $n++;
                 } else if($n < 7){
                         $n++;
-                        echo"<td>"."<button class='info_complete' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
+                        echo"<td>"."<button class='info_complete btn-outline-success' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
                     }else if($n == 7){
                         $n++;
-                        echo"<td>"."<button class='actualizar-estudiantes' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
+                        echo"<td>"."<button class='actualizar-estudiantes btn-outline-success' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
                     }
                 }
             echo "</tr>";

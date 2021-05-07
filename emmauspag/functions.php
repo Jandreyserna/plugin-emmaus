@@ -45,13 +45,13 @@ function enqueue_styles() {
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
- wp_register_style('emmaus_datatable', plugins_url('plugin-emmaus/emmauspag/css/jquery.dataTables.min.css'), time());
+ wp_register_style('emmaus_datatable', 'https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css', time());
  wp_enqueue_style('emmaus_datatable');
 
  wp_register_style('theme_style_2', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', array(), time());
  wp_enqueue_style('theme_style_2');
 
- wp_register_script('jquery', plugins_url('\\plugin-emmaus/emmauspag/js/jquery-3.6.0.min.js'),false , time());
+ wp_register_script('jquery', plugins_url('plugin-emmaus/emmauspag/js/jquery-3.6.0.min.js'),false , time());
  wp_enqueue_script('jquery');
 
  wp_register_script('bootstraps', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js',array('jquery','theme_style_3'), time() );
@@ -63,7 +63,7 @@ function enqueue_styles() {
  wp_register_script('theme_style_5', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), time());
  wp_enqueue_script('theme_style_5');
 
- wp_register_script('emmaus_datatable_scripts',plugins_url('\\plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
+ wp_register_script('emmaus_datatable_scripts',plugins_url('plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
  wp_enqueue_script('emmaus_datatable_scripts');
 
 
@@ -99,6 +99,9 @@ add_action('wp_ajax_event-list', 'info_complete');
 
  add_action('wp_ajax_nopriv_event_list2', 'form_update');
  add_action('wp_ajax_event_list2', 'form_update');
+
+ add_action('wp_ajax_nopriv_event_list3', 'update_student_funtion');
+ add_action('wp_ajax_event_list3', 'update_student_funtion');
 
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag

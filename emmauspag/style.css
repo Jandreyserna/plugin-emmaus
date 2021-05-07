@@ -1,4 +1,6 @@
 
+
+
 .btn-primary{
   background: #24BB14 !important;
 }
@@ -75,13 +77,13 @@ form select{
   border-radius: 10px;
 }
 
-form input{
+/* form input{
   width: 150px;
     font-weight: bold;
     display: inline-block;
     margin-right: 20%;
     border-radius: 10px;
-}
+} */
 
 form label{
     margin-right: 40px;

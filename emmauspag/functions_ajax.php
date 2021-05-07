@@ -72,39 +72,39 @@ function form_update(){
       $datos = $modelo->consulta_dato($_POST['id']);
         // print_r($datos[0]);
      ?>
-     <form class="update_estudent" action="" method="post">
+     <form id="form-updata-student" action="" method="post">
        <input type="hidden" name="boton" value="estudiantes"/>
-       <label >promotor</label>
-       <input   type="text" name="IdContacto"  placeholder="<?= $datos[0]['IdContacto'] ?>"/>
-       <label >Documento</label>
-       <input   type="text" name="DocIdentidad"  placeholder="<?= $datos[0]['DocIdentidad'] ?>"/>
-       <label >Nombres</label>
-       <input   type="text" name="Nombres"  placeholder="<?= $datos[0]['Nombre1'] ?>"/>
-       <label >Apellidos</label>
-       <input   type="text" name="Apellidos"  placeholder="<?= $datos[0]['Apellido1'] ?>"/>
-       <label >Nacimiento</label>
-       <input   type="text" name="FechaNacimiento"  placeholder="<?= $datos[0]['FechaNacimiento'] ?>"/>
-       <label >Ocupacion</label>
-       <input   type="text" name="Ocupacion"  placeholder="<?= $datos[0]['Ocupacion'] ?>"/>
-       <label >Direccion</label>
-       <input   type="text" name="DireccionCasa"  placeholder="<?= $datos[0]['DireccionCasa'] ?>"/>
-       <label >Telefono</label>
-       <input   type="text" name="Telefono"  placeholder="<?= $datos[0]['Telefono'] ?>"/>
-       <label >Celular</label>
-       <input   type="text" name="Celular"  placeholder="<?= $datos[0]['Celular'] ?>"/>
-       <label >Escolaridad</label>
-       <input   type="text" name="Escolaridad"  placeholder="<?= $datos[0]['Escolaridad'] ?>"/>
-       <label >Email</label>
-       <input   type="text" name="CorreoElectronico"  placeholder="<?= $datos[0]['CorreoElectronico'] ?>"/>
-       <label >Ciudad</label>
-       <input   type="text" name="Ciudad"  placeholder="<?= $datos[0]['Ciudad'] ?>"/>
-       <label >Iglesia</label>
-       <input   type="text" name="Iglesia"  placeholder="<?= $datos[0]['Iglesia'] ?>"/>
-       <label >Estado Civil</label>
-       <input   type="text" name="EstadoCivil"  placeholder="<?= $datos[0]['EstadoCivil'] ?>"/>
-       <label >Barrio</label>
-       <input   type="text" name="Barrio"  placeholder="<?= $datos[0]['Barrio'] ?>"/>
-       <button  class="btn-outline-success" type="button" name="button-update-student">actualizar</button>
+       <label for="update1">promotor</label>
+       <input id="update1"  type="text" name="IdContacto"  placeholder="<?= $datos[0]['IdContacto'] ?>"/>
+       <label for="update2">Documento</label>
+       <input  id="update2" type="text" name="DocIdentidad"  placeholder="<?= $datos[0]['DocIdentidad'] ?>"/>
+       <label for="update3">Nombres</label>
+       <input  id="update3" type="text" name="Nombres"  placeholder="<?= $datos[0]['Nombre1'] ?>"/>
+       <label for="update4">Apellidos</label>
+       <input  id="update4" type="text" name="Apellidos"  placeholder="<?= $datos[0]['Apellido1'] ?>"/>
+       <label for="update5">Nacimiento</label>
+       <input  id="update5" type="text" name="FechaNacimiento"  placeholder="<?= $datos[0]['FechaNacimiento'] ?>"/>
+       <label for="update6">Ocupacion</label>
+       <input  id="update6" type="text" name="Ocupacion"  placeholder="<?= $datos[0]['Ocupacion'] ?>"/>
+       <label for="update7">Direccion</label>
+       <input  id="update7" type="text" name="DireccionCasa"  placeholder="<?= $datos[0]['DireccionCasa'] ?>"/>
+       <label for="update8">Telefono</label>
+       <input  id="update8" type="text" name="Telefono"  placeholder="<?= $datos[0]['Telefono'] ?>"/>
+       <label for="update9">Celular</label>
+       <input  id="update9" type="text" name="Celular"  placeholder="<?= $datos[0]['Celular'] ?>"/>
+       <label for="update10">Escolaridad</label>
+       <input  id="update10" type="text" name="Escolaridad"  placeholder="<?= $datos[0]['Escolaridad'] ?>"/>
+       <label for="update11">Email</label>
+       <input  id="update11" type="text" name="CorreoElectronico"  placeholder="<?= $datos[0]['CorreoElectronico'] ?>"/>
+       <label for="update12">Ciudad</label>
+       <input  id="update12" type="text" name="Ciudad"  placeholder="<?= $datos[0]['Ciudad'] ?>"/>
+       <label for="update13">Iglesia</label>
+       <input  id="update13" type="text" name="Iglesia"  placeholder="<?= $datos[0]['Iglesia'] ?>"/>
+       <label for="update14">Estado Civil</label>
+       <input  id="update14" type="text" name="EstadoCivil"  placeholder="<?= $datos[0]['EstadoCivil'] ?>"/>
+       <label for="update15">Barrio</label>
+       <input  id="update15" type="text" name="Barrio"  placeholder="<?= $datos[0]['Barrio'] ?>"/>
+       <button  class="update_student btn-outline-success" type="button" name="button-update-student">actualizar</button>
      </form>
 
 <?php
@@ -112,4 +112,11 @@ function form_update(){
    }
 
    wp_die();
+}
+
+function update_student_funtion(){
+  if (!empty($_POST['datos'])){
+    print_r($_POST['datos']);
+  }
+  wp_die();
 }
