@@ -67,7 +67,7 @@ class Modelo
          );
     $primary = array_search('PRIMARY', array_column($primary_key, 'CONSTRAINT_NAME'));
 
-    return $primary_key[$primary]['COLUMN_NAME'];
+    return (isset($primary_key[$primary]['COLUMN_NAME'])) ? $primary_key : null;
 
 
   }

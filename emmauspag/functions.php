@@ -100,10 +100,6 @@ add_action('wp_ajax_event-list', 'info_complete');
  add_action('wp_ajax_nopriv_event_list2', 'form_update');
  add_action('wp_ajax_event_list2', 'form_update');
 
- add_action('wp_ajax_nopriv_event_list3', 'update_student_funtion');
- add_action('wp_ajax_event_list3', 'update_student_funtion');
-
-
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
 function urlemma($url){

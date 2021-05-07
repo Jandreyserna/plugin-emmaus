@@ -9,11 +9,9 @@ function info_complete(){
      if (!empty($_POST['id'])){
         $modelo = new modelo('estudiantes');
         $datos = $modelo->consulta_dato($_POST['id']);
-        // echo "<pre>POST: ";
-        // print_r( $datos);
-        // echo "</pre>";?>
+?>
         <div class="titulo text-center">
-          <h2><?= $datos[0]['Nombre1'].' '.$datos[0]['Nombre2'].' '.$datos[0]['Apellido1'].' '.$datos[0]['Apellido2']; ?>
+          <h2><?= $datos[0]['Nombres'].' '.$datos[0]['Apellidos'].' '; ?>
         </h2>
           <h3><?= $datos[0]['IdEstudiante']  ?></h3>
         </div>
@@ -68,22 +66,21 @@ function form_update(){
   if (!empty($_POST['id'])){
      $modelo = new modelo('estudiantes');
 
-
       $datos = $modelo->consulta_dato($_POST['id']);
-        // print_r($datos[0]);
      ?>
-     <form id="form-updata-student" action="" method="post">
-       <input type="hidden" name="boton" value="estudiantes"/>
+     <form id="form-updata-student"  method="post">
+       <input type="hidden" name="update" value="entre"/>
+       <input type="hidden" name="IdEstudent" value="<?= $_POST['id']  ?>"/>
        <label for="update1">promotor</label>
        <input id="update1"  type="text" name="IdContacto"  placeholder="<?= $datos[0]['IdContacto'] ?>"/>
        <label for="update2">Documento</label>
        <input  id="update2" type="text" name="DocIdentidad"  placeholder="<?= $datos[0]['DocIdentidad'] ?>"/>
        <label for="update3">Nombres</label>
-       <input  id="update3" type="text" name="Nombres"  placeholder="<?= $datos[0]['Nombre1'] ?>"/>
+       <input  id="update3" type="text" name="Nombres"  placeholder="<?= $datos[0]['Nombres'] ?>"/>
        <label for="update4">Apellidos</label>
-       <input  id="update4" type="text" name="Apellidos"  placeholder="<?= $datos[0]['Apellido1'] ?>"/>
+       <input  id="update4" type="text" name="Apellidos"  placeholder="<?= $datos[0]['Apellidos'] ?>"/>
        <label for="update5">Nacimiento</label>
-       <input  id="update5" type="text" name="FechaNacimiento"  placeholder="<?= $datos[0]['FechaNacimiento'] ?>"/>
+       <input  id="update5" type="date" name="FechaNacimiento"  placeholder="<?= $datos[0]['FechaNacimiento'] ?>"/>
        <label for="update6">Ocupacion</label>
        <input  id="update6" type="text" name="Ocupacion"  placeholder="<?= $datos[0]['Ocupacion'] ?>"/>
        <label for="update7">Direccion</label>
@@ -104,19 +101,27 @@ function form_update(){
        <input  id="update14" type="text" name="EstadoCivil"  placeholder="<?= $datos[0]['EstadoCivil'] ?>"/>
        <label for="update15">Barrio</label>
        <input  id="update15" type="text" name="Barrio"  placeholder="<?= $datos[0]['Barrio'] ?>"/>
-       <button  class="update_student btn-outline-success" type="button" name="button-update-student">actualizar</button>
+       <input  class="update_student btn-outline-success" type="submit" value="actualizar"/>
      </form>
 
-<?php
 
-   }
+<?php
+        }
 
    wp_die();
 }
 
 function update_student_funtion(){
-  if (!empty($_POST['datos'])){
-    print_r($_POST['datos']);
-  }
-  wp_die();
+  $id = $_POST['IdEstudent'];
+  unset($_POST['update']);
+  unset($_POST['IdEstudent']);
+
+  $modelo = new Modelo_estudiantes;
+
+  $modelo->update_estudent(array_filter($_POST), $id);
+
+
+  echo "<pre>$id: ";
+  print_r( array_filter($_POST) );
+  echo "</pre>";
 }

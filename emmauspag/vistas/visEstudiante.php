@@ -1,3 +1,13 @@
+<?php
+
+if (!empty($_POST['update'])){
+  update_student_funtion();
+}
+
+
+?>
+
+
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
