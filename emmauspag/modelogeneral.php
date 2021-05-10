@@ -34,7 +34,9 @@ class Modelo
         "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = '{$this->nombre_tabla}'
-        ORDER BY ORDINAL_POSITION"
+        AND `TABLE_SCHEMA` = 'dbemmaus'
+        ORDER BY ORDINAL_POSITION",
+        'ARRAY_A'
       );
 
     return $colum_name;
@@ -45,7 +47,7 @@ class Modelo
     $nombre_columna = $this->wpdb->get_results (
         "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE `TABLE_SCHEMA` = 'emmaus'
+        WHERE `TABLE_SCHEMA` = 'dbemmaus'
         AND `TABLE_NAME` = '{$this->nombre_tabla}'
         AND `COLUMN_KEY` != 'PRI'
         AND `COLUMN_KEY` != 'MUL' LIMIT 10000",
@@ -59,12 +61,13 @@ class Modelo
   {
     $primary_key =$this->wpdb->get_results(
           "SELECT * FROM information_schema.KEY_COLUMN_USAGE
-           WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'",
+           WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'
+           AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'dbemmaus'",
            'ARRAY_A'
          );
     $primary = array_search('PRIMARY', array_column($primary_key, 'CONSTRAINT_NAME'));
 
-    return $primary_key[$primary]['COLUMN_NAME'];
+    return (isset($primary_key[$primary]['COLUMN_NAME'])) ? $primary_key : null;
 
 
   }
@@ -74,10 +77,14 @@ class Modelo
     $results = $this->wpdb->get_results(
           "SELECT *
             FROM information_schema.KEY_COLUMN_USAGE
-            WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}' AND
-            KEY_COLUMN_USAGE.CONSTRAINT_NAME LIKE '%fk_Es-%';",
+            WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'
+            AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'dbemmaus'
+            AND KEY_COLUMN_USAGE.CONSTRAINT_NAME LIKE '%fk_Es-%'",
            'ARRAY_A'
          );
+         echo "<pre>";
+         print_r($results);
+         echo "</pre>";
 
     #if (isset($results[0])) $this->key_foreaneas = $results;
 
@@ -126,5 +133,30 @@ class Modelo
            'ARRAY_A'
          );
     return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  public function traer_datos(){
+    $informacion = $this->wpdb->get_results(
+          "SELECT *
+          FROM `{$this->nombre_tabla}`
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
+  public function consulta_dato($dato){
+    print_r($dato);
+    $informacion = $this->wpdb->get_results(
+          "SELECT *
+          FROM `estudiantes`
+          WHERE `IdEstudiante` = $dato
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+
+    // return (if(!empty($informacion)) ? $informacion : null;
   }
 }

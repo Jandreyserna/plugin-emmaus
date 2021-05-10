@@ -1,7 +1,18 @@
+<?php
+
+if (!empty($_POST['update'])){
+  update_student_funtion();
+}
+
+
+?>
+
+
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
   </div>
+
   <form class="d-md-flex form-search-estudiantes" method="post"  >
         <input type="hidden" name="boton" value="buscador-nombre">
         <input type="hidden" name="Tabla" value="estudiantes">
@@ -9,48 +20,53 @@
         <!-- <input id="Fbuscar" class="btn btn-outline-success" type="submit" value="BUSCAR"/> -->
   </form>
 
-  <div class="contenedor-search">
 
-  </div>
-
-  <table class="table" id="tabla-buscador">
+  <?php
+  $columnas = $modelo_estudiantes->columnas();
+  $info = $modelo_estudiantes->traer_datos();
+  ?>
+  <table class="display" id="tabla1">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Ciudad</th>
-      <th scope="col">Cursos Terminados</th>
-      <th scope="col">Ultimo Curso</th>
-      <th scope="col">Fecha</th>
+      <th scope='col'>ID</th>
+      <th scope='col'>IDPROMOTOR</th>
+      <th scope='col'>DOCUMENTO</th>
+      <th scope='col'>NOMBRES</th>
+      <th scope='col'>APELLIDOS</th>
+      <th scope='col'>info</th>
+      <th scope='col'>actu</th>
+      <th></th>
     </tr>
+
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">0</th>
-      <td>Jose Mario</td>
-      <td>Dosquebradas</td>
-      <td>5</td>
-      <td>el hombre perfecto</td>
-      <td>05/05/2020</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Flikimax</td>
-      <td>Dosquebradas</td>
-      <td>Todo bebe</td>
-      <td>Amado se yo mismo</td>
-      <td>01/12/2021</td>
-    </tr>
+
+      <?php
+      for ($x=0; $x < sizeof($info); $x++) {
+          echo  "<tr>";
+          $n = 0;
+          foreach ($info[$x] as $key => $dato) {
+                    if($n < 6 ){
+                    echo"<td>".$dato."</td>";
+                  $n++;
+                } else if($n < 7){
+                        $n++;
+                        echo"<td>"."<button class='info_complete btn-outline-success' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
+                    }else if($n == 7){
+                        $n++;
+                        echo"<td>"."<button class='actualizar-estudiantes btn-outline-success' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
+                    }
+                }
+            echo "</tr>";
+              }?>
   </tbody>
 </table>
-
-
-
+</div>
+<div class="contenedor-search">
 
 </div>
-
 <div class="crudd">
-  <button class="btn btn-primary" type="button" name="button">
+  <button class="btn btn-outline-success" type="button" name="button">
 
 
   <div class="container">
@@ -59,7 +75,7 @@
 
   </div>
 </button>
-<button class="btn btn-primary" type="button" name="button">
+<button class="btn btn-outline-success" type="button" name="button">
   <div class="container">
     <a href="#buscar" class="btn-crudd btn-sucess" data-toggle="collapse">Actualizar Estudiante</a>
 
@@ -72,9 +88,6 @@
     <input type="hidden" name="tabla" value="estudiantes"/>
     <input  type="hidden" name="boton" value="ingreso"/>
     <?php
-
-    
-
 
 
     foreach($llaves_foranes as $noimporta)
