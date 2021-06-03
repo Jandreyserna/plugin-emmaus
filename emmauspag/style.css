@@ -1,4 +1,14 @@
 
+
+
+.btn-primary{
+  background: #24BB14 !important;
+}
+
+#wpfooter{
+  position: relative;
+}
+
 a.class_a_href{
   cursor: default;
   color: white;
@@ -33,7 +43,7 @@ button.btn{
 
 a.btn-crudd{
   cursor: default;
-  color: white;
+  color: #0044BB;
 }
 
 button.boton_para_volver{
@@ -67,13 +77,13 @@ form select{
   border-radius: 10px;
 }
 
-form input{
+/* form input{
   width: 150px;
     font-weight: bold;
     display: inline-block;
     margin-right: 20%;
     border-radius: 10px;
-}
+} */
 
 form label{
     margin-right: 40px;

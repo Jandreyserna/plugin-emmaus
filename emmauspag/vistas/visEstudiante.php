@@ -1,3 +1,13 @@
+<?php
+
+if (!empty($_POST['update'])){
+  update_student_funtion();
+}
+
+
+?>
+
+
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
@@ -10,29 +20,24 @@
         <!-- <input id="Fbuscar" class="btn btn-outline-success" type="submit" value="BUSCAR"/> -->
   </form>
 
-  <div class="contenedor-search">
 
-  </div>
   <?php
   $columnas = $modelo_estudiantes->columnas();
   $info = $modelo_estudiantes->traer_datos();
-  // echo "<pre>";
-  // print_r($info[0]);
-  // echo "</pre>";
   ?>
   <table class="display" id="tabla1">
   <thead>
     <tr>
-      <?php
-      $n = 0;
-      foreach ($columnas as $key => $title) {
-                  if($n < 6){
-                    echo"<th scope='col'>".$title['COLUMN_NAME']."</th>";
-                    $n++;
-                  }
-
-    }?>
+      <th scope='col'>ID</th>
+      <th scope='col'>IDPROMOTOR</th>
+      <th scope='col'>DOCUMENTO</th>
+      <th scope='col'>NOMBRES</th>
+      <th scope='col'>APELLIDOS</th>
+      <th scope='col'>info</th>
+      <th scope='col'>actu</th>
+      <th></th>
     </tr>
+
   </thead>
   <tbody>
 
@@ -41,31 +46,27 @@
           echo  "<tr>";
           $n = 0;
           foreach ($info[$x] as $key => $dato) {
-                    if($n < 6 && $dato != 'IdEstudiante'){
+                    if($n < 6 ){
                     echo"<td>".$dato."</td>";
-
-                  }else if($dato == 'IdEstudiante'){
-                      print_r($dato[$n]);
-                        echo"<th scope='row'>".$dato[$n]."</th>";
-                  }
                   $n++;
-
+                } else if($n < 7){
+                        $n++;
+                        echo"<td>"."<button class='info_complete btn-outline-success' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
+                    }else if($n == 7){
+                        $n++;
+                        echo"<td>"."<button class='actualizar-estudiantes btn-outline-success' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
+                    }
                 }
             echo "</tr>";
               }?>
-
-
-
   </tbody>
 </table>
-
-
-
+</div>
+<div class="contenedor-search">
 
 </div>
-
 <div class="crudd">
-  <button class="btn btn-primary" type="button" name="button">
+  <button class="btn btn-outline-success" type="button" name="button">
 
 
   <div class="container">
@@ -74,7 +75,7 @@
 
   </div>
 </button>
-<button class="btn btn-primary" type="button" name="button">
+<button class="btn btn-outline-success" type="button" name="button">
   <div class="container">
     <a href="#buscar" class="btn-crudd btn-sucess" data-toggle="collapse">Actualizar Estudiante</a>
 
