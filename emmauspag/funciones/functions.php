@@ -40,8 +40,6 @@ add_action('widgets_init', 'sidebar');
 
 function enqueue_styles() {
 
-
-
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
@@ -75,6 +73,8 @@ add_action('admin_enqueue_scripts', 'enqueue_styles');
 # ==========================
 # ========== AJAX ==========
 # ==========================
+
+
 function boton_obtener_info_ajax() {
   wp_enqueue_script ('obtener_js', plugins_url('/plugin-emmaus/emmauspag/js/ajax.js'), array('jquery'), time());
   wp_localize_script('obtener_js', 'ajax_var', array(

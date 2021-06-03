@@ -1,60 +1,49 @@
 <div class="titulo text-center">
   <h1>ADMINISTRACIÓN DE CURSOS</h1>
 </div>
-<form class="d-md-flex">
-      <input class="form-control me-2" type="search" placeholder="DIGITE EL NOMBRE " aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">BUSCAR CUSROS DE UN ESTUDIANTE</button>
-</form>
-<div class="selecc">
-  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-    <option selected>Cursos</option>
 
-    <option value="1">El Homber mas grande</option>
-    <option value="2">el siervo perfecto</option>
-    <option value="3">perdone como Dios lo perdono</option>
-    <option value="4">Restauracion Y Caida</option>
-    <option value="5">Bautismo</option>
-    <option value="6">Crisnianismo basico</option>
-
-  </select>
-</div>
-
+<?php
+  $modelo_cursos = new Modelo_cursos();
+  $info_curso = $modelo_cursos-> informacion_tabla_cursos();
+  print_r($info_curso);
+ ?>
 <button class="btn btn-outline-success" type="button" name="button">
   <div class="container">
     <a href="#anadir" class="btn-crudd btn-sucess" data-toggle="collapse">Añadir Nuevo Curso</a>
   </div>
 </button>
 
-<table class="table">
+<!-- <table class="display" id="tabla-cursos">
 <thead>
   <tr>
-    <th scope="col">Nombre Del Curso</th>
-    <th scope="col">Programa</th>
-    <th scope="col">Material</th>
-    <th scope="col">Costo Venta</th>
+    <th scope='col'>ID</th>
+    <th scope='col'>Nombre Del Curso</th>
+    <th scope='col'>Nivel</th>
+    <th scope='col'>Prvograma</th>
+    <th scope='col'>Costo Venta</th>
   </tr>
+
 </thead>
-<tbody>
-  <tr>
-    <th scope="row">El primer evangelio</th>
-    <td>KM 1</td>
-    <td>Mateo</td>
-    <td>$ 50.000.00</td>
-  </tr>
-  <tr>
-    <th scope="row">Berea - 1</th>
-    <td>Cusro Berea</td>
-    <td>Introduccion A.T Turner</td>
-    <td>$ 50.000.00</td>
-  </tr>
-  <tr>
-    <th scope="row">El Dicipula amado</th>
-    <td>Km 2</td>
-    <td>Juan</td>
-    <td>$ 50.000.00</td>
-  </tr>
+<tbody> -->
+
+  <?php
+  // if ($info_curso != null) {
+  //   for ($x=0; $x < sizeof($info_curso); $x++) {
+  //       echo  "<tr>";
+  //       foreach ($info_curso[$x] as $key => $dato) {
+  //         echo"<td>".$dato."</td>";
+  //       }
+  //       // echo"<td><button class='borrar-estudiante btn-outline-success' type='button' name='button_borrar'>Borrar</button></td>";
+  //       // echo"<td>"."<button class='info-estudiante btn-outline-success' type='button' name='button_informacion'>".'Informaciòn'."</button>"."</td>";
+  //       echo "</tr>";
+  //   }
+  //
+  // }?>
+
+<!--
 </tbody>
-</table>
+</table> -->
+
 
 <div id="anadir" class="collapse">
   <form class="">
