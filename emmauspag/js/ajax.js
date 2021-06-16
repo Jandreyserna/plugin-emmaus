@@ -76,4 +76,30 @@ jQuery(document).ready(function ($) {
 				    });
       });
 
+			//--------------------------------------------//
+			//-------BOTON DE costo de curso CON AJAX------//
+			//--------------------------------------------//
+
+				 $("#tabla-cursos").on("click", ".costo-curso", function(){
+
+					 var padre = $(this).closest("tr");
+					 var id = $('.sorting_1', padre).text();
+
+					 console.log(id);
+
+					 jQuery.ajax({
+									 type: "post",
+									 url: ajax_var.url,
+
+									 data: {
+											 'action' : "conocer-costo",
+											 'id'     : id
+									 },
+									 success: function(result){
+											 console.log('Todo ok.');
+											 jQuery('.mostrar-costo').html(result);
+									 }
+							 });
+				 });
+
 });

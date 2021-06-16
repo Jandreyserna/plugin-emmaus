@@ -1,5 +1,17 @@
 <?php
 
+##########################################
+##### Evaluar los POST de este archivo ###
+##########################################
+
+if (!empty($_POST['nuevo-costo'])){
+  $ID['IdMaterial'] = $_POST['nuevo-costo'];
+  unset($_POST['nuevo-costo']);
+  $modelo_curso = new Modelo_cursos();
+  $modelo_curso->update_costo_material($ID, $_POST);
+
+}
+
 ######################################################
 #####OBTENER LOS DATOS DE UN ID EN BASE DE DATOS######
 ######################################################
@@ -128,4 +140,36 @@ function update_student_funtion(){
 
   $modelo->update_estudent(array_filter($_POST), $id);
 
+}
+
+
+#########################################
+#####COLOCAR LOS COSTOS DE LIBROS######
+#########################################
+
+function costos_libros()
+{
+  $id = $_POST['id'];
+  $modelo = new Modelo_cursos();
+  $material = $modelo->cursos_materiales($id);
+  ?>
+  <button class="btn btn-outline-success" type="button" name="button">
+    <div class="container">
+      <a href="#actualizar-costo" class="btn-crudd btn-sucess" data-toggle="collapse">Actualizar Costo Venta Material</a>
+    </div>
+  </button>
+
+  <div id="actualizar-costo" class="collapse">
+    <form class="" method="post" action="">
+          <p><label for="campo1">Nuevo Costo de venta</label>
+          <input name="ValorVenta" type="number" placeholder="Digite El Valor" ></p>
+          <input name="nuevo-costo" type="hidden" value="<?=$material[0]['IdMaterial']?>" >
+          <button class="btn btn-outline-success" type="submit">Actualizar</button>
+    </form>
+
+  </div>
+<?php
+  echo "<pre>";
+  print_r($material);
+  echo "</pre>";
 }

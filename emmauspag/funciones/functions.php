@@ -100,6 +100,13 @@ add_action('wp_ajax_event-list', 'info_complete');
  add_action('wp_ajax_nopriv_event_list2', 'form_update');
  add_action('wp_ajax_event_list2', 'form_update');
 
+ # =========================================================
+ # ========== AJAX BOTON DE CONOCER COSTO DE CURSO==========
+ # =========================================================
+
+ add_action('wp_ajax_nopriv_conocer-costo', 'costos_libros');
+ add_action('wp_ajax_conocer-costo', 'costos_libros');
+
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
 function urlemma($url){

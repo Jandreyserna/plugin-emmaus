@@ -34,7 +34,7 @@ class Modelo
         "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = '{$this->nombre_tabla}'
-        AND `TABLE_SCHEMA` = 'dbemmaus'
+        AND `TABLE_SCHEMA` = 'emma'
         ORDER BY ORDINAL_POSITION",
         'ARRAY_A'
       );
@@ -47,7 +47,7 @@ class Modelo
     $nombre_columna = $this->wpdb->get_results (
         "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE `TABLE_SCHEMA` = 'dbemmaus'
+        WHERE `TABLE_SCHEMA` = 'emma'
         AND `TABLE_NAME` = '{$this->nombre_tabla}'
         AND `COLUMN_KEY` != 'PRI'
         AND `COLUMN_KEY` != 'MUL' LIMIT 10000",
@@ -62,7 +62,7 @@ class Modelo
     $primary_key =$this->wpdb->get_results(
           "SELECT * FROM information_schema.KEY_COLUMN_USAGE
            WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'
-           AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'dbemmaus'",
+           AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'emma'",
            'ARRAY_A'
          );
     $primary = array_search('PRIMARY', array_column($primary_key, 'CONSTRAINT_NAME'));
@@ -78,7 +78,7 @@ class Modelo
           "SELECT *
             FROM information_schema.KEY_COLUMN_USAGE
             WHERE KEY_COLUMN_USAGE.TABLE_NAME  = '{$this->nombre_tabla}'
-            AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'dbemmaus'
+            AND KEY_COLUMN_USAGE.CONSTRAINT_SCHEMA = 'emma'
             AND KEY_COLUMN_USAGE.CONSTRAINT_NAME LIKE '%fk_Es-%'",
            'ARRAY_A'
          );
