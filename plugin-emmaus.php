@@ -6,11 +6,12 @@ Version: 0.1
 Author: Jandrey Steven Serna
 License: private
 */
-require_once dirname(__FILE__) . '/emmauspag/modelopromotor.php';
-require_once dirname(__FILE__) . '/emmauspag/modelogeneral.php';
-require_once dirname(__FILE__) . '/emmauspag/modeloestudiantes.php';
-require_once dirname(__FILE__) . '/emmauspag/functions.php';
-require_once dirname(__FILE__) . '/emmauspag/functions_ajax.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
+require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
+require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 
 
 

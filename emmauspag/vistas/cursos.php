@@ -1,71 +1,93 @@
 <div class="titulo text-center">
   <h1>ADMINISTRACIÓN DE CURSOS</h1>
 </div>
-<form class="d-md-flex">
-      <input class="form-control me-2" type="search" placeholder="DIGITE EL NOMBRE " aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">BUSCAR CUSROS DE UN ESTUDIANTE</button>
-</form>
-<div class="selecc">
-  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-    <option selected>Cursos</option>
 
-    <option value="1">El Homber mas grande</option>
-    <option value="2">el siervo perfecto</option>
-    <option value="3">perdone como Dios lo perdono</option>
-    <option value="4">Restauracion Y Caida</option>
-    <option value="5">Bautismo</option>
-    <option value="6">Crisnianismo basico</option>
+<?php
+$modelo_curso = new Modelo_cursos();
+$curso = $modelo_curso->informacion_tabla_cursos();
+$info_material = $modelo_curso->cursos_materiales_listado();
+$info_nivel = $modelo_curso->cursos_niveles_listado();
 
-  </select>
-</div>
+if (!empty($_POST['nuevo-curso'])){
 
+  unset($_POST['nuevo-curso']);
+  $Dato['Nombre'] = $_POST['Nombre'];
+  $modelo_curso->insertar_curso($Dato);
+  $ultimo_curso = $modelo_curso->ultimo_curso();
+  // echo "<pre>";
+  // print_r($ultimo_curso);
+  // echo "<pre>";
+  $Dato2['IdMaterialRel'] = $_POST['IdMaterial'];
+  $Dato2['IdCurso'] = $ultimo_curso[0]['IdCurso'];
+  $Dato3['IdCurso'] = $ultimo_curso[0]['IdCurso'];
+  $Dato3 ['IdNivel'] = $_POST['IdNivel'];
+  echo "<pre>";
+  print_r($_POST);
+  echo "<pre>";
+  $modelo_curso->insertar_curso_material($Dato2);
+  $modelo_curso->insertar_curso_nivel($Dato3);
+
+}
+ ?>
 <button class="btn btn-outline-success" type="button" name="button">
   <div class="container">
     <a href="#anadir" class="btn-crudd btn-sucess" data-toggle="collapse">Añadir Nuevo Curso</a>
   </div>
 </button>
 
-<table class="table">
+<table class="display" id="tabla-cursos">
 <thead>
   <tr>
-    <th scope="col">Nombre Del Curso</th>
-    <th scope="col">Programa</th>
-    <th scope="col">Material</th>
-    <th scope="col">Costo Venta</th>
+    <th scope='col'>ID</th>
+    <th scope='col'>Nombre Del Curso</th>
+    <th scope='col'>Nivel</th>
+    <th scope='col'>Programa</th>
+    <th scope='col'>Costo Venta</th>
   </tr>
+
 </thead>
 <tbody>
-  <tr>
-    <th scope="row">El primer evangelio</th>
-    <td>KM 1</td>
-    <td>Mateo</td>
-    <td>$ 50.000.00</td>
-  </tr>
-  <tr>
-    <th scope="row">Berea - 1</th>
-    <td>Cusro Berea</td>
-    <td>Introduccion A.T Turner</td>
-    <td>$ 50.000.00</td>
-  </tr>
-  <tr>
-    <th scope="row">El Dicipula amado</th>
-    <td>Km 2</td>
-    <td>Juan</td>
-    <td>$ 50.000.00</td>
-  </tr>
+
+  <?php
+  if ($curso != null) {
+    for ($x=0; $x < sizeof($curso); $x++) {
+        echo  "<tr>";
+        foreach ($curso[$x] as $key => $dato) {
+          echo"<td>".$dato."</td>";
+        }
+        echo"<td><button class='costo-curso btn-outline-success' type='button' name='button_costo'>Costo</button></td>";
+        // echo"<td>"."<button class='info-estudiante btn-outline-success' type='button' name='button_informacion'>".'Informaciòn'."</button>"."</td>";
+        echo "</tr>";
+    }
+
+  }?>
+
+
 </tbody>
 </table>
 
+<div class="mostrar-costo">
+
+</div>
+
+
 <div id="anadir" class="collapse">
-  <form class="">
+  <form class="" method="post" action="">
         <p><label for="campo1">Nombre Curso</label>
-        <input type="text" placeholder="DIGITE EL NOMBRE " ></p>
-        <p><label for="campo2">Duracion Curso</label>
-        <input  type="text" placeholder="DIGITE UN VALOR " ></p>
-        <p><label for="campo3">Costo Curso</label>
-        <input  type="text" placeholder="DIGITE UN VALOR " ></p>
-        <p><label for="campo4">Material (Libro)</label>
-        <input  type="text" placeholder="DIGITE EL NOMBRE " ></p>
+        <input name="Nombre" type="text" placeholder="DIGITE EL NOMBRE " ></p>
+        <input name="nuevo-curso" type="hidden" value="nuevo" >
+        <select class="id_libro" name="IdMaterial" required>
+            <option value="" disabled selected>Material</option>
+         <?php foreach ($info_material as $columna=> $data): ?>
+            <option value="<?= $data['IdMaterial'] ?>"> <?= $data['TituloMaterial']?></option>
+         <?php endforeach; ?>
+        </select>
+        <select class="id_Programa" name="IdNivel" required>
+            <option value="" disabled selected>Nivel</option>
+         <?php foreach ($info_nivel as $colum=> $date): ?>
+            <option value="<?= $date['IdNivel'] ?>"> <?= $date['NombreNivel']?></option>
+         <?php endforeach; ?>
+        </select>
         <button class="btn btn-outline-success" type="submit">añadir</button>
   </form>
 
