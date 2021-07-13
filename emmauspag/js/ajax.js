@@ -13,7 +13,7 @@ jQuery(document).ready(function ($) {
 
 
 //--------------------------------------------------------//
-//-------------tabla estudiantes con ajax-----------------//
+//-------------tabla estudiantes-cursos con ajax-----------------//
 //--------------------------------------------------------//
 
 				$('#tabla1').DataTable({
@@ -21,6 +21,41 @@ jQuery(document).ready(function ($) {
 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
 		 }
 	 });
+
+	 //--------------------------------------------------------//
+	 //-------------tabla estudiantes con ajax-----------------//
+	 //--------------------------------------------------------//
+
+	 				$('#estudiantes').DataTable({
+	 		 language: {
+	 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+	 		 }
+	 	 });
+
+		 //----------------------------------------------------------//
+		 //-------BOTON DE INFO COMPLETA DE ESTUDIANTE CON AJAX------//
+		 //----------------------------------------------------------//
+
+	      $("#estudiantes").on("click", ".info-student", function(){
+
+					var padre = $(this).closest("tr");
+					var id = $('.sorting_1', padre).text();
+
+					console.log(id);
+
+					jQuery.ajax({
+	                type: "post",
+	                url: ajax_var.url,
+
+	                data: {
+	                    'action' : 'event-list-student',
+											'id'     : id
+	                },
+	                success: function(result){
+	                    jQuery('.contenedor-search').html(result);
+	                }
+					    });
+	      });
 
 	 //--------------------------------------------//
 	 //-------BOTON DE INFO COMPLETA CON AJAX------//

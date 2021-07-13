@@ -17,6 +17,15 @@ class Modelo
       #$this->get_key_foreaneas();
   }
 
+  function insertar_data_wpdb($datos)
+  {
+
+    $this->wpdb->insert(
+      $this->nombre_tabla, # TABLA
+      $datos # DATOS
+    );
+  }
+
   function insertar_wpdb($args)
   {
 
@@ -34,7 +43,6 @@ class Modelo
         "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = '{$this->nombre_tabla}'
-        AND `TABLE_SCHEMA` = 'emma'
         ORDER BY ORDINAL_POSITION",
         'ARRAY_A'
       );
@@ -147,7 +155,7 @@ class Modelo
   }
 
   public function consulta_dato($dato){
-    print_r($dato);
+    // print_r($dato);
     $informacion = $this->wpdb->get_results(
           "SELECT *
           FROM `estudiantes`

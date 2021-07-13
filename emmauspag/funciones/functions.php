@@ -61,6 +61,9 @@ function enqueue_styles() {
  wp_register_script('theme_style_5', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), time());
  wp_enqueue_script('theme_style_5');
 
+ wp_register_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array(), time());
+ wp_enqueue_script ('modal_js');
+
  wp_register_script('emmaus_datatable_scripts',plugins_url('plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
  wp_enqueue_script('emmaus_datatable_scripts');
 
@@ -68,7 +71,16 @@ function enqueue_styles() {
 }
 add_action('admin_enqueue_scripts', 'enqueue_styles');
 
+# ==========================
+# ========== MODALES JS ==========
+# ==========================
 
+
+// function modales_ajax() {
+//   wp_enqueue_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array('jquery'), time());
+//   wp_localize_script('modal_js', 'ajax_var', array());
+// }
+// add_action('admin_enqueue_scripts', 'modales_ajax');
 
 # ==========================
 # ========== AJAX ==========
@@ -84,6 +96,13 @@ function boton_obtener_info_ajax() {
   ));
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
+
+# ==========================================================
+# ========== AJAX BOTON DE Informacion ESTUDIANTES==========
+# ==========================================================
+
+add_action('wp_ajax_nopriv_event-list-student', 'info_student');
+add_action('wp_ajax_event-list-student', 'info_student');
 
 # ==============================================
 # ========== AJAX BOTON DE Informacion==========
@@ -139,6 +158,18 @@ function insertar_base_datos($datos){
 
   }
 }
+
+# ==========================================================
+# ========== insertar con nombre de tabla y datos ==========
+# ==========================================================
+
+function insert_funtion($tabla,$datos){
+
+  $modelo = new Modelo($tabla);
+  $modelo->insertar_data_wpdb($datos);
+
+}
+
 
 # ===============================
 # ========== shortCOde ==========

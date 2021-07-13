@@ -13,6 +13,8 @@ class Modelo_estudiantes
       #$this->get_key_foreaneas();
   }
 
+
+
   public function update_estudent($datos, $id){
     $this->wpdb->show_errors(false);
       $this->wpdb->update(
@@ -20,5 +22,74 @@ class Modelo_estudiantes
         $datos, # DATOS
         array('IdEstudiante' => $id)
       );
+  }
+
+#########################################################################
+########## Traer informacion basica de todos los estudiantes ############
+#########################################################################
+
+  public function info_table_student(){
+    $informacion = $this->wpdb->get_results(
+      "SELECT estudiantes.`IdEstudiante`,(SELECT promotores.`Nombre`
+                       FROM promotores
+                       WHERE promotores.`IdContacto` = estudiantes.`IdContacto`
+                       GROUP BY promotores.`Nombre`)
+                       AS Promotor,
+       estudiantes.`DocIdentidad`,estudiantes.`Nombres`, estudiantes.`Apellidos`
+        FROM estudiantes INNER JOIN promotores
+        GROUP BY estudiantes.`IdEstudiante`;
+      ",
+       'ARRAY_A'
+     );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
+  #########################################################################
+  ########## Traer informacion de la tabla de curzos realizados ############
+  #########################################################################
+  public function cursos_realizados(){
+    $informacion = $this->wpdb->get_results(
+      "SELECT estudiantes.`IdEstudiante`, estudiantes.`Nombres`, estudiantes.`Apellidos`,
+      (SELECT COUNT(curso_realizados.`IdCursoRealizado`)
+                       FROM curso_realizados
+                       WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`)
+                       AS Cursos_Realizados,
+                       (SELECT MAX(curso_realizados.`FechaTerminacion`)
+                       FROM curso_realizados
+                       WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`)
+                       AS Fecha,
+                       (SELECT curso_realizados.`IdMaterial`
+                        FROM curso_realizados
+                        WHERE curso_realizados.`FechaTerminacion` = Fecha) AS Material
+        FROM estudiantes INNER JOIN curso_realizados
+        WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`
+        OR NOT EXISTS (SELECT  curso_realizados.`IdEstudiante`
+                       FROM curso_realizados
+                       WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante` )
+        GROUP BY estudiantes.`IdEstudiante`
+
+      ",
+
+       'ARRAY_A'
+     );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
+  ###########################################################
+  ########## Traer informacion bde un estudiante ############
+  ###########################################################
+
+  public function informacion_estudiante($id){
+    $informacion = $this->wpdb->get_results(
+      "SELECT *
+      FROM `estudiantes`
+      WHERE `IdEstudiante` = $id
+      ",
+       'ARRAY_A'
+     );
+    return (isset($informacion[0])) ? $informacion : null;
+
   }
 }

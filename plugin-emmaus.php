@@ -3,7 +3,7 @@
 Plugin Name: emmaus
 Description: Este plugin sirve para gestionar una base de datos.
 Version: 0.1
-Author: Jandrey Steven Serna
+Author: Jandrey Steven Serna & José Mario VAlencia
 License: private
 */
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
@@ -12,13 +12,73 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
+// require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
 
 
 
 add_action('init', 'fkm_init', 0);
 function fkm_init() {
   add_action('admin_menu', 'fkm_admin_menu');
+}
 
+add_action('init', 'student_init', 0);
+function student_init() {
+  add_action('admin_menu', 'student_admin_menu');
+
+}
+
+add_action('init', 'curse_init', 0);
+function curse_init() {
+  add_action('admin_menu', 'curse_admin_menu');
+}
+
+add_action('init', 'diplomes_init', 0);
+function diplomes_init() {
+  add_action('admin_menu', 'diplomes_admin_menu');
+}
+
+function student_admin_menu(){
+  add_menu_page(
+    'ESTUDIANTES',
+    'ESTUDIANTES ',
+    'administrator',
+    'estudiante',
+    'estudent_admin',
+    'dashicons-welcome-learn-more',
+    4 );
+
+    add_submenu_page(
+    'estudiante',
+    'Ver Estudiantes',
+    'Ver Estudiantes',
+    'administrator',
+    'ver_estudiante',
+    'see_students_admin',
+    1 );
+}
+
+
+function curse_admin_menu(){
+  add_menu_page(
+    'Cursos',
+    'Cursos',
+    'administrator',
+    'curso',
+    'curso_admin',
+    'dashicons-book-alt',
+    4 );
+}
+
+function diplomes_admin_menu(){
+  add_menu_page(
+    'Diplomas',
+    'Diplomas',
+    'administrator',
+    'diploma',
+    'diploma_admin',
+    'dashicons-awards
+    ',
+    4 );
 }
 
 function fkm_admin_menu(){
@@ -31,33 +91,6 @@ function fkm_admin_menu(){
     'dashicons-schedule',
     3
   );
-
-  add_submenu_page(
-  'emmaus',
-  'ESTUDIANTES',
-  'ESTUDIANTES ',
-  'administrator',
-  'estudiante',
-  'estudent_admin',
-  1 );
-
-  add_submenu_page(
-  'emmaus',
-  'Cursos',
-  'Cursos',
-  'administrator',
-  'curso',
-  'curso_admin',
-  2 );
-
-  add_submenu_page(
-  'emmaus',
-  'Diplomas',
-  'Diplomas',
-  'administrator',
-  'diploma',
-  'diploma_admin',
-  3 );
 
   add_submenu_page(
   'emmaus',
@@ -87,16 +120,13 @@ function core_emmaus(){
 
 function estudent_admin()
 {
-  $modelo_estudiantes = new modelo('estudiantes');
-  $primary_Key = $modelo_estudiantes->primary_key();
-  $llaves_foranes = $modelo_estudiantes->get_key_foreaneas();
-  // echo "<pre>";
-  // echo "hola";
-  // print_r ($llaves_foranes);
-  // echo "</pre>";
-  $colum_name = $modelo_estudiantes->columnas_sin_llaves();
-
+  // $modelo_estudiantes = new Modelo_estudiantes();
+  // $datas = $modelo_estudiantes->cursos_realizados();
   require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
+}
+function see_students_admin()
+{
+  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes.php';
 }
 
 function curso_admin(){

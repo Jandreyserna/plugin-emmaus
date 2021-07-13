@@ -1,40 +1,43 @@
 <?php
 
-if (!empty($_POST['update'])){
-  update_student_funtion();
+
+if (!empty($_POST['nuevo-estudiante'])){
+  unset($_POST['nuevo-estudiante']);
+  insert_funtion('estudiantes',$_POST);
+} else if (!empty($_POST['id-actual-estudiante'])){
+  require_once dirname(__FILE__).'\emmauspag\vistas\estudiantes.php';
 }
+$modelo_estudiantes = new Modelo_estudiantes();
+$datas = $modelo_estudiantes->cursos_realizados();
+$modelo_columnas_estudiantes      = new Modelo('estudiantes');
+$columnas_estudiantes             = $modelo_columnas_estudiantes->columnas();
 
-
+// echo "<pre>";
+// print_r($columnas_estudiantes );
+// echo"</pre>";
 ?>
 
 
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
+    <h1>ADMINISTRACIÓN DE CURSOS REALIZADOS</h1>
   </div>
 
-  <form class="d-md-flex form-search-estudiantes" method="post"  >
-        <input type="hidden" name="boton" value="buscador-nombre">
-        <input type="hidden" name="Tabla" value="estudiantes">
-        <input   class="form-control me-2" type="search" placeholder="DIGITE EL NOMBRE " aria-label="Search">
-        <!-- <input id="Fbuscar" class="btn btn-outline-success" type="submit" value="BUSCAR"/> -->
-  </form>
 
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
+    AÑADIR NUEVO ESTUDIANTE
+  </button>
 
-  <?php
-  $columnas = $modelo_estudiantes->columnas();
-  $info = $modelo_estudiantes->traer_datos();
-  ?>
   <table class="display" id="tabla1">
   <thead>
     <tr>
       <th scope='col'>ID</th>
-      <th scope='col'>IDPROMOTOR</th>
-      <th scope='col'>DOCUMENTO</th>
       <th scope='col'>NOMBRES</th>
       <th scope='col'>APELLIDOS</th>
-      <th scope='col'>info</th>
-      <th scope='col'>actu</th>
+      <th scope='col'>CURSO REALIZADO</th>
+      <th scope='col'>FECHA</th>
+      <th scope='col'>ULTIMO CURSO</th>
       <th></th>
     </tr>
 
@@ -42,101 +45,70 @@ if (!empty($_POST['update'])){
   <tbody>
 
       <?php
-      for ($x=0; $x < sizeof($info); $x++) {
+      for ($x=0; $x < sizeof($datas); $x++):
           echo  "<tr>";
-          $n = 0;
-          foreach ($info[$x] as $key => $dato) {
-                    if($n < 6 ){
+          foreach ($datas[$x] as $key => $dato):
                     echo"<td>".$dato."</td>";
-                  $n++;
-                } else if($n < 7){
-                        $n++;
-                        echo"<td>"."<button class='info_complete btn-outline-success' type='button' name='button_info'>".'Informacion'."</button>"."</td>";
-                    }else if($n == 7){
-                        $n++;
-                        echo"<td>"."<button class='actualizar-estudiantes btn-outline-success' type='button' name='button_actualizar'>".'Actualizar'."</button>"."</td>";
-                    }
-                }
-            echo "</tr>";
-              }?>
+          endforeach;?>
+                <td>
+                  <form action=''  method="post">
+                    <input name="id-actual-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
+                    <button class="btn btn-outline-success" type="submit">ver mas</button>
+                  </form>
+                </td>
+            </tr>
+<?php endfor; ?>
   </tbody>
 </table>
 </div>
+
+  <!-- <div class="container">
+    <button type="button" class="btn btn-outline-success" name="button">
+      <a href="#añadirestudiante" class="btn-sucess" data-toggle="collapse" >AÑADIR NUEVO ESTUDIANTE</a>
+    </button>
+  </div> -->
+
+
 <div class="contenedor-search">
 
 </div>
-<div class="crudd">
-  <button class="btn btn-outline-success" type="button" name="button">
 
 
-  <div class="container">
-
-    <a href="#ident" class="btn-crudd btn-sucess" data-toggle="collapse">Insertar Estudiante Nuevo</a>
-
-  </div>
-</button>
-<button class="btn btn-outline-success" type="button" name="button">
-  <div class="container">
-    <a href="#buscar" class="btn-crudd btn-sucess" data-toggle="collapse">Actualizar Estudiante</a>
-
-  </div>
-</button>
-</div>
-
-<div id="ident" class="collapse">
-  <form action="" class="form-inline" method="post">
-    <input type="hidden" name="tabla" value="estudiantes"/>
-    <input  type="hidden" name="boton" value="ingreso"/>
-    <?php
-
-
-    foreach($llaves_foranes as $noimporta)
-      {
-            $n=0;
-            $opciones_select = $modelo_estudiantes->get_field_key_foreanea_select('Nombres', $noimporta['REFERENCED_TABLE_NAME']);
+<!-- Modal -->
+<div class="modal fade" id="añadirestudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+        <input name="nuevo-estudiante" type="hidden" value="nuevo" >
+        <?php
+              for ($z=0; $z < sizeof($columnas_estudiantes) ; $z++)
+              {
+                foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):?>
+                  <label for="campo1"><?=$column?></label>
+                  <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
+        <?php  endforeach;
+              }
             ?>
-            <label for="campo1"><?php echo $noimporta['REFERENCED_TABLE_NAME']; ?> </label>
-            <select class="selection" name="selecionador">
-                <?php foreach ($opciones_select as $nombres) { ?>
-                  <option value="<?php echo 1 ?>"><?php echo $nombres['Nombres'] ?></option>
-                  <?php  } ?>
-            </select>
-      <?php
-      }
-    foreach ($colum_name as  $value)
-            {
-                  ?><p>
-                    <label for="campo1"><?php echo $value['COLUMN_NAME']; ?> </label>
-                    <input type="text" id="campo1" name="<?php  echo $value['COLUMN_NAME'] ?>" placeholder="Inserta un dato"/>
-                   </p>
-                  <?php
-                }
-      ?>
-    <input href="#enviar-form"  type="submit" value="Enviar"/>
-  </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Añadir</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="enviar-form">
-  <?php
-        insertar_base_datos($_POST);
-    ?>
-</div>
-
-<div id="buscar" class="collapse">
-    <?php
-    $columnas = $modelo_estudiantes->columnas_sin_llaves();
-    ?>
-      <form class="formulario_busqueda" method="post">
-        <input  type="hidden" name="tabla" value="estudiantes"/>
-        <input  type="hidden" name="boton" value="actualizar"/>
-        <input   type="text" name="Nombres"  placeholder="Digite los NOMBRES"/>
-        <input   type="text" name="Apellidos"  placeholder="Digite los APELLIDOS"/>
-        <input  id="Enviar" type="submit" value="consultar"/>
-      </form>
-        <div id="respuesta"></div>
 
 
-</div>
+
 
 <div class="boton-volver">
   <button class="boton_para_volver" name="button">

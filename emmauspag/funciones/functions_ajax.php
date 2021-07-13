@@ -19,51 +19,17 @@ if (!empty($_POST['nuevo-costo'])){
 
 function info_complete(){
      if (!empty($_POST['id'])){
+
         $modelo = new modelo('estudiantes');
         $datos = $modelo->consulta_dato($_POST['id']);
+
 ?>
         <div class="titulo text-center">
           <h2><?= $datos[0]['Nombres'].' '.$datos[0]['Apellidos'].' '; ?>
         </h2>
           <h3><?= $datos[0]['IdEstudiante']  ?></h3>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th scope='col'>PROMOTOR</th>
-              <th scope='col'>DOCUMENTO</th>
-              <th scope='col'>NACIMIENTO</th>
-              <th scope='col'>OCUPACIÓN</th>
-              <th scope='col'>DIRECCIÓN</th>
-              <th scope='col'>TELEFONO</th>
-              <th scope='col'>CELULAR</th>
-              <th scope='col'>ESCOLARIDAD</th>
-              <th scope='col'>EMAIL</th>
-              <th scope='col'>CIUDAD</th>
-              <th scope='col'>IGLESIA</th>
-              <th scope='col'>ESTADO CIVIL</th>
-              <th scope='col'>BARRIO</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><?= $datos[0]['IdContacto']  ?></td>
-              <td><?= $datos[0]['DocIdentidad']  ?></td>
-              <td><?= $datos[0]['FechaNacimiento']  ?></td>
-              <td><?= $datos[0]['Ocupacion']  ?></td>
-              <td><?= $datos[0]['DireccionCasa']  ?></td>
-              <td><?= $datos[0]['Telefono']  ?></td>
-              <td><?= $datos[0]['Celular']  ?></td>
-              <td><?= $datos[0]['Escolaridad']  ?></td>
-              <td><?= $datos[0]['CorreoElectronico']  ?></td>
-              <td><?= $datos[0]['Ciudad']  ?></td>
-              <td><?= $datos[0]['Iglesia']  ?></td>
-              <td><?= $datos[0]['EstadoCivil']  ?></td>
-              <td><?= $datos[0]['Barrio']  ?></td>
-            </tr>
-          </tbody>
-        </table>
+
 <?php
     }
 
@@ -172,4 +138,59 @@ function costos_libros()
   echo "<pre>";
   print_r($material);
   echo "</pre>";
+}
+
+
+##################################################
+#####INFORMACION COMPLETA DE LOS ESTUDIANTES######
+##################################################
+
+function info_student(){
+  if (!empty($_POST['id'])){
+     $modelo          = new modelo('estudiantes');
+     $datos           = $modelo->consulta_dato($_POST['id']);
+     $modelo_promotor = new Modelo_promotor();
+     $promotor        = $modelo_promotor-> traer_un_promotor($datos[0]['IdContacto']);
+     $modelo_curso    = new Modelo_cursos();
+     $ultimo_curso    = $modelo_curso-> last_course_student($_POST['id']);
+     $datos[0]['Promotor'] = $promotor[0]['Nombre'];
+     // echo "<pre>";
+     // print_r($ultimo_curso);
+     // echo "</pre>";
+?>
+     <div class="titulo text-center">
+       <h2><?= $datos[0]['Nombres'].' '.$datos[0]['Apellidos'].' '; ?>
+     </h2>
+       <h3><?= $datos[0]['IdEstudiante']  ?></h3>
+     </div>
+<?php
+unset($datos[0]['IdEstudiante']);
+unset($datos[0]['IdContacto']);
+unset($datos[0]['Nombres']);
+unset($datos[0]['Apellidos']);
+?>
+<div class="" >
+  <div class="datos-estudiante">
+    <?php foreach ($datos[0] as $campo => $valor): ?>
+    <ul>
+<?php   if ($valor != null):  ?>
+       <li><?=$campo.': '.$datos[0][$campo]?></li>
+<?php   endif; ?>
+    </ul>
+    <?php endforeach; ?>
+  </div>
+  <div class="datos_curso_estudiante">
+    <?php foreach ($ultimo_curso[0] as $campos => $dato):?>
+      <ul>
+        <li><?=$campos.': '.$ultimo_curso[0][$campos]?></li>
+      </ul>
+    <?php endforeach; ?>
+  </div>
+
+</div>
+
+<?php
+ }
+
+ wp_die();
 }

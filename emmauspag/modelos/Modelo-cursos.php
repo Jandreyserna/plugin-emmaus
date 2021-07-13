@@ -97,6 +97,24 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  #################################################################
+  ######Obtener el ultimo curso registrado de un estudiante #######
+  #################################################################
+
+  public function last_course_student($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT materiales.`TituloMaterial`, MAX(curso_realizados.`FechaTerminacion`) AS Fecha,
+		          curso_realizados.`Porcentaje`
+	             FROM curso_realizados INNER JOIN materiales
+               WHERE `IdEstudiante` = $id AND
+               (curso_realizados.`IdMaterial` = materiales.`IdMaterial` OR
+                 curso_realizados.`IdMaterial` = materiales.`Short`)
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion)) ? $informacion : null;
+  }
 
 
   ####################################################

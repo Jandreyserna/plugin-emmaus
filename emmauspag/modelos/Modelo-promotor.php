@@ -29,4 +29,16 @@ class Modelo_promotor
     return (isset($informacion[0])) ? $informacion : null;
 
   }
+
+  public function traer_un_promotor($id){
+    $informacion = $this->wpdb->get_results(
+          "SELECT promotores.`Nombre`
+          FROM `promotores`
+          WHERE promotores.`IdContacto` = $id
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion)) ? $informacion : null;
+
+  }
 }
