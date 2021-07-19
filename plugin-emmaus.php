@@ -6,6 +6,7 @@ Version: 0.1
 Author: Jandrey Steven Serna & José Mario VAlencia
 License: private
 */
+
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
@@ -13,6 +14,60 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 // require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
+
+
+
+// ROLES Y CAPACIBILITIES
+
+
+
+$adminEmmaus = [ # CAPs
+  'cursos' => 1,
+  'diplomas' => 1,
+  'principal' => 1,
+  'estudiantes' => 1,
+  'certificados' => 1,
+  'validaciones' => 1,
+];
+
+$promotor = [ # CAPs
+  'cursos' => 1,
+  'diplomas' => 1,
+  'estudiantes' => 1
+];
+
+$colaborador = [ # CAPs
+  'cursos' => 1,
+  'diplomas' => 1,
+  'estudiantes' => 1,
+  'validaciones' => 1,
+];
+
+
+// SE AGREGAN LO ROLES
+addRole('adminEmmaus', 'Admin Emmaus', $adminEmmaus);
+addRole('promotorEmmaus', 'Promotor', $promotor);
+addRole('colaboradorEmmaus', 'Colaborador', $colaborador);
+
+// SE LE AGREGAN LAS CAPS AL ADMIN
+
+$adminCaps = array_merge($adminEmmaus, $promotor, $colaborador);
+$role = get_role('administrator');
+foreach ($adminCaps as $cap => $value) {
+  $role->add_cap($cap);
+}
+
+
+// remove_role('adminEmmaus');
+// remove_role('promotorEmmaus');
+// remove_role('colaboradorEmmaus');
+
+// TODO: MOVER PARA OTRO LADO
+function addRole($role, $display_name, $capabilities)
+{
+  add_role($role, $display_name, $capabilities);
+}
+
 
 
 
@@ -41,20 +96,20 @@ function student_admin_menu(){
   add_menu_page(
     'ESTUDIANTES',
     'ESTUDIANTES ',
-    'administrator',
+    'estudiantes',
     'estudiante',
     'estudent_admin',
     'dashicons-welcome-learn-more',
     4 );
 
-    add_submenu_page(
-    'estudiante',
-    'Ver Estudiantes',
-    'Ver Estudiantes',
-    'administrator',
-    'ver_estudiante',
-    'see_students_admin',
-    1 );
+    // add_submenu_page(
+    // 'estudiante',
+    // 'Ver Estudiantes',
+    // 'Ver Estudiantes',
+    // 'administrator',
+    // 'ver_estudiante',
+    // 'see_students_admin',
+    // 1 );
 }
 
 

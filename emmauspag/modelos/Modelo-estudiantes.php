@@ -50,7 +50,7 @@ class Modelo_estudiantes
   #########################################################################
   public function cursos_realizados(){
     $informacion = $this->wpdb->get_results(
-      "SELECT estudiantes.`IdEstudiante`, estudiantes.`Nombres`, estudiantes.`Apellidos`,
+      "SELECT estudiantes.`IdEstudiante`, estudiantes.`Nombres`, estudiantes.`Apellidos`,estudiantes.`Ciudad`,
       (SELECT COUNT(curso_realizados.`IdCursoRealizado`)
                        FROM curso_realizados
                        WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`)

@@ -20,13 +20,12 @@ class Modelo_promotor
 
   public function traer_promotor(){
     $informacion = $this->wpdb->get_results(
-          "SELECT promotores.`IdContacto`,promotores.`Nombre`, iglesias.`NombreIglesia`
-          FROM `promotores` INNER JOIN `iglesias`
-          WHERE promotores.`IdIglesia` = iglesias.`IdIglesia`
+          "SELECT promotores.`IdContacto`,promotores.`Nombre`
+          FROM `promotores`
           ",
            'ARRAY_A'
          );
-    return (isset($informacion[0])) ? $informacion : null;
+    return (isset($informacion)) ? $informacion : null;
 
   }
 

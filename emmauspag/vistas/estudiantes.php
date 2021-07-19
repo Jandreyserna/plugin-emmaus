@@ -1,6 +1,6 @@
 <?php
 
-  $id = 2;
+  $id = $_POST['id-estudiante'];
   $modelo_estudiantes                = new Modelo_estudiantes();
   $info_estudiante                  = $modelo_estudiantes->informacion_estudiante($id);
   $modelo_cursos                    = new Modelo_cursos();
@@ -76,6 +76,13 @@
 </button>
 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
   ACTUALIZAR ESTUDAINTE
+</button>
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+  CURSOS REALIZADOS
+</button>
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+  PLAN DE ESTUDIOS
 </button>
 
 <!-- Modal -->
