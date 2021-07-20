@@ -1,32 +1,13 @@
 <?php
 
   $id = $_POST['id-estudiante'];
-  $modelo_estudiantes                = new Modelo_estudiantes();
-  $info_estudiante                  = $modelo_estudiantes->informacion_estudiante($id);
-  $modelo_cursos                    = new Modelo_cursos();
-  $ultimo_curso                     = $modelo_cursos->last_course_student($id);
-  $modelo_columnas_curso_realizados = new Modelo("curso_realizados");
-  $columnas_curso_realizados        = $modelo_columnas_curso_realizados->columnas();
-  $principal['Id']        = $info_estudiante[0]['IdEstudiante'];
-  $principal['Promotor']  = $info_estudiante[0]['IdContacto'];
-  $principal['Documento'] = $info_estudiante[0]['DocIdentidad'];
-  $principal['Nombres']   = $info_estudiante[0]['Nombres'];
-  $principal['Apellidos'] = $info_estudiante[0]['Apellidos'];
-  $secundario['Fecha De Nacimiento'] = $info_estudiante[0]['FechaNacimiento'];
-  $secundario['Ocupacion']        = $info_estudiante[0]['Ocupacion'];
-  $secundario['Dirección']        = $info_estudiante[0]['DireccionCasa'];
-  $secundario['Telefono']         = $info_estudiante[0]['Telefono'];
-  $secundario['Celular']          = $info_estudiante[0]['Celular'];
-  $secundario['Escolaridad']      = $info_estudiante[0]['Escolaridad'];
-  $secundario['Correo']           = $info_estudiante[0]['CorreoElectronico'];
-  $secundario['Ciudad']           = $info_estudiante[0]['FechaSolicitud'];
-  $secundario['Iglesia']          = $info_estudiante[0]['Iglesia'];
-  $secundario['Estado Civil']     = $info_estudiante[0]['EstadoCivil'];
-  $secundario['Barrio']           = $info_estudiante[0]['Barrio'];
-  $secundario['Comentario']       = $info_estudiante[0]['Info'];
 
-  unset($columnas_curso_realizados [4]);
-  unset($columnas_curso_realizados [5]);
+
+  $principal =  Information_One_Student_First($id);
+  $secundario = Information_One_Student_Secund($id);
+  $info_estudiante = Information_One_Student($id);
+  $ultimo_curso = Last_course_Of_Student($id);
+  $columnas_curso_realizados = Column_Course_Done();
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
@@ -70,7 +51,7 @@
 </div>
 
 <div class="container">
-  
+
   <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" >Ver todo</a>
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">

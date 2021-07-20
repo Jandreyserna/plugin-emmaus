@@ -4,16 +4,14 @@ if (!empty($_POST['nuevo-estudiante'])){
   insert_funtion('estudiantes', $_POST);
 } else if (!empty($_POST['id-estudiante'])){
   see_students_admin();
-} else {
-  $modelo_estudiantes = new Modelo_estudiantes();
-  $datas = $modelo_estudiantes->cursos_realizados();
-  $modelo_columnas_estudiantes      = new Modelo('estudiantes');
-  $columnas_estudiantes             = $modelo_columnas_estudiantes->columnas();
-  $modelo_promotor  = new Modelo_promotor();
-  $promotores = $modelo_promotor->traer_promotor();
+}else{
 
-  unset($columnas_estudiantes[0]);
-  unset($columnas_estudiantes[1]);
+
+  $datas = Information_curse_student();
+  $columnas_estudiantes = Colum_Students();
+  $promotores = Information_Promotors();
+
+
 
   // echo "<pre>";
   // print_r($columnas_estudiantes );
@@ -37,7 +35,7 @@ if (!empty($_POST['nuevo-estudiante'])){
         <th scope='col'>Nombres</th>
         <th scope='col'>Apellidos</th>
         <th scope='col'>Ciudad</th>
-        <th scope='col'># cursos hechos</th>
+        <th scope='col'># Cursos Hechos</th>
         <th scope='col'>Fecha</th>
         <th scope='col'>Ultimo curso</th>
         <th></th>
@@ -127,4 +125,4 @@ if (!empty($_POST['nuevo-estudiante'])){
     </button>
   </div>
   </div>
-<?php }
+  <?php } ?>

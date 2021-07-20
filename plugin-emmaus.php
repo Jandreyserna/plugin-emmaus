@@ -7,13 +7,27 @@ Author: Jandrey Steven Serna & José Mario VAlencia
 License: private
 */
 
+
+// importando los modelos
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
+
+// IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 // require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -175,12 +189,14 @@ function core_emmaus(){
 
 function estudent_admin()
 {
+  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
   // $modelo_estudiantes = new Modelo_estudiantes();
   // $datas = $modelo_estudiantes->cursos_realizados();
   require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
 }
 function see_students_admin()
 {
+  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
   require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes.php';
 }
 
