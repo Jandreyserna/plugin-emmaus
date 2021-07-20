@@ -22,24 +22,24 @@ if (!empty($_POST['nuevo-estudiante'])){
 
   <div class="contenedor-estudiantes">
     <div class="titulo text-center">
-      <h1>ADMINISTRACIÓN DE CURSOS REALIZADOS</h1>
+      <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
     </div>
 
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
-      AÑADIR NUEVO ESTUDIANTE
+      Añadir nuevo estudiante
     </button>
 
     <table class="display" id="tabla1">
     <thead>
       <tr>
-        <th scope='col'>NOMBRES</th>
-        <th scope='col'>APELLIDOS</th>
-        <th scope='col'>CIUDAD</th>
-        <th scope='col'>CURSO REALIZADO</th>
-        <th scope='col'>FECHA</th>
-        <th scope='col'>ULTIMO CURSO</th>
+        <th scope='col'>Nombres</th>
+        <th scope='col'>Apellidos</th>
+        <th scope='col'>Ciudad</th>
+        <th scope='col'># cursos hechos</th>
+        <th scope='col'>Fecha</th>
+        <th scope='col'>Ultimo curso</th>
         <th></th>
       </tr>
 
@@ -57,7 +57,7 @@ if (!empty($_POST['nuevo-estudiante'])){
                   <td>
                     <form action=''  method="POST">
                       <input name="id-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
-                      <button class="btn btn-outline-success" type="submit">ver mas</button>
+                      <button class="btn btn-outline-success" type="submit">Ver más</button>
                     </form>
                   </td>
               </tr>

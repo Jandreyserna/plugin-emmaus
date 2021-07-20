@@ -69,21 +69,27 @@
   </div>
 </div>
 
-<a href="#ver_mas_estudiante" data-toggle="collapse" >Ver</a>
+<div class="container">
+  
+  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" >Ver todo</a>
 
-<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
-  AÑADIR CURSO
-</button>
-<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-  ACTUALIZAR ESTUDAINTE
-</button>
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
+    Añadir curso
+  </button>
 
-<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-  CURSOS REALIZADOS
-</button>
-<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-  PLAN DE ESTUDIOS
-</button>
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+    Actualizar
+  </button>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+    Cursos realizados
+  </button>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+    Plan de estudios
+  </button>
+
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="añadirestudiante-curso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

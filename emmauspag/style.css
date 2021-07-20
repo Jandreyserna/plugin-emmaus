@@ -1,9 +1,29 @@
+/* Colores {
+  Principales {
+    verde: #24BB14,
+    azul: #0044BB,
+  }
+} */
 
+/*Variables*/
+:root {
+  --main-green:#24BB14;
+  --main-blue: #0044BB;
+  --light-green: #84be7e;
+  --light-blue: #879bbd;
+}
 
+/*Botones vista estudiantes*/
+.btn-outline-success{
+  background-color: var(--main-green);
+  color: white;
+}
 
 .btn-primary{
-  background: #24BB14 !important;
+  background-color: var(--main-green);
 }
+/* / Botones vista estudiantes*/
+
 
 #wpfooter{
   position: relative;
@@ -43,7 +63,7 @@ button.btn{
 
 a.btn-crudd{
   cursor: default;
-  color: #0044BB;
+  color: var(--main-blue);
 }
 
 button.boton_para_volver{
