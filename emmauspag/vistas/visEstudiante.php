@@ -14,9 +14,9 @@ if (!empty($_POST['nuevo-estudiante'])){
   // echo"</pre>";
   ?>
 
-  <div class="contenedor-estudiantes">
+<div class="contenedor-estudiantes">
     <div class="titulo text-center">
-      <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
+      <h1>Modulo Estudiantes</h1>
     </div>
 
 

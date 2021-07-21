@@ -22,6 +22,14 @@
 .btn-primary{
   background-color: var(--main-green);
 }
+
+.btn-accion{
+  border: 1px solid rgb(92, 92, 92); 
+  padding: 2px;
+  background-color: gray;
+  color: white;
+  border-radius: 0.2;
+}
 /* / Botones vista estudiantes*/
 
 

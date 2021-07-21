@@ -28,7 +28,7 @@ if (!empty($_POST['IdCursoRealizado'])){
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
+    <h1>Adminitración de estudiante</h1>
   </div>
 
 <div class="container">
@@ -60,15 +60,19 @@ if (!empty($_POST['IdCursoRealizado'])){
 </div>
 
 <div class="container">
+  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver todo</a>
+</div>
 
-  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" >Ver todo</a>
+
+
+<div class="container">
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
     Añadir curso
   </button>
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-    Actualizar
+    Actualizar información
   </button>
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
@@ -80,6 +84,11 @@ if (!empty($_POST['IdCursoRealizado'])){
   </button>
 
 </div>
+
+<div class="container">
+  <a href="" class="btn-accion"> Volver a estudiantes</a>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="añadirestudiante-curso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
