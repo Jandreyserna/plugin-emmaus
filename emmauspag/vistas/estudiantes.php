@@ -1,9 +1,5 @@
 <?php
 if (!empty($_POST['IdCursoRealizado'])){
-  // unset($_POST['nuevo-curso']);
-  // echo "<pre>";
-  // print_r($_POST);
-  // echo "</pre>";
   insert_funtion('curso_realizados', $_POST);
 }else{
 
@@ -13,13 +9,31 @@ if (!empty($_POST['IdCursoRealizado'])){
   // echo "<pre>";
   // print_r($_POST['id-estudiante']);
   // echo "</pre>";
-
+###############################################################
+########Traigo la informacion del estudiante en 2 paretes #####
+###############################################################
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
+
+  ###################################################
+  ########Traigo los promotores y las columnas#######
+  ###################################################
+  $promotores = Information_Promotors();
+  $columnas_estudiantes = Colum_Students();
+
+  ###################################################
+  ########
+  ###################################################
   $info_estudiante = Information_One_Student($id);
   $ultimo_curso = Last_course_Of_Student($id);
   $columnas_curso_realizados = Column_Course_Done();
   $materiales = Materials();
+
+  ###################################################
+  ########Traigo todos los cursos ###################
+  ###################################################
+
+  $cursos_hechos = 
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
@@ -74,10 +88,11 @@ if (!empty($_POST['IdCursoRealizado'])){
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
     Cursos realizados
   </button>
-
+<!-- <a href="">volver a estudiantes</a> -->
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
     Plan de estudios
   </button>
+  <!-- <button type="submit" name="button"><a href="">Volver estudiantes</a> </button> -->
 
 </div>
 
@@ -113,5 +128,64 @@ if (!empty($_POST['IdCursoRealizado'])){
   </div>
 </div>
 
->
+<!-- Modal ACTUALIZAR -->
+<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+        <input name="Actualizar-estudiante" type="hidden" value="nuevo" >
+        <select class="id_promotor" name="IdContacto" required>
+            <option value="" disabled selected>Promotor</option>
+         <?php foreach ($promotores as $col=> $valor): ?>
+            <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?></option>
+         <?php endforeach; ?>
+        </select>
+
+        <?php
+              for ($z=2; $z < sizeof($columnas_estudiantes) ; $z++)
+              {
+                foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):?>
+                  <label for="campo1"><?=$column?></label>
+                  <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
+        <?php  endforeach;
+              }
+            ?>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal CURSOS REALIZADOS -->
+<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Curso Realizados Por Estudiante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <?php }

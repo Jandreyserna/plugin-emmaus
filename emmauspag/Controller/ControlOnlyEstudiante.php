@@ -1,5 +1,7 @@
 <?php
-
+##################################################################
+########Traigo ta informacion de un estudiante ###################
+##################################################################
 function Information_One_Student($id)
 {
   $modelo_estudiantes                = new Modelo_estudiantes();
@@ -15,6 +17,10 @@ function Information_One_Student($id)
   return $info_estudiante ;
 }
 
+######################################################################################
+########Traigo la primera parte de la informacion de un estudiante ###################
+######################################################################################
+
 function Information_One_Student_First($id)
 {
   $modelo_estudiantes                = new Modelo_estudiantes();
@@ -29,7 +35,9 @@ function Information_One_Student_First($id)
   return $principal;
 
 }
-
+######################################################################################
+########Traigo La segunda parte de la informacion de un estudiante ###################
+######################################################################################
 
 function Information_One_Student_Secund($id)
 {
@@ -53,6 +61,10 @@ function Information_One_Student_Secund($id)
 
 }
 
+###################################################################
+########Traigo el ultimo curso de un estudiante ###################
+###################################################################
+
 function Last_course_Of_Student($id)
 {
   $modelo_cursos                    = new Modelo_cursos();
@@ -60,6 +72,10 @@ function Last_course_Of_Student($id)
 
   return $ultimo_curso;
 }
+
+#############################################################################
+########Traigo las columnas de la tabla curso_realizados  ###################
+#############################################################################
 
 function Column_Course_Done()
 {
@@ -75,10 +91,23 @@ function Column_Course_Done()
 
 }
 
+#######################################################
+########Traigo todos los Materiales ###################
+#######################################################
+
 function Materials()
 {
   $modelo_materiales = new Modelo_materiales();
   $materiales        = $modelo_materiales->Materials_and_title();
 
   return $materiales ;
+}
+
+#########################################################################
+########Traigo todos los cursos hechos por estudiante ###################
+#########################################################################
+
+function All_Course_Of_Student()
+{
+  
 }
