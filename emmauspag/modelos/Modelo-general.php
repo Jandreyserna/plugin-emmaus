@@ -19,6 +19,9 @@ class Modelo
 
   function insertar_data_wpdb($datos)
   {
+    // echo "<pre>";
+    // print_r($datos);
+    // echo "</pre>";
 
     $this->wpdb->insert(
       $this->nombre_tabla, # TABLA

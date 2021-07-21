@@ -16,6 +16,8 @@ function Colum_Students()
 
   unset($columnas_estudiantes[0]);
   unset($columnas_estudiantes[1]);
+
+  return $columnas_estudiantes;
 }
 
 function Information_Promotors()

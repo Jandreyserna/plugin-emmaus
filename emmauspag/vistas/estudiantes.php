@@ -1,22 +1,31 @@
 <?php
+if (!empty($_POST['IdCursoRealizado'])){
+  // unset($_POST['nuevo-curso']);
+  // echo "<pre>";
+  // print_r($_POST);
+  // echo "</pre>";
+  insert_funtion('curso_realizados', $_POST);
+}else{
 
   $id = $_POST['id-estudiante'];
+  unset($_POST['id-estudiante']);
 
+  // echo "<pre>";
+  // print_r($_POST['id-estudiante']);
+  // echo "</pre>";
 
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
   $info_estudiante = Information_One_Student($id);
   $ultimo_curso = Last_course_Of_Student($id);
   $columnas_curso_realizados = Column_Course_Done();
+  $materiales = Materials();
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
-  // print_r($columnas_curso_realizados);
+  // print_r($materiales);
   // echo "</pre>";
-
 ?>
-
-
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
@@ -84,15 +93,15 @@
       </div>
       <div class="modal-body">
         <form action="" method="post">
-          <input name="nuevo-estudiante-curso" type="hidden" value="nuevo" >
-          <?php
-          for ($i=0; $i < sizeof($columnas_curso_realizados) ; $i++)
-          {
-              foreach($columnas_curso_realizados[$i] as $nombre_columna_curso => $nom_colum ):?>
-                <label for="campo1"><?=$nom_colum?></label>
-                <input name="<?=$nom_colum?>" type="text" placeholder="DIGITE EL NOMBRE " >
-            <?php  endforeach;
-          }?>
+          <input name="IdCursoRealizado" type="hidden" value="4" >
+          <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
+          <select class="id_material" name="IdMaterial" required>
+              <option value="" disabled selected>Material</option>
+           <?php foreach ($materiales as $col=> $valor): ?>
+              <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
+           <?php endforeach; ?>
+          </select>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Añadir</button>
@@ -104,30 +113,5 @@
   </div>
 </div>
 
-<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Formulario curso</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <input name="nuevo-estudiante-curso" type="hidden" value="nuevo" >
-          <?php
-              foreach($info_estudiante[0] as $columna => $colum ):?>
-                <label for="campo1"><?=$columna?></label>
-                <input name="<?=$columna?>" type="text" placeholder="DIGITE EL NOMBRE " >
-            <?php  endforeach;?>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Añadir</button>
-          </div>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
+>
+<?php }

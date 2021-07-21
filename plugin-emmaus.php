@@ -13,6 +13,7 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 
 // IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';

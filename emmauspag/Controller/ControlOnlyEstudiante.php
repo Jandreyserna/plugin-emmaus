@@ -68,7 +68,17 @@ function Column_Course_Done()
 
   unset($columnas_curso_realizados [4]);
   unset($columnas_curso_realizados [5]);
+  unset($columnas_curso_realizados [0]);
+  unset($columnas_curso_realizados [3]);
 
   return $columnas_curso_realizados ;
 
+}
+
+function Materials()
+{
+  $modelo_materiales = new Modelo_materiales();
+  $materiales        = $modelo_materiales->Materials_and_title();
+
+  return $materiales ;
 }

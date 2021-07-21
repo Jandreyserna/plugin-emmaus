@@ -6,13 +6,9 @@ if (!empty($_POST['nuevo-estudiante'])){
   see_students_admin();
 }else{
 
-
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-
-
-
   // echo "<pre>";
   // print_r($columnas_estudiantes );
   // echo"</pre>";
@@ -53,7 +49,7 @@ if (!empty($_POST['nuevo-estudiante'])){
                     endif;
             endforeach;?>
                   <td>
-                    <form action=''  method="POST">
+                    <form action=''  method="post">
                       <input name="id-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
                       <button class="btn btn-outline-success" type="submit">Ver más</button>
                     </form>
