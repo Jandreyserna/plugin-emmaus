@@ -107,7 +107,9 @@ function Materials()
 ########Traigo todos los cursos hechos por estudiante ###################
 #########################################################################
 
-function All_Course_Of_Student()
+function All_Course_Of_Student($id)
 {
-
+  $modelo_cursos = new Modelo_cursos();
+  $cursos_hechos = $modelo_cursos->Course_Done_Of_Student($id);
+  return $cursos_hechos;
 }

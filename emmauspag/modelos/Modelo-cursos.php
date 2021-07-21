@@ -172,4 +172,23 @@ class Modelo_cursos
         array('IdMaterial' => $id['IdMaterial'])
       );
   }
+
+  ##########################################################
+  ######Cursos hechos por un estudiante#####################
+  ##########################################################
+
+
+  public function Course_Done_Of_Student($id)
+  {
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT curso_realizados.`IdMaterial`, materiales.`TituloMaterial` As Material, curso_realizados.`Porcentaje`
+            FROM `curso_realizados` INNER JOIN `materiales`
+            WHERE curso_realizados.`IdEstudiante` = $id AND curso_realizados.`IdMaterial` = materiales.`IdMaterial`
+            GROUP BY curso_realizados.`IdMaterial`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion)) ? $informacion : null;
+  }
 }

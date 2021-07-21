@@ -33,11 +33,11 @@ if (!empty($_POST['IdCursoRealizado'])){
   ########Traigo todos los cursos ###################
   ###################################################
 
-  $cursos_hechos =
+  $cursos_hechos = All_Course_Of_Student($id);
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
-  // print_r($materiales);
+  // print_r($cursos_hechos);
   // echo "</pre>";
 ?>
 <div class="contenedor-estudiantes">
@@ -74,27 +74,27 @@ if (!empty($_POST['IdCursoRealizado'])){
 </div>
 
 <div class="container">
+  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver todo</a>
+</div>
 
-  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" >Ver todo</a>
-
+<div class="container">
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
     Añadir curso
   </button>
-
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
     Actualizar informacion
   </button>
-
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#cursos_realizados">
     Cursos realizados
   </button>
 <!-- <a href="">volver a estudiantes</a> -->
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
     Plan de estudios
   </button>
+</div>
 
-  <div  class = " contenedor ">
-    <Un  href = "" clase = " btn-accion " > Volver a Estudiantes </una >
+  <div  class = " container">
+    <a href = "" class="btn-accion" > Volver a Estudiantes </a>
   </div>
   <!-- <button type="submit" name="button"><a href="">Volver estudiantes</a> </button> -->
 
@@ -151,13 +151,12 @@ if (!empty($_POST['IdCursoRealizado'])){
             <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?></option>
          <?php endforeach; ?>
         </select>
-
         <?php
               for ($z=2; $z < sizeof($columnas_estudiantes) ; $z++)
               {
                 foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):?>
                   <label for="campo1"><?=$column?></label>
-                  <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
+                  <input name="<?=$column?>" type="text" value = <?=$info_estudiante[0][$column]?>  >
         <?php  endforeach;
               }
             ?>
@@ -172,7 +171,7 @@ if (!empty($_POST['IdCursoRealizado'])){
 </div>
 
 <!-- Modal CURSOS REALIZADOS -->
-<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cursos_realizados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -183,7 +182,9 @@ if (!empty($_POST['IdCursoRealizado'])){
       </div>
       <div class="modal-body">
         <ul>
-          <li></li>
+          <?php for ($i=0; $i < sizeof($cursos_hechos) ; $i++) {?>
+                <li>Curso: <?=$cursos_hechos[$i]['Material']?> Nota: <?=$cursos_hechos[$i]['Porcentaje']?></li>
+          <?php } ?>
         </ul>
       </div>
     </div>

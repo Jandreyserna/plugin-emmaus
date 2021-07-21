@@ -23,12 +23,12 @@
   background-color: var(--main-green);
 }
 
-. btn-accion {
-  borde :  rgb sólido de 1 px ( 92 , 92 , 92 );
-  relleno :  2 px ;
-  color de fondo : gris;
-  color : blanco;
-  radio del borde :  0,2 ;
+.btn-accion{
+  border: 1px solid rgb(92, 92, 92);
+  padding: 2px;
+  background-color: gray;
+  color: white;
+  border-radius: 0.2;
 }
 /* / Botones vista estudiantes*/
 
