@@ -22,8 +22,15 @@
 .btn-primary{
   background-color: var(--main-green);
 }
-/* / Botones vista estudiantes*/
 
+. btn-accion {
+  borde :  rgb sólido de 1 px ( 92 , 92 , 92 );
+  relleno :  2 px ;
+  color de fondo : gris;
+  color : blanco;
+  radio del borde :  0,2 ;
+}
+/* / Botones vista estudiantes*/
 
 #wpfooter{
   position: relative;

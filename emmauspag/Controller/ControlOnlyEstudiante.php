@@ -109,5 +109,5 @@ function Materials()
 
 function All_Course_Of_Student()
 {
-  
+
 }

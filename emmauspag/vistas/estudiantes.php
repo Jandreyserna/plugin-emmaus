@@ -33,7 +33,7 @@ if (!empty($_POST['IdCursoRealizado'])){
   ########Traigo todos los cursos ###################
   ###################################################
 
-  $cursos_hechos = 
+  $cursos_hechos =
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
@@ -42,7 +42,7 @@ if (!empty($_POST['IdCursoRealizado'])){
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>ADMINISTRACIÓN DE ESTUDIANTES</h1>
+    <h1> Adminitración de estudiante </h1>
   </div>
 
 <div class="container">
@@ -82,7 +82,7 @@ if (!empty($_POST['IdCursoRealizado'])){
   </button>
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-    Actualizar
+    Actualizar informacion
   </button>
 
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
@@ -92,6 +92,10 @@ if (!empty($_POST['IdCursoRealizado'])){
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
     Plan de estudios
   </button>
+
+  <div  class = " contenedor ">
+    <Un  href = "" clase = " btn-accion " > Volver a Estudiantes </una >
+  </div>
   <!-- <button type="submit" name="button"><a href="">Volver estudiantes</a> </button> -->
 
 </div>
