@@ -1,7 +1,14 @@
 <?php
-if (!empty($_POST['IdCursoRealizado'])){
+if (!empty($_POST['IdMaterial']) && !empty($_POST['IdEstudiante'])){
+
+  // $_POST['IdCursoRealizado'] = 999999;
+  // admin_url('admin.php?page=') . $_GET['page'];
+  // echo "<pre>";
+  // print_r($_GET);
+  // echo "</pre>";
   insert_funtion('curso_realizados', $_POST);
-}else{
+  see_students_admin();
+}
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
@@ -9,29 +16,20 @@ if (!empty($_POST['IdCursoRealizado'])){
   // echo "<pre>";
   // print_r($_POST['id-estudiante']);
   // echo "</pre>";
-###############################################################
-########Traigo la informacion del estudiante en 2 paretes #####
-###############################################################
+
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
 
-  ###################################################
-  ########Traigo los promotores y las columnas#######
-  ###################################################
+
   $promotores = Information_Promotors();
   $columnas_estudiantes = Colum_Students();
 
-  ###################################################
-  ########
-  ###################################################
+
   $info_estudiante = Information_One_Student($id);
   $ultimo_curso = Last_course_Of_Student($id);
   $columnas_curso_realizados = Column_Course_Done();
   $materiales = Materials();
 
-  ###################################################
-  ########Traigo todos los cursos ###################
-  ###################################################
 
   $cursos_hechos = All_Course_Of_Student($id);
 
@@ -111,8 +109,7 @@ if (!empty($_POST['IdCursoRealizado'])){
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
-          <input name="IdCursoRealizado" type="hidden" value="4" >
+        <form action="<?=admin_url('admin.php?page=') . $_GET['page']?>" method="post">
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <select class="id_material" name="IdMaterial" required>
               <option value="" disabled selected>Material</option>
@@ -143,7 +140,7 @@ if (!empty($_POST['IdCursoRealizado'])){
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="<?see_students_admin();?>" method="post">
         <input name="Actualizar-estudiante" type="hidden" value="nuevo" >
         <select class="id_promotor" name="IdContacto" required>
             <option value="" disabled selected>Promotor</option>
@@ -190,7 +187,3 @@ if (!empty($_POST['IdCursoRealizado'])){
     </div>
   </div>
 </div>
-
-
-
-<?php }

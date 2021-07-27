@@ -22,16 +22,6 @@ require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 
 
 
-
-
-
-
-
-
-
-
-
-
 // ROLES Y CAPACIBILITIES
 
 

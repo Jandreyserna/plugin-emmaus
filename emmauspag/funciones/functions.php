@@ -165,7 +165,7 @@ function insertar_base_datos($datos){
 # ========== insertar con nombre de tabla y datos ==========
 # ==========================================================
 
-function insert_funtion($tabla,$datos){
+function insert_funtion($tabla, $datos){
 
   $modelo = new Modelo($tabla);
   $modelo->insertar_data_wpdb($datos);

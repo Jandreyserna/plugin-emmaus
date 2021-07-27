@@ -57,17 +57,20 @@ class Modelo_estudiantes
                        AS Cursos_Realizados,
                        (SELECT MAX(curso_realizados.`FechaTerminacion`)
                        FROM curso_realizados
-                       WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`)
+                       WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante` LIMIT 1)
                        AS Fecha,
                        (SELECT curso_realizados.`IdMaterial`
                         FROM curso_realizados
-                        WHERE curso_realizados.`FechaTerminacion` = Fecha) AS Material
+                        WHERE curso_realizados.`FechaTerminacion` = Fecha
+                      LIMIT 1) AS Material
         FROM estudiantes INNER JOIN curso_realizados
         WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`
         OR NOT EXISTS (SELECT  curso_realizados.`IdEstudiante`
                        FROM curso_realizados
-                       WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante` )
+                       WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`
+                     LIMIT 1)
         GROUP BY estudiantes.`IdEstudiante`
+        LIMIT 1
 
       ",
 
