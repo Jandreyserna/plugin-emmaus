@@ -28,12 +28,12 @@ if (!empty($_POST['nuevo-estudiante'])){
     <table class="display" id="tabla1">
     <thead>
       <tr>
+        <th scope='col'>Promotor</th>
         <th scope='col'>Nombres</th>
         <th scope='col'>Apellidos</th>
+        <th scope='col'># Documento</th>
         <th scope='col'>Ciudad</th>
-        <th scope='col'># Cursos Hechos</th>
-        <th scope='col'>Fecha</th>
-        <th scope='col'>Ultimo curso</th>
+        <!-- <th scope='col'>Ultimo curso</th> -->
         <th></th>
       </tr>
 
