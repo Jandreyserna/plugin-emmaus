@@ -24,6 +24,29 @@ class Modelo_estudiantes
       );
   }
 
+  public function Updata_born_date($data,$id){
+    $this->wpdb->show_errors(false);
+    $tabla = "curso_realizados";
+      $this->wpdb->update(
+        $tabla, # TABLA
+        $data, # DATOS
+        array('IdCursoRealizado' => $id)
+      );
+  }
+
+
+  public function fechas_nacimiento(){
+    $informacion = $this->wpdb->get_results(
+      "SELECT `FechaTerminacion`, `IdCursoRealizado`
+      FROM curso_realizados
+      LIMIT 9999,20000
+      ",
+       'ARRAY_A'
+     );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
 #########################################################################
 ########## Traer informacion basica de todos los estudiantes ############
 #########################################################################
@@ -35,7 +58,7 @@ class Modelo_estudiantes
                        WHERE promotores.`IdContacto` = estudiantes.`IdContacto`
                        GROUP BY promotores.`Nombre`)
                        AS Promotor,
-       estudiantes.`DocIdentidad`,estudiantes.`Nombres`, estudiantes.`Apellidos`
+       estudiantes.`Nombres`, estudiantes.`Apellidos`,estudiantes.`DocIdentidad`,estudiantes.`Ciudad`
         FROM estudiantes INNER JOIN promotores
         GROUP BY estudiantes.`IdEstudiante`;
       ",
@@ -68,6 +91,7 @@ class Modelo_estudiantes
                        FROM curso_realizados
                        WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante` )
         GROUP BY estudiantes.`IdEstudiante`
+        LIMIT 50
 
       ",
 

@@ -1,5 +1,20 @@
 <?php
 
+function Update_date_Students($data, $id)
+{
+  $modelo_estudiantes = new Modelo_estudiantes();
+  $modelo_estudiantes->Updata_born_date($data,$id);
+}
+
+function data_students()
+{
+  $modelo_estudiantes = new Modelo_estudiantes();
+  $dates = $modelo_estudiantes->fechas_nacimiento();
+
+  return $dates;
+
+}
+
 function Information_curse_student()
 {
   $modelo_estudiantes = new Modelo_estudiantes();
@@ -8,6 +23,7 @@ function Information_curse_student()
   return $datas;
 
 }
+
 
 function Colum_Students()
 {
