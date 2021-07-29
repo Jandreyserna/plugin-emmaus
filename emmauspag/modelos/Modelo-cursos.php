@@ -137,6 +137,8 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+
+
   #################################################################
   ######Obtener todos los cursos que hay por ver ########## #######
   #################################################################
@@ -155,6 +157,24 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+
+  #################################################################
+  ######Obtener todos los cursos para devolver ########## #######
+  #################################################################
+
+  public function Courses_Wins(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT programas.`Nombre` AS programas, niveles.`NombreNivel` , cursos.`Nombre` AS curso
+            FROM programas INNER JOIN niveles INNER join cursos_niveles INNER JOIN cursos
+            WHERE cursos_niveles.`IdNivel` = niveles.`IdNivel`
+            AND niveles.`IdProgramaRel` = programas.`IdPrograma`
+            AND cursos.`IdCurso` = cursos_niveles.`IdCurso`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 
   ####################################################
   ######INSERTAR UN NUEVO CURSO EN TABLA cursos#######

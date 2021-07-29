@@ -107,6 +107,11 @@ function diplomes_init() {
   add_action('admin_menu', 'diplomes_admin_menu');
 }
 
+add_action('init', 'certificates_init', 0);
+function certificates_init() {
+  add_action('admin_menu', 'certificate_admin_menu');
+}
+
 function student_admin_menu(){
   add_menu_page(
     'ESTUDIANTES',
@@ -125,6 +130,17 @@ function student_admin_menu(){
     // 'ver_estudiante',
     // 'see_students_admin',
     // 1 );
+}
+
+function certificate_admin_menu(){
+  add_menu_page(
+  'CERTIFICADOS',
+  'CERTIFICADOS',
+  'certificados',
+  'certificado',
+  'certificado_admin',
+  'dashicons-id-alt',
+  5 );
 }
 
 
@@ -171,14 +187,6 @@ function fkm_admin_menu(){
   'validacion_admin',
   4 );
 
-  add_submenu_page(
-  'emmaus',
-  'Certificados',
-  'Certificados',
-  'administrator',
-  'certificado',
-  'certificado_admin',
-  5 );
 
 }
 
@@ -214,5 +222,6 @@ function validacion_admin(){
 }
 
 function certificado_admin(){
+  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
   require_once dirname(__FILE__). '/emmauspag/vistas/certificado.php';
 }
