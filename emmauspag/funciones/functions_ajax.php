@@ -119,6 +119,14 @@ function costos_libros()
   $modelo = new Modelo_cursos();
   $material = $modelo->cursos_materiales($id);
   ?>
+<div class="container">
+
+
+  <div class="mostrar-costo-libro center">
+    <h4><?=$material[0]['TituloMaterial']?></h4>
+    <h5><?=$material[0]['ValorVenta']?></h5>
+  </div>
+
   <button class="btn btn-outline-success" type="button" name="button">
     <div class="container">
       <a href="#actualizar-costo" class="btn-crudd btn-sucess" data-toggle="collapse">Actualizar Costo Venta Material</a>
@@ -134,10 +142,11 @@ function costos_libros()
     </form>
 
   </div>
+</div>
 <?php
-  echo "<pre>";
-  print_r($material);
-  echo "</pre>";
+  // echo "<pre>";
+  // print_r($material);
+  // echo "</pre>";
 }
 
 
