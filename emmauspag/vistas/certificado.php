@@ -1,7 +1,16 @@
 <?php
 
-$table = control_course_done();
 
+// $idmaterial = control_update_id();
+// echo "<pre>";
+// print_r($idmaterial);
+// echo "</pre>";
+// $table = control_course_done();
+
+
+
+
+$devoluciones = control_course_done();
 ?>
 
 
@@ -30,19 +39,28 @@ $table = control_course_done();
     <th scope="col">Fecha</th>
     <th scope="col">Nombre Del Curso</th>
     <th scope="col">Puntaje</th>
-    <th scope="col">Calificador</th>
+    <!-- <th scope="col">Calificador</th> -->
     <th scope="col">Nombre Estudiante</th>
     <th scope="col">Devolver</th>
   </tr>
 </thead>
 <tbody>
-  <tr>
-    <th scope="row">15/07/2020</th>
-    <td>Siervo de Dios</td>
-    <td>98%</td>
-    <td>Eliza</td>
-    <td>Jairo Gonzales</td>
-    <td><button type="button" class="btn-outline-success" name="button"><span class="dashicons dashicons-yes-alt"></span></button></td>
-  </tr>
+  <?php
+  for ($x=0; $x < sizeof($devoluciones); $x++):
+      echo  "<tr>";
+      foreach ($devoluciones[$x] as $key => $dato):
+        if ($key != 'IdCursoRealizado' ):
+                echo"<td>".$dato."</td>";
+              endif;
+      endforeach;?>
+            <td>
+              <form action=''  method="post">
+                <input name="id-estudiante" type="hidden" value="<?=$devoluciones[$x]['IdCursoRealizado']?>" >
+                <button class="btn btn-outline-success" type="submit">Ver más</button>
+              </form>
+            </td>
+        </tr>
+<?php endfor; ?>
+
 </tbody>
 </table>
