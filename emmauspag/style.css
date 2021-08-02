@@ -7,31 +7,31 @@
 
 /*Variables*/
 :root {
-  --main-green:#24BB14;
-  --main-blue: #0044BB;
-  --light-green: #84be7e;
-  --light-blue: #879bbd;
+  --main-green:#50a74b;
+  --main-blue: #004b7c;
+  --sec-blue: #0061a0;
+  --light-green: #289241;
+  --light-blue: #88aad7;
 }
 
 /*Botones vista estudiantes*/
 .btn-outline-success{
-  background-color: var(--main-green);
+  background-color: var(--light-green);
   color: white;
 }
 
 .btn-primary{
-  background-color: var(--main-green);
+  background-color: var(--light-green);
 }
 
 .btn-accion{
-  border: 1px solid rgb(92, 92, 92); 
+  border: 1px solid rgb(92, 92, 92);
   padding: 2px;
-  background-color: gray;
-  color: white;
+  background-color: rgb(187, 187, 187);
+  color: rgb(0, 0, 0);
   border-radius: 0.2;
 }
 /* / Botones vista estudiantes*/
-
 
 #wpfooter{
   position: relative;
