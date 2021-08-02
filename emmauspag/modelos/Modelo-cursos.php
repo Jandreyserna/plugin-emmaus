@@ -113,9 +113,68 @@ class Modelo_cursos
             ",
            'ARRAY_A'
          );
-    return (isset($informacion)) ? $informacion : null;
+    return (isset($informacion[0])) ? $informacion : null;
   }
 
+  #################################################################
+  ######Obtener todos los cursos hechos por un estudiante # #######
+  #################################################################
+
+  public function courses_done_student($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT cursos.`Nombre`, cursos.`IdCurso`
+	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
+             WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
+             AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
+             AND materiales.`Short` = curso_realizados.`IdMaterial`
+             AND curso_realizados.`IdEstudiante` = $id
+             GROUP BY cursos.`Nombre`
+             ORDER BY `cursos`.`IdCurso` ASC
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+
+
+  #################################################################
+  ######Obtener todos los cursos que hay por ver ########## #######
+  #################################################################
+
+  public function Courses_All(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT programas.`Nombre` AS programas, niveles.`NombreNivel` , cursos.`Nombre` AS curso
+            FROM programas INNER JOIN niveles INNER join cursos_niveles INNER JOIN cursos
+            WHERE cursos_niveles.`IdNivel` = niveles.`IdNivel`
+            AND niveles.`IdProgramaRel` = programas.`IdPrograma`
+            AND cursos.`IdCurso` = cursos_niveles.`IdCurso`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+
+  #################################################################
+  ######Obtener todos los cursos para devolver ########## #######
+  #################################################################
+
+  public function Courses_Wins(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT programas.`Nombre` AS programas, niveles.`NombreNivel` , cursos.`Nombre` AS curso
+            FROM programas INNER JOIN niveles INNER join cursos_niveles INNER JOIN cursos
+            WHERE cursos_niveles.`IdNivel` = niveles.`IdNivel`
+            AND niveles.`IdProgramaRel` = programas.`IdPrograma`
+            AND cursos.`IdCurso` = cursos_niveles.`IdCurso`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 
   ####################################################
   ######INSERTAR UN NUEVO CURSO EN TABLA cursos#######

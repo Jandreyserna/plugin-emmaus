@@ -37,7 +37,7 @@ class Modelo_promotor
           ",
            'ARRAY_A'
          );
-    return (isset($informacion)) ? $informacion : null;
+    return (isset($informacion[0])) ? $informacion : null;
 
   }
 }

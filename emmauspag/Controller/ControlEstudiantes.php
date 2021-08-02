@@ -3,7 +3,7 @@
 function Information_curse_student()
 {
   $modelo_estudiantes = new Modelo_estudiantes();
-  $datas = $modelo_estudiantes->cursos_realizados();
+  $datas = $modelo_estudiantes->info_table_student();
 
   return $datas;
 

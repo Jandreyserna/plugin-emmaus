@@ -14,6 +14,13 @@
   --light-blue: #88aad7;
 }
 
+/*Buscador datatable */
+div.dataTables_wrapper div.dataTables_filter input {
+  margin-left: 0.5em;
+  display: inline;
+  width: 400px;
+}
+
 /*Botones vista estudiantes*/
 .btn-outline-success{
   background-color: var(--light-green);

@@ -11,7 +11,7 @@ if (!empty($_POST['IdCursoRealizado'])){
   unset($_POST['id-estudiante']);
 
   // echo "<pre>";
-  // print_r($_POST['id-estudiante']);
+  // print_r($id);
   // echo "</pre>";
 
   $principal =  Information_One_Student_First($id);
@@ -20,10 +20,12 @@ if (!empty($_POST['IdCursoRealizado'])){
   $ultimo_curso = Last_course_Of_Student($id);
   $columnas_curso_realizados = Column_Course_Done();
   $materiales = Materials();
+  $cursos_hechos = courses_done($id);
+  $cursos = Plan_Study();
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
-  // print_r($materiales);
+  // print_r($cursos);
   // echo "</pre>";
 ?>
 <div class="contenedor-estudiantes">
@@ -75,11 +77,11 @@ if (!empty($_POST['IdCursoRealizado'])){
     Actualizar información
   </button>
 
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#realizados">
     Cursos realizados
   </button>
 
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#plan-estudios">
     Plan de estudios
   </button>
 
@@ -122,5 +124,80 @@ if (!empty($_POST['IdCursoRealizado'])){
   </div>
 </div>
 
->
+<!-- Modal Cursos realizados -->
+<div class="modal fade" id="realizados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Curos Realizados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php
+        if (!empty($cursos_hechos)):
+         ?>
+        <ul>
+          <?php
+          $m = 0;
+            foreach ($cursos_hechos as $campos => $nombre):
+
+          ?>
+          <li ><?=$cursos_hechos[$m]['Nombre']?></li>
+          <?php
+          $m++;
+              endforeach;
+          endif;
+           ?>
+        </ul>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Plan de estudios -->
+<div class="modal fade" id="plan-estudios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Plan De Estudios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php
+        if (!empty($cursos)):
+          $cont = 1;
+          $sum = 0;
+          ?>
+          <ul>
+          <?php
+          foreach ($cursos as $columa => $dato):
+            ?>
+
+              <li><?= $cursos[$sum]['curso'] ?></li>
+
+            <?php
+            $sum++;
+            endforeach;
+            ?>
+            </ul>
+            <?php
+         endif;
+          ?>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php }

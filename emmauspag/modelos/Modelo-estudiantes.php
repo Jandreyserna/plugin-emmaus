@@ -35,9 +35,10 @@ class Modelo_estudiantes
                        WHERE promotores.`IdContacto` = estudiantes.`IdContacto`
                        GROUP BY promotores.`Nombre`)
                        AS Promotor,
-       estudiantes.`DocIdentidad`,estudiantes.`Nombres`, estudiantes.`Apellidos`
+       estudiantes.`Nombres`, estudiantes.`Apellidos`,estudiantes.`DocIdentidad`, estudiantes.`Ciudad`
         FROM estudiantes INNER JOIN promotores
-        GROUP BY estudiantes.`IdEstudiante`;
+        GROUP BY estudiantes.`IdEstudiante`
+        LIMIT 2000
       ",
        'ARRAY_A'
      );

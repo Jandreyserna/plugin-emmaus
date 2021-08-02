@@ -1,5 +1,9 @@
 jQuery(document).ready(function ($) {
 
+	// $('.dataTables_filterinput[type="search"]').css(
+	//      {'width':'350px','display':'inline-block'}
+	//   );
+
 	//----------------------------------------------------//
 	//-------------tabla cursos con ajax-----------------//
 	//---------------------------------------------------//
@@ -31,6 +35,16 @@ jQuery(document).ready(function ($) {
 	 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
 	 		 }
 	 	 });
+
+		 //----------------------------------------------------//
+		 //-------------tabla Certificados con ajax-----------------//
+		 //---------------------------------------------------//
+
+			 $('#certificado-table').DataTable({
+					 language: {
+						 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+				 }
+			 });
 
 		 //----------------------------------------------------------//
 		 //-------BOTON DE INFO COMPLETA DE ESTUDIANTE CON AJAX------//

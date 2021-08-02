@@ -19,9 +19,11 @@ function Information_One_Student_First($id)
 {
   $modelo_estudiantes                = new Modelo_estudiantes();
   $info_estudiante                  = $modelo_estudiantes->informacion_estudiante($id);
+  $modelo_promotores                = new Modelo_promotor();
+  $info_promotor                 = $modelo_promotores->traer_un_promotor($info_estudiante[0]['IdContacto']);
 
   $principal['Id']        = $info_estudiante[0]['IdEstudiante'];
-  $principal['Promotor']  = $info_estudiante[0]['IdContacto'];
+  $principal['Promotor']  = $info_promotor[0]['Nombre'];
   $principal['Documento'] = $info_estudiante[0]['DocIdentidad'];
   $principal['Nombres']   = $info_estudiante[0]['Nombres'];
   $principal['Apellidos'] = $info_estudiante[0]['Apellidos'];
@@ -73,6 +75,22 @@ function Column_Course_Done()
 
   return $columnas_curso_realizados ;
 
+}
+
+function courses_done($id)
+{
+  $modelo_cursos_hechos = new Modelo_cursos();
+  $curso_realizados        = $modelo_cursos_hechos->courses_done_student($id);
+
+  return $curso_realizados ;
+}
+
+function Plan_Study()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $cursos        = $modelo_cursos->Courses_All();
+
+  return $cursos ;
 }
 
 function Materials()
