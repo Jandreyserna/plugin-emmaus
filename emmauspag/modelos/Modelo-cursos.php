@@ -165,11 +165,46 @@ class Modelo_cursos
   public function Courses_Wins(){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT programas.`Nombre` AS programas, niveles.`NombreNivel` , cursos.`Nombre` AS curso
-            FROM programas INNER JOIN niveles INNER join cursos_niveles INNER JOIN cursos
-            WHERE cursos_niveles.`IdNivel` = niveles.`IdNivel`
-            AND niveles.`IdProgramaRel` = programas.`IdPrograma`
-            AND cursos.`IdCurso` = cursos_niveles.`IdCurso`
+            "SELECT `IdCursoRealizado`, `FechaTerminacion`,(SELECT TituloMaterial
+                          FROM materiales
+                          WHERE curso_realizados.`IdMaterial` = materiales.`IdMaterial`
+                                               GROUP BY materiales.`IdMaterial`
+                          ) AS Curso,
+                          `Porcentaje`, (SELECT Nombres
+                                         FROM estudiantes
+                                         WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`) AS Estudiante
+
+FROM `curso_realizados` WHERE `Enviado` < 2
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #################################################################
+  ######Obtener todos los id de cursos para actualizar ############
+  #################################################################
+
+  public function Courses_Id_Update(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT `IdCursoRealizado`,`IdMaterial`,`IdCurso`
+             FROM `curso_realizados`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #################################################################
+  ######Obtener todos los estados de cursos para actualizar ############
+  #################################################################
+
+  public function Courses_Id_Update_state(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT `IdCursoRealizado`,`Enviado`
+             FROM `curso_realizados`
             ",
            'ARRAY_A'
          );
@@ -216,6 +251,21 @@ class Modelo_cursos
     );
   }
 
+  #############################################################
+  ######ACTUALIZAR Estado del Curso#####################
+  #############################################################
+
+
+  public function Id_Update_state($id , $datos ){
+    $tabla = 'curso_realizados';
+    $this->wpdb->show_errors(false);
+      $this->wpdb->update(
+        $tabla, # TABLA
+        $datos, # DATOS
+        array('IdCursoRealizado' => $id)
+      );
+  }
+
 
   #############################################################
   ######ACTUALIZAR COSTO DE LOS MATERIALES#####################
@@ -231,4 +281,19 @@ class Modelo_cursos
         array('IdMaterial' => $id['IdMaterial'])
       );
   }
+
+
+#############################################################################
+######actualizar el IdCurso de curso de la tabla curso_realizados############
+#############################################################################
+
+public function Courses_Update_state($id,$datos){
+  $tabla = 'curso_realizados';
+  $this->wpdb->show_errors(false);
+    $this->wpdb->update(
+      $tabla, # TABLA
+      $datos, # DATOS
+      array('IdCursoRealizado' => $id)
+    );
+}
 }
