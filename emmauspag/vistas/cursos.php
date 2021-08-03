@@ -1,5 +1,5 @@
 <div class="titulo text-center">
-  <h1>ADMINISTRACIÓN DE CURSOS</h1>
+  <h1>ADMINISTRACIÓN DE CURSOS Y MATERIALES</h1>
 </div>
 
 <?php
