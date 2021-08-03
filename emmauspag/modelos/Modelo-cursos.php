@@ -79,6 +79,22 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  ####################################################################
+  ######INFORMACION DE EL ULTIMO ID DE Cursos_Realizados##############
+  ####################################################################
+
+  public function  Last_Id_Course(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+          "SELECT MAX(`IdCursoRealizado`) AS IdMax
+          FROM `curso_realizados`
+          WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
 
   ######################################################
   ######Obtener el ID del ultimo curso registrado#######
@@ -127,7 +143,7 @@ class Modelo_cursos
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
-             AND materiales.`Short` = curso_realizados.`IdMaterial`
+             AND materiales.`IdMaterial` = curso_realizados.`IdMaterial`
              AND curso_realizados.`IdEstudiante` = $id
              GROUP BY cursos.`Nombre`
              ORDER BY `cursos`.`IdCurso` ASC

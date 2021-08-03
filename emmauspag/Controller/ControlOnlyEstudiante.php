@@ -100,3 +100,10 @@ function Materials()
 
   return $materiales ;
 }
+
+function Course_Last_Id()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $Last_id   = $modelo_cursos->Last_Id_Course();
+  return $Last_id[0]['IdMax'];
+}

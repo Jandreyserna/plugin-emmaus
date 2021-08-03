@@ -1,18 +1,22 @@
 <?php
-if (!empty($_POST['IdCursoRealizado'])){
-  // unset($_POST['nuevo-curso']);
-  // echo "<pre>";
-  // print_r($_POST);
-  // echo "</pre>";
+if (!empty($_POST['nuevo-curso'])){
+    die;
+  unset($_POST['nuevo-curso']);
+  if($_POST['Porcentaje'] != 0)
+  {
+    $_POST['Enviado'] = 1;
+  }else {
+    $_POST['Enviado'] = 0;
+  }
+  echo "<pre>";
+  print_r($_POST);
+  echo "</pre>";
   insert_funtion('curso_realizados', $_POST);
+
 }else{
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
-
-  // echo "<pre>";
-  // print_r($id);
-  // echo "</pre>";
 
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
@@ -22,10 +26,12 @@ if (!empty($_POST['IdCursoRealizado'])){
   $materiales = Materials();
   $cursos_hechos = courses_done($id);
   $cursos = Plan_Study();
+  $ultimo_id = Course_Last_Id();
+  $ultimo_id++;
 
   // unset($info_tabla[0]['IdContacto']);
   // echo "<pre>";
-  // print_r($cursos);
+  // print_r($cursos_hechos);
   // echo "</pre>";
 ?>
 <div class="contenedor-estudiantes">
@@ -65,10 +71,7 @@ if (!empty($_POST['IdCursoRealizado'])){
   <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver todo</a>
 </div>
 
-
-
 <div class="container">
-
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
     Añadir curso
   </button>
@@ -84,7 +87,6 @@ if (!empty($_POST['IdCursoRealizado'])){
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#plan-estudios">
     Plan de estudios
   </button>
-
 </div>
 
 <div class="container">
@@ -104,7 +106,8 @@ if (!empty($_POST['IdCursoRealizado'])){
       </div>
       <div class="modal-body">
         <form action="" method="post">
-          <input name="IdCursoRealizado" type="hidden" value="4" >
+          <input name="nuevo-curso" type="hidden" value="4" >
+          <input name="IdCursoRealizado" type="hidden" value="<?=$ultimo_id?>" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <select class="id_material" name="IdMaterial" required>
               <option value="" disabled selected>Material</option>
@@ -112,7 +115,42 @@ if (!empty($_POST['IdCursoRealizado'])){
               <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
            <?php endforeach; ?>
           </select>
+          <div class="" style="display-inline">
+            <label for="campo2">NOTA :</label>
+            <input name="Porcentaje" type="text" value="0" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Añadir</button>
+          </div>
+        </form>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Actualizar estudiante-->
+<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
+          <?php
+          foreach ($info_estudiante[0] as $camp => $infor):
+            ?>
+            <label for="campo1"><?=$camp?></label>
+            <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
+          <?php
+          endforeach;
+          ?>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Añadir</button>
@@ -142,7 +180,6 @@ if (!empty($_POST['IdCursoRealizado'])){
           <?php
           $m = 0;
             foreach ($cursos_hechos as $campos => $nombre):
-
           ?>
           <li ><?=$cursos_hechos[$m]['Nombre']?></li>
           <?php
