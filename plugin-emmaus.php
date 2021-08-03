@@ -134,11 +134,11 @@ function student_admin_menu(){
 
 function certificate_admin_menu(){
   add_menu_page(
-  'CERTIFICADOS',
-  'CERTIFICADOS',
-  'certificados',
-  'certificado',
-  'certificado_admin',
+  'CURSOS',
+  'CURSOS',
+  'cursos',
+  'curso',
+  'curso_admin',
   'dashicons-id-alt',
   5 );
 }
@@ -146,11 +146,11 @@ function certificate_admin_menu(){
 
 function curse_admin_menu(){
   add_menu_page(
-    'Cursos',
-    'Cursos',
+    'MATERIALES',
+    'MATERIALES',
     'administrator',
-    'curso',
-    'curso_admin',
+    'material',
+    'material_admin',
     'dashicons-book-alt',
     4 );
 }
@@ -209,7 +209,7 @@ function see_students_admin()
   require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes.php';
 }
 
-function curso_admin(){
+function material_admin(){
   require_once dirname(__FILE__). '/emmauspag/vistas/cursos.php';
 }
 
@@ -221,7 +221,12 @@ function validacion_admin(){
   require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
 }
 
-function certificado_admin(){
+function curso_admin(){
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
   require_once dirname(__FILE__). '/emmauspag/vistas/certificado.php';
+}
+
+function See_Notes_course(){
+  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/notas.php';
 }

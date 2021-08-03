@@ -28,9 +28,10 @@ if (!empty($_POST['nuevo-estudiante'])){
     <table class="display" id="tabla1">
     <thead>
       <tr>
-        <th scope='col'>Promotor</th>
+        <th scope='col'>ID</th>
         <th scope='col'>Nombres</th>
         <th scope='col'>Apellidos</th>
+        <th scope='col'>Promotor</th>
         <th scope='col'>Dirección</th>
         <th scope='col'>Ciudad</th>
         <!-- <th scope='col'>Ultimo curso</th> -->
@@ -44,9 +45,9 @@ if (!empty($_POST['nuevo-estudiante'])){
         for ($x=0; $x < sizeof($datas); $x++):
             echo  "<tr>";
             foreach ($datas[$x] as $key => $dato):
-              if ($key != 'IdEstudiante' ):
+
                       echo"<td>".$dato."</td>";
-                    endif;
+
             endforeach;?>
                   <td>
                     <form action=''  method="post">
@@ -59,18 +60,6 @@ if (!empty($_POST['nuevo-estudiante'])){
     </tbody>
   </table>
   </div>
-
-    <!-- <div class="container">
-      <button type="button" class="btn btn-outline-success" name="button">
-        <a href="#añadirestudiante" class="btn-sucess" data-toggle="collapse" >AÑADIR NUEVO ESTUDIANTE</a>
-      </button>
-    </div> -->
-
-
-  <div class="contenedor-search">
-
-  </div>
-
 
   <!-- Modal -->
   <div class="modal fade" id="añadirestudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -110,10 +99,6 @@ if (!empty($_POST['nuevo-estudiante'])){
       </div>
     </div>
   </div>
-
-
-
-
 
   <div class="boton-volver">
     <button class="boton_para_volver" name="button">

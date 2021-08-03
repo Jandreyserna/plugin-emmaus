@@ -16,7 +16,7 @@ $devoluciones = control_course_done();
 
 
 <div class="titulo text-center">
-  <h1>CERTIFICADOS</h1>
+  <h1>ADMINISTRACION DE CURSOS</h1>
 </div>
 <div class="certificados crudd">
   <!-- <form class="d-md-flex">
@@ -36,12 +36,15 @@ $devoluciones = control_course_done();
 <table class="display" id="certificado-table">
 <thead>
   <tr>
-    <th scope="col">Fecha</th>
+    <th scope="col">IdCursoHecho</th>
+    <th scope="col">Nombre Estudiante</th>
     <th scope="col">Nombre Del Curso</th>
     <th scope="col">Puntaje</th>
-    <!-- <th scope="col">Calificador</th> -->
-    <th scope="col">Nombre Estudiante</th>
+    <th scope="col">Fecha</th>
     <th scope="col">Devolver</th>
+    <!-- <th scope="col">Calificador</th> -->
+
+
   </tr>
 </thead>
 <tbody>
@@ -49,14 +52,14 @@ $devoluciones = control_course_done();
   for ($x=0; $x < sizeof($devoluciones); $x++):
       echo  "<tr>";
       foreach ($devoluciones[$x] as $key => $dato):
-        if ($key != 'IdCursoRealizado' ):
+        
                 echo"<td>".$dato."</td>";
-              endif;
+
       endforeach;?>
             <td>
               <form action=''  method="post">
                 <input name="id-estudiante" type="hidden" value="<?=$devoluciones[$x]['IdCursoRealizado']?>" >
-                <button class="btn btn-outline-success" type="submit">Ver más</button>
+                <button class="btn btn-outline-success" type="submit">enviar</button>
               </form>
             </td>
         </tr>

@@ -181,14 +181,16 @@ class Modelo_cursos
   public function Courses_Wins(){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT `IdCursoRealizado`, `FechaTerminacion`,(SELECT TituloMaterial
+            "SELECT `IdCursoRealizado`, (SELECT Nombres
+                           FROM estudiantes
+                           WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`) AS Estudiante,
+
+                          (SELECT TituloMaterial
                           FROM materiales
                           WHERE curso_realizados.`IdMaterial` = materiales.`IdMaterial`
-                                               GROUP BY materiales.`IdMaterial`
+                          GROUP BY materiales.`IdMaterial`
                           ) AS Curso,
-                          `Porcentaje`, (SELECT Nombres
-                                         FROM estudiantes
-                                         WHERE curso_realizados.`IdEstudiante` = estudiantes.`IdEstudiante`) AS Estudiante
+                          `Porcentaje` , `FechaTerminacion`
 
 FROM `curso_realizados` WHERE `Enviado` < 2
             ",
