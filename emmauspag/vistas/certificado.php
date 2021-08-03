@@ -1,4 +1,7 @@
 <?php
+if (!empty($_POST['notas'])){
+  See_Notes_course();
+}else{
 
 
 // $idmaterial = control_update_id();
@@ -23,10 +26,10 @@ $devoluciones = control_course_done();
         <input class="form-control me-2" type="search" placeholder="DIGITE EL NOMBRE " aria-label="Search">
         <button class="btn btn-outline-success" type="submit">BUSCAR</button>
   </form> -->
-
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
-    Registrar Nota
-  </button>
+  <form action='' method="post">
+  <input name="notas" type="hidden" value="hola" >
+  <button type="submit" class="btn btn-outline-success" name="notas-view">Registrar Notas</button>
+  </form>
   <!-- <button class="btn btn-primary" type="button" name="button">
     <a href="#curso" class="btn-crudd btn-sucess" data-toggle="collapse">Registrar curso</a>
   </button> -->
@@ -67,3 +70,4 @@ $devoluciones = control_course_done();
 
 </tbody>
 </table>
+<?php }?>
