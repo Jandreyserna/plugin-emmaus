@@ -172,4 +172,19 @@ class Modelo_cursos
         array('IdMaterial' => $id['IdMaterial'])
       );
   }
+
+
+//////////////////////////////////////////////////////////
+//////ACTUALIZAR MATERIAL DEL CURSO REALIZADO////////////
+////////////////////////////////////////////////////////
+
+function Courses_Update_state($id,$dato){
+  $tabla = 'curso_realizados';
+  $this->wpdb->show_errors(false);
+    $this->wpdb->update(
+      $tabla, # TABLA
+      $dato, # DATOS
+      array('IdCursoRealizado' => $id)
+    );
+}
 }

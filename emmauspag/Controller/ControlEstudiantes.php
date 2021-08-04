@@ -36,6 +36,20 @@ function Colum_Students()
   return $columnas_estudiantes;
 }
 
+function update_id_course($num, $id)
+ {
+   $dato['IdMaterial'] = $num;
+   echo "<pre>";
+   print_r($dato);
+   echo "</pre>";
+   print_r($id);
+   echo "</pre>";
+   $modelo_cursos = new Modelo_cursos();
+   $modelo_cursos->Courses_Update_state($id,$dato);
+
+
+ }
+
 function Information_Promotors()
 {
   $modelo_promotor  = new Modelo_promotor();

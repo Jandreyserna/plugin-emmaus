@@ -37,9 +37,10 @@ class Modelo_estudiantes
 
   public function fechas_nacimiento(){
     $informacion = $this->wpdb->get_results(
-      "SELECT `FechaTerminacion`, `IdCursoRealizado`
+      "SELECT `IdMaterial`, `IdCursoRealizado`
       FROM curso_realizados
-      LIMIT 9999,20000
+      
+
       ",
        'ARRAY_A'
      );
