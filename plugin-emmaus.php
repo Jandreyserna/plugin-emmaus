@@ -36,46 +36,46 @@ require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 
 
 
-$adminEmmaus = [ # CAPs
-  'cursos' => 1,
-  'diplomas' => 1,
-  'principal' => 1,
-  'estudiantes' => 1,
-  'certificados' => 1,
-  'validaciones' => 1,
-];
+//$adminEmmaus = [ # CAPs
+//  'cursos' => 1,
+//  'diplomas' => 1,
+//  'principal' => 1,
+//  'estudiantes' => 1,
+//  'certificados' => 1,
+//  'validaciones' => 1,
+//];
 
-$promotor = [ # CAPs
-  'cursos' => 1,
-  'diplomas' => 1,
-  'estudiantes' => 1
-];
+//$promotor = [ # CAPs
+//  'cursos' => 1,
+//  'diplomas' => 1,
+//  'estudiantes' => 1
+//];
 
-$colaborador = [ # CAPs
-  'cursos' => 1,
-  'diplomas' => 1,
-  'estudiantes' => 1,
-  'validaciones' => 1,
-];
+//$colaborador = [ # CAPs
+//  'cursos' => 1,
+//  'diplomas' => 1,
+//  'estudiantes' => 1,
+//  'validaciones' => 1,
+//];
 
 
 // SE AGREGAN LO ROLES
-addRole('adminEmmaus', 'Admin Emmaus', $adminEmmaus);
-addRole('promotorEmmaus', 'Promotor', $promotor);
-addRole('colaboradorEmmaus', 'Colaborador', $colaborador);
+//addRole('adminEmmaus', 'Admin Emmaus', $adminEmmaus);
+//addRole('promotorEmmaus', 'Promotor', $promotor);
+//addRole('colaboradorEmmaus', 'Colaborador', $colaborador);
 
 // SE LE AGREGAN LAS CAPS AL ADMIN
 
-$adminCaps = array_merge($adminEmmaus, $promotor, $colaborador);
-$role = get_role('administrator');
-foreach ($adminCaps as $cap => $value) {
-  $role->add_cap($cap);
-}
+//$adminCaps = array_merge($adminEmmaus, $promotor, $colaborador);
+//$role = get_role('administrator');
+//foreach ($adminCaps as $cap => $value) {
+//  $role->add_cap($cap);
+//}
 
 
-// remove_role('adminEmmaus');
-// remove_role('promotorEmmaus');
-// remove_role('colaboradorEmmaus');
+ //remove_role('adminEmmaus');
+ //remove_role('promotorEmmaus');
+ //remove_role('colaboradorEmmaus');
 
 // TODO: MOVER PARA OTRO LADO
 function addRole($role, $display_name, $capabilities)
@@ -198,6 +198,7 @@ function core_emmaus(){
 
 function estudent_admin()
 {
+  //echo "hola entre a la vista estudiante";
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
   // $modelo_estudiantes = new Modelo_estudiantes();
   // $datas = $modelo_estudiantes->cursos_realizados();

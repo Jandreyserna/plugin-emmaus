@@ -42,6 +42,8 @@ function enqueue_styles() {
 
 /*  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style'); */
+ wp_register_script('emmaus_datatable_scripts',plugins_url('plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
+ wp_enqueue_script('emmaus_datatable_scripts');
 
  wp_register_style('emmaus_datatable', 'https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css', time());
  wp_enqueue_style('emmaus_datatable');
@@ -63,9 +65,6 @@ function enqueue_styles() {
 
  wp_register_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array(), time());
  wp_enqueue_script ('modal_js');
-
- wp_register_script('emmaus_datatable_scripts',plugins_url('plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
- wp_enqueue_script('emmaus_datatable_scripts');
 
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');

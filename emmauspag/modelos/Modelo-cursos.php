@@ -244,7 +244,7 @@ FROM `curso_realizados` WHERE `Enviado` < 2
              GROUP BY materiales.IdMaterial
              ) AS material, `Porcentaje`, estudiantes.`DireccionCasa`, estudiantes.`Ciudad`
             FROM `curso_realizados` INNER JOIN estudiantes
-            WHERE curso_realizados.`Enviado` = 0
+            WHERE curso_realizados.`Porcentaje` < 70
             AND estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`
             ",
            'ARRAY_A'

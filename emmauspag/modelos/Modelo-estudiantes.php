@@ -30,17 +30,8 @@ class Modelo_estudiantes
 
   public function info_table_student(){
     $informacion = $this->wpdb->get_results(
-      "SELECT estudiantes.`IdEstudiante`, estudiantes.`Nombres`,
-      estudiantes.`Apellidos`,(SELECT promotores.`Nombre`
-                                FROM promotores
-                                WHERE promotores.`IdContacto` = estudiantes.`IdContacto`
-                                GROUP BY promotores.`Nombre`)
-                                AS Promotor,
-                                estudiantes.`DireccionCasa`,
-                                estudiantes.`Ciudad`
-        FROM estudiantes INNER JOIN promotores
-        GROUP BY estudiantes.`IdEstudiante` DESC
-        LIMIT 2000
+      "SELECT e.IdEstudiante , e.IdContacto , e.Nombres, e.Apellidos , e.DireccionCasa , e.Ciudad
+      FROM estudiantes AS e 
       ",
        'ARRAY_A'
      );
