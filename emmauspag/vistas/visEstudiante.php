@@ -29,9 +29,9 @@ if (!empty($_POST['nuevo-estudiante'])){
     <thead>
       <tr>
         <th scope='col'>ID</th>
+        <th scope='col'>IdPromotor</th>
         <th scope='col'>Nombres</th>
         <th scope='col'>Apellidos</th>
-        <th scope='col'>Promotor</th>
         <th scope='col'>Dirección</th>
         <th scope='col'>Ciudad</th>
         <!-- <th scope='col'>Ultimo curso</th> -->
