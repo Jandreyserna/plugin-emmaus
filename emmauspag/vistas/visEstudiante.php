@@ -16,7 +16,7 @@ if (!empty($_POST['nuevo-estudiante'])){
 
 <div class="contenedor-estudiantes">
     <div class="titulo text-center">
-      <h1>Modulo Estudiantes</h1>
+      <h1>Módulo Estudiantes</h1>
     </div>
 
 
