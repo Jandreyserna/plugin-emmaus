@@ -24,6 +24,9 @@ if (!empty($_POST['nuevo-estudiante'])){
     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
       Añadir nuevo estudiante
     </button>
+    <button type="button" class="btn btn-outline-success" data-toggle="modal2" data-target="#busquedaavanzada">
+      Busqueda avanzada
+    </button>
 
     <table class="display" id="tabla1">
     <thead>
@@ -41,22 +44,25 @@ if (!empty($_POST['nuevo-estudiante'])){
     </thead>
     <tbody>
 
-        <?php
-        for ($x=0; $x < sizeof($datas); $x++):
-            echo  "<tr>";
-            foreach ($datas[$x] as $key => $dato):
-
-                      echo"<td>".$dato."</td>";
-
-            endforeach;?>
-                  <td>
-                    <form action=''  method="post">
-                      <input name="id-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
-                      <button class="btn btn-outline-success" type="submit">Ver más</button>
-                    </form>
-                  </td>
-              </tr>
-  <?php endfor; ?>
+        <?php 
+        $size = sizeof($datas);
+        $x = 0;
+        while($x < $size):
+          echo  "<tr>";
+          foreach ($datas[$x] as $key => $dato):
+            echo"<td>".$dato."</td>";
+          endforeach;?>
+              <td>
+                <form action=''  method="post">
+                  <input name="id-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
+                  <button class="btn btn-outline-success" type="submit">Ver más</button>
+                </form>
+              </td>
+          </tr>
+        <?php 
+        $x++;
+        endwhile
+        ?>
     </tbody>
   </table>
   </div>
@@ -102,8 +108,8 @@ if (!empty($_POST['nuevo-estudiante'])){
 
   <div class="boton-volver">
     <button class="boton_para_volver" name="button">
-    <a href="<?=site_url()?>">Volver</a>
+      <a href="<?=site_url()?>">Volver</a>
     </button>
   </div>
-  </div>
-  <?php } ?>
+</div>
+<?php } ?>
