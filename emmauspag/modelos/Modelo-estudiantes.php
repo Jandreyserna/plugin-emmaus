@@ -31,7 +31,7 @@ class Modelo_estudiantes
   public function info_table_student(){
       $informacion = $this->wpdb->get_results(
         "SELECT e.IdEstudiante , e.IdContacto , e.Nombres, e.Apellidos , e.DireccionCasa , e.Ciudad
-        FROM estudiantes AS e ORDER BY E.IdEstudiante DESC LIMIT 3000;
+        FROM estudiantes AS e ORDER BY e.IdEstudiante DESC LIMIT 3000;
         ",
        'ARRAY_A'
      );
