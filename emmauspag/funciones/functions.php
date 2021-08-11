@@ -98,19 +98,23 @@ function boton_obtener_info_ajax() {
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
 
+
+
+# =================================================================================
+# ========== boton que llama a la vista secundaria de estudiantes =================
+# =================================================================================
+
+add_action('wp_ajax_nopriv_event-vista-student', 'Call_view_students');
+add_action('wp_ajax_event-vista-student', 'Call_view_students');
+
+
 # ==========================================================
-# ========== AJAX BOTON DE Informacion ESTUDIANTES==========
+# ========== AJAX Buscador de Estduaiantes =================
 # ==========================================================
 
-add_action('wp_ajax_nopriv_event-list-student', 'info_student');
-add_action('wp_ajax_event-list-student', 'info_student');
+add_action('wp_ajax_nopriv_event-search-student', 'table-student');
+add_action('wp_ajax_event-search-student', 'table-student');
 
-# ==============================================
-# ========== AJAX BOTON DE Informacion==========
-# ==============================================
-
-add_action('wp_ajax_nopriv_event-list', 'info_complete');
-add_action('wp_ajax_event-list', 'info_complete');
 
 
 # ==============================================

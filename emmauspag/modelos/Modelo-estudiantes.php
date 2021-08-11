@@ -29,12 +29,13 @@ class Modelo_estudiantes
 #########################################################################
 
   public function info_table_student(){
-      $informacion = $this->wpdb->get_results(
-        "SELECT e.IdEstudiante , e.IdContacto , e.Nombres, e.Apellidos , e.DireccionCasa , e.Ciudad
-        FROM estudiantes AS e ORDER BY e.IdEstudiante DESC LIMIT 3000;
-        ",
-       'ARRAY_A'
+    $informacion = $this->wpdb->get_results(
+      "SELECT `IdEstudiante` , `IdContacto` ,`Nombres`, `Apellidos` , `DireccionCasa` ,`Ciudad`
+      FROM estudiantes
+      ",
+       'OBJECT'
      );
+     // json_encode($informacion);
     return (isset($informacion[0])) ? $informacion : null;
   }
 

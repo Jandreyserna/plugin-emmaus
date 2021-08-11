@@ -9,9 +9,14 @@ if (!empty($_POST['nuevo-estudiante'])){
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-  // echo "<pre>";
-  // print_r($columnas_estudiantes );
-  // echo"</pre>";
+   
+  $url = ABSPATH;
+  //$url = str_replace(\, '/', ABSPATH);
+   //echo "<pre>";
+   //print_r($url);
+   //print_r(ABSPATH .'\wp_confi.php');
+   //echo"</pre>";
+
   ?>
 
 <div class="contenedor-estudiantes">
@@ -28,6 +33,7 @@ if (!empty($_POST['nuevo-estudiante'])){
       Busqueda avanzada
     </button>
 
+
     <table class="display" id="tabla1">
     <thead>
       <tr>
@@ -42,30 +48,12 @@ if (!empty($_POST['nuevo-estudiante'])){
       </tr>
 
     </thead>
-    <tbody>
-
-        <?php 
-        $size = sizeof($datas);
-        $x = 0;
-        while($x < $size):
-          echo  "<tr>";
-          foreach ($datas[$x] as $key => $dato):
-            echo"<td>".$dato."</td>";
-          endforeach;?>
-              <td>
-                <form action=''  method="post">
-                  <input name="id-estudiante" type="hidden" value="<?=$datas[$x]['IdEstudiante']?>" >
-                  <button class="btn btn-outline-success" type="submit">Ver más</button>
-                </form>
-              </td>
-          </tr>
-        <?php 
-        $x++;
-        endwhile
-        ?>
-    </tbody>
   </table>
   </div>
+<div class="contenedor.search">
+  
+</div>
+
 
   <!-- Modal -->
   <div class="modal fade" id="añadirestudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

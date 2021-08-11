@@ -200,6 +200,7 @@ function estudent_admin()
 {
   //echo "hola entre a la vista estudiante";
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
+  // require_once dirname(__FILE__) . '/emmauspag/Controller/datas_estudiante.php';
   // $modelo_estudiantes = new Modelo_estudiantes();
   // $datas = $modelo_estudiantes->cursos_realizados();
   require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
