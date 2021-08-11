@@ -58,7 +58,7 @@ jQuery(document).ready(function ($) {
 			window.location.href = 'admin.php?page=estudiante';
 			alert("funciona bien");
 		}
-			});
+		});
 });
 
 
