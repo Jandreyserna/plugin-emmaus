@@ -30,11 +30,12 @@ class Modelo_estudiantes
 
   public function info_table_student(){
     $informacion = $this->wpdb->get_results(
-      "SELECT e.IdEstudiante , e.IdContacto , e.Nombres, e.Apellidos , e.DireccionCasa , e.Ciudad
-      FROM estudiantes AS e LIMIT 2000
+      "SELECT `IdEstudiante` , `IdContacto` ,`Nombres`, `Apellidos` , `DireccionCasa` ,`Ciudad`
+      FROM estudiantes
       ",
-       'ARRAY_A'
+       'OBJECT'
      );
+     // json_encode($informacion);
     return (isset($informacion[0])) ? $informacion : null;
 
   }

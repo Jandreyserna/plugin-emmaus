@@ -30,9 +30,6 @@ if (!empty($_POST['nuevo-curso'])){
   $ultimo_id++;
 
   // unset($info_tabla[0]['IdContacto']);
-  // echo "<pre>";
-  // print_r($cursos_hechos);
-  // echo "</pre>";
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">

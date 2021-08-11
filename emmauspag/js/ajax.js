@@ -20,12 +20,48 @@ jQuery(document).ready(function ($) {
 //-------------tabla estudiantes-cursos con ajax-----------------//
 //--------------------------------------------------------//
 
-				$('#tabla1').DataTable({
+	var table =	$('#tabla1').DataTable({
 		 language: {
 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
-		 }
+		 },
+		 ajax:{
+			 url: '../wp-content/plugins/plugin-emmaus/emmauspag/modelos/datas_estudiante.php',
+			 dataSrc:""
+		 },
+		 columns:[
+			 {data: "IdEstudiante"},
+			 {data: "IdContacto"},
+			 {data: "Nombres"},
+			 {data: "Apellidos"},
+			 {data: "DireccionCasa"},
+			 {data: "Ciudad"},
+			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> <span class='glyphicon glyphicon-search'> VER MAS</span></button>"}
+		 ]
 	 });
 
+	 $("#tabla1").on("click", "#ruta", function(){
+
+		var padre = $(this).closest("tr");
+		var id = $('.sorting_1', padre).text();
+
+		console.log(id);
+
+		jQuery.ajax({
+			type: "post",
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/estudiantes.php',
+
+		data: {
+			'id-estudiante'     : id
+		},
+		success: function(response){
+			window.location.href = 'admin.php?page=estudiante';
+			alert("funciona bien");
+		}
+			});
+});
+
+
+	 
 	 //--------------------------------------------------------//
 	 //-------------tabla estudiantes con ajax-----------------//
 	 //--------------------------------------------------------//

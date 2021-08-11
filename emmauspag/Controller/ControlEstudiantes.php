@@ -4,8 +4,10 @@ function Information_curse_student()
 {
   $modelo_estudiantes = new Modelo_estudiantes();
   $datas = $modelo_estudiantes->info_table_student();
-
-  return $datas;
+  // $data=$datas->fetchAll(PDO::FETCH_ASSOC);
+  // print json_encode($datas, JSON_UNESCAPED_UNICODE);
+  // echo json_encode($datas);
+  // return $datas;
 
 }
 

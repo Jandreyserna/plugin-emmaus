@@ -203,3 +203,22 @@ unset($datos[0]['Apellidos']);
 
  wp_die();
 }
+
+
+
+function table_student(){
+  // echo "<pre>";
+  // print_r($_POST);
+  // echo"</pre>";
+
+    wp_die();
+}
+
+function Call_view_students(){
+
+  print_r($_POST);
+  if (!empty($_POST['id'])){
+    see_students_admin();
+  }
+  wp_die();
+}
