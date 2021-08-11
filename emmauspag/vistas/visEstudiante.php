@@ -9,18 +9,6 @@ if (!empty($_POST['nuevo-estudiante'])){
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-   
-  $url = ABSPATH;
-
- 
-
-  //$url = str_replace(\, '/', ABSPATH);
-   //echo "<pre>";
-  // print_r($url);
-   //echo "<pre>";
-   //print_r(str_replace('\\','/',ABSPATH));
-   //echo"</pre>";
-
   ?>
 
 <div class="contenedor-estudiantes">
@@ -54,9 +42,9 @@ if (!empty($_POST['nuevo-estudiante'])){
     </thead>
   </table>
   </div>
-<div class="contenedor.search">
+  <div class="contenedor.search">
   
-</div>
+  </div>
 
 
   <!-- Modal -->

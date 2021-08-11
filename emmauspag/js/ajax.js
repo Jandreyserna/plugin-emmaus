@@ -54,9 +54,8 @@ jQuery(document).ready(function ($) {
 		data: {
 			'id-estudiante'     : id
 		},
-		success: function(response){
-			window.location.href = 'admin.php?page=estudiante';
-			alert("funciona bien");
+		success: function(result){
+			jQuery('.contenedor-estudiantes').html(result);
 		}
 		});
 });
