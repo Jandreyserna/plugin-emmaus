@@ -93,7 +93,9 @@ function boton_obtener_info_ajax() {
   wp_localize_script('obtener_js', 'ajax_var', array(
     'url'    => admin_url('admin-ajax.php'),
     'nonce'  => wp_create_nonce('my-ajax-nonce'),
-    'action' => 'event-list'
+    'action' => 'event-list',
+    'path'   =>  ABSPATH
+    // 'path'   =>  str_replace('\\','/',ABSPATH)
   ));
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
@@ -174,6 +176,8 @@ function insert_funtion($tabla,$datos){
   $modelo->insertar_data_wpdb($datos);
 
 }
+
+
 
 
 # ===============================

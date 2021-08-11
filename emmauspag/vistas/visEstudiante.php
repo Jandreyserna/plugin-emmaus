@@ -11,10 +11,14 @@ if (!empty($_POST['nuevo-estudiante'])){
   $promotores = Information_Promotors();
    
   $url = ABSPATH;
+
+ 
+
   //$url = str_replace(\, '/', ABSPATH);
    //echo "<pre>";
-   //print_r($url);
-   //print_r(ABSPATH .'\wp_confi.php');
+  // print_r($url);
+   //echo "<pre>";
+   //print_r(str_replace('\\','/',ABSPATH));
    //echo"</pre>";
 
   ?>

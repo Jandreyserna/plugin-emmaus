@@ -25,8 +25,9 @@ jQuery(document).ready(function ($) {
 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
 		 },
 		 ajax:{
-			 url: '../wp-content/plugins/plugin-emmaus/emmauspag/modelos/datas_estudiante.php',
-			 dataSrc:""
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/modelos/datas_estudiante.php',
+			//url: ajax_var.url,
+			 dataSrc:"",
 		 },
 		 columns:[
 			 {data: "IdEstudiante"},
@@ -35,7 +36,7 @@ jQuery(document).ready(function ($) {
 			 {data: "Apellidos"},
 			 {data: "DireccionCasa"},
 			 {data: "Ciudad"},
-			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> <span class='glyphicon glyphicon-search'> VER MAS</span></button>"}
+			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> VER MAS</button>"}
 		 ]
 	 });
 
