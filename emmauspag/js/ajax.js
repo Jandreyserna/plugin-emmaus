@@ -49,10 +49,11 @@ jQuery(document).ready(function ($) {
 
 		jQuery.ajax({
 			type: "post",
-			url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/estudiantes.php',
+			url: ajax_var.url,
 
 		data: {
-			'id-estudiante'     : id
+			'action'  : "event-vista-student",
+			'id-estudiante' : id
 		},
 		success: function(result){
 			jQuery('.contenedor-estudiantes').html(result);

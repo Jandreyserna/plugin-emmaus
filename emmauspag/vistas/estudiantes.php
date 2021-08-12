@@ -1,7 +1,8 @@
 <?php
 require_once dirname(dirname(__FILE__)) . '/Controller/ControlOnlyEstudiante.php';
-require_once dirname(dirname(__FILE__)) . '\modelos\Modelo-estudiantes.php';
-require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-estudiantes.php';
+// require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+
 if (!empty($_POST['nuevo-curso'])){
     die;
   unset($_POST['nuevo-curso']);
@@ -11,22 +12,16 @@ if (!empty($_POST['nuevo-curso'])){
   }else {
     $_POST['Enviado'] = 0;
   }
-  echo "<pre>";
-  //print_r($_POST);
-  echo "</pre>";
-  insert_funtion('curso_realizados', $_POST);
 
-}else{
+  insert_funtion('curso_realizados', $_POST);
+} else {
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
-  echo "<pre>";
-  //print_r( dirname(dirname(__FILE__)) );
-  echo "</pre>";
 
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
- $info_estudiante = Information_One_Student($id);
+  $info_estudiante = Information_One_Student($id);
   $ultimo_curso = Last_course_Of_Student($id);
   $columnas_curso_realizados = Column_Course_Done();
   $materiales = Materials();

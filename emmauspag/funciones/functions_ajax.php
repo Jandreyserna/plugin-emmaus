@@ -215,10 +215,6 @@ function table_student(){
 }
 
 function Call_view_students(){
-
-  print_r($_POST);
-  if (!empty($_POST['id'])){
-    see_students_admin();
-  }
+  require_once dirname(__DIR__) . '/vistas/estudiantes.php';
   wp_die();
 }
