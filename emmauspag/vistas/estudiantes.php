@@ -12,7 +12,7 @@ if (!empty($_POST['nuevo-curso'])){
     $_POST['Enviado'] = 0;
   }
   echo "<pre>";
-  print_r($_POST);
+  //print_r($_POST);
   echo "</pre>";
   insert_funtion('curso_realizados', $_POST);
 
@@ -21,7 +21,7 @@ if (!empty($_POST['nuevo-curso'])){
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
   echo "<pre>";
-  print_r( dirname(dirname(__FILE__)) );
+  //print_r( dirname(dirname(__FILE__)) );
   echo "</pre>";
 
   $principal =  Information_One_Student_First($id);
@@ -39,7 +39,7 @@ if (!empty($_POST['nuevo-curso'])){
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>Adminitración de estudiante</h1>
+    <h1>Administración de estudiante</h1>
   </div>
 
 <div class="container">
