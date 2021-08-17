@@ -4,10 +4,20 @@ if (!empty($_POST['nuevo-estudiante'])){
   insert_funtion('estudiantes', $_POST);
 } else if (!empty($_POST['id-estudiante'])){
   see_students_admin();
-}else{
+} else if (!empty($_POST['nuevo-curso'])){
+  unset($_POST['nuevo-curso']);
+if($_POST['Porcentaje'] != 0)
+{
+  $_POST['Enviado'] = 1;
+}else {
+  $_POST['Enviado'] = 0;
+}
+insert_funtion('curso_realizados', $_POST);
+} 
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
+
   ?>
 
 <div class="contenedor-estudiantes">
@@ -82,6 +92,4 @@ if (!empty($_POST['nuevo-estudiante'])){
     </button>
   </div>
 </div>
-<?php 
-}
-?>
+

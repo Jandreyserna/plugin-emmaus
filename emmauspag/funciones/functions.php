@@ -174,7 +174,6 @@ function insert_funtion($tabla,$datos){
 
   $modelo = new Modelo($tabla);
   $modelo->insertar_data_wpdb($datos);
-
 }
 
 

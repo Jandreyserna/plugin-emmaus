@@ -1,20 +1,6 @@
 <?php
 require_once dirname(dirname(__FILE__)) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-estudiantes.php';
-// require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
-
-if (!empty($_POST['nuevo-curso'])){
-    die;
-  unset($_POST['nuevo-curso']);
-  if($_POST['Porcentaje'] != 0)
-  {
-    $_POST['Enviado'] = 1;
-  }else {
-    $_POST['Enviado'] = 0;
-  }
-
-  insert_funtion('curso_realizados', $_POST);
-} else {
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
@@ -234,5 +220,3 @@ if (!empty($_POST['nuevo-curso'])){
     </div>
   </div>
 </div>
-
-<?php }
