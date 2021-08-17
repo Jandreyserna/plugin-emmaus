@@ -126,6 +126,7 @@ require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-estudiantes.php';
       </div>
       <div class="modal-body">
         <form action="" method="post">
+          <input name="Update-students" type="hidden" value="No importa" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <?php
           foreach ($info_estudiante[0] as $camp => $infor):

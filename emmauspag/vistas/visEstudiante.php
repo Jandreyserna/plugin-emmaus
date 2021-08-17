@@ -13,7 +13,13 @@ if($_POST['Porcentaje'] != 0)
   $_POST['Enviado'] = 0;
 }
 insert_funtion('curso_realizados', $_POST);
-} 
+} else if (!empty($_POST['Update-students'])){
+  unset($_POST['Update-students']);
+  $id_student = $_POST['IdEstudiante'];
+  unset($_POST['IdEstudiante']);
+  update_funtion($_POST, $id_student);
+
+}
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();

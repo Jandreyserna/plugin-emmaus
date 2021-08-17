@@ -176,6 +176,16 @@ function insert_funtion($tabla,$datos){
   $modelo->insertar_data_wpdb($datos);
 }
 
+# ==========================================================
+# ========== actualizar en la tabla de estudiantes datos ==========
+# ==========================================================
+
+function update_funtion($datos, $id){
+
+  $modelo = new Modelo_estudiantes();
+  $modelo->update_estudent($datos, $id);
+}
+
 
 
 
