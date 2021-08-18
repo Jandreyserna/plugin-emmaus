@@ -1,23 +1,23 @@
 <?php
 if (!empty($_POST['nuevo-estudiante'])){
-  unset($_POST['nuevo-estudiante']);
-  insert_funtion('estudiantes', $_POST);
-} else if (!empty($_POST['id-estudiante'])){
-  see_students_admin();
-} else if (!empty($_POST['nuevo-curso'])){
-  unset($_POST['nuevo-curso']);
-if($_POST['Porcentaje'] != 0)
-{
-  $_POST['Enviado'] = 1;
-}else {
-  $_POST['Enviado'] = 0;
-}
-insert_funtion('curso_realizados', $_POST);
-} else if (!empty($_POST['Update-students'])){
-  unset($_POST['Update-students']);
-  $id_student = $_POST['IdEstudiante'];
-  unset($_POST['IdEstudiante']);
-  update_funtion($_POST, $id_student);
+    unset($_POST['nuevo-estudiante']);
+    insert_funtion('estudiantes', $_POST);
+  } else if (!empty($_POST['id-estudiante'])){
+      see_students_admin();
+  } else if (!empty($_POST['nuevo-curso'])){
+      unset($_POST['nuevo-curso']);
+      if($_POST['Porcentaje'] != 0)
+        {
+          $_POST['Enviado'] = 1;
+        }else {
+          $_POST['Enviado'] = 0;
+        }
+        insert_funtion('curso_realizados', $_POST);
+  } else if (!empty($_POST['Update-students'])){
+    unset($_POST['Update-students']);
+    $id_student = $_POST['IdEstudiante'];
+    unset($_POST['IdEstudiante']);
+    update_funtion($_POST, $id_student);
 
 }
   $datas = Information_curse_student();
@@ -69,7 +69,7 @@ insert_funtion('curso_realizados', $_POST);
             <select class="id_promotor" name="IdContacto" required>
               <option value="" disabled selected>Promotor</option>
               <?php foreach ($promotores as $col=> $valor): ?>
-                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?></option>
+                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>)</option>
               <?php endforeach; ?>
             </select>
             <?php

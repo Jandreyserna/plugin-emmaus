@@ -94,8 +94,6 @@ function boton_obtener_info_ajax() {
     'url'    => admin_url('admin-ajax.php'),
     'nonce'  => wp_create_nonce('my-ajax-nonce'),
     'action' => 'event-list',
-    'path'   =>  ABSPATH
-    // 'path'   =>  str_replace('\\','/',ABSPATH)
   ));
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
@@ -132,6 +130,16 @@ add_action('wp_ajax_event-search-student', 'table-student');
 
  add_action('wp_ajax_nopriv_conocer-costo', 'costos_libros');
  add_action('wp_ajax_conocer-costo', 'costos_libros');
+
+
+ 
+# =================================================================================
+# ========== boton que llama a la vista secundaria de estudiantes =================
+# =================================================================================
+
+add_action('wp_ajax_nopriv_event-list-tow-students', 'Call_two_view_students');
+add_action('wp_ajax_event-list-tow-students', 'Call_two_view_students');
+
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 

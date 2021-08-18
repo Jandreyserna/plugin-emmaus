@@ -77,17 +77,30 @@ jQuery(document).ready(function ($) {
 		 //-------------tabla Certificados con ajax-----------------//
 		 //---------------------------------------------------//
 
-			 $('#certificado-table').DataTable({
-					 language: {
-						 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
-				 }
+			 $('#courses-table').DataTable({
+				language: {
+					url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+				 },
+				 ajax:{
+					url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/courses.php',
+					 dataSrc:"",
+				 },
+				 columns:[
+					 {data: "IdCursoRealizado"},
+					 {data: "estudianteN"},
+					 {data: "estudianteA"},
+					 {data: "Material"},
+					 {data: "Porcentaje"},
+					 {data: "FechaTerminacion"},
+					 {"defaultContent": "<button id='register-course' type='button' class='form btn btn-primary btn-xs '>Registrar</button>"}
+				 ]
 			 });
 
 		 //----------------------------------------------------------//
 		 //-------BOTON DE INFO COMPLETA DE ESTUDIANTE CON AJAX------//
 		 //----------------------------------------------------------//
 
-	      $("#estudiantes").on("click", ".info-student", function(){
+	      $("#courses-table").on("click", "#register-course", function(){
 
 					var padre = $(this).closest("tr");
 					var id = $('.sorting_1', padre).text();
@@ -99,14 +112,32 @@ jQuery(document).ready(function ($) {
 	                url: ajax_var.url,
 
 	                data: {
-	                    'action' : 'event-list-student',
-											'id'     : id
+	                    'action' : 'event-list-tow-students',
+						'id-course'     : id
 	                },
 	                success: function(result){
-	                    jQuery('.contenedor-search').html(result);
+	                    jQuery('.container-course').html(result);
 	                }
 					    });
 	      });
+
+	//-----------------------------------------------------------------//
+	 //-------Boton cargar la vista de calificar un curso en grupo-----//
+	 //----------------------------------------------------------------//
+
+	 $("#calificar").click(function(){
+
+
+		jQuery.ajax({
+		url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/notas.php',
+
+		success: function(result){
+			console.log('Todo ok.');
+			jQuery('.container-table').html(result);
+		}
+			});
+	});
+
 
 	 //--------------------------------------------//
 	 //-------BOTON DE INFO COMPLETA CON AJAX------//
@@ -187,5 +218,25 @@ jQuery(document).ready(function ($) {
 									 }
 							 });
 				 });
+
+				$('#table-notes').DataTable({
+					language: {
+						url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+					},
+					ajax:{
+					   url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/calificar.php',
+						dataSrc:"",
+					},
+					columns:[
+						{data: "IdCursoRealizado"},
+						{data: "Nombres"},
+						{data: "Apellidos"},
+						{data: "material"},
+						{data: "Porcentaje"},
+						{data: "DireccionCasa"},
+						{data: "Ciudad"},
+						{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> calificar </button>"}
+					]
+				});
 
 });

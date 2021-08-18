@@ -1,13 +1,16 @@
 <?php
+require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+require_once dirname(dirname(__FILE__)) . '/Controller/ControlNotes.php';
+require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-cursos.php';
+require_once dirname(dirname(__FILE__)) . '/funciones/functions.php';
+
 $datas_table = control_notes_table();
-
+echo "<pre>";
+print_r( $datas_table);
+echo "</pre>";
 ?>
-<div class="titulo text-center">
-    <h1>Modulo de Notas</h1>
-</div>
 
-
-<table class="display" id="tabla1">
+<table class="display" id="table-notes">
     <thead>
       <tr>
         <th scope='col'>ID</th>
@@ -22,24 +25,7 @@ $datas_table = control_notes_table();
       </tr>
 
     </thead>
-    <tbody>
-
-        <?php
-        for ($x=0; $x < sizeof($datas_table); $x++):
-            echo  "<tr>";
-            foreach ($datas_table[$x] as $key => $dato):
-
-                      echo"<td>".$dato."</td>";
-
-            endforeach;?>
-                  <td>
-                  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirnota">
-                      calificar
-                  </button>
-                  </td>
-              </tr>
-  <?php endfor; ?>
-    </tbody>
+   
   </table>
 
 <!-- Modal -->

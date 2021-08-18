@@ -1,73 +1,51 @@
 <?php
 if (!empty($_POST['notas'])){
   See_Notes_course();
-}else{
-
-
-// $idmaterial = control_update_id();
-// echo "<pre>";
-// print_r($idmaterial);
-// echo "</pre>";
-// $table = control_course_done();
-
-
-
-
-$devoluciones = control_course_done();
+}else if (!empty($_POST['nuevo-curso'])){
+          unset($_POST['nuevo-curso']);
+          if($_POST['Porcentaje'] != 0)
+          {
+            $_POST['Enviado'] = 1;
+          }else {
+            $_POST['Enviado'] = 0;
+          }
+          insert_funtion('curso_realizados', $_POST);
+} else if (!empty($_POST['Update-students'])){
+    unset($_POST['Update-students']);
+    $id_student = $_POST['IdEstudiante'];
+    unset($_POST['IdEstudiante']);
+    update_funtion($_POST, $id_student);
+}
+//$devoluciones = control_course_done();
 ?>
 
+<div class="container-course">
+
+  <div class="titulo text-center">
+    <h1>ADMINISTRACION DE CURSOS</h1>
+  </div>
+  <div id="boton-calificar">
+  <button type="button" class="btn btn-outline-success" id="calificar">
+    Registrar Notas
+  </button>
+  </div>
+  <div class="container-table">
+  <table class="display" id="courses-table">
+    <thead>
+      <tr>
+        <th scope="col">IdCursoHecho</th>
+        <th scope="col">Nombre Estudiante</th>
+        <th scope="col">Apellido Estudiante</th>
+        <th scope="col">Material</th>
+        <th scope="col">Puntaje</th>
+        <th scope="col">Fecha</th>
+        <th>acción</th>
+        <!-- <th scope="col">Calificador</th> -->
 
 
-<div class="titulo text-center">
-  <h1>ADMINISTRACION DE CURSOS</h1>
+      </tr>
+    </thead>
+
+  </table>
+  </div>
 </div>
-<div class="certificados crudd">
-  <!-- <form class="d-md-flex">
-        <input class="form-control me-2" type="search" placeholder="DIGITE EL NOMBRE " aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">BUSCAR</button>
-  </form> -->
-  <form action='' method="post">
-  <input name="notas" type="hidden" value="hola" >
-  <button type="submit" class="btn btn-outline-success" name="notas-view">Registrar Notas</button>
-  </form>
-  <!-- <button class="btn btn-primary" type="button" name="button">
-    <a href="#curso" class="btn-crudd btn-sucess" data-toggle="collapse">Registrar curso</a>
-  </button> -->
-
-</div>
-
-<table class="display" id="certificado-table">
-<thead>
-  <tr>
-    <th scope="col">IdCursoHecho</th>
-    <th scope="col">Nombre Estudiante</th>
-    <th scope="col">Nombre Del Curso</th>
-    <th scope="col">Puntaje</th>
-    <th scope="col">Fecha</th>
-    <th scope="col">Devolver</th>
-    <!-- <th scope="col">Calificador</th> -->
-
-
-  </tr>
-</thead>
-<tbody>
-  <?php
-  for ($x=0; $x < sizeof($devoluciones); $x++):
-      echo  "<tr>";
-      foreach ($devoluciones[$x] as $key => $dato):
-        
-                echo"<td>".$dato."</td>";
-
-      endforeach;?>
-            <td>
-              <form action=''  method="post">
-                <input name="id-estudiante" type="hidden" value="<?=$devoluciones[$x]['IdCursoRealizado']?>" >
-                <button class="btn btn-outline-success" type="submit">enviar</button>
-              </form>
-            </td>
-        </tr>
-<?php endfor; ?>
-
-</tbody>
-</table>
-<?php }?>

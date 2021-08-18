@@ -192,7 +192,7 @@ class Modelo_cursos
                           ) AS Curso,
                           `Porcentaje` , `FechaTerminacion`
 
-FROM `curso_realizados` WHERE `Enviado` < 2
+FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
             ",
            'ARRAY_A'
          );
@@ -244,13 +244,51 @@ FROM `curso_realizados` WHERE `Enviado` < 2
              GROUP BY materiales.IdMaterial
              ) AS material, `Porcentaje`, estudiantes.`DireccionCasa`, estudiantes.`Ciudad`
             FROM `curso_realizados` INNER JOIN estudiantes
-            WHERE curso_realizados.`Porcentaje` < 70
+            WHERE curso_realizados.`Porcentaje` = 0
             AND estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`
+            ",
+           'OBJECT'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #####################################################################
+  ######Obtener Toda la informacion de los cursos realixados###########
+  #####################################################################
+
+  public function All_courses(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT curso_realizados.`IdCursoRealizado`, 
+            (SELECT `Nombres` FROM estudiantes WHERE curso_realizados.IdEstudiante = estudiantes.IdEstudiante) AS estudianteN,
+            (SELECT `Apellidos` FROM estudiantes WHERE curso_realizados.IdEstudiante = estudiantes.IdEstudiante) AS estudianteA,
+            (SELECT `TituloMaterial` FROM materiales WHERE curso_realizados.IdMaterial = materiales.IdMaterial GROUP BY materiales.IdMaterial) AS Material,
+            `Porcentaje`,
+            `FechaTerminacion` 
+              FROM `curso_realizados` WHERE 1
+              ORDER BY curso_realizados.`IdCursoRealizado` DESC
+            ",
+           'OBJECT'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #####################################################################
+  ######Obtener Id de estudiande que realizo un curso #################
+  #####################################################################
+
+  public function Id_student_course($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT `IdEstudiante`
+            FROM curso_realizados 
+            WHERE `IdCursoRealizado` = $id
             ",
            'ARRAY_A'
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
 
 
   ####################################################

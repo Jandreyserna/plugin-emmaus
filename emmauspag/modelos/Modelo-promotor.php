@@ -20,8 +20,11 @@ class Modelo_promotor
 
   public function traer_promotor(){
     $informacion = $this->wpdb->get_results(
-          "SELECT promotores.`IdContacto`,promotores.`Nombre`
+          "SELECT promotores.`IdContacto`,promotores.`Nombre`, promotores.`Ciudad`
           FROM `promotores`
+          GROUP BY promotores.`IdContacto`
+          ORDER BY promotores.`Ciudad`
+          
           ",
            'ARRAY_A'
          );

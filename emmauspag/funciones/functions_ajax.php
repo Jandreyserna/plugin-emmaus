@@ -213,8 +213,27 @@ function table_student(){
 
     wp_die();
 }
+####################################################################
+#########Funcion que llama a la ista secundaria de estudiantes######
+####################################################################
 
 function Call_view_students(){
   require_once dirname(__DIR__) . '/vistas/estudiantes.php';
   wp_die();
 }
+
+##########################################################################################
+#########Funcion que llama a la vista secundaria de estudiantes desde la tabal cursos######
+##########################################################################################
+
+function Call_two_view_students(){
+  require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
+  $modelo = new Modelo_cursos();
+  $idstudent = $modelo->Id_student_course($_POST['id-course']);
+  unset($_POST['id-course']);
+  $_POST['id-estudiante'] = $idstudent[0]['IdEstudiante'];
+  require_once dirname(__DIR__) . '/vistas/estudiantes.php';
+  wp_die();
+}
+
+##########################################################################################
