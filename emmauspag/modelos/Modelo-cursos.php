@@ -244,7 +244,7 @@ FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
              GROUP BY materiales.IdMaterial
              ) AS material, `Porcentaje`, estudiantes.`DireccionCasa`, estudiantes.`Ciudad`
             FROM `curso_realizados` INNER JOIN estudiantes
-            WHERE curso_realizados.`Porcentaje` = 0
+            WHERE curso_realizados.`Porcentaje` = 1
             AND estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`
             ",
            'OBJECT'
@@ -265,8 +265,8 @@ FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
             (SELECT `TituloMaterial` FROM materiales WHERE curso_realizados.IdMaterial = materiales.IdMaterial GROUP BY materiales.IdMaterial) AS Material,
             `Porcentaje`,
             `FechaTerminacion` 
-              FROM `curso_realizados` WHERE 1
-              ORDER BY curso_realizados.`IdCursoRealizado` DESC
+              FROM `curso_realizados` WHERE `FechaTerminacion` > 20150101  
+              ORDER BY `curso_realizados`.`FechaTerminacion`  ASC
             ",
            'OBJECT'
          );

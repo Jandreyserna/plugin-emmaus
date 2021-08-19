@@ -1,8 +1,5 @@
 jQuery(document).ready(function ($) {
 
-	// $('.dataTables_filterinput[type="search"]').css(
-	//      {'width':'350px','display':'inline-block'}
-	//   );
 
 	//----------------------------------------------------//
 	//-------------tabla cursos con ajax-----------------//
@@ -130,7 +127,7 @@ jQuery(document).ready(function ($) {
 
 		jQuery.ajax({
 		url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/notas.php',
-
+		
 		success: function(result){
 			console.log('Todo ok.');
 			jQuery('.container-table').html(result);
@@ -224,8 +221,8 @@ jQuery(document).ready(function ($) {
 						url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
 					},
 					ajax:{
-					   url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/calificar.php',
-						dataSrc:"",
+					    url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/calificar.php',
+						dataSrc:""
 					},
 					columns:[
 						{data: "IdCursoRealizado"},
@@ -235,8 +232,28 @@ jQuery(document).ready(function ($) {
 						{data: "Porcentaje"},
 						{data: "DireccionCasa"},
 						{data: "Ciudad"},
-						{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> calificar </button>"}
+						{"defaultContent": "<button id='register-note' data-toggle='modal' data-target='#añadirnota' type='button' class='form btn btn-primary btn-xs '> calificar </button>"}
 					]
 				});
+
+				$("#table-notes").on("click", "#añadirnota", function(){
+
+					var padre = $(this).closest("tr");
+					var id = $('.sorting_1', padre).text();
+
+					console.log(id);
+
+					jQuery.ajax({
+						url: ajax_var.url,
+	                	type: "post",
+	                	data: {
+							'action' : "list-modal-notes",
+							'id-course' : id
+	                	},
+	                	success: function(result){
+	                    	jQuery('.modal-content').html(result);
+	                	}
+					});
+	      });
 
 });

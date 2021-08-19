@@ -25,9 +25,12 @@ if (!empty($_POST['notas'])){
     <h1>ADMINISTRACION DE CURSOS</h1>
   </div>
   <div id="boton-calificar">
-  <button type="button" class="btn btn-outline-success" id="calificar">
+  <a href=" http://localhost/pagina/wordpress/wp-admin/admin.php?page=calificion"><button type="button" class="btn btn-outline-success">
     Registrar Notas
-  </button>
+  </button></a>
+  <a href=" http://localhost/pagina/wordpress/wp-admin/admin.php?page=perdidos"><button type="button" class="btn btn-outline-success">
+    Rectificar Notas
+  </button></a>
   </div>
   <div class="container-table">
   <table class="display" id="courses-table">
