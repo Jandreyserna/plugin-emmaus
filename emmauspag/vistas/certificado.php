@@ -16,7 +16,6 @@ if (!empty($_POST['notas'])){
     unset($_POST['IdEstudiante']);
     update_funtion($_POST, $id_student);
 }
-//$devoluciones = control_course_done();
 ?>
 
 <div class="container-course">
@@ -25,10 +24,10 @@ if (!empty($_POST['notas'])){
     <h1>ADMINISTRACION DE CURSOS</h1>
   </div>
   <div id="boton-calificar">
-  <a href=" http://localhost/pagina/wordpress/wp-admin/admin.php?page=calificion"><button type="button" class="btn btn-outline-success">
+  <a href="<?= dirname($_SERVER['HTTP_REFERER'])?>/admin.php?page=calificacion"><button type="button" class="btn btn-outline-success">
     Registrar Notas
   </button></a>
-  <a href=" http://localhost/pagina/wordpress/wp-admin/admin.php?page=perdidos"><button type="button" class="btn btn-outline-success">
+  <a href="<?= dirname($_SERVER['HTTP_REFERER'])?>/admin.php?page=perdidos"><button type="button" class="btn btn-outline-success">
     Rectificar Notas
   </button></a>
   </div>

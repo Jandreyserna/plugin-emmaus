@@ -138,7 +138,7 @@ function certificate_admin_menu(){
     'Calificar',
     'Calificar',
     'administrator',
-    'calificion',
+    'calificacion',
     'See_Notes_course',
     1 );
 
