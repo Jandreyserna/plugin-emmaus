@@ -241,6 +241,7 @@ function Call_two_view_students(){
 ##########################################################################################
 
 function Call_modal_notes(){
+  unset($_POST['action']);
   ?>
   <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Calificar Curso</h5>
@@ -250,7 +251,7 @@ function Call_modal_notes(){
         </div>
         <div class="modal-body">
           <form action="" method="post">
-          <input name="nueva-nota" type="hidden" value="nuevo" >
+          <input name="update-nota" type="hidden" value="nuevo" >
           <input name="IdCursoRealizado" type="hidden" value=<?= $_POST['id-course']?> >
           <input name="Porcentaje" type="number" value="0" >
           <div class="modal-footer">

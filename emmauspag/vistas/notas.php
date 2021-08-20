@@ -3,11 +3,21 @@ if (!empty($_POST['nueva-nota'])){
   unset($_POST['nueva-nota']);
   unset($_POST['id-course']);
   insert_funtion('curso_realizados', $_POST);
+}else if(!empty($_POST['update-nota'])){
+  unset($_POST['update-nota']);
+  unset($_POST['id-course']);
+  $id = $_POST['IdCursoRealizado'];
+  unset($_POST['IdCursoRealizado']);
+  update_course_note($_POST,$id);
 }
 ?>
 
 <div class="titulo text-center">
     <h1>Cursos sin Porcentajes</h1>
+  </div>
+
+  <div class="nota">
+
   </div>
 
 <table class="display" id="table-notes">

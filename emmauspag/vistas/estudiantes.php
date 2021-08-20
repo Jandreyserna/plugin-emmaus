@@ -130,10 +130,12 @@ require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-estudiantes.php';
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <?php
           foreach ($info_estudiante[0] as $camp => $infor):
+            if ($camp != 'FechaSolicitud'):
             ?>
             <label for="campo1"><?=$camp?></label>
             <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
           <?php
+            endif;
           endforeach;
           ?>
           <div class="modal-footer">

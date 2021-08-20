@@ -236,7 +236,7 @@ jQuery(document).ready(function ($) {
 					]
 				});
 
-				$("#table-notes").on("click", "#añadirnota", function(){
+				$("#table-notes").on("click", "#register-note", function(){
 
 					var padre = $(this).closest("tr");
 					var id = $('.sorting_1', padre).text();
@@ -247,7 +247,7 @@ jQuery(document).ready(function ($) {
 						url: ajax_var.url,
 	                	type: "post",
 	                	data: {
-							'action' : "list-modal-notes",
+							'action' : "event-list-modal-notes",
 							'id-course' : id
 	                	},
 	                	success: function(result){

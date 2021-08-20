@@ -75,10 +75,13 @@ if (!empty($_POST['nuevo-estudiante'])){
             <?php
             for ($z=2; $z < sizeof($columnas_estudiantes) ; $z++)
             {
-              foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):?>
-                <label for="campo1"><?=$column?></label>
-                <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
+              foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):
+                if ($column != 'FechaSolicitud'):
+                ?>
+                  <label for="campo1"><?=$column?></label>
+                  <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
               <?php 
+                endif;
               endforeach;
             }
               ?>
