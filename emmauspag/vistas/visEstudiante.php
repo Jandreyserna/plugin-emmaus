@@ -54,8 +54,8 @@ if (!empty($_POST['nuevo-estudiante'])){
 
 <div class="contenedor.search"></div>
   <!-- Modal -->
-  <div class="modal fade" id="añadirestudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade bd-example-modal-lg" id="añadirestudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="añadirestudiante" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
@@ -78,8 +78,10 @@ if (!empty($_POST['nuevo-estudiante'])){
               foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):
                 if ($column != 'FechaSolicitud'):
                 ?>
+                <DIV>
                   <label for="campo1"><?=$column?></label>
                   <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
+                </DIV>
               <?php 
                 endif;
               endforeach;
@@ -92,8 +94,8 @@ if (!empty($_POST['nuevo-estudiante'])){
           </form>
         </div>
       </div>
-    </div>
-  </div>
+<!--     </div>
+ -->  </div>
 
   <div class="boton-volver">
     <button class="boton_para_volver" name="button">
@@ -102,3 +104,7 @@ if (!empty($_POST['nuevo-estudiante'])){
   </div>
 </div>
 
+<!-- Full screen modal -->
+<div class="modal-dialog modal-fullscreen-sm-down">
+  ...
+</div>
