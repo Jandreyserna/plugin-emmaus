@@ -45,7 +45,8 @@ function Information_One_Student_Secund($id)
   $secundario['Celular']          = $info_estudiante[0]['Celular'];
   $secundario['Escolaridad']      = $info_estudiante[0]['Escolaridad'];
   $secundario['Correo']           = $info_estudiante[0]['CorreoElectronico'];
-  $secundario['Ciudad']           = $info_estudiante[0]['FechaSolicitud'];
+  $secundario['Ciudad']           = $info_estudiante[0]['Ciudad'];
+  $secundario['Fecha de Solicitud'] = $info_estudiante[0]['FechaSolicitud'];
   $secundario['Iglesia']          = $info_estudiante[0]['Iglesia'];
   $secundario['Estado Civil']     = $info_estudiante[0]['EstadoCivil'];
   $secundario['Barrio']           = $info_estudiante[0]['Barrio'];

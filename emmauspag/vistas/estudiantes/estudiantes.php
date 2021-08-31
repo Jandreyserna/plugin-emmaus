@@ -1,19 +1,6 @@
 <?php
-if (!empty($_POST['nuevo-curso'])){
-    die;
-  unset($_POST['nuevo-curso']);
-  if($_POST['Porcentaje'] != 0)
-  {
-    $_POST['Enviado'] = 1;
-  }else {
-    $_POST['Enviado'] = 0;
-  }
-  echo "<pre>";
-  print_r($_POST);
-  echo "</pre>";
-  insert_funtion('curso_realizados', $_POST);
-
-}else{
+require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
@@ -30,13 +17,10 @@ if (!empty($_POST['nuevo-curso'])){
   $ultimo_id++;
 
   // unset($info_tabla[0]['IdContacto']);
-  // echo "<pre>";
-  // print_r($cursos_hechos);
-  // echo "</pre>";
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>Adminitración de estudiante</h1>
+    <h1>Administración de estudiante</h1>
   </div>
 
 <div class="container">
@@ -142,13 +126,16 @@ if (!empty($_POST['nuevo-curso'])){
       </div>
       <div class="modal-body">
         <form action="" method="post">
+          <input name="Update-students" type="hidden" value="No importa" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <?php
           foreach ($info_estudiante[0] as $camp => $infor):
+            if ($camp != 'FechaSolicitud'):
             ?>
             <label for="campo1"><?=$camp?></label>
             <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
           <?php
+            endif;
           endforeach;
           ?>
           <div class="modal-footer">
@@ -236,5 +223,3 @@ if (!empty($_POST['nuevo-curso'])){
     </div>
   </div>
 </div>
-
-<?php }

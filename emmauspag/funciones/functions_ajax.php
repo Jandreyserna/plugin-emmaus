@@ -203,3 +203,63 @@ unset($datos[0]['Apellidos']);
 
  wp_die();
 }
+
+
+
+function table_student(){
+  // echo "<pre>";
+  // print_r($_POST);
+  // echo"</pre>";
+
+    wp_die();
+}
+####################################################################
+#########Funcion que llama a la ista secundaria de estudiantes######
+####################################################################
+
+function Call_view_students(){
+  require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
+  wp_die();
+}
+
+##########################################################################################
+#########Funcion que llama a la vista secundaria de estudiantes desde la tabal cursos#####
+##########################################################################################
+
+function Call_two_view_students(){
+  require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
+  $modelo = new Modelo_cursos();
+  $idstudent = $modelo->Id_student_course($_POST['id-course']);
+  unset($_POST['id-course']);
+  $_POST['id-estudiante'] = $idstudent[0]['IdEstudiante'];
+  require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
+  wp_die();
+}
+
+##########################################################################################
+#########Funcion que llama a el modal de la vista calificar de cursos#####################
+##########################################################################################
+
+function Call_modal_notes(){
+  unset($_POST['action']);
+  ?>
+  <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Calificar Curso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+          <input name="update-nota" type="hidden" value="nuevo" >
+          <input name="IdCursoRealizado" type="hidden" value=<?= $_POST['id-course']?> >
+          <input name="Porcentaje" type="number" value="0" >
+          <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+          </div>
+          </form>
+        </div>
+<?php
+  wp_die();
+}

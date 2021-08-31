@@ -1,6 +1,6 @@
 # plugin-emmaus
-## Commit actual       / fecha
-    0676fad..584aa9d      Jueves 5 agosto, 12:24 pm
+## Commit actual      /Rama-actual   / fecha
+    a7cf2d3           fix-pag       Miercoles 11 agosto, 8:40 pm
 
  # flujo:
 

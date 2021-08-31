@@ -54,9 +54,6 @@ function enqueue_styles() {
  wp_register_script('jquery', plugins_url('plugin-emmaus/emmauspag/js/jquery-3.6.0.min.js'),false , time());
  wp_enqueue_script('jquery');
 
- wp_register_script('bootstraps', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js',array('jquery','theme_style_3'), time() );
- wp_enqueue_script('bootstraps');
-
  wp_register_script('theme_style_4', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), time());
  wp_enqueue_script('theme_style_4');
 
@@ -72,16 +69,6 @@ function enqueue_styles() {
 }
 add_action('admin_enqueue_scripts', 'enqueue_styles');
 
-# ==========================
-# ========== MODALES JS ==========
-# ==========================
-
-
-// function modales_ajax() {
-//   wp_enqueue_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array('jquery'), time());
-//   wp_localize_script('modal_js', 'ajax_var', array());
-// }
-// add_action('admin_enqueue_scripts', 'modales_ajax');
 
 # ==========================
 # ========== AJAX ==========
@@ -93,24 +80,28 @@ function boton_obtener_info_ajax() {
   wp_localize_script('obtener_js', 'ajax_var', array(
     'url'    => admin_url('admin-ajax.php'),
     'nonce'  => wp_create_nonce('my-ajax-nonce'),
-    'action' => 'event-list'
+    'action' => 'event-list',
   ));
 }
 add_action('admin_enqueue_scripts', 'boton_obtener_info_ajax');
 
+
+
+# =================================================================================
+# ========== boton que llama a la vista secundaria de estudiantes =================
+# =================================================================================
+
+add_action('wp_ajax_nopriv_event-vista-student', 'Call_view_students');
+add_action('wp_ajax_event-vista-student', 'Call_view_students');
+
+
 # ==========================================================
-# ========== AJAX BOTON DE Informacion ESTUDIANTES==========
+# ========== AJAX Buscador de Estduaiantes =================
 # ==========================================================
 
-add_action('wp_ajax_nopriv_event-list-student', 'info_student');
-add_action('wp_ajax_event-list-student', 'info_student');
+add_action('wp_ajax_nopriv_event-search-student', 'table-student');
+add_action('wp_ajax_event-search-student', 'table-student');
 
-# ==============================================
-# ========== AJAX BOTON DE Informacion==========
-# ==============================================
-
-add_action('wp_ajax_nopriv_event-list', 'info_complete');
-add_action('wp_ajax_event-list', 'info_complete');
 
 
 # ==============================================
@@ -126,6 +117,23 @@ add_action('wp_ajax_event-list', 'info_complete');
 
  add_action('wp_ajax_nopriv_conocer-costo', 'costos_libros');
  add_action('wp_ajax_conocer-costo', 'costos_libros');
+
+
+ 
+# =================================================================================
+# ========== boton que llama a la vista secundaria de estudiantes =================
+# =================================================================================
+
+add_action('wp_ajax_nopriv_event-list-tow-students', 'Call_two_view_students');
+add_action('wp_ajax_event-list-tow-students', 'Call_two_view_students');
+
+# =================================================================================
+# ========== boton que llama a modal de registrar notas a un curso de estudiante ==
+# =================================================================================
+
+add_action('wp_ajax_nopriv_event-list-modal-notes', 'Call_modal_notes');
+add_action('wp_ajax_event-list-modal-notes', 'Call_modal_notes');
+
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
@@ -168,8 +176,19 @@ function insert_funtion($tabla,$datos){
 
   $modelo = new Modelo($tabla);
   $modelo->insertar_data_wpdb($datos);
-
 }
+
+# ==========================================================
+# ========== actualizar en la tabla de estudiantes datos ==========
+# ==========================================================
+
+function update_funtion($datos, $id){
+
+  $modelo = new Modelo_estudiantes();
+  $modelo->update_estudent($datos, $id);
+}
+
+
 
 
 # ===============================
