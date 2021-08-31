@@ -218,7 +218,7 @@ function table_student(){
 ####################################################################
 
 function Call_view_students(){
-  require_once dirname(__DIR__) . '/vistas/estudiantes.php';
+  require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
   wp_die();
 }
 
@@ -232,7 +232,7 @@ function Call_two_view_students(){
   $idstudent = $modelo->Id_student_course($_POST['id-course']);
   unset($_POST['id-course']);
   $_POST['id-estudiante'] = $idstudent[0]['IdEstudiante'];
-  require_once dirname(__DIR__) . '/vistas/estudiantes.php';
+  require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
   wp_die();
 }
 

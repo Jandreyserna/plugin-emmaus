@@ -209,16 +209,16 @@ function estudent_admin()
 {
   
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
-  require_once dirname(__FILE__) . '/emmauspag/vistas/visEstudiante.php';
+  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
 }
 function see_students_admin()
 {
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
-  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes.php';
+  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
 }
 
 function material_admin(){
-  require_once dirname(__FILE__). '/emmauspag/vistas/cursos.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/cursos.php';
 }
 
 function diploma_admin(){
@@ -231,15 +231,15 @@ function validacion_admin(){
 
 function curso_admin(){
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/certificado.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/certificado.php';
 }
 
 function See_Notes_course(){
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/notas.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/notas.php';
 }
 
 function See_Lost_course(){
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/perdidos.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
 }

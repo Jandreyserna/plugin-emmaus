@@ -1,6 +1,6 @@
 <?php
-require_once dirname(dirname(__FILE__)) . '/Controller/ControlOnlyEstudiante.php';
-require_once dirname(dirname(__FILE__)) . '/modelos/Modelo-estudiantes.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);

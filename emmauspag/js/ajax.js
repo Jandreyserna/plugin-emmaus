@@ -22,7 +22,7 @@ jQuery(document).ready(function ($) {
 			 url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
 		 },
 		 ajax:{
-			url: '../wp-content/plugins/plugin-emmaus/emmauspag/modelos/datas_estudiante.php',
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/datas_estudiante.php',
 			//url: ajax_var.url,
 			 dataSrc:"",
 		 },
@@ -34,7 +34,8 @@ jQuery(document).ready(function ($) {
 			 {data: "DireccionCasa"},
 			 {data: "Ciudad"},
 			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> VER MAS</button>"}
-		 ]
+		 ],
+		 order: [[0, "desc"]]
 	 });
 
 	 $("#tabla1").on("click", "#ruta", function(){
@@ -126,7 +127,7 @@ jQuery(document).ready(function ($) {
 
 
 		jQuery.ajax({
-		url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/notas.php',
+		url:'../wp-content/plugins/plugin-emmaus/emmauspag/vistas/cursos/notas.php',
 		
 		success: function(result){
 			console.log('Todo ok.');
