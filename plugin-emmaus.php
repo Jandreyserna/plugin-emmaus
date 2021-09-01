@@ -111,6 +111,11 @@ function certificates_init() {
   add_action('admin_menu', 'certificate_admin_menu');
 }
 
+add_action('init', 'print_init', 0);
+function print_init() {
+  add_action('admin_menu', 'Emmaus_admin_print');
+}
+
 function student_admin_menu(){
   add_menu_page(
     'ESTUDIANTES',
@@ -199,6 +204,18 @@ function fkm_admin_menu(){
 
 }
 
+function Emmaus_admin_print(){
+  add_menu_page(
+    'Imprimir',
+    'Imprimir',
+    'administrator',
+    'impresiones',
+    'admin_print',
+    'dashicons-schedule',
+    3
+  );
+}
+
 
 
 function core_emmaus(){
@@ -242,4 +259,9 @@ function See_Notes_course(){
 function See_Lost_course(){
   require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
   require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
+}
+
+function admin_print(){
+  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+  require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
 }

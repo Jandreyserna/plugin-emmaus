@@ -252,6 +252,29 @@ FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+ #################################################################
+ ######Obtener informacuion para la tabla notas######## ############
+#################################################################
+
+  public function table_lost(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT curso_realizados.`IdCursoRealizado`,estudiantes.`Nombres`, estudiantes.`Apellidos`, 
+            (SELECT materiales.`TituloMaterial`
+             FROM materiales 
+             WHERE materiales.IdMaterial = curso_realizados.IdMaterial
+             GROUP BY materiales.IdMaterial
+             ) AS material, `Porcentaje`, estudiantes.`DireccionCasa`, estudiantes.`Ciudad`
+            FROM `curso_realizados` INNER JOIN estudiantes
+            WHERE curso_realizados.`Porcentaje` < 70 
+            AND  curso_realizados.`FechaTerminacion` > 20150101
+            AND estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`
+            ",
+           'OBJECT'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
   #####################################################################
   ######Obtener Toda la informacion de los cursos realixados###########
   #####################################################################
