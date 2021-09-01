@@ -1,12 +1,11 @@
 <?php
 /*
-Plugin Name: emmaus
-Description: Este plugin sirve para gestionar una base de datos.
-Version: 0.1
-Author: Jandrey Steven Serna & José Mario VAlencia
-License: private
+Plugin Name: BD Instituto Emmaus
+Description: Plugin adaptado para manejar una base de datos.
+Version: 0.2
+Author: Jandrey Steven Serna & José Mario Valencia
+License: Private
 */
-
 
 // importando los modelos
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
@@ -15,25 +14,12 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 
-// IMPORTANDO LAS FUNTIONS
+// IMPORTANDO LAS FUNCTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 
 
-
-
-
-
-
-
-
-
-
-
-
 // ROLES Y CAPACIBILITIES
-
-
 
 //$adminEmmaus = [ # CAPs
 //  'cursos' => 1,
@@ -81,8 +67,6 @@ function addRole($role, $display_name, $capabilities)
 {
   add_role($role, $display_name, $capabilities);
 }
-
-
 
 
 add_action('init', 'fkm_init', 0);
