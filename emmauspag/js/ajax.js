@@ -91,7 +91,8 @@ jQuery(document).ready(function ($) {
 					 {data: "Porcentaje"},
 					 {data: "FechaTerminacion"},
 					 {"defaultContent": "<button id='register-course' type='button' class='form btn btn-primary btn-xs '>Registrar</button>"}
-				 ]
+				 ],
+				 order: [[0, "desc"]]
 			 });
 
 		 //----------------------------------------------------------//
@@ -217,6 +218,10 @@ jQuery(document).ready(function ($) {
 							 });
 				 });
 
+/*
+				CURSOS QUE NO TIENEN NOTAS DE LA VISTA NOTAS
+*/				 
+
 				$('#table-notes').DataTable({
 					language: {
 						url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
@@ -234,8 +239,12 @@ jQuery(document).ready(function ($) {
 						{data: "DireccionCasa"},
 						{data: "Ciudad"},
 						{"defaultContent": "<button id='register-note' data-toggle='modal' data-target='#añadirnota' type='button' class='form btn btn-primary btn-xs '> calificar </button>"}
-					]
+					],
+					order: [[0, "desc"]]
 				});
+/*
+				BOTON DE TABLA DE LA VISTA NOTAS, PARA REGISTRAR NOTAS A LOS QUE NO TIENEN 
+*/	
 
 				$("#table-notes").on("click", "#register-note", function(){
 
@@ -256,5 +265,104 @@ jQuery(document).ready(function ($) {
 	                	}
 					});
 	      });
+/*
+				CURSOS QUE PERDIERON LA NOTA PARA PODER CAMBIAR NOTA CUANDO REPITAN EL CURSO 
+				EN LA VISTA PERDIDOS
+*/	
+
+		  $('#table-lost').DataTable({
+			language: {
+				url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+			},
+			ajax:{
+				url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/rectificar.php',
+				dataSrc:""
+			},
+			columns:[
+				{data: "IdCursoRealizado"},
+				{data: "Nombres"},
+				{data: "Apellidos"},
+				{data: "material"},
+				{data: "Porcentaje"},
+				{data: "DireccionCasa"},
+				{data: "Ciudad"},
+				{"defaultContent": "<button id='rectify-note' data-toggle='modal' data-target='#rectifynota' type='button' class='form btn btn-primary btn-xs '> rectificar </button>"}
+			],
+			order: [[0, "desc"]]
+		});
+
+/*
+				BOTON DE TABLA DE LA VISTA perdidos, PARA ACTUALIZAR NOTAS A LOS QUE
+				PERDIERON CURSOS
+*/	
+
+		$("#table-lost").on("click", "#rectify-note", function(){
+
+			var padre = $(this).closest("tr");
+			var id = $('.sorting_1', padre).text();
+
+			console.log(id);
+
+			jQuery.ajax({
+				url: ajax_var.url,
+				type: "post",
+				data: {
+					'action' : "event-list-modal-notes",
+					'id-course' : id
+				},
+			success: function(result){
+			jQuery('.modal-content').html(result);
+			}
+		});
+});
+
+/*
+				CURSOS QUE ESTAN LISTOS PARA IMPRIMIR
+*/	
+
+		$('#table-print').DataTable({
+			language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+			},
+			ajax:{
+				url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/imprimir.php',
+				dataSrc:""
+			},
+			columns:[
+				{data: "IdCursoRealizado"},
+				{data: "Nombres"},
+				{data: "Apellidos"},
+				{data: "material"},
+				{data: "Porcentaje"},
+				{data: "DireccionCasa"},
+				{data: "Ciudad"},
+				{"defaultContent": "<button id='print-note' data-toggle='modal' data-target='#imprimirnota' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
+			],
+			order: [[0, "desc"]]
+		});
+
+/*
+		BOTON DE TABLA DE LA VISTA impresiones/imprimir, PARA cusos hechos (perdidos o ganados) uno por uno
+*/	
+
+		$("#table-print").on("click", "#print-note", function(){
+
+			var padre = $(this).closest("tr");
+			var id = $('.sorting_1', padre).text();
+
+			console.log(id);
+
+			jQuery.ajax({
+				url: ajax_var.url,
+				type: "post",
+				data: {
+					'action' : "event-list-modal-notes",
+					'id-course' : id
+				},
+				success: function(result){
+				jQuery('.modal-content').html(result);
+				}
+			});
+		});
 
 });

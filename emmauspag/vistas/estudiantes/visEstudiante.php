@@ -2,6 +2,7 @@
 if (!empty($_POST['nuevo-estudiante'])){
     unset($_POST['nuevo-estudiante']);
     insert_funtion('estudiantes', $_POST);
+    $_POST['FechaSolicitud'] = date("Y-m-d");
   } else if (!empty($_POST['id-estudiante'])){
       see_students_admin();
   } else if (!empty($_POST['nuevo-curso'])){
@@ -12,7 +13,8 @@ if (!empty($_POST['nuevo-estudiante'])){
         }else {
           $_POST['Enviado'] = 0;
         }
-        insert_funtion('curso_realizados', $_POST);
+        $_POST['FechaTerminacion'] = date("Y-m-d");
+      insert_funtion('curso_realizados', $_POST);
   } else if (!empty($_POST['Update-students'])){
     unset($_POST['Update-students']);
     $id_student = $_POST['IdEstudiante'];

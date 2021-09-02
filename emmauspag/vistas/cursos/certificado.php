@@ -9,6 +9,7 @@ if (!empty($_POST['notas'])){
           }else {
             $_POST['Enviado'] = 0;
           }
+          $_POST['FechaTerminacion'] = date("Y-m-d");
           insert_funtion('curso_realizados', $_POST);
 } else if (!empty($_POST['Update-students'])){
     unset($_POST['Update-students']);
