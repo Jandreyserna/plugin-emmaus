@@ -316,4 +316,53 @@ jQuery(document).ready(function ($) {
 		});
 });
 
+/*
+				CURSOS QUE ESTAN LISTOS PARA IMPRIMIR
+*/	
+
+		$('#table-print').DataTable({
+			language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+			},
+			ajax:{
+				url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/imprimir.php',
+				dataSrc:""
+			},
+			columns:[
+				{data: "IdCursoRealizado"},
+				{data: "Nombres"},
+				{data: "Apellidos"},
+				{data: "material"},
+				{data: "Porcentaje"},
+				{data: "DireccionCasa"},
+				{data: "Ciudad"},
+				{"defaultContent": "<button id='print-note' data-toggle='modal' data-target='#imprimirnota' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
+			],
+			order: [[0, "desc"]]
+		});
+
+/*
+		BOTON DE TABLA DE LA VISTA impresiones/imprimir, PARA cusos hechos (perdidos o ganados) uno por uno
+*/	
+
+		$("#table-print").on("click", "#print-note", function(){
+
+			var padre = $(this).closest("tr");
+			var id = $('.sorting_1', padre).text();
+
+			console.log(id);
+
+			jQuery.ajax({
+				url: ajax_var.url,
+				type: "post",
+				data: {
+					'action' : "event-list-modal-notes",
+					'id-course' : id
+				},
+				success: function(result){
+				jQuery('.modal-content').html(result);
+				}
+			});
+		});
+
 });

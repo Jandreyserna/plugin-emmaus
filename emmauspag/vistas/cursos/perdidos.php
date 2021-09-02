@@ -2,6 +2,12 @@
 if(!empty($_POST['update-nota'])){
     unset($_POST['update-nota']);
     unset($_POST['id-course']);
+    if($_POST['Porcentaje'] != 0)
+          {
+            $_POST['Enviado'] = 1;
+          }else {
+            $_POST['Enviado'] = 0;
+          }
     $id = $_POST['IdCursoRealizado'];
     unset($_POST['IdCursoRealizado']);
     update_course_note($_POST,$id);
