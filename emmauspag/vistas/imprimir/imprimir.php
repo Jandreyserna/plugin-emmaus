@@ -1,5 +1,5 @@
 <?php
-\PhpOffice\PhpWord\Autoloader::register();
+/* \PhpOffice\PhpWord\Autoloader::register();
 
 use PhpOffice\PhpWord\PhpWord;
 use PhpOficce\PhpWord\Style\Font;
@@ -18,7 +18,7 @@ $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documento,'Word2011');
 $objWriter->save('certificado.docx');
 
 header("Content-Disposition: attachment; filename='certificado.docx'");
-echo file_get_contents('certificado.docx');
+echo file_get_contents('certificado.docx'); */
 ?>
 <div class="titulo text-center">
 <h1>Cursos listo para imprimir</h1>
