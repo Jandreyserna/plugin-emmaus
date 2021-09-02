@@ -80,10 +80,14 @@ if (!empty($_POST['nuevo-estudiante'])){
               foreach($columnas_estudiantes[$z] as $nombre_columna => $column ):
                 if ($column != 'FechaSolicitud'):
                 ?>
-                <DIV>
-                  <label for="campo1"><?=$column?></label>
-                  <input name="<?=$column?>" type="text" placeholder="DIGITE EL NOMBRE " >
-                </DIV>
+                <div class="form-row">
+                  <div class="col">
+                    <label for="campo1"><?=$column?></label>
+                  </div>
+                  <div class="col">
+                    <input name="<?=$column?>" type="text" placeholder="Digite el dato" >
+                  </div>
+                </div>
               <?php 
                 endif;
               endforeach;

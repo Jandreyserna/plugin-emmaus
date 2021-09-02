@@ -132,8 +132,14 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
           foreach ($info_estudiante[0] as $camp => $infor):
             if ($camp != 'FechaSolicitud'):
             ?>
-            <label for="campo1"><?=$camp?></label>
-            <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
+            <div class="form-row">
+              <div>
+                <label for="campo1"><?=$camp?></label>
+              </div>
+              <div>
+                <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
+              </div>             
+            </div>           
           <?php
             endif;
           endforeach;
