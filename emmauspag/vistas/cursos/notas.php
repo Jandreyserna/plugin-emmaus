@@ -2,6 +2,7 @@
 if (!empty($_POST['nueva-nota'])){
   unset($_POST['nueva-nota']);
   unset($_POST['id-course']);
+  $_POST['FechaTerminacion'] = date("Y-m-d");
   insert_funtion('curso_realizados', $_POST);
 }else if(!empty($_POST['update-nota'])){
   unset($_POST['update-nota']);
@@ -12,6 +13,7 @@ if (!empty($_POST['nueva-nota'])){
           }else {
             $_POST['Enviado'] = 0;
           }
+  $_POST['FechaTerminacion'] = date("Y-m-d");
   $id = $_POST['IdCursoRealizado'];
   unset($_POST['IdCursoRealizado']);
   update_course_note($_POST,$id);
