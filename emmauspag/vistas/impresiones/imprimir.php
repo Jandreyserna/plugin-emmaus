@@ -1,24 +1,28 @@
 <?php
-/* \PhpOffice\PhpWord\Autoloader::register();
-
 use PhpOffice\PhpWord\PhpWord;
-use PhpOficce\PhpWord\Style\Font;
-
+use PhpOffice\PhpWord\Style\Font;
 $documento = new PhpWord();
 
-$seccion = $documento->m addSection();
+echo "<pre>";
+print_r( $documento );
+echo "</pre>";
+$document = $PHPWord->loadTemplate('Template.docx');
 
-$seccion->addText(
-  htmlspecialchars(
-    'primer texto - Texto ain formato'
-  )
-);
+$document->setValue('Value1', 'Sun');
+$document->setValue('Value2', 'Mercury');
+$document->setValue('Value3', 'Venus');
+$document->setValue('Value4', 'Earth');
+$document->setValue('Value5', 'Mars');
+$document->setValue('Value6', 'Jupiter');
+$document->setValue('Value7', 'Saturn');
+$document->setValue('Value8', 'Uranus');
+$document->setValue('Value9', 'Neptun');
+$document->setValue('Value10', 'Pluto');
 
-$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documento,'Word2011');
-$objWriter->save('certificado.docx');
+$document->setValue('weekday', date('l'));
+$document->setValue('time', date('H:i'));
 
-header("Content-Disposition: attachment; filename='certificado.docx'");
-echo file_get_contents('certificado.docx'); */
+$document->save('Solarsystem.docx');
 ?>
 <div class="titulo text-center">
 <h1>Cursos listo para imprimir</h1>

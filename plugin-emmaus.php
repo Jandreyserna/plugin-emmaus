@@ -8,7 +8,8 @@ License: private
 */
 
 //importando fichero para descargas tipo word
-//require_once dirname(__FILE__) . '/PHPWord-master/src/PhpWord/Autoloader.php';
+require_once 'PhpAutoload.php';
+//require_once  dirname(__FILE__).'/lib/PhpOffice/PhpWord/PHPWord.php';
 
 // importando los modelos
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
