@@ -8,9 +8,9 @@ License: private
 */
 
 //importando fichero para descargas tipo word
-require_once 'PhpAutoload.php';
+//require_once 'PhpAutoload.php';
 //require_once  dirname(__FILE__).'/lib/PhpOffice/PhpWord/PHPWord.php';
-
+//require_once  dirname(__FILE__).'/pdf/crearPdf.php';
 // importando los modelos
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
@@ -22,17 +22,217 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 
+class PrimaryClass  
+{
+    public function __construct()
+    {
+        add_action('init', [$this, 'init']);
+        //register_activation_hook(__FILE__, [$this, 'activation']);
+        //register_deactivation_hook(__FILE__, [$this, 'deactivation']);
+    }
+
+
+    public function init() : void
+    {
+        add_action('admin_menu', [$this, 'menu_pages']); 
+    }
+
+    public function menu_pages() : void
+    {
+        
+        add_menu_page(
+            'ESTUDIANTES',
+            'ESTUDIANTES ',
+            'estudiantes',
+            'estudiante',
+            [$this, 'estudent_admin' ],
+            'dashicons-welcome-learn-more',
+            4 
+        );
+
+        add_menu_page(
+          'CURSOS',
+          'CURSOS',
+          'cursos',
+          'curso',
+          [$this, 'curso_admin'],
+          'dashicons-id-alt',
+          5
+        );
+
+        add_submenu_page(
+            'curso',
+            'Calificar',
+            'Calificar',
+            'administrator',
+            'calificacion',
+            [$this, 'See_Notes_course'],
+            1 
+        );
+
+        add_submenu_page(
+            'curso',
+            'Rectificar',
+            'Rectificar',
+            'administrator',
+            'perdidos',
+            [$this, 'See_Lost_course'],
+            2
+        );
+
+        add_menu_page(
+            'MATERIALES',
+            'MATERIALES',
+            'administrator',
+            'material',
+            [$this, 'material_admin'],
+            'dashicons-book-alt',
+            4
+        );
+
+        add_menu_page(
+            'Diplomas',
+            'Diplomas',
+            'administrator',
+            'diploma',
+            [$this, 'diploma_admin'],
+            'dashicons-awards',
+            4 
+        );
+
+        add_menu_page(
+            'Emmaus',
+            'Emmaus',
+            'administrator',
+            'emmaus',
+            [$this, 'core_emmaus'],
+            'dashicons-schedule',
+            3
+        );
+
+        add_submenu_page(
+          'emmaus',
+          'Validaciones',
+          'Validaciones',
+          'administrator',
+          'validación',
+          [$this, 'validacion_admin'],
+          4 
+        );
+
+        add_menu_page(
+          'Imprimir',
+          'Imprimir',
+          'administrator',
+          'impresiones',
+          [$this, 'admin_print' ],
+          'dashicons-schedule',
+          3
+        );
+    }
+
+    /**
+     * funciones de menus y submenus
+     *
+     * @return Void
+     **/
+    
+    public function admin_page()
+    {
+        echo "Aloha admin_page";
+    }
+
+    public function core_emmaus(){
+      require_once dirname(__FILE__) . '/emmauspag/vistas/principal.php';
+    }
+    
+    public function estudent_admin()
+    {
+      
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
+    }
+    public function see_students_admin()
+    {
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
+    }
+    
+    public function material_admin(){
+      require_once dirname(__FILE__). '/emmauspag/vistas/cursos/cursos.php';
+    }
+    
+    public function diploma_admin(){
+      require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
+    }
+    
+    public function validacion_admin(){
+      require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
+    }
+    
+    public function curso_admin(){
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/cursos/certificado.php';
+    }
+    
+    public function See_Notes_course(){
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/cursos/notas.php';
+    }
+    
+    public function See_Lost_course(){
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
+    }
+    
+    public function admin_print(){
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
+    }
 
 
 
+    /**
+     * Activacion del plugin
+     *
+     * @return Void
+     **/
+    public function activation() : void
+    {
+        $option = get_option('aloha');
+        if (!$option) {
+            add_option('aloha', 'Aloha mundo');
+        }
+    }
+
+    /**
+    * Desactivacion del plugin
+    *
+    * @return Void
+    **/
+    /* function deactivation() : void
+    {
+        if ($option = get_option('aloha')) {
+            delete_option('aloha');
+        }
+    }
+    function shortcode_mostrar_autor($atts) {
+
+        $p = shortcode_atts( array (
+              'nombre' => 'Invitado'
+              ), $atts );
+              
+        $texto = "<H1>".'Este artículo ha sido creado por '.$p['nombre']."</H1>";
+        return $texto;
+    } */
+    
+    /* function shortcodes_init(){
+        add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
+       } */
+}
 
 
-
-
-
-
-
-
+new PrimaryClass;
 
 // ROLES Y CAPACIBILITIES
 
@@ -83,188 +283,4 @@ require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 function addRole($role, $display_name, $capabilities)
 {
   add_role($role, $display_name, $capabilities);
-}
-
-
-
-
-add_action('init', 'fkm_init', 0);
-function fkm_init() {
-  add_action('admin_menu', 'fkm_admin_menu');
-}
-
-add_action('init', 'student_init', 0);
-function student_init() {
-  add_action('admin_menu', 'student_admin_menu');
-
-}
-
-add_action('init', 'curse_init', 0);
-function curse_init() {
-  add_action('admin_menu', 'curse_admin_menu');
-}
-
-add_action('init', 'diplomes_init', 0);
-function diplomes_init() {
-  add_action('admin_menu', 'diplomes_admin_menu');
-}
-
-add_action('init', 'certificates_init', 0);
-function certificates_init() {
-  add_action('admin_menu', 'certificate_admin_menu');
-}
-
-add_action('init', 'print_init', 0);
-function print_init() {
-  add_action('admin_menu', 'Emmaus_admin_print');
-}
-
-function student_admin_menu(){
-  add_menu_page(
-    'ESTUDIANTES',
-    'ESTUDIANTES ',
-    'estudiantes',
-    'estudiante',
-    'estudent_admin',
-    'dashicons-welcome-learn-more',
-    4 );
-
-}
-
-function certificate_admin_menu(){
-  add_menu_page(
-  'CURSOS',
-  'CURSOS',
-  'cursos',
-  'curso',
-  'curso_admin',
-  'dashicons-id-alt',
-  5 );
-
-  add_submenu_page(
-    'curso',
-    'Calificar',
-    'Calificar',
-    'administrator',
-    'calificacion',
-    'See_Notes_course',
-    1 );
-
-    add_submenu_page(
-      'curso',
-      'Rectificar',
-      'Rectificar',
-      'administrator',
-      'perdidos',
-      'See_Lost_course',
-      2 );
-}
-
-
-function curse_admin_menu(){
-  add_menu_page(
-    'MATERIALES',
-    'MATERIALES',
-    'administrator',
-    'material',
-    'material_admin',
-    'dashicons-book-alt',
-    4 );
-}
-
-function diplomes_admin_menu(){
-  add_menu_page(
-    'Diplomas',
-    'Diplomas',
-    'administrator',
-    'diploma',
-    'diploma_admin',
-    'dashicons-awards
-    ',
-    4 );
-}
-
-function fkm_admin_menu(){
-  add_menu_page(
-    'Emmaus',
-    'Emmaus',
-    'administrator',
-    'emmaus',
-    'core_emmaus',
-    'dashicons-schedule',
-    3
-  );
-
-  add_submenu_page(
-  'emmaus',
-  'Validaciones',
-  'Validaciones',
-  'administrator',
-  'validación',
-  'validacion_admin',
-  4 );
-
-
-}
-
-function Emmaus_admin_print(){
-  add_menu_page(
-    'Imprimir',
-    'Imprimir',
-    'administrator',
-    'impresiones',
-    'admin_print',
-    'dashicons-schedule',
-    3
-  );
-}
-
-
-
-function core_emmaus(){
-  require_once dirname(__FILE__) . '/emmauspag/vistas/principal.php';
-}
-
-function estudent_admin()
-{
-  
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
-  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
-}
-function see_students_admin()
-{
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
-  require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
-}
-
-function material_admin(){
-  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/cursos.php';
-}
-
-function diploma_admin(){
-  require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
-}
-
-function validacion_admin(){
-  require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
-}
-
-function curso_admin(){
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/certificado.php';
-}
-
-function See_Notes_course(){
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/notas.php';
-}
-
-function See_Lost_course(){
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
-}
-
-function admin_print(){
-  require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
-  require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
 }
