@@ -1,5 +1,17 @@
 <?php
-//require_once  dirname(dirname(dirname(__DIR__))).'/pdf/crearPdf.php';
+ob_start();
+$phpWord = new \PhpOffice\PhpWord\PhpWord();
+$seccion = $phpWord->addSection();
+$seccion->addText(
+    "Primer texto - sin formato"
+);
+
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+$objWriter->save('primer.docx');
+header("content-Type: appliication/octet-stream");
+header("Content-Disposition: attachment; filename='primer.docx'");
+//file_get_contents('primer.docx');
+//ob_end_flush();
 ?>
 <div class="titulo text-center">
 <h1>Cursos listo para imprimir</h1>
@@ -30,4 +42,3 @@
   </div>
 </div>
 </div>
-

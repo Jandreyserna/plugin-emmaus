@@ -25,7 +25,6 @@ if (!empty($_POST['nuevo-estudiante'])){
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-
   ?>
 
 <div class="contenedor-estudiantes">

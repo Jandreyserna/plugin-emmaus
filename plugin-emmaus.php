@@ -7,10 +7,13 @@ Author: Jandrey Steven Serna & José Mario VAlencia
 License: private
 */
 
-//importando fichero para descargas tipo word
-//require_once 'PhpAutoload.php';
-//require_once  dirname(__FILE__).'/lib/PhpOffice/PhpWord/PHPWord.php';
-//require_once  dirname(__FILE__).'/pdf/crearPdf.php';
+//cargando las dependencias de PhpWord para imprimir los certificados
+
+if (!defined('ABSPATH')) {
+	exit;
+}
+require_once 'phpWord/bootstrap.php';
+
 // importando los modelos
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-cursos.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-promotor.php';
