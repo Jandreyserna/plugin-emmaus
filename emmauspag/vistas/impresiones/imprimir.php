@@ -1,17 +1,23 @@
 <?php
-ob_start();
-$phpWord = new \PhpOffice\PhpWord\PhpWord();
-$seccion = $phpWord->addSection();
+$phpword = new \PhpOffice\PhpWord\PhpWord();
+$seccion = $phpword->addSection();
 $seccion->addText(
-    "Primer texto - sin formato"
+  "primer texto - Jandrey Steven Serna Restrepo"
 );
-
-$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-$objWriter->save('primer.docx');
-header("content-Type: appliication/octet-stream");
-header("Content-Disposition: attachment; filename='primer.docx'");
-//file_get_contents('primer.docx');
-//ob_end_flush();
+$url = ABSPATH .'ganados.docx';
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpword,'Word2007');
+$objWriter->save($url);
+if(file_exists($url)){
+  $envio = site_url('ganados.docx');
+?>
+  <script>
+    window.open(
+      '<?=$envio?>',
+      '_blank'
+    );
+  </script>
+<?php
+}
 ?>
 <div class="titulo text-center">
 <h1>Cursos listo para imprimir</h1>
