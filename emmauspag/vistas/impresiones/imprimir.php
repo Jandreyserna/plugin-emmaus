@@ -1,5 +1,5 @@
 <?php
-$phpword = new \PhpOffice\PhpWord\PhpWord();
+/* $phpword = new \PhpOffice\PhpWord\PhpWord();
 $seccion = $phpword->addSection();
 $seccion->addText(
   "primer texto - Jandrey Steven Serna Restrepo"
@@ -17,7 +17,7 @@ if(file_exists($url)){
     );
   </script>
 <?php
-}
+} */
 ?>
 <div class="titulo text-center">
 <h1>Cursos listo para imprimir</h1>
@@ -39,6 +39,9 @@ if(file_exists($url)){
 </thead>
 
 </table>
+<div class="result">
+
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="añadirnota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">

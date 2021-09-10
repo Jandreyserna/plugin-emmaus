@@ -337,6 +337,33 @@ public function table_done_courses(){
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  ###################################################################################################
+  ######Obtener datos para poner en el documento de word de estudiantes que ganaron #################
+  ###################################################################################################
+
+  public function datas_for_certificate($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT (SELECT `Nombres` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Nombres,
+            (SELECT `Apellidos` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Apellidos,
+            (SELECT `TituloMaterial`
+            FROM materiales
+            WHERE materiales.`IdMaterial` = curso_realizados.`IdMaterial`
+            GROUP BY materiales.`IdMaterial`) AS Material,
+            `Porcentaje`
+            FROM curso_realizados
+            WHERE IdCursoRealizado = $id
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+  
+
 
 
   ####################################################

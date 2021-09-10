@@ -118,8 +118,6 @@ add_action('wp_ajax_event-search-student', 'table-student');
  add_action('wp_ajax_nopriv_conocer-costo', 'costos_libros');
  add_action('wp_ajax_conocer-costo', 'costos_libros');
 
-
- 
 # =================================================================================
 # ========== boton que llama a la vista secundaria de estudiantes =================
 # =================================================================================
@@ -133,6 +131,13 @@ add_action('wp_ajax_event-list-tow-students', 'Call_two_view_students');
 
 add_action('wp_ajax_nopriv_event-list-modal-notes', 'Call_modal_notes');
 add_action('wp_ajax_event-list-modal-notes', 'Call_modal_notes');
+
+# =========================================================================================
+# ========== boton que llama a funcion que descarga el documento de imprimir certificado ==
+# =========================================================================================
+
+add_action('wp_ajax_nopriv_event-list-doc-imprimir', 'Call_print_certificate');
+add_action('wp_ajax_event-list-doc-imprimir', 'Call_print_certificate');
 
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag

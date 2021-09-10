@@ -263,3 +263,40 @@ function Call_modal_notes(){
 <?php
   wp_die();
 }
+
+##########################################################################################
+#########Funcion que descarga el documento de word···················#####################
+##########################################################################################
+
+function Call_print_certificate(){
+  require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+  require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
+  require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
+  
+  unset($_POST['action']);
+  $modelo = new Modelo_cursos();
+  $datos = $modelo->datas_for_certificate($_POST['id-course']);
+  $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . 'Plantilla_CERTIFICADO.docx');
+  $nombre = $datos['Nombres']." ".$datos['Apellidos'];
+  $templateProcessor->setComplexBlock('nombre', $nombre);
+  $templateProcessor->setComplexBlock('porcentaje', $datos['Porcentaje']);
+  $templateProcessor->setComplexBlock('material', $datos['Material']);
+  $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'ganados.docx';
+  $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($templateProcessor,'Word2007');
+  $objWriter->save($url);
+  if(file_exists($url)){
+    $envio = site_url('ganados.docx');
+  echo "<pre>";
+  print_r( site_url('ganados.docx'));
+  echo "</pre>";
+?>
+  <script>
+    window.open(
+      '<?=$envio?>',
+      '_blank'
+    );
+  </script>
+<?php
+}
+  wp_die();
+}
