@@ -46,7 +46,7 @@ class PrimaryClass
         add_menu_page(
             'ESTUDIANTES',
             'ESTUDIANTES ',
-            'estudiantes',
+            'administrator',
             'estudiante',
             [$this, 'estudent_admin' ],
             'dashicons-welcome-learn-more',
@@ -283,7 +283,7 @@ new PrimaryClass;
  //remove_role('colaboradorEmmaus');
 
 // TODO: MOVER PARA OTRO LADO
-function addRole($role, $display_name, $capabilities)
+/* function addRole($role, $display_name, $capabilities)
 {
   add_role($role, $display_name, $capabilities);
-}
+} */
