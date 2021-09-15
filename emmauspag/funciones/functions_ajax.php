@@ -275,31 +275,30 @@ function Call_print_certificate(){
   require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
   require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
   require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
-  
   unset($_POST['action']);
   $modelo = new Modelo_cursos();
   $datos = $modelo->datas_for_certificate($_POST['id-course']);
-  $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
   $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
-  echo "<pre>";
-  print_r( $datos[0]['Porcentaje'] );
-  echo "</pre>";
-  $nom = new TextRun();
-  $nom->addText($nombre);
-  $porcentaje = new TextRun();
-  $porcentaje->addText($datos[0]['Porcentaje']);
-  $material = new TextRun();
-  $material->addText($datos[0]['Material']);
-
-  
-  $templateProcessor->setComplexBlock('nombre', $nom);
-  $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
-  $templateProcessor->setComplexBlock('material', $material);
   $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/ganados.docx';
-  $templateProcessor->saveAs($url);
-  
-  if(file_exists($url)){
+  $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos.docx';
+
+  $fuente = [
+    "name" => "Arial",
+    "size" => 18,
+    "bold" => true,
+  ];
     if($datos[0]['Porcentaje'] > 69.9){
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
+      $nom = new TextRun();
+      $nom->addText($nombre,$fuente);
+      $porcentaje = new TextRun();
+      $porcentaje->addText($datos[0]['Porcentaje']);
+      $material = new TextRun();
+      $material->addText($datos[0]['Material']);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
+      $templateProcessor->setComplexBlock('material', $material);
+      $templateProcessor->saveAs($url);
       $envio = site_url('ganados.docx');
 ?>
       <script>
@@ -311,8 +310,26 @@ function Call_print_certificate(){
 <?php
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
+    } else{
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
+      $nom = new TextRun();
+      $nom->addText($nombre);
+      $ciudad = new TextRun();
+      $ciudad->addText($datos[0]['Ciudad']);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('ciudad', $ciudad);
+      $templateProcessor->saveAs($url2);
+      $envio = site_url('perdidos.docx');
+      ?>
+      <script>
+        window.open(
+        '<?=$envio?>',
+        '_blank'
+        );
+      </script>
+<?php
+      $dato['Enviado'] = 2;
+      $modelo->Id_Update_state($_POST['id-course'] , $dato);
     }   
-  }
-  
   wp_die();
 }

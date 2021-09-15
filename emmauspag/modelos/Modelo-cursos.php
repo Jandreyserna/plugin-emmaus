@@ -350,6 +350,9 @@ public function table_done_courses(){
             (SELECT `Apellidos` 
             FROM estudiantes
             WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Apellidos,
+            (SELECT `Ciudad` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Ciudad,
             (SELECT `TituloMaterial`
             FROM materiales
             WHERE materiales.`IdMaterial` = curso_realizados.`IdMaterial`
