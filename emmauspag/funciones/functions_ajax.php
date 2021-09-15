@@ -279,7 +279,7 @@ function Call_print_certificate(){
   $modelo = new Modelo_cursos();
   $datos = $modelo->datas_for_certificate($_POST['id-course']);
   $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
-  $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/ganados.docx';
+  
   $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos.docx';
 
   $fuente = [
@@ -289,6 +289,11 @@ function Call_print_certificate(){
   ];
     if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
+      $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
+      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/'.$archivo;
+      echo "<pre>";
+      print_r( date("Y-m-d-B-A") );
+      echo "</pre>";
       $nom = new TextRun();
       $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
@@ -299,7 +304,7 @@ function Call_print_certificate(){
       $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
       $templateProcessor->setComplexBlock('material', $material);
       $templateProcessor->saveAs($url);
-      $envio = site_url('ganados.docx');
+      $envio = site_url($archivo);
 ?>
       <script>
         window.open(
