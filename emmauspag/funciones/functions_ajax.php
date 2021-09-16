@@ -291,9 +291,6 @@ function Call_print_certificate(){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
       $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
       $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
-      echo "<pre>";
-      print_r( date("Y-m-d-B-A") );
-      echo "</pre>";
       $nom = new TextRun();
       $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();

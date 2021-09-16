@@ -366,6 +366,23 @@ public function table_done_courses(){
     return (isset($informacion[0])) ? $informacion : null;
   }
   
+  ###############################################################################
+  ######Obtener el id del ulrimo material registrado en los cursos ################
+  #################################################################################
+
+  public function last_material(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT MAX(`IdMaterial`) AS id
+            FROM materiales
+            ",
+           'ARRAY_A'
+         );
+         echo "<pre>";
+         print_r( $informacion );
+         echo "</pre>";
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 
 
 
@@ -378,6 +395,19 @@ public function table_done_courses(){
 
     $this->wpdb->insert(
       $this->nombre_tabla, # TABLA
+      $args # DATOS
+    );
+  }
+
+   ####################################################
+  ######INSERTAR UN NUEVO CURSO EN TABLA cursos#######
+  ####################################################
+
+  function insertar_material($args)
+  {
+
+    $this->wpdb->insert(
+      'materiales', # TABLA
       $args # DATOS
     );
   }
