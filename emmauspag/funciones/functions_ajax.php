@@ -280,7 +280,7 @@ function Call_print_certificate(){
   $datos = $modelo->datas_for_certificate($_POST['id-course']);
   $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
   
-  $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos.docx';
+  
 
   $fuente = [
     "name" => "Arial",
@@ -290,7 +290,7 @@ function Call_print_certificate(){
     if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
       $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
-      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/'.$archivo;
+      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
       echo "<pre>";
       print_r( date("Y-m-d-B-A") );
       echo "</pre>";
@@ -304,7 +304,7 @@ function Call_print_certificate(){
       $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
       $templateProcessor->setComplexBlock('material', $material);
       $templateProcessor->saveAs($url);
-      $envio = site_url($archivo);
+      $envio = site_url('certificados/'.$archivo);
 ?>
       <script>
         window.open(
@@ -317,6 +317,10 @@ function Call_print_certificate(){
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
     } else{
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo2 = $estudiante.date("Y-m-d-B-A").'.docx';
+      $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos/'.$archivo2;
       $nom = new TextRun();
       $nom->addText($nombre);
       $ciudad = new TextRun();
@@ -324,7 +328,7 @@ function Call_print_certificate(){
       $templateProcessor->setComplexBlock('nombre', $nom);
       $templateProcessor->setComplexBlock('ciudad', $ciudad);
       $templateProcessor->saveAs($url2);
-      $envio = site_url('perdidos.docx');
+      $envio = site_url('perdidos/'.$archivo2);
       ?>
       <script>
         window.open(
