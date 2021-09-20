@@ -139,7 +139,7 @@ class Modelo_cursos
   public function courses_done_student($id){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT cursos.`Nombre`, cursos.`IdCurso`
+            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
@@ -153,7 +153,23 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  ######################################################################################
+  ######Obtener todos los cursos y id de materiales del plan de estudios################
+  ######################################################################################
 
+  public function courses_all_id(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT cursos.`Nombre` AS Curso , (SELECT `IdMaterialRel`
+            FROM cursos_materiales
+            WHERE cursos_materiales.IdCurso = cursos.IdCurso
+            GROUP BY cursos_materiales.IdCurso) AS IdMaterial
+            FROM cursos
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 
   #################################################################
   ######Obtener todos los cursos que hay por ver ########## #######

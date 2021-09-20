@@ -2,6 +2,7 @@
 require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
 
+
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
 
@@ -22,6 +23,26 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   <div class="titulo text-center">
     <h1>Más sobre el estudiante</h1>
   </div>
+
+
+
+<div class="container">
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
+    Añadir curso
+  </button>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
+    Actualizar información
+  </button>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#realizados">
+    Cursos realizados
+  </button>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#plan-estudios">
+    Plan de estudios
+  </button>
+</div>
 
 <div class="container">
   <div class="row">
@@ -50,31 +71,13 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
     </div>
   </div>
 </div>
-
 <div class="container">
-  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver todo</a>
+  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver mas...</a>
 </div>
 
-<div class="container">
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
-    Añadir curso
-  </button>
-
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#actualizar">
-    Actualizar información
-  </button>
-
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#realizados">
-    Cursos realizados
-  </button>
-
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#plan-estudios">
-    Plan de estudios
-  </button>
-</div>
 
 <div class="container">
-  <a href="" class="btn-accion"> Volver a estudiantes</a>
+  <a href="" class="btn-accion"> Volver a vista anterior</a>
 </div>
 
 
@@ -116,7 +119,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 
 <!-- Modal Actualizar estudiante-->
 <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
@@ -132,15 +135,27 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
           foreach ($info_estudiante[0] as $camp => $infor):
             if ($camp != 'FechaSolicitud'):              
             ?>
-            <div class="form-row">
-              <div>
+              <div class="form-row">
+            <?php
+              if($camp == 'FechaNacimiento'){
+            ?>
                 <label for="campo1"><?=$camp?></label>
+                <input name="<?=$camp?>" type="date" value="<?=$infor?>" >
+            <?php
+              }else if ($camp == 'Telefono' || $camp == 'Telefono' ){
+            ?>
+                <label for="campo1"><?=$camp?></label>
+                <input name="<?=$camp?>" type="number" value="<?=$infor?>" >
+            <?php
+              }else{
+            ?>
+              <label for="campo1"><?=$camp?></label>
+              <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
+            <?php
+              }
+            ?>
               </div>
-              <div>
-                <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
-              </div>             
-            </div>     
-          <?php
+            <?php
             endif;
           endforeach;
           ?>
@@ -203,19 +218,19 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
       <div class="modal-body">
         <?php
         if (!empty($cursos)):
-          $cont = 1;
-          $sum = 0;
           ?>
           <ul>
           <?php
-          foreach ($cursos as $columa => $dato):
-            ?>
-
-              <li><?= $cursos[$sum]['curso'] ?></li>
-
-            <?php
-            $sum++;
-            endforeach;
+          echo "<pre>";
+          print_r( $cursos_hechos );
+          echo "</pre>";
+          for ($z=0; $z < sizeof($cursos) ; $z++){
+            foreach ($cursos[$z] as $columa => $dato){
+              ?>
+                <li><?=$dato ?></li>
+              <?php
+            }
+          }
             ?>
             </ul>
             <?php
