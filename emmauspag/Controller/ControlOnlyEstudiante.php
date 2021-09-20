@@ -89,7 +89,7 @@ function courses_done($id)
 function Plan_Study()
 {
   $modelo_cursos= new Modelo_cursos();
-  $cursos        = $modelo_cursos->Courses_All();
+  $cursos        = $modelo_cursos->courses_all_id();
 
   return $cursos ;
 }

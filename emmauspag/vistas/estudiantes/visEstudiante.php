@@ -80,12 +80,32 @@ if (!empty($_POST['nuevo-estudiante'])){
                 if ($column != 'FechaSolicitud'):
                 ?>
                 <div class="form-row">
-                  <div class="col">
-                    <label for="campo1"><?=$column?></label>
-                  </div>
-                  <div class="col">
-                    <input name="<?=$column?>" type="text" placeholder="" >
-                  </div>
+                  <?php if($column == 'FechaNacimiento' ){ ?>
+                        <div class="col">
+                          <label for="campo1"><?=$column?></label>
+                        </div>
+                        <div class="col">
+                          <input name="<?=$column?>" type="date" placeholder="" >
+                        </div>
+                  <?php }else if($column == 'Telefono' || $column == 'Celular' ){ ?>
+                        <div class="col">
+                          <label for="campo1"><?=$column?></label>
+                        </div>
+                        <div class="col">
+                          <input name="<?=$column?>" type="number" placeholder="" >
+                        </div>
+                <?php 
+                  }else{
+                ?>
+                    <div class="col">
+                      <label for="campo1"><?=$column?></label>
+                    </div>
+                    <div class="col">
+                      <input name="<?=$column?>" type="text" placeholder="" >
+                    </div>
+                <?php
+                  }
+                ?>
                 </div>
               <?php 
                 endif;
