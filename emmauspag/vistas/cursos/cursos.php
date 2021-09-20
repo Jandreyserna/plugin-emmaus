@@ -1,5 +1,5 @@
 <div class="titulo text-center">
-  <h1>ADMINISTRACIÓN DE CURSOS Y MATERIALES</h1>
+  <h1>Administración de Materiales</h1>
 </div>
 
 <?php
@@ -29,18 +29,18 @@ if (!empty($_POST['nuevo-curso'])){
 }
  ?>
  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadircurso">
-   Registrar Curso
+   Registrar nuevo curso
  </button>
 
  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirmaterial">
-   Registrar Material
+   Registrar nuevo material
  </button>
 
 <table class="display" id="tabla-cursos">
 <thead>
   <tr>
-    <th scope='col'>ID</th>
-    <th scope='col'>Nombre Del Curso</th>
+    <th scope='col'>Id</th>
+    <th scope='col'>Curso</th>
     <th scope='col'>Nivel</th>
     <th scope='col'>Programa</th>
     <th scope='col'>Costo Venta</th>
@@ -80,7 +80,7 @@ if (!empty($_POST['nuevo-curso'])){
       <div class="modal-body">
         <form class="" method="post" action="">
               <p><label for="campo1">Nombre Curso</label>
-              <input name="Nombre" type="text" placeholder="DIGITE EL NOMBRE " ></p>
+              <input name="Nombre" type="text" placeholder="Nombre del nuevo curso" ></p>
               <input name="nuevo-curso" type="hidden" value="nuevo" >
               <select class="id_libro" name="IdMaterial" required>
                   <option value="" disabled selected>Material</option>
@@ -120,14 +120,14 @@ if (!empty($_POST['nuevo-curso'])){
       <div class="modal-body">
         <form class="" method="post" action="">
               <label for="campo1">Nombre Curso</label>
-              <input name="TituloMaterial" type="text" placeholder="DIGITE EL NOMBRE" >
+              <input name="TituloMaterial" type="text" placeholder="Escriba el titulo del material" >
               <input name="nuevo-material" type="hidden" value="nuevo" >
               <label for="campo1">Short</label>
-              <input name="Short" type="text" placeholder="DIGITE EL Short" >
+              <input name="Short" type="text" placeholder="Digite el titulo abreviado" >
               <label for="campo1">Costo de Compra</label>
-              <input name="ValorCosto" type="number" placeholder="0" >
+              <input name="ValorCosto" type="number" placeholder="Digite el costo de compra" >
               <label for="campo1">Costo de Venta</label>
-              <input name="ValorVenta" type="number" placeholder="0" >
+              <input name="ValorVenta" type="number" placeholder="Digite el costo al público" >
 
 
           <div class="modal-footer">

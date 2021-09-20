@@ -21,7 +21,7 @@ if (!empty($_POST['nueva-nota'])){
 ?>
 
 <div class="titulo text-center">
-    <h1>Cursos sin Porcentajes</h1>
+    <h1>Cursos para calificar</h1>
   </div>
 
   <div class="nota">

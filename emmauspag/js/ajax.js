@@ -286,7 +286,7 @@ jQuery(document).ready(function ($) {
 				{data: "Porcentaje"},
 				{data: "DireccionCasa"},
 				{data: "Ciudad"},
-				{"defaultContent": "<button id='rectify-note' data-toggle='modal' data-target='#rectifynota' type='button' class='form btn btn-primary btn-xs '> rectificar </button>"}
+				{"defaultContent": "<button id='rectify-note' data-toggle='modal' data-target='#rectifynota' type='button' class='form btn btn-primary btn-xs '>Re calificar</button>"}
 			],
 			order: [[0, "desc"]]
 		});

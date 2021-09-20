@@ -20,13 +20,13 @@ if(file_exists($url)){
 } */
 ?>
 <div class="titulo text-center">
-<h1>Cursos listo para imprimir</h1>
+<h1>Cursos listos para imprimir</h1>
 </div>
 
 <table class="display" id="table-print">
 <thead>
   <tr>
-    <th scope='col'>ID</th>
+    <th scope='col'>Id</th>
     <th scope='col'>Nombres</th>
     <th scope='col'>Apellidos</th>
     <th scope='col'>Material</th>
