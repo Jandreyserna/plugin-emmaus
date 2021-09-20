@@ -74,13 +74,11 @@ echo "</pre>"; */
   </div>
 </div>
 <div class="container">
-  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver mas...</a>
+  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn btn-info">Ver mas...</a>
+
+  <a href="" class="btn btn-outline-info"> Volver a vista anterior</a>
 </div>
 
-
-<div class="container">
-  <a href="" class="btn-accion"> Volver a vista anterior</a>
-</div>
 
 
 <!-- Modal -->
