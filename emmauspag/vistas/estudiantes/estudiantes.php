@@ -20,13 +20,13 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>Administración de estudiante</h1>
+    <h1>Más sobre el estudiante</h1>
   </div>
 
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3>Información de estudiante</h3>
+      <h3>Información:</h3>
       <ul>
   <?php foreach ($principal as $campo=> $valor): ?>
           <li><?=$campo.  ':'." ".$valor?></li>
@@ -41,7 +41,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
       </div>
     </div>
     <div class="col">
-      <h3>Ultimo curso realizado por estudiante</h3>
+      <h3>Último curso realizado:</h3>
       <ul>
         <?php foreach ($ultimo_curso[0] as $campo2=> $valor2): ?>
                 <li><?=$campo2.  ':'." ".$valor2?></li>
