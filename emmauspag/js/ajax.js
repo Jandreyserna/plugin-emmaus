@@ -33,7 +33,7 @@ jQuery(document).ready(function ($) {
 			 {data: "Apellidos"},
 			 {data: "DireccionCasa"},
 			 {data: "Ciudad"},
-			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> VER MAS</button>"}
+			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
 		 ],
 		 order: [[0, "desc"]]
 	 });
