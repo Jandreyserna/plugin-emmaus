@@ -60,8 +60,8 @@ function enqueue_styles() {
  wp_register_script('theme_style_5', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), time());
  wp_enqueue_script('theme_style_5');
 
- wp_register_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array(), time());
- wp_enqueue_script ('modal_js');
+ /* wp_register_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array(), time());
+ wp_enqueue_script ('modal_js'); */
 
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
@@ -118,8 +118,6 @@ add_action('wp_ajax_event-search-student', 'table-student');
  add_action('wp_ajax_nopriv_conocer-costo', 'costos_libros');
  add_action('wp_ajax_conocer-costo', 'costos_libros');
 
-
- 
 # =================================================================================
 # ========== boton que llama a la vista secundaria de estudiantes =================
 # =================================================================================
@@ -133,6 +131,13 @@ add_action('wp_ajax_event-list-tow-students', 'Call_two_view_students');
 
 add_action('wp_ajax_nopriv_event-list-modal-notes', 'Call_modal_notes');
 add_action('wp_ajax_event-list-modal-notes', 'Call_modal_notes');
+
+# =========================================================================================
+# ========== boton que llama a funcion que descarga el documento de imprimir certificado ==
+# =========================================================================================
+
+add_action('wp_ajax_nopriv_event-list-doc-imprimir', 'Call_print_certificate');
+add_action('wp_ajax_event-list-doc-imprimir', 'Call_print_certificate');
 
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag

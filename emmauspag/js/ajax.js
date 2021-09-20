@@ -33,7 +33,7 @@ jQuery(document).ready(function ($) {
 			 {data: "Apellidos"},
 			 {data: "DireccionCasa"},
 			 {data: "Ciudad"},
-			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '> VER MAS</button>"}
+			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
 		 ],
 		 order: [[0, "desc"]]
 	 });
@@ -286,7 +286,7 @@ jQuery(document).ready(function ($) {
 				{data: "Porcentaje"},
 				{data: "DireccionCasa"},
 				{data: "Ciudad"},
-				{"defaultContent": "<button id='rectify-note' data-toggle='modal' data-target='#rectifynota' type='button' class='form btn btn-primary btn-xs '> rectificar </button>"}
+				{"defaultContent": "<button id='rectify-note' data-toggle='modal' data-target='#rectifynota' type='button' class='form btn btn-primary btn-xs '>Re calificar</button>"}
 			],
 			order: [[0, "desc"]]
 		});
@@ -336,7 +336,7 @@ jQuery(document).ready(function ($) {
 				{data: "Porcentaje"},
 				{data: "DireccionCasa"},
 				{data: "Ciudad"},
-				{"defaultContent": "<button id='print-note' data-toggle='modal' data-target='#imprimirnota' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
+				{"defaultContent": "<button id='print-note' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
 			],
 			order: [[0, "desc"]]
 		});
@@ -349,18 +349,20 @@ jQuery(document).ready(function ($) {
 
 			var padre = $(this).closest("tr");
 			var id = $('.sorting_1', padre).text();
-
+			
+			/* var total = $(padre ,"td:nth-child( )").text();
 			console.log(id);
+			console.log(total); */
 
 			jQuery.ajax({
 				url: ajax_var.url,
 				type: "post",
 				data: {
-					'action' : "event-list-modal-notes",
+					'action' : "event-list-doc-imprimir",
 					'id-course' : id
 				},
 				success: function(result){
-				jQuery('.modal-content').html(result);
+				jQuery('.result').html(result);
 				}
 			});
 		});

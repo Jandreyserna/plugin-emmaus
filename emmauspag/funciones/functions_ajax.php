@@ -4,6 +4,9 @@
 ##### Evaluar los POST de este archivo ###
 ##########################################
 
+use PhpOffice\PhpWord\Element\Text;
+use PhpOffice\PhpWord\Element\TextRun;
+
 if (!empty($_POST['nuevo-costo'])){
   $ID['IdMaterial'] = $_POST['nuevo-costo'];
   unset($_POST['nuevo-costo']);
@@ -261,5 +264,78 @@ function Call_modal_notes(){
           </form>
         </div>
 <?php
+  wp_die();
+}
+
+##########################################################################################
+#########Funcion que descarga el documento de word···················#####################
+##########################################################################################
+
+function Call_print_certificate(){
+  require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+  require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
+  require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
+  unset($_POST['action']);
+  $modelo = new Modelo_cursos();
+  $datos = $modelo->datas_for_certificate($_POST['id-course']);
+  $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
+  
+  
+
+  $fuente = [
+    "name" => "Arial",
+    "size" => 18,
+    "bold" => true,
+  ];
+    if($datos[0]['Porcentaje'] > 69.9){
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
+      $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
+      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
+      $nom = new TextRun();
+      $nom->addText($nombre,$fuente);
+      $porcentaje = new TextRun();
+      $porcentaje->addText($datos[0]['Porcentaje']);
+      $material = new TextRun();
+      $material->addText($datos[0]['Material']);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
+      $templateProcessor->setComplexBlock('material', $material);
+      $templateProcessor->saveAs($url);
+      $envio = site_url('certificados/'.$archivo);
+?>
+      <script>
+        window.open(
+        '<?=$envio?>',
+        '_blank'
+        );
+      </script>
+<?php
+      $dato['Enviado'] = 2;
+      $modelo->Id_Update_state($_POST['id-course'] , $dato);
+    } else{
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo2 = $estudiante.date("Y-m-d-B-A").'.docx';
+      $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos/'.$archivo2;
+      $nom = new TextRun();
+      $nom->addText($nombre);
+      $ciudad = new TextRun();
+      $ciudad->addText($datos[0]['Ciudad']);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('ciudad', $ciudad);
+      $templateProcessor->saveAs($url2);
+      $envio = site_url('perdidos/'.$archivo2);
+      ?>
+      <script>
+        window.open(
+        '<?=$envio?>',
+        '_blank'
+        );
+      </script>
+<?php
+      $dato['Enviado'] = 2;
+      $modelo->Id_Update_state($_POST['id-course'] , $dato);
+    }   
   wp_die();
 }

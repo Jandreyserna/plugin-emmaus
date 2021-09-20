@@ -1,6 +1,7 @@
 <?php
 if (!empty($_POST['nuevo-estudiante'])){
     unset($_POST['nuevo-estudiante']);
+    $_POST['FechaSolicitud'] = date("Y-m-d");
     insert_funtion('estudiantes', $_POST);
     $_POST['FechaSolicitud'] = date("Y-m-d");
   } else if (!empty($_POST['id-estudiante'])){
@@ -14,7 +15,7 @@ if (!empty($_POST['nuevo-estudiante'])){
           $_POST['Enviado'] = 0;
         }
         $_POST['FechaTerminacion'] = date("Y-m-d");
-      insert_funtion('curso_realizados', $_POST);
+        insert_funtion('curso_realizados', $_POST);
   } else if (!empty($_POST['Update-students'])){
     unset($_POST['Update-students']);
     $id_student = $_POST['IdEstudiante'];
@@ -25,24 +26,23 @@ if (!empty($_POST['nuevo-estudiante'])){
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-
   ?>
 
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>Módulo Estudiantes</h1>
+    <h1>Administración de Estudiantes</h1>
   </div>
     
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
-    Añadir nuevo estudiante
+    Nuevo estudiante
   </button>
 
   <table class="display" id="tabla1">
     <thead>
       <tr>
-        <th scope='col'>ID</th>
-        <th scope='col'>IdPromotor</th>
+        <th scope='col'>Id</th>
+        <th scope='col'>Id de Promotor</th>
         <th scope='col'>Nombres</th>
         <th scope='col'>Apellidos</th>
         <th scope='col'>Dirección</th>
@@ -60,7 +60,7 @@ if (!empty($_POST['nuevo-estudiante'])){
     <div class="modal-dialog modal-lg" id="añadirestudiante" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Estudiante</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -69,7 +69,7 @@ if (!empty($_POST['nuevo-estudiante'])){
           <form action="" method="post">
             <input name="nuevo-estudiante" type="hidden" value="nuevo" >
             <select class="id_promotor" name="IdContacto" required>
-              <option value="" disabled selected>Promotor</option>
+              <option value="" disabled selected>Escoger promotor</option>
               <?php foreach ($promotores as $col=> $valor): ?>
                 <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>)</option>
               <?php endforeach; ?>
@@ -81,12 +81,32 @@ if (!empty($_POST['nuevo-estudiante'])){
                 if ($column != 'FechaSolicitud'):
                 ?>
                 <div class="form-row">
-                  <div class="col">
-                    <label for="campo1"><?=$column?></label>
-                  </div>
-                  <div class="col">
-                    <input name="<?=$column?>" type="text" placeholder="Digite el dato" >
-                  </div>
+                  <?php if($column == 'FechaNacimiento' ){ ?>
+                        <div class="col">
+                          <label for="campo1"><?=$column?></label>
+                        </div>
+                        <div class="col">
+                          <input name="<?=$column?>" type="date" placeholder="" >
+                        </div>
+                  <?php }else if($column == 'Telefono' || $column == 'Celular' ){ ?>
+                        <div class="col">
+                          <label for="campo1"><?=$column?></label>
+                        </div>
+                        <div class="col">
+                          <input name="<?=$column?>" type="number" placeholder="" >
+                        </div>
+                <?php 
+                  }else{
+                ?>
+                    <div class="col">
+                      <label for="campo1"><?=$column?></label>
+                    </div>
+                    <div class="col">
+                      <input name="<?=$column?>" type="text" placeholder="" >
+                    </div>
+                <?php
+                  }
+                ?>
                 </div>
               <?php 
                 endif;

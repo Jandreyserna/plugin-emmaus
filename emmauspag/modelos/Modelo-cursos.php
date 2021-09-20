@@ -139,7 +139,7 @@ class Modelo_cursos
   public function courses_done_student($id){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT cursos.`Nombre`, cursos.`IdCurso`
+            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
@@ -153,7 +153,23 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  ######################################################################################
+  ######Obtener todos los cursos y id de materiales del plan de estudios################
+  ######################################################################################
 
+  public function courses_all_id(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT cursos.`Nombre` AS Curso , (SELECT `IdMaterialRel`
+            FROM cursos_materiales
+            WHERE cursos_materiales.IdCurso = cursos.IdCurso
+            GROUP BY cursos_materiales.IdCurso) AS IdMaterial
+            FROM cursos
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 
   #################################################################
   ######Obtener todos los cursos que hay por ver ########## #######
@@ -337,6 +353,53 @@ public function table_done_courses(){
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  ###################################################################################################
+  ######Obtener datos para poner en el documento de word de estudiantes que ganaron #################
+  ###################################################################################################
+
+  public function datas_for_certificate($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT (SELECT `Nombres` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Nombres,
+            (SELECT `Apellidos` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Apellidos,
+            (SELECT `Ciudad` 
+            FROM estudiantes
+            WHERE estudiantes.`IdEstudiante` = curso_realizados.`IdEstudiante`) AS Ciudad,
+            (SELECT `TituloMaterial`
+            FROM materiales
+            WHERE materiales.`IdMaterial` = curso_realizados.`IdMaterial`
+            GROUP BY materiales.`IdMaterial`) AS Material,
+            `Porcentaje`
+            FROM curso_realizados
+            WHERE IdCursoRealizado = $id
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+  
+  ###############################################################################
+  ######Obtener el id del ulrimo material registrado en los cursos ################
+  #################################################################################
+
+  public function last_material(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT MAX(`IdMaterial`) AS id
+            FROM materiales
+            ",
+           'ARRAY_A'
+         );
+         echo "<pre>";
+         print_r( $informacion );
+         echo "</pre>";
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
 
 
   ####################################################
@@ -348,6 +411,19 @@ public function table_done_courses(){
 
     $this->wpdb->insert(
       $this->nombre_tabla, # TABLA
+      $args # DATOS
+    );
+  }
+
+   ####################################################
+  ######INSERTAR UN NUEVO CURSO EN TABLA cursos#######
+  ####################################################
+
+  function insertar_material($args)
+  {
+
+    $this->wpdb->insert(
+      'materiales', # TABLA
       $args # DATOS
     );
   }

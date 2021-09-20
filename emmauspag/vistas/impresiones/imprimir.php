@@ -1,17 +1,8 @@
 <?php
-/* \PhpOffice\PhpWord\Autoloader::register();
-
-use PhpOffice\PhpWord\PhpWord;
-use PhpOficce\PhpWord\Style\Font;
-
-$documento = new PhpWord();
-
-$seccion = $documento->m addSection();
-
+/* $phpword = new \PhpOffice\PhpWord\PhpWord();
+$seccion = $phpword->addSection();
 $seccion->addText(
-  htmlspecialchars(
-    'primer texto - Texto ain formato'
-  )
+  "primer texto - Jandrey Steven Serna Restrepo"
 );
 
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documento,'Word2007');
@@ -27,7 +18,7 @@ echo file_get_contents('certificado.docx'); */
 <table class="display" id="table-print">
 <thead>
   <tr>
-    <th scope='col'>ID</th>
+    <th scope='col'>Id</th>
     <th scope='col'>Nombres</th>
     <th scope='col'>Apellidos</th>
     <th scope='col'>Material</th>
@@ -40,6 +31,9 @@ echo file_get_contents('certificado.docx'); */
 </thead>
 
 </table>
+<div class="result">
+
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="añadirnota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
@@ -49,4 +43,3 @@ echo file_get_contents('certificado.docx'); */
   </div>
 </div>
 </div>
-

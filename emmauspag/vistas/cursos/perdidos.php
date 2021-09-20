@@ -11,6 +11,7 @@ if(!empty($_POST['update-nota'])){
     $_POST['FechaTerminacion'] = date("Y-m-d");
     $id = $_POST['IdCursoRealizado'];
     unset($_POST['IdCursoRealizado']);
+    $_POST['FechaTerminacion'] = date("Y-m-d");
     update_course_note($_POST,$id);
   }
 ?>

@@ -2,6 +2,7 @@
 require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
 
+
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
 
@@ -15,45 +16,17 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $cursos = Plan_Study();
   $ultimo_id = Course_Last_Id();
   $ultimo_id++;
-
+/* echo "<pre>";
+print_r( $cursos );
+echo "</pre>"; */
   // unset($info_tabla[0]['IdContacto']);
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
-    <h1>Administración de estudiante</h1>
+    <h1>Más sobre el estudiante</h1>
   </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h3>Información de estudiante</h3>
-      <ul>
-  <?php foreach ($principal as $campo=> $valor): ?>
-          <li><?=$campo.  ':'." ".$valor?></li>
-  <?php endforeach; ?>
-      </ul>
-      <div id="ver_mas_estudiante" class="collapse">
-        <ul>
-    <?php foreach ($secundario as $campo1=> $valor1): ?>
-            <li><?=$campo1.  ':'." ".$valor1?></li>
-    <?php endforeach; ?>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <h3>Ultimo curso realizado por estudiante</h3>
-      <ul>
-        <?php foreach ($ultimo_curso[0] as $campo2=> $valor2): ?>
-                <li><?=$campo2.  ':'." ".$valor2?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  </div>
-</div>
 
-<div class="container">
-  <a type="button" href="#ver_mas_estudiante" data-toggle="collapse" class="btn-accion">Ver todo</a>
-</div>
 
 <div class="container">
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante-curso">
@@ -74,8 +47,38 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 </div>
 
 <div class="container">
-  <a href="" class="btn-accion"> Volver a estudiantes</a>
+  <div class="row">
+    <div class="col">
+      <h3>Información:</h3>
+      <ul>
+  <?php foreach ($principal as $campo=> $valor): ?>
+          <li><?=$campo.  ':'." ".$valor?></li>
+  <?php endforeach; ?>
+      </ul>
+      <div id="ver_mas_estudiante" class="collapse">
+        <ul>
+    <?php foreach ($secundario as $campo1=> $valor1): ?>
+            <li><?=$campo1.  ':'." ".$valor1?></li>
+    <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h3>Último curso realizado:</h3>
+      <ul>
+        <?php foreach ($ultimo_curso[0] as $campo2=> $valor2): ?>
+                <li><?=$campo2.  ':'." ".$valor2?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
 </div>
+<div class="container">
+  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn btn-info">Ver mas...</a>
+
+  <a href="" class="btn btn-outline-info"> Volver a vista anterior</a>
+</div>
+
 
 
 <!-- Modal -->
@@ -116,7 +119,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 
 <!-- Modal Actualizar estudiante-->
 <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Formulario Estudiante</h5>
@@ -130,17 +133,29 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <?php
           foreach ($info_estudiante[0] as $camp => $infor):
-            if ($camp != 'FechaSolicitud'):
+            if ($camp != 'FechaSolicitud'):              
             ?>
-            <div class="form-row">
-              <div>
+              <div class="form-row">
+            <?php
+              if($camp == 'FechaNacimiento'){
+            ?>
                 <label for="campo1"><?=$camp?></label>
+                <input name="<?=$camp?>" type="date" value="<?=$infor?>" >
+            <?php
+              }else if ($camp == 'Telefono' || $camp == 'Celular' ){
+            ?>
+                <label for="campo1"><?=$camp?></label>
+                <input name="<?=$camp?>" type="number" value="<?=$infor?>" >
+            <?php
+              }else{
+            ?>
+              <label for="campo1"><?=$camp?></label>
+              <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
+            <?php
+              }
+            ?>
               </div>
-              <div>
-                <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
-              </div>             
-            </div>           
-          <?php
+            <?php
             endif;
           endforeach;
           ?>
@@ -203,19 +218,26 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
       <div class="modal-body">
         <?php
         if (!empty($cursos)):
-          $cont = 1;
-          $sum = 0;
           ?>
           <ul>
           <?php
-          foreach ($cursos as $columa => $dato):
-            ?>
-
-              <li><?= $cursos[$sum]['curso'] ?></li>
-
-            <?php
-            $sum++;
-            endforeach;
+          for($i = 0; $i < sizeof($cursos); $i++){
+            $band = 0;
+            for ($z=0; $z < sizeof($cursos_hechos) ; $z++){
+              if($cursos_hechos[$z]['IdMaterial'] == $cursos[$i]['IdMaterial']){
+                $band = 1;
+              }
+            }
+            if($band == 1){
+          ?>
+            <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
+          <?php
+            }else{
+          ?>
+              <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
+          <?php
+            }
+          }
             ?>
             </ul>
             <?php
