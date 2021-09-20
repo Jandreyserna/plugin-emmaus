@@ -16,7 +16,9 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $cursos = Plan_Study();
   $ultimo_id = Course_Last_Id();
   $ultimo_id++;
-
+/* echo "<pre>";
+print_r( $cursos );
+echo "</pre>"; */
   // unset($info_tabla[0]['IdContacto']);
 ?>
 <div class="contenedor-estudiantes">
@@ -221,14 +223,21 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
           ?>
           <ul>
           <?php
-          echo "<pre>";
-          print_r( $cursos_hechos );
-          echo "</pre>";
-          for ($z=0; $z < sizeof($cursos) ; $z++){
-            foreach ($cursos[$z] as $columa => $dato){
-              ?>
-                <li><?=$dato ?></li>
-              <?php
+          for($i = 0; $i < sizeof($cursos); $i++){
+            $band = 0;
+            for ($z=0; $z < sizeof($cursos_hechos) ; $z++){
+              if($cursos_hechos[$z]['IdMaterial'] == $cursos[$i]['IdMaterial']){
+                $band = 1;
+              }
+            }
+            if($band == 1){
+          ?>
+            <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
+          <?php
+            }else{
+          ?>
+              <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
+          <?php
             }
           }
             ?>
