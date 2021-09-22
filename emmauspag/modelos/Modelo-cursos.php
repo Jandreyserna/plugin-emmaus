@@ -215,6 +215,24 @@ FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  /*
+      CONSULTAR TODOS LOS CURSOS RECIENTES QUE NO HAYAN SIDO IMPRESOS Y SUS NOTAS SEAN APROBADAS
+  */
+
+  public function Courses_notes_wins(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT `IdCursoRealizado`,`Porcentaje`,
+            (SELECT `TituloMaterial` FROM materiales WHERE materiales.IdMaterial = curso_realizados.IdMaterial GROUP BY materiales.`IdMaterial`) AS Material,
+            (SELECT `Nombres` FROM estudiantes WHERE estudiantes.IdEstudiante = curso_realizados.IdEstudiante) AS Nombre,
+            (SELECT `Apellidos` FROM estudiantes WHERE estudiantes.IdEstudiante = curso_realizados.IdEstudiante ) AS Apellido
+            FROM `curso_realizados` WHERE `Enviado` = 1 AND `Porcentaje` > 69;
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+  
   #################################################################
   ######Obtener todos los id de cursos para actualizar ############
   #################################################################

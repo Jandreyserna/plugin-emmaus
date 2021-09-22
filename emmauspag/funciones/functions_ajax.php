@@ -285,18 +285,34 @@ function Call_print_certificate(){
   $fuente = [
     "name" => "Arial",
     "size" => 18,
+    "valign"=>'center',
     "bold" => true,
   ];
-    if($datos[0]['Porcentaje'] > 69.9){
+  $fuente2 = [
+    "name" => "Times New Roma",
+    "size" => 12,
+    "bold" => true,
+  ];
+  $fuente3 = [
+    "name" => "Comic Sans MS",
+    "size" => 11,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
-      $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
+      $PHPWord = new \PhpOffice\PhpWord\PhpWord();
+      $PHPWord->addParagraphStyle('p2Style', array('align'=>'center', 'spaceAfter'=>100));
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
       $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
       $nom = new TextRun();
       $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
-      $porcentaje->addText($datos[0]['Porcentaje']);
+      $porcentaje->addText("\t\t".$datos[0]['Porcentaje'],$fuente2);
       $material = new TextRun();
-      $material->addText($datos[0]['Material']);
+      $material->addText($datos[0]['Material'],$fuente3);
       $templateProcessor->setComplexBlock('nombre', $nom);
       $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
       $templateProcessor->setComplexBlock('material', $material);
@@ -312,7 +328,7 @@ function Call_print_certificate(){
 <?php
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
-    } else{
+  } else{
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
