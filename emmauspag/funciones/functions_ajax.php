@@ -301,8 +301,6 @@ function Call_print_certificate(){
   ];
   if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
-      $PHPWord = new \PhpOffice\PhpWord\PhpWord();
-      $PHPWord->addParagraphStyle('p2Style', array('align'=>'center', 'spaceAfter'=>100));
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo = $estudiante.date("Y-m-d-B-A").'.docx';

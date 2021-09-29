@@ -1,31 +1,52 @@
 <?php
-if (!empty($_POST['nuevo-estudiante'])){
-    unset($_POST['nuevo-estudiante']);
-    $_POST['FechaSolicitud'] = date("Y-m-d");
-    insert_funtion('estudiantes', $_POST);
-  } else if (!empty($_POST['id-estudiante'])){
-      see_students_admin();
-  } else if (!empty($_POST['nuevo-curso'])){
-      unset($_POST['nuevo-curso']);
-      if($_POST['Porcentaje'] != 0)
-        {
-          $_POST['Enviado'] = 1;
-        }else {
-          $_POST['Enviado'] = 0;
-        }
+if(!empty($_POST['activo'])){
+  switch ($_POST['activo']) {
+    case 'nuevo-estudiante':
+        unset($_POST['activo']);
+        $_POST['FechaSolicitud'] = date("Y-m-d");
+        insert_funtion('estudiantes', $_POST);
+        break;
+    case 'nuevo-curso':
+        unset($_POST['activo']);
+        if($_POST['Porcentaje'] != 0)
+          {
+            $_POST['Enviado'] = 1;
+          }else {
+            $_POST['Enviado'] = 0;
+          }
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('curso_realizados', $_POST);
-  } else if (!empty($_POST['Update-students'])){
-    unset($_POST['Update-students']);
-    $id_student = $_POST['IdEstudiante'];
-    unset($_POST['IdEstudiante']);
-    update_funtion($_POST, $id_student);
+        break;
+    case 'Update-students':
+        unset($_POST['activo']);
+        $id_student = $_POST['IdEstudiante'];
+        unset($_POST['IdEstudiante']);
+        update_funtion($_POST, $id_student);
+        break;
+    case 'Actualizar-nota-unica':
+        unset($_POST['activo']);
+        if($_POST['Porcentaje'] != 0)
+            {
+              $_POST['Enviado'] = 1;
+            }else {
+              $_POST['Enviado'] = 0;
+            }
+        $id = $_POST['IdCursoRealizado'];
+        unset($_POST['IdCursoRealizado']);
+        $_POST['FechaTerminacion'] = date("Y-m-d");
+        update_course($_POST,$id);
 
+        break;
+    case 'eliminar-curso':
+        unset($_POST['activo']);
+        funtion_delete_course($_POST['IdCursoRealizado']);
+        break;
+  }
 }
   $datas = Information_curse_student();
   $columnas_estudiantes = Colum_Students();
   $promotores = Information_Promotors();
-  ?>
+?>
 
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -66,7 +87,7 @@ if (!empty($_POST['nuevo-estudiante'])){
         </div>
         <div class="modal-body">
           <form action="" method="post">
-            <input name="nuevo-estudiante" type="hidden" value="nuevo" >
+            <input name="activo" type="hidden" value="nuevo-estudiante" >
             <select class="id_promotor" name="IdContacto" required>
               <option value="" disabled selected>Escoger promotor</option>
               <?php foreach ($promotores as $col=> $valor): ?>

@@ -16,10 +16,6 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $cursos = Plan_Study();
   $ultimo_id = Course_Last_Id();
   $ultimo_id++;
-/* echo "<pre>";
-print_r( $cursos );
-echo "</pre>"; */
-  // unset($info_tabla[0]['IdContacto']);
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -93,7 +89,7 @@ echo "</pre>"; */
       </div>
       <div class="modal-body">
         <form action="" method="post">
-          <input name="nuevo-curso" type="hidden" value="4" >
+          <input name="activo" type="hidden" value="nuevo-curso" >
           <input name="IdCursoRealizado" type="hidden" value="<?=$ultimo_id?>" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <select class="id_material" name="IdMaterial" required>
@@ -129,7 +125,7 @@ echo "</pre>"; */
       </div>
       <div class="modal-body">
         <form action="" method="post">
-          <input name="Update-students" type="hidden" value="No importa" >
+          <input name="activo" type="hidden" value="Update-students" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
           <?php
           foreach ($info_estudiante[0] as $camp => $infor):
@@ -172,7 +168,7 @@ echo "</pre>"; */
 
 <!-- Modal Cursos realizados -->
 <div class="modal fade" id="realizados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Curos Realizados</h5>
@@ -189,7 +185,23 @@ echo "</pre>"; */
           $m = 0;
             foreach ($cursos_hechos as $campos => $nombre):
           ?>
-          <li ><?=$cursos_hechos[$m]['Nombre']?></li>
+          <li >
+            <div class="row align-items-center">
+              <h6><?=$cursos_hechos[$m]['Nombre']?></h6>
+              <form action="" method="post">
+                <input type="hidden" name="activo" value="Actualizar-nota-unica">
+                <input type="hidden" name="IdCursoRealizado" value="<?=$cursos_hechos[$m]['IdCursoRealizado']?>">
+                <input type="number" name="Porcentaje" value="<?=$cursos_hechos[$m]['Porcentaje']?>">
+                <button type="submit" class="btn btn-primary"><span class="dashicons dashicons-edit "></span></button>
+              </form>
+              <form action="" method="post">
+                <input type="hidden" name="activo" value="eliminar-curso">
+                <input type="hidden" name="IdCursoRealizado" value="<?=$cursos_hechos[$m]['IdCursoRealizado']?>">
+                <button type="submit" class="btn btn-primary"><span class="dashicons dashicons-trash"></span></button>
+              </form>
+            </div>
+          </li>
+
           <?php
           $m++;
               endforeach;

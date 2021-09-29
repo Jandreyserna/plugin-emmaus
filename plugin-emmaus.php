@@ -30,8 +30,8 @@ class PrimaryClass
     public function __construct()
     {
         add_action('init', [$this, 'init']);
-        //register_activation_hook(__FILE__, [$this, 'activation']);
-        //register_deactivation_hook(__FILE__, [$this, 'deactivation']);
+        register_activation_hook(__FILE__, [$this, 'activation']);
+        register_deactivation_hook(__FILE__, [$this, 'deactivation']);
     }
 
 
@@ -46,7 +46,7 @@ class PrimaryClass
         add_menu_page(
             'ESTUDIANTES',
             'ESTUDIANTES ',
-            'administrator',
+            'estudiantes',
             'estudiante',
             [$this, 'estudent_admin' ],
             'dashicons-welcome-learn-more',
@@ -67,7 +67,7 @@ class PrimaryClass
             'curso',
             'Calificar',
             'Calificar',
-            'administrator',
+            'calificaciones',
             'calificacion',
             [$this, 'See_Notes_course'],
             1 
@@ -77,7 +77,7 @@ class PrimaryClass
             'curso',
             'Rectificar',
             'Rectificar',
-            'administrator',
+            'rectificados',
             'perdidos',
             [$this, 'See_Lost_course'],
             2
@@ -86,7 +86,7 @@ class PrimaryClass
         add_menu_page(
             'MATERIALES',
             'MATERIALES',
-            'administrator',
+            'materiales',
             'material',
             [$this, 'material_admin'],
             'dashicons-book-alt',
@@ -96,7 +96,7 @@ class PrimaryClass
         add_menu_page(
             'Diplomas',
             'Diplomas',
-            'administrator',
+            'diplomas',
             'diploma',
             [$this, 'diploma_admin'],
             'dashicons-awards',
@@ -106,7 +106,7 @@ class PrimaryClass
         add_menu_page(
             'Emmaus',
             'Emmaus',
-            'administrator',
+            'principal',
             'emmaus',
             [$this, 'core_emmaus'],
             'dashicons-schedule',
@@ -117,7 +117,7 @@ class PrimaryClass
           'emmaus',
           'Validaciones',
           'Validaciones',
-          'administrator',
+          'validaciones',
           'validación',
           [$this, 'validacion_admin'],
           4 
@@ -126,7 +126,7 @@ class PrimaryClass
         add_menu_page(
           'Imprimir',
           'Imprimir',
-          'administrator',
+          'impresion',
           'impresiones',
           [$this, 'admin_print' ],
           'dashicons-schedule',
@@ -202,9 +202,27 @@ class PrimaryClass
      **/
     public function activation() : void
     {
-        $option = get_option('aloha');
-        if (!$option) {
-            add_option('aloha', 'Aloha mundo');
+        $option = get_role('adminEmmaus');
+        $role = get_role('administrator');
+        if (empty($option)) {
+            $adminEmmaus = [ # CAPs
+              'cursos' => 1,
+              'diplomas' => 1,
+              'principal' => 1,
+              'estudiantes' => 1,
+              'certificados' => 1,
+              'emmaus' => 1,
+              'validacione' => 1,
+              'impresion'=>1,
+              'calificaciones' => 1,       
+              'materiales' => 1,
+              'rectificados' => 1,
+              'activate_plugins' => 1,
+            ];
+            add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
+            foreach( $adminEmmaus as $cap => $value){
+              $role->add_cap($cap);
+            }
         }
     }
 
@@ -213,33 +231,22 @@ class PrimaryClass
     *
     * @return Void
     **/
-    /* function deactivation() : void
-    {
-        if ($option = get_option('aloha')) {
-            delete_option('aloha');
-        }
-    }
-    function shortcode_mostrar_autor($atts) {
+    function deactivation() : void
+    {   
+        remove_role('adminEmmaus');
 
-        $p = shortcode_atts( array (
-              'nombre' => 'Invitado'
-              ), $atts );
-              
-        $texto = "<H1>".'Este artículo ha sido creado por '.$p['nombre']."</H1>";
-        return $texto;
-    } */
-    
-    /* function shortcodes_init(){
-        add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
-       } */
+    }
 }
 
 
 new PrimaryClass;
 
 // ROLES Y CAPACIBILITIES
-
-
+/* 
+$role =(array) get_role('adminEmmaus');
+            echo "<pre>";
+            print_r( $role );
+            echo "</pre>"; */
 
 //$adminEmmaus = [ # CAPs
 //  'cursos' => 1,
@@ -272,7 +279,10 @@ new PrimaryClass;
 // SE LE AGREGAN LAS CAPS AL ADMIN
 
 //$adminCaps = array_merge($adminEmmaus, $promotor, $colaborador);
-//$role = get_role('administrator');
+/* $role = get_role('administrator');
+echo "<pre>";
+print_r( $role );
+echo "</pre>"; */
 //foreach ($adminCaps as $cap => $value) {
 //  $role->add_cap($cap);
 //}
@@ -287,3 +297,5 @@ new PrimaryClass;
 {
   add_role($role, $display_name, $capabilities);
 } */
+$role = get_role('adminEmmaus');
+$role->add_cap('activate_plugins');

@@ -139,7 +139,9 @@ class Modelo_cursos
   public function courses_done_student($id){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial
+            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial , 
+                    curso_realizados.`Porcentaje` AS Porcentaje, curso_realizados.`IdCursoRealizado` AS IdCursoRealizado,
+                    curso_realizados.`Enviado` AS Enviado 
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
@@ -515,6 +517,19 @@ public function Courses_Update_state($id,$datos){
     $this->wpdb->update(
       $tabla, # TABLA
       $datos, # DATOS
+      array('IdCursoRealizado' => $id)
+    );
+}
+
+#############################################################################
+##### Eliminar un curso registrado a un estudiante ##########################
+#############################################################################
+
+public function delete_course_register($id){
+  $tabla = 'curso_realizados';
+  $this->wpdb->show_errors(false);
+    $this->wpdb->delete(
+      $tabla, # TABLA
       array('IdCursoRealizado' => $id)
     );
 }

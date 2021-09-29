@@ -6,6 +6,12 @@
 } */
 
 /*Variables*/
+#footer-thankyou{
+  display: none;
+}
+
+
+
 :root {
   --main-green:#50a74b;
   --main-blue: #004b7c;

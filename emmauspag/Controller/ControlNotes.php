@@ -8,7 +8,7 @@ function control_notes_table(){
 
 function update_course_note($datas,$id){
     $modelo = new Modelo_cursos();
-    $table = $modelo->Courses_Update_state($id,$datas);
+    $modelo->Courses_Update_state($id,$datas);
 }
 
 /*
