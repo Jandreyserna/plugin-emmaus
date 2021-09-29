@@ -28,13 +28,17 @@ require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
 class PrimaryClass  
 {
     public function __construct()
-    {
+    { 
+        add_filter('login_redirect', [$this, 'admin_default_page']);
         add_action('init', [$this, 'init']);
         register_activation_hook(__FILE__, [$this, 'activation']);
         register_deactivation_hook(__FILE__, [$this, 'deactivation']);
     }
 
-
+    public function admin_default_page() {
+      return admin_url('/admin.php?page=emmaus');
+    }
+    
     public function init() : void
     {
         add_action('admin_menu', [$this, 'menu_pages']); 
@@ -189,6 +193,10 @@ class PrimaryClass
     }
     
     public function admin_print(){
+      if(!file_exists(ABSPATH.'certificados')){
+        mkdir(ABSPATH.'certificados', 0775);
+        mkdir(ABSPATH.'perdidos', 0775);
+      } 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
     }
@@ -203,6 +211,11 @@ class PrimaryClass
     public function activation() : void
     {
         $option = get_role('adminEmmaus');
+
+        echo "<pre>ADMIN EMAUS";
+        print_r( $option );
+        echo "</pre>";
+        
         $role = get_role('administrator');
         if (empty($option)) {
             $adminEmmaus = [ # CAPs
@@ -217,7 +230,6 @@ class PrimaryClass
               'calificaciones' => 1,       
               'materiales' => 1,
               'rectificados' => 1,
-              'activate_plugins' => 1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value){
@@ -241,9 +253,11 @@ class PrimaryClass
 
 new PrimaryClass;
 
+
+
 // ROLES Y CAPACIBILITIES
 /* 
-$role =(array) get_role('adminEmmaus');
+$role = (array) get_role('adminEmmaus');
             echo "<pre>";
             print_r( $role );
             echo "</pre>"; */
@@ -297,5 +311,5 @@ echo "</pre>"; */
 {
   add_role($role, $display_name, $capabilities);
 } */
-$role = get_role('adminEmmaus');
-$role->add_cap('activate_plugins');
+/* $role = get_role('adminEmmaus');
+$role->add_cap('activate_plugins'); */

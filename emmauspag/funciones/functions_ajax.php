@@ -147,9 +147,7 @@ function costos_libros()
   </div>
 </div>
 <?php
-  // echo "<pre>";
-  // print_r($material);
-  // echo "</pre>";
+
 }
 
 
@@ -166,9 +164,6 @@ function info_student(){
      $modelo_curso    = new Modelo_cursos();
      $ultimo_curso    = $modelo_curso-> last_course_student($_POST['id']);
      $datos[0]['Promotor'] = $promotor[0]['Nombre'];
-     // echo "<pre>";
-     // print_r($ultimo_curso);
-     // echo "</pre>";
 ?>
      <div class="titulo text-center">
        <h2><?= $datos[0]['Nombres'].' '.$datos[0]['Apellidos'].' '; ?>
@@ -210,9 +205,6 @@ unset($datos[0]['Apellidos']);
 
 
 function table_student(){
-  // echo "<pre>";
-  // print_r($_POST);
-  // echo"</pre>";
 
     wp_die();
 }
