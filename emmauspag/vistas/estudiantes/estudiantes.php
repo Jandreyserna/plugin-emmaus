@@ -258,17 +258,22 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                     {
                       if( $cursos[$z]['IdCurso'] == $cursos_niveles[$i]['IdCurso'] )
                       {
-                        for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++)
+                        $bandera = 0;
+                        for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++ )
                         {
-                          if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] )
+                          if( $bandera == 0)
                           {
+                            $bandera = 1;
+                            if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] )
+                            {
 ?>
-                              <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
+                                <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
 <?php
-                          }else {
+                            }else {
 ?>
-                              <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
+                                <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
 <?php
+                            }
                           }
                         }
                       }
