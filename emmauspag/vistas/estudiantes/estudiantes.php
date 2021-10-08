@@ -16,6 +16,12 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $cursos = Plan_Study();
   $ultimo_id = Course_Last_Id();
   $ultimo_id++;
+  $programas = all_programs();
+  $niveles = all_nevels();
+  $cursos_niveles = courses_and_nevels();
+/*   echo "<pre>";
+  print_r($niveles);
+  echo "/<pre>"; */
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -228,33 +234,55 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
         </button>
       </div>
       <div class="modal-body">
-        <?php
+<?php
         if (!empty($cursos)):
-          ?>
+?>
           <ul>
-          <?php
-          for($i = 0; $i < sizeof($cursos); $i++){
-            $band = 0;
-            for ($z=0; $z < sizeof($cursos_hechos) ; $z++){
-              if($cursos_hechos[$z]['IdMaterial'] == $cursos[$i]['IdMaterial']){
-                $band = 1;
+<?php
+          foreach( $programas as $programs => $program){
+?>          
+            <li class="" ><?=$program['Nombre']?></li>
+<?php
+            for( $y = 0 ; $y < sizeof($niveles) ; $y++ )
+            {
+              if( $niveles[$y]['IdProgramaRel'] == $program['IdPrograma'] )
+              {
+?>
+                <li class="" ><?=$niveles[$y]['NombreNivel']?></li>
+<?php
+                for( $i = 0 ; $i < sizeof($cursos_niveles) ; $i++ )
+                {
+                  if( $cursos_niveles[$i]['IdNivel'] == $niveles[$y]['IdNivel'] )
+                  {
+                    for ( $z=0 ; $z < sizeof($cursos) ; $z++ )
+                    {
+                      if( $cursos[$z]['IdCurso'] == $cursos_niveles[$i]['IdCurso'] )
+                      {
+                        for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++)
+                        {
+                          if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] )
+                          {
+?>
+                              <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
+<?php
+                          }else {
+?>
+                              <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
+<?php
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-            if($band == 1){
-          ?>
-            <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
-          <?php
-            }else{
-          ?>
-              <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
-          <?php
-            }
           }
-            ?>
+?>
             </ul>
-            <?php
+<?php
          endif;
-          ?>
+?>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

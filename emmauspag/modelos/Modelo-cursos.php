@@ -165,7 +165,8 @@ class Modelo_cursos
             "SELECT cursos.`Nombre` AS Curso , (SELECT `IdMaterialRel`
             FROM cursos_materiales
             WHERE cursos_materiales.IdCurso = cursos.IdCurso
-            GROUP BY cursos_materiales.IdCurso) AS IdMaterial
+            GROUP BY cursos_materiales.IdCurso) AS IdMaterial, 
+            cursos.`IdCurso` AS IdCurso
             FROM cursos
             ",
            'ARRAY_A'
@@ -190,6 +191,51 @@ class Modelo_cursos
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+  
+  #################################################################
+  ######Obtener todos los programas ####################### #######
+  #################################################################
+
+  public function programs(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `programas` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #################################################################
+  ######Obtener todos los niveles ####################### #######
+  #################################################################
+
+  public function nevels(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `niveles` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+
+  #################################################################
+  ######Obtener todos los niveles y sus cursos relacionados #######
+  #################################################################
+
+  public function courses_nevels(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `cursos_niveles` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
 
 
   #################################################################
