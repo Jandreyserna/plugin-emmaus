@@ -366,5 +366,29 @@ jQuery(document).ready(function ($) {
 				}
 			});
 		});
+/*
+		Tabla de Diplomas
+*/	
+
+$('#table-diplomas').DataTable({
+	language: {
+	url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+	},
+	ajax:{
+		url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/diplomas_render.php',
+		dataSrc:""
+	},
+	columns:[
+		{data: "IdCursoRealizado"},
+		{data: "Nombres"},
+		{data: "Apellidos"},
+		{data: "material"},
+		{data: "Porcentaje"},
+		{data: "DireccionCasa"},
+		{data: "Ciudad"},
+		{"defaultContent": "<button id='print-note' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
+	],
+	order: [[0, "desc"]]
+});
 
 });

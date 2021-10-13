@@ -1,7 +1,7 @@
 <?php
+
 require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
-
 
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
@@ -19,9 +19,6 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $programas = all_programs();
   $niveles = all_nevels();
   $cursos_niveles = courses_and_nevels();
-/*   echo "<pre>";
-  print_r($niveles);
-  echo "/<pre>"; */
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -239,7 +236,8 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 ?>
           <ul>
 <?php
-          foreach( $programas as $programs => $program){
+          foreach( $programas as $programs => $program)
+          {
 ?>          
             <li class="" ><?=$program['Nombre']?></li>
 <?php
@@ -254,27 +252,27 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                 {
                   if( $cursos_niveles[$i]['IdNivel'] == $niveles[$y]['IdNivel'] )
                   {
-                    for ( $z=0 ; $z < sizeof($cursos) ; $z++ )
+
+                    for ( $z = 0 ; $z < sizeof($cursos) ; $z++ )
                     {
                       if( $cursos[$z]['IdCurso'] == $cursos_niveles[$i]['IdCurso'] )
                       {
                         $bandera = 0;
                         for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++ )
-                        {
-                          if( $bandera == 0)
-                          {
-                            $bandera = 1;
-                            if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] )
+                        {      
+                            if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] && $cursos_hechos[$w]['Porcentaje'] >= 70 )                          
                             {
+                              $bandera = 1;                         
 ?>
-                                <li class="list-win" ><?=$cursos[$i]['Curso'] ?></li>
-<?php
-                            }else {
-?>
-                                <li class="list-lost"><?=$cursos[$i]['Curso'] ?></li>
+                              <li class="list-win" ><?=$cursos[$z]['Curso'] ?></li>
 <?php
                             }
-                          }
+                        }
+                        if($bandera == 0)
+                        {
+?>
+                          <li class="list-lost"><?=$cursos[$z]['Curso'] ?></li>
+<?php
                         }
                       }
                     }
