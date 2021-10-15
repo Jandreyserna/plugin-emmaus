@@ -140,6 +140,14 @@ add_action('wp_ajax_nopriv_event-list-doc-imprimir', 'Call_print_certificate');
 add_action('wp_ajax_event-list-doc-imprimir', 'Call_print_certificate');
 
 
+# =========================================================================================
+# ========== boton que llama a funcion que descarga el documento de imprimir Diploma  =====
+# =========================================================================================
+
+add_action('wp_ajax_nopriv_event-list-diploma-imprimir', 'Call_print_diploma');
+add_action('wp_ajax_event-list-diploma-imprimir', 'Call_print_diploma');
+
+
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
 function urlemma($url){

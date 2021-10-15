@@ -34,6 +34,7 @@ if (!empty($_POST['imprimir-ganados'])){
       "bold" => true,
     ];
     $z= 0;
+    print_r($documento->getDocInfo());
       foreach($cursos as $nombre_columna ){
           $seccion = $documento->addSection();
           $seccion->addText(" \n",$fuente);
@@ -46,7 +47,6 @@ if (!empty($_POST['imprimir-ganados'])){
           $z++;
         }
 
-      
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documento, "Word2007");
     $objWriter->save($url);
     $envio = site_url('certificados/'.$archivo);

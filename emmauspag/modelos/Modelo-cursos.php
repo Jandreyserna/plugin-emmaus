@@ -221,6 +221,26 @@ class Modelo_cursos
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  #################################################################
+  ######Obtener todos los Diplomados que hay para hacer ###########
+  #################################################################
+
+  public function diplomados(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT cursos.IdCurso AS IdCurso, cursos.Nombre
+              FROM cursos INNER JOIN cursos_niveles INNER JOIN niveles
+              WHERE
+              cursos.IdCurso = cursos_niveles.IdCurso AND
+              cursos_niveles.IdNivel = niveles.IdNivel AND
+              (niveles.IdNivel = 5 OR  niveles.IdNivel = 17 OR  niveles.IdNivel = 25)
+              GROUP BY cursos.IdCurso
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
 
   #################################################################
   ######Obtener todos los niveles y sus cursos relacionados #######

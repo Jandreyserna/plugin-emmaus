@@ -379,16 +379,38 @@ $('#table-diplomas').DataTable({
 		dataSrc:""
 	},
 	columns:[
-		{data: "IdCursoRealizado"},
+		{data: "IdDiploma"},
+		{data: "Curso"},
+		{data: "Programa"},
 		{data: "Nombres"},
 		{data: "Apellidos"},
-		{data: "material"},
 		{data: "Porcentaje"},
-		{data: "DireccionCasa"},
-		{data: "Ciudad"},
+		{data: "FechaTerminacion"},
 		{"defaultContent": "<button id='print-note' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
 	],
 	order: [[0, "desc"]]
+});
+
+/*
+		BOTON DE TABLA DE LA VISTA Diplomas, PARA Diplomas Hechos, uno por uno
+*/	
+
+$("#table-diplomas").on("click", "#print-note", function(){
+
+	var padre = $(this).closest("tr");
+	var id = $('.sorting_1', padre).text();
+
+	jQuery.ajax({
+		url: ajax_var.url,
+		type: "post",
+		data: {
+			'action' : "event-list-diploma-imprimir",
+			'id-course' : id
+		},
+		success: function(result){
+		jQuery('.result').html(result);
+		}
+	});
 });
 
 });

@@ -19,6 +19,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $programas = all_programs();
   $niveles = all_nevels();
   $cursos_niveles = courses_and_nevels();
+  $diplomados = diplomados_courses();
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -141,7 +142,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                 <label for="campo1"><?=$camp?></label>
                 <input name="<?=$camp?>" type="date" value="<?=$infor?>" >
             <?php
-              }else if ($camp == 'Telefono' || $camp == 'Telefono' ){
+              }else if ($camp == 'Telefono' || $camp == 'Celular' ){
             ?>
                 <label for="campo1"><?=$camp?></label>
                 <input name="<?=$camp?>" type="number" value="<?=$infor?>" >
@@ -252,27 +253,30 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                 {
                   if( $cursos_niveles[$i]['IdNivel'] == $niveles[$y]['IdNivel'] )
                   {
-
-                    for ( $z = 0 ; $z < sizeof($cursos) ; $z++ )
+                    if($niveles[$y]['IdNivel'] != 5 && $niveles[$y]['IdNivel'] != 25 && $niveles[$y]['IdNivel'] != 17 )
                     {
-                      if( $cursos[$z]['IdCurso'] == $cursos_niveles[$i]['IdCurso'] )
+
+                      for ( $z = 0 ; $z < sizeof($cursos) ; $z++ )
                       {
-                        $bandera = 0;
-                        for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++ )
-                        {      
-                            if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] && $cursos_hechos[$w]['Porcentaje'] >= 70 )                          
-                            {
-                              $bandera = 1;                         
-?>
-                              <li class="list-win" ><?=$cursos[$z]['Curso'] ?></li>
-<?php
-                            }
-                        }
-                        if($bandera == 0)
+                        if( $cursos[$z]['IdCurso'] == $cursos_niveles[$i]['IdCurso'] )
                         {
-?>
-                          <li class="list-lost"><?=$cursos[$z]['Curso'] ?></li>
-<?php
+                          $bandera = 0;
+                          for( $w = 0 ; $w < sizeof($cursos_hechos) ; $w++ )
+                          {      
+                              if($cursos_hechos[$w]['IdMaterial'] == $cursos[$z]['IdMaterial'] && $cursos_hechos[$w]['Porcentaje'] >= 70 )                          
+                              {
+                                $bandera = 1;                         
+  ?>
+                                <li class="list-win" ><?=$cursos[$z]['Curso'] ?></li>
+  <?php
+                              }
+                          }
+                          if($bandera == 0)
+                          {
+  ?>
+                            <li class="list-lost"><?=$cursos[$z]['Curso'] ?></li>
+  <?php
+                          }
                         }
                       }
                     }
@@ -280,6 +284,31 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                 }
               }
             }
+?>
+            <form action="" method="post">
+                <input type="hidden" name="activo" value="elecion-diploma">
+                <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
+                <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
+                <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
+            </form>
+            <form action="" method="post">
+                <input type="hidden" name="activo" value="insertar-diploma">
+                <input type="hidden" name="IdPrograma" value="<?=$program['IdPrograma']?>">
+                <input type="hidden" name="IdEstudiante" value="<?=$id?>">
+                <select class="id_Diploma" name="IdCurso" required>
+                  <option value="" disabled selected>Escoger Diplomado</option>
+<?php           
+                  foreach ($diplomados as $diplomas=> $diploma): 
+?>
+                  <option value="<?= $diploma['IdCurso'] ?>"> <?= $diploma['Nombre']?></option>
+<?php
+                  endforeach;
+ ?>
+                </select>
+                <input type="number" name="Porcentaje" >
+                <button type="submit" class="btn btn-primary">Registrar Diplomado</button>
+            </form>
+<?php
           }
 ?>
             </ul>

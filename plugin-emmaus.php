@@ -156,7 +156,7 @@ class PrimaryClass
     
     public function estudent_admin()
     {
-      
+      require_once dirname(__FILE__) . '/phpWord/bootstrap.php';
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
     }

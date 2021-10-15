@@ -32,9 +32,11 @@ class ModeloDiplomas
   {
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-          "SELECT `IdMaterial`,`TituloMaterial`
-           FROM `materiales`
-           GROUP BY `IdMaterial`
+          "SELECT IdDiploma,Porcentaje,FechaTerminacion, (SELECT Nombre FROM Cursos WHERE cursos.IdCurso = diplomas.IdCurso ) AS Curso,
+          (SELECT Nombres FROM estudiantes WHERE estudiantes.IdEstudiante = diplomas.IdEstudiante ) AS Nombres,
+          (SELECT Apellidos FROM estudiantes WHERE estudiantes.IdEstudiante = diplomas.IdEstudiante ) AS Apellidos,
+          (SELECT Nombre FROM programas WHERE programas.IdPrograma = diplomas.IdPrograma ) AS Programa
+          FROM `diplomas`
             ",
            'ARRAY_A'
          );

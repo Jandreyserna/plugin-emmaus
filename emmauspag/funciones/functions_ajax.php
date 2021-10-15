@@ -264,7 +264,7 @@ function Call_modal_notes(){
 ##########################################################################################
 
 function Call_print_certificate(){
-  require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+  require ABSPATH . '/wp-load.php';
   require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
   require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
   unset($_POST['action']);
@@ -296,7 +296,7 @@ function Call_print_certificate(){
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
-      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
+      $url = ABSPATH  .'/certificados/'.$archivo;
       $nom = new TextRun();
       $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
@@ -323,7 +323,7 @@ function Call_print_certificate(){
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo2 = $estudiante.date("Y-m-d-B-A").'.docx';
-      $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos/'.$archivo2;
+      $url2 = ABSPATH  .'/perdidos/'.$archivo2;
       $nom = new TextRun();
       $nom->addText($nombre);
       $ciudad = new TextRun();
@@ -343,5 +343,11 @@ function Call_print_certificate(){
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
     }   
+  wp_die();
+}
+
+function Call_print_diploma()
+{
+
   wp_die();
 }

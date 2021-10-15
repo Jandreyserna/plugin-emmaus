@@ -1,12 +1,15 @@
 <?php
+
+use PhpOffice\PhpWord\Element\TextRun;
+
 if(!empty($_POST['activo'])){
   switch ($_POST['activo']) {
-    case 'nuevo-estudiante':
+    case 'nuevo-estudiante': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
         unset($_POST['activo']);
         $_POST['FechaSolicitud'] = date("Y-m-d");
         insert_funtion('estudiantes', $_POST);
         break;
-    case 'nuevo-curso':
+    case 'nuevo-curso': // accion activada por el boton de añadir un nuevo curso de la subpage estudiante
         unset($_POST['activo']);
         if($_POST['Porcentaje'] != 0)
           {
@@ -17,13 +20,13 @@ if(!empty($_POST['activo'])){
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('curso_realizados', $_POST);
         break;
-    case 'Update-students':
+    case 'Update-students': // accion activada por el boton de actualizar estudiante de la subpage estudiante
         unset($_POST['activo']);
         $id_student = $_POST['IdEstudiante'];
         unset($_POST['IdEstudiante']);
         update_funtion($_POST, $id_student);
         break;
-    case 'Actualizar-nota-unica':
+    case 'Actualizar-nota-unica': // accion activada por el boton de actualizar nota curso de la subpage estudiante
         unset($_POST['activo']);
         if($_POST['Porcentaje'] != 0)
             {
@@ -37,9 +40,48 @@ if(!empty($_POST['activo'])){
         update_course($_POST,$id);
 
         break;
-    case 'eliminar-curso':
+    case 'eliminar-curso': // accion activada por el boton de eliminar curso de la subpage estudiante
         unset($_POST['activo']);
         funtion_delete_course($_POST['IdCursoRealizado']);
+        break;
+    case 'insertar-diploma': // accion activada por el boton de añadir Diplomado de la subpage estudiante
+        unset($_POST['activo']);
+        $_POST['FechaTerminacion'] = date("Y-m-d");
+        insert_funtion('diplomas', $_POST);
+        break;
+    case 'elecion-diploma': // accion activada por el boton de imprimir elección Diplomado de la subpage estudiante
+          $fuente = [
+            "name" => "Arial",
+            "size" => 11,
+            "bold" => false,
+          ];
+          $fuente2 = [
+            "name" => "arial",
+            "size" => 11,
+            "bold" => true,
+          ];
+          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/Carta elección Diplomado.docx');
+          $archivo = $_POST['Nombre'].' '.'eleccionDiplomado'.'.docx';
+          $url = ABSPATH  .'/certificados/'.$archivo;
+          $nom = new TextRun();
+          $nom->addText($_POST['Nombre'],$fuente2);
+          $fecha = new TextRun();
+          $fecha->addText(date("F-j-Y"),$fuente);
+          $ciudad = new TextRun();
+          $ciudad->addText($_POST['Ciudad'],$fuente);
+          $templateProcessor->setComplexBlock('nombre', $nom);
+          $templateProcessor->setComplexBlock('fecha', $fecha);
+          $templateProcessor->setComplexBlock('ciudad', $ciudad);
+          $templateProcessor->saveAs($url);
+          $envio = site_url('certificados/'.$archivo);
+?>
+          <script>
+            window.open(
+            '<?=$envio?>',
+            '_blank'
+            );
+          </script>
+<?php
         break;
   }
 }

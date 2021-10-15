@@ -130,3 +130,9 @@ function courses_and_nevels()
   return $courses_nevels;
 }
 
+function diplomados_courses()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $diploms   = $modelo_cursos->diplomados();
+  return $diploms ;
+}
