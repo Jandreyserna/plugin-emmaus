@@ -6,6 +6,10 @@ if(!empty($_POST['activo'])){
   switch ($_POST['activo']) {
     case 'nuevo-estudiante': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
         unset($_POST['activo']);
+        foreach($_POST as $campo => $valor) // convierto todas las minusculas a mayusculas
+        {
+          $_POST[$campo] = 	strtoupper($_POST[$campo]);
+        }
         $_POST['FechaSolicitud'] = date("Y-m-d");
         insert_funtion('estudiantes', $_POST);
         break;
@@ -22,6 +26,10 @@ if(!empty($_POST['activo'])){
         break;
     case 'Update-students': // accion activada por el boton de actualizar estudiante de la subpage estudiante
         unset($_POST['activo']);
+        foreach($_POST as $campo => $valor) // convierto todas las minusculas a mayusculas
+        {
+          $_POST[$campo] = 	strtoupper($_POST[$campo]);
+        }
         $id_student = $_POST['IdEstudiante'];
         unset($_POST['IdEstudiante']);
         update_funtion($_POST, $id_student);
@@ -60,9 +68,9 @@ if(!empty($_POST['activo'])){
             "size" => 11,
             "bold" => true,
           ];
-          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/Carta elección Diplomado.docx');
+          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado.docx');
           $archivo = $_POST['Nombre'].' '.'eleccionDiplomado'.'.docx';
-          $url = ABSPATH  .'/certificados/'.$archivo;
+          $url = ABSPATH  .'/diplomas/'.$archivo;
           $nom = new TextRun();
           $nom->addText($_POST['Nombre'],$fuente2);
           $fecha = new TextRun();
@@ -73,7 +81,7 @@ if(!empty($_POST['activo'])){
           $templateProcessor->setComplexBlock('fecha', $fecha);
           $templateProcessor->setComplexBlock('ciudad', $ciudad);
           $templateProcessor->saveAs($url);
-          $envio = site_url('certificados/'.$archivo);
+          $envio = site_url('diplomas/'.$archivo);
 ?>
           <script>
             window.open(
@@ -99,21 +107,28 @@ if(!empty($_POST['activo'])){
   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirestudiante">
     Nuevo estudiante
   </button>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
 
-  <table class="display" id="tabla1">
-    <thead>
-      <tr>
-        <th scope='col'>Id</th>
-        <th scope='col'>Id de Promotor</th>
-        <th scope='col'>Nombres</th>
-        <th scope='col'>Apellidos</th>
-        <th scope='col'>Dirección</th>
-        <th scope='col'>Ciudad</th>
-        <!-- <th scope='col'>Ultimo curso</th> -->
-        <th></th>
-      </tr>
-    </thead>
-  </table>
+        <table class=" table table-bordered  display nowrap" cellspacing="0" width="100%" id="tabla1">
+          <thead>
+            <tr>
+              <th scope='col'>Id</th>
+              <th scope='col'>Id de Promotor</th>
+              <th scope='col'>Nombres</th>
+              <th scope='col'>Apellidos</th>
+              <th scope='col'>Dirección</th>
+              <th scope='col'>Ciudad</th>
+              <!-- <th scope='col'>Ultimo curso</th> -->
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="contenedor.search"></div>

@@ -34,7 +34,6 @@ if (!empty($_POST['imprimir-ganados'])){
       "bold" => true,
     ];
     $z= 0;
-    print_r($documento->getDocInfo());
       foreach($cursos as $nombre_columna ){
           $seccion = $documento->addSection();
           $seccion->addText(" \n",$fuente);
@@ -58,8 +57,6 @@ if (!empty($_POST['imprimir-ganados'])){
       );
     </script>
 <?php
-    /* $dato['Enviado'] = 2;
-    $modelo->Id_Update_state($_POST['id-course'] , $dato); */
 }
 ?>
 <div class="titulo text-center">

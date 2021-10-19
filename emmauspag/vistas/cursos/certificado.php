@@ -58,9 +58,9 @@ if(!empty($_POST['activo']))
             "size" => 11,
             "bold" => true,
           ];
-          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/Carta elección Diplomado.docx');
+          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado.docx');
           $archivo = $_POST['Nombre'].' '.'eleccionDiplomado'.'.docx';
-          $url = ABSPATH  .'/certificados/'.$archivo;
+          $url = ABSPATH  .'/diplomas/'.$archivo;
           $nom = new TextRun();
           $nom->addText($_POST['Nombre'],$fuente2);
           $fecha = new TextRun();
@@ -71,7 +71,7 @@ if(!empty($_POST['activo']))
           $templateProcessor->setComplexBlock('fecha', $fecha);
           $templateProcessor->setComplexBlock('ciudad', $ciudad);
           $templateProcessor->saveAs($url);
-          $envio = site_url('certificados/'.$archivo);
+          $envio = site_url('diplomas/'.$archivo);
 ?>
           <script>
             window.open(
@@ -100,22 +100,25 @@ if(!empty($_POST['activo']))
   </button></a>
   </div>
   <div class="container-table">
-  <table class="display" id="courses-table">
-    <thead>
-      <tr>
-        <th scope="col">IdCursoHecho</th>
-        <th scope="col">Nombre Estudiante</th>
-        <th scope="col">Apellido Estudiante</th>
-        <th scope="col">Material</th>
-        <th scope="col">Puntaje</th>
-        <th scope="col">Fecha</th>
-        <th>acción</th>
-        <!-- <th scope="col">Calificador</th> -->
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table table-bordered  display nowrap" id="courses-table">
+          <thead>
+            <tr>
+              <th scope="col">IdCursoHecho</th>
+              <th scope="col">Nombre Estudiante</th>
+              <th scope="col">Apellido Estudiante</th>
+              <th scope="col">Material</th>
+              <th scope="col">Puntaje</th>
+              <th scope="col">Fecha</th>
+              <th>acción</th>
+              <!-- <th scope="col">Calificador</th> -->
 
 
-      </tr>
-    </thead>
-
-  </table>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

@@ -40,8 +40,6 @@ add_action('widgets_init', 'sidebar');
 
 function enqueue_styles() {
 
-/*  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
- wp_enqueue_style('emmaus_style'); */
  wp_register_script('emmaus_datatable_scripts',plugins_url('plugin-emmaus/emmauspag/js/jquery.dataTables.min.js'), array(), time());
  wp_enqueue_script('emmaus_datatable_scripts');
 
@@ -54,17 +52,20 @@ function enqueue_styles() {
  wp_register_script('jquery', plugins_url('plugin-emmaus/emmauspag/js/jquery-3.6.0.min.js'),false , time());
  wp_enqueue_script('jquery');
 
+ wp_register_script('table-responsive-js', 'https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js' ,false , time());
+ wp_enqueue_script('table-responsive-js');
+
  wp_register_script('theme_style_4', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), time());
  wp_enqueue_script('theme_style_4');
 
  wp_register_script('theme_style_5', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), time());
  wp_enqueue_script('theme_style_5');
 
- /* wp_register_script ('modal_js', plugins_url('/plugin-emmaus/emmauspag/js/modales.js'), array(), time());
- wp_enqueue_script ('modal_js'); */
-
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
+
+ wp_register_style('table-responsive-css', 'https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css', array(), time());
+ wp_enqueue_style('table-responsive-css');
 
 }
 add_action('admin_enqueue_scripts', 'enqueue_styles');

@@ -166,38 +166,53 @@ class PrimaryClass
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
     }
     
-    public function material_admin(){
+    public function material_admin()
+    {
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/cursos.php';
     }
     
-    public function diploma_admin(){
+    public function diploma_admin()
+    {
+      if(!file_exists(ABSPATH.'diplomas'))
+      {
+        mkdir(ABSPATH.'diplomas', 0775);
+
+      } 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlDiplomas.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
     }
     
-    public function validacion_admin(){
+    public function validacion_admin()
+    {
       require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
     }
     
-    public function curso_admin(){
+    public function curso_admin()
+    {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/certificado.php';
     }
     
-    public function See_Notes_course(){
+    public function See_Notes_course()
+    {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/notas.php';
     }
     
-    public function See_Lost_course(){
+    public function See_Lost_course()
+    {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
     }
     
-    public function admin_print(){
-      if(!file_exists(ABSPATH.'certificados')){
+    public function admin_print()
+    {
+      if(!file_exists(ABSPATH.'certificados'))
+      {
         mkdir(ABSPATH.'certificados', 0775);
         mkdir(ABSPATH.'perdidos', 0775);
+        mkdir(ABSPATH.'diplomas', 0775);
+
       } 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
@@ -219,7 +234,8 @@ class PrimaryClass
         echo "</pre>";
         
         $role = get_role('administrator');
-        if (empty($option)) {
+        if (empty($option))
+        {
             $adminEmmaus = [ # CAPs
               'cursos' => 1,
               'diplomas' => 1,
@@ -234,7 +250,8 @@ class PrimaryClass
               'rectificados' => 1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
-            foreach( $adminEmmaus as $cap => $value){
+            foreach( $adminEmmaus as $cap => $value)
+            {
               $role->add_cap($cap);
             }
         }
@@ -254,64 +271,3 @@ class PrimaryClass
 
 
 new PrimaryClass;
-
-
-
-// ROLES Y CAPACIBILITIES
-/* 
-$role = (array) get_role('adminEmmaus');
-            echo "<pre>";
-            print_r( $role );
-            echo "</pre>"; */
-
-//$adminEmmaus = [ # CAPs
-//  'cursos' => 1,
-//  'diplomas' => 1,
-//  'principal' => 1,
-//  'estudiantes' => 1,
-//  'certificados' => 1,
-//  'validaciones' => 1,
-//];
-
-//$promotor = [ # CAPs
-//  'cursos' => 1,
-//  'diplomas' => 1,
-//  'estudiantes' => 1
-//];
-
-//$colaborador = [ # CAPs
-//  'cursos' => 1,
-//  'diplomas' => 1,
-//  'estudiantes' => 1,
-//  'validaciones' => 1,
-//];
-
-
-// SE AGREGAN LO ROLES
-//addRole('adminEmmaus', 'Admin Emmaus', $adminEmmaus);
-//addRole('promotorEmmaus', 'Promotor', $promotor);
-//addRole('colaboradorEmmaus', 'Colaborador', $colaborador);
-
-// SE LE AGREGAN LAS CAPS AL ADMIN
-
-//$adminCaps = array_merge($adminEmmaus, $promotor, $colaborador);
-/* $role = get_role('administrator');
-echo "<pre>";
-print_r( $role );
-echo "</pre>"; */
-//foreach ($adminCaps as $cap => $value) {
-//  $role->add_cap($cap);
-//}
-
-
- //remove_role('adminEmmaus');
- //remove_role('promotorEmmaus');
- //remove_role('colaboradorEmmaus');
-
-// TODO: MOVER PARA OTRO LADO
-/* function addRole($role, $display_name, $capabilities)
-{
-  add_role($role, $display_name, $capabilities);
-} */
-/* $role = get_role('adminEmmaus');
-$role->add_cap('activate_plugins'); */

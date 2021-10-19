@@ -119,25 +119,13 @@ div.crudd{
   width: 70%;
   margin-left: 10px !important;
 }
-/* form{
-	width:50%;
-	padding:16px;
-	border-radius:10px;
-	margin:auto;
-	background-color:#6CC9F8;
-} */
+
 
 form select{
   border-radius: 10px;
 }
 
-/* form input{
-  width: 150px;
-    font-weight: bold;
-    display: inline-block;
-    margin-right: 20%;
-    border-radius: 10px;
-} */
+
 
 form label{
     margin-right: 40px;
@@ -163,4 +151,20 @@ form label{
 
 .btn.btn-sucess {
   background: #00000000;
+}
+
+/*
+estilos de tablas
+*/
+table {
+  border-radius: 5px;
+}
+
+table thead {
+  border: 12px;
+  background-color: #237DD4;
+}
+
+.dataTables_length select{
+  width: 50px;
 }

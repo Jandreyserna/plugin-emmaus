@@ -292,7 +292,7 @@ function Call_print_certificate(){
     "bold" => true,
   ];
   if($datos[0]['Porcentaje'] > 69.9){
-      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Plantilla_CERTIFICADO.docx');
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
@@ -319,7 +319,7 @@ function Call_print_certificate(){
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
   } else{
-      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/ANIMO.docx');
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo2 = $estudiante.date("Y-m-d-B-A").'.docx';
