@@ -29,3 +29,13 @@ function Information_Promotors()
 
   return $promotores;
 }
+
+function update_course($datas,$id){
+  $modelo = new Modelo_cursos();
+  $modelo->Courses_Update_state($id,$datas);
+}
+
+function funtion_delete_course($id){
+  $modelo = new Modelo_cursos();
+  $modelo->delete_course_register($id);
+}

@@ -147,9 +147,7 @@ function costos_libros()
   </div>
 </div>
 <?php
-  // echo "<pre>";
-  // print_r($material);
-  // echo "</pre>";
+
 }
 
 
@@ -166,9 +164,6 @@ function info_student(){
      $modelo_curso    = new Modelo_cursos();
      $ultimo_curso    = $modelo_curso-> last_course_student($_POST['id']);
      $datos[0]['Promotor'] = $promotor[0]['Nombre'];
-     // echo "<pre>";
-     // print_r($ultimo_curso);
-     // echo "</pre>";
 ?>
      <div class="titulo text-center">
        <h2><?= $datos[0]['Nombres'].' '.$datos[0]['Apellidos'].' '; ?>
@@ -210,9 +205,6 @@ unset($datos[0]['Apellidos']);
 
 
 function table_student(){
-  // echo "<pre>";
-  // print_r($_POST);
-  // echo"</pre>";
 
     wp_die();
 }
@@ -268,11 +260,11 @@ function Call_modal_notes(){
 }
 
 ##########################################################################################
-#########Funcion que descarga el documento de word···················#####################
+#########Funcion que descarga el documento de word   de cursos ganados o perdidos ########
 ##########################################################################################
 
 function Call_print_certificate(){
-  require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+  require ABSPATH . '/wp-load.php';
   require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
   require_once dirname(__DIR__) . '/modelos/Modelo-cursos.php';
   unset($_POST['action']);
@@ -285,18 +277,32 @@ function Call_print_certificate(){
   $fuente = [
     "name" => "Arial",
     "size" => 18,
+    "valign"=>'center',
     "bold" => true,
   ];
-    if($datos[0]['Porcentaje'] > 69.9){
-      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/Plantilla_CERTIFICADO.docx');
-      $archivo = 'ganados-'.date("Y-m-d-G-i-s-A").'.docx';
-      $url = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/certificados/'.$archivo;
+  $fuente2 = [
+    "name" => "Times New Roma",
+    "size" => 12,
+    "bold" => true,
+  ];
+  $fuente3 = [
+    "name" => "Comic Sans MS",
+    "size" => 11,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  if($datos[0]['Porcentaje'] > 69.9){
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Plantilla_CERTIFICADO.docx');
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
+      $url = ABSPATH  .'/certificados/'.$archivo;
       $nom = new TextRun();
       $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
-      $porcentaje->addText($datos[0]['Porcentaje']);
+      $porcentaje->addText("\t\t".$datos[0]['Porcentaje'],$fuente2);
       $material = new TextRun();
-      $material->addText($datos[0]['Material']);
+      $material->addText($datos[0]['Material'],$fuente3);
       $templateProcessor->setComplexBlock('nombre', $nom);
       $templateProcessor->setComplexBlock('porcentaje', $porcentaje);
       $templateProcessor->setComplexBlock('material', $material);
@@ -312,12 +318,12 @@ function Call_print_certificate(){
 <?php
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
-    } else{
-      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/ANIMO.docx');
+  } else{
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/ANIMO.docx');
       $estudiante = explode(' ',$nombre);
       $estudiante = implode($estudiante);
       $archivo2 = $estudiante.date("Y-m-d-B-A").'.docx';
-      $url2 = dirname(dirname(dirname(dirname(dirname(__DIR__)))))  .'/perdidos/'.$archivo2;
+      $url2 = ABSPATH  .'/perdidos/'.$archivo2;
       $nom = new TextRun();
       $nom->addText($nombre);
       $ciudad = new TextRun();
@@ -337,5 +343,70 @@ function Call_print_certificate(){
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
     }   
+  wp_die();
+}
+
+function Call_print_diploma()
+{
+  require ABSPATH . '/wp-load.php';
+  require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
+  require_once dirname(__DIR__) . '/modelos/ModeloDiplomas.php';
+  unset($_POST['action']);
+  $modelo = new ModeloDiplomas();
+  print_r($_POST['id']);
+  $datos = $modelo->datas_for_diploma($_POST['id']);
+  $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
+  
+  $fuente = [
+    "name" => "Edwardian Script ITC",
+    "size" => 47,
+    "align"=>'center',
+    "bold" => true,
+  ];
+
+
+  $fuente2 = [
+    "name" => "Tahoma",
+    "size" => 26,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  
+
+  $fuente3 = [
+    "name" => "Times New Roma",
+    "size" => 16,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  if($datos[0]['Porcentaje'] > 69.9)
+  {
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Diplomado.docx');
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
+      $url = ABSPATH  .'/diplomas/'.$archivo;
+      $nom = new TextRun();
+      $nom->addText($nombre,$fuente);
+      $programa = new TextRun();
+      $programa->addText("\t\t".$datos[0]['Programa'],$fuente2);
+      $fecha = new TextRun();
+      $fecha->addText($datos[0]['FechaTerminacion'],$fuente3);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('programa', $programa);
+      $templateProcessor->setComplexBlock('fecha', $fecha);
+      $templateProcessor->saveAs($url);
+      $envio = site_url('diplomas/'.$archivo);
+?>
+      <script>
+        window.open(
+        '<?=$envio?>',
+        '_blank'
+        );
+      </script>
+<?php
+      $dato['Enviado'] = 2;
+      $modelo->Id_Update_state($_POST['id-course'] , $dato);
+  }
   wp_die();
 }

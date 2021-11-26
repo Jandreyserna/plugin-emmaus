@@ -108,3 +108,31 @@ function Course_Last_Id()
   $Last_id   = $modelo_cursos->Last_Id_Course();
   return $Last_id[0]['IdMax'];
 }
+
+function all_programs()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $programs   = $modelo_cursos->programs();
+  return $programs;
+}
+
+function all_nevels()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $nevels   = $modelo_cursos->nevels();
+  return $nevels;
+}
+
+function courses_and_nevels()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $courses_nevels   = $modelo_cursos->courses_nevels();
+  return $courses_nevels;
+}
+
+function diplomados_courses()
+{
+  $modelo_cursos= new Modelo_cursos();
+  $diploms   = $modelo_cursos->diplomados();
+  return $diploms ;
+}

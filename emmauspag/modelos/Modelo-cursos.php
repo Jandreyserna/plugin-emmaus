@@ -139,7 +139,9 @@ class Modelo_cursos
   public function courses_done_student($id){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial
+            "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial , 
+                    curso_realizados.`Porcentaje` AS Porcentaje, curso_realizados.`IdCursoRealizado` AS IdCursoRealizado,
+                    curso_realizados.`Enviado` AS Enviado 
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
@@ -163,7 +165,8 @@ class Modelo_cursos
             "SELECT cursos.`Nombre` AS Curso , (SELECT `IdMaterialRel`
             FROM cursos_materiales
             WHERE cursos_materiales.IdCurso = cursos.IdCurso
-            GROUP BY cursos_materiales.IdCurso) AS IdMaterial
+            GROUP BY cursos_materiales.IdCurso) AS IdMaterial, 
+            cursos.`IdCurso` AS IdCurso
             FROM cursos
             ",
            'ARRAY_A'
@@ -188,6 +191,71 @@ class Modelo_cursos
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+  
+  #################################################################
+  ######Obtener todos los programas ####################### #######
+  #################################################################
+
+  public function programs(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `programas` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #################################################################
+  ######Obtener todos los niveles ####################### #######
+  #################################################################
+
+  public function nevels(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `niveles` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #################################################################
+  ######Obtener todos los Diplomados que hay para hacer ###########
+  #################################################################
+
+  public function diplomados(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT cursos.IdCurso AS IdCurso, cursos.Nombre
+              FROM cursos INNER JOIN cursos_niveles INNER JOIN niveles
+              WHERE
+              cursos.IdCurso = cursos_niveles.IdCurso AND
+              cursos_niveles.IdNivel = niveles.IdNivel AND
+              (niveles.IdNivel = 5 OR  niveles.IdNivel = 17 OR  niveles.IdNivel = 25)
+              GROUP BY cursos.IdCurso
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+
+  #################################################################
+  ######Obtener todos los niveles y sus cursos relacionados #######
+  #################################################################
+
+  public function courses_nevels(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT * FROM `cursos_niveles` WHERE 1
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
 
 
   #################################################################
@@ -215,6 +283,24 @@ FROM `curso_realizados` WHERE `Enviado` < 2 AND `Enviado` > 0
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  /*
+      CONSULTAR TODOS LOS CURSOS RECIENTES QUE NO HAYAN SIDO IMPRESOS Y SUS NOTAS SEAN APROBADAS
+  */
+
+  public function Courses_notes_wins(){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT `IdCursoRealizado`,`Porcentaje`,
+            (SELECT `TituloMaterial` FROM materiales WHERE materiales.IdMaterial = curso_realizados.IdMaterial GROUP BY materiales.`IdMaterial`) AS Material,
+            (SELECT `Nombres` FROM estudiantes WHERE estudiantes.IdEstudiante = curso_realizados.IdEstudiante) AS Nombre,
+            (SELECT `Apellidos` FROM estudiantes WHERE estudiantes.IdEstudiante = curso_realizados.IdEstudiante ) AS Apellido
+            FROM `curso_realizados` WHERE `Enviado` = 1 AND `Porcentaje` > 69;
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+  
   #################################################################
   ######Obtener todos los id de cursos para actualizar ############
   #################################################################
@@ -497,6 +583,19 @@ public function Courses_Update_state($id,$datos){
     $this->wpdb->update(
       $tabla, # TABLA
       $datos, # DATOS
+      array('IdCursoRealizado' => $id)
+    );
+}
+
+#############################################################################
+##### Eliminar un curso registrado a un estudiante ##########################
+#############################################################################
+
+public function delete_course_register($id){
+  $tabla = 'curso_realizados';
+  $this->wpdb->show_errors(false);
+    $this->wpdb->delete(
+      $tabla, # TABLA
       array('IdCursoRealizado' => $id)
     );
 }
