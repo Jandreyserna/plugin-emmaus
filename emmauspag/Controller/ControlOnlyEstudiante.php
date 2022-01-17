@@ -10,7 +10,6 @@ function Information_One_Student($id)
   // echo"</pre>";
 
   unset($info_estudiante[0]['IdEstudiante'] );
-  unset($info_estudiante[0]['IdContacto'] );
 
   return $info_estudiante ;
 }
@@ -27,6 +26,7 @@ function Information_One_Student_First($id)
   $principal['Documento'] = $info_estudiante[0]['DocIdentidad'];
   $principal['Nombres']   = $info_estudiante[0]['Nombres'];
   $principal['Apellidos'] = $info_estudiante[0]['Apellidos'];
+  $principal['IdPromotor'] = $info_estudiante[0]['IdContacto'];
 
   return $principal;
 
@@ -135,4 +135,25 @@ function diplomados_courses()
   $modelo_cursos= new Modelo_cursos();
   $diploms   = $modelo_cursos->diplomados();
   return $diploms ;
+}
+
+#########################################################################
+###### Funcion que llama al modelo de cursos y extrae los promotores ####
+#########################################################################
+
+function promotores(){
+  $modelo_cursos = new Modelo_cursos();
+  $promotores = $modelo_cursos->traer_promotores();
+  return $promotores;
+}
+
+
+#######################################################################################
+###### Funcion que llama al modelo de cursos y extrae el promotor de un estudiante ####
+#######################################################################################
+
+function promotor($id){
+  $modelo_cursos = new Modelo_cursos();
+  $promotor = $modelo_cursos->traer_un_promotor($id);
+  return $promotor;
 }

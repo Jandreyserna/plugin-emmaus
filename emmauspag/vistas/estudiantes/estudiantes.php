@@ -20,6 +20,8 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $niveles = all_nevels();
   $cursos_niveles = courses_and_nevels();
   $diplomados = diplomados_courses();
+  $promotores = promotores();
+  $promotor_actual = promotor($info_estudiante[0]['IdContacto']);
 ?>
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
@@ -131,24 +133,34 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
         <form action="" method="post">
           <input name="activo" type="hidden" value="Update-students" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
-          <?php
+<?php
           foreach ($info_estudiante[0] as $camp => $infor):
             if ($camp != 'FechaSolicitud'):              
-            ?>
+?>
               <div class="form-row">
-            <?php
+<?php
               if($camp == 'FechaNacimiento'){
-            ?>
+?>
                 <label for="campo1"><?=$camp?></label>
                 <input name="<?=$camp?>" type="date" value="<?=$infor?>" >
-            <?php
+<?php
               }else if ($camp == 'Telefono' || $camp == 'Celular' ){
-            ?>
+?>
                 <label for="campo1"><?=$camp?></label>
                 <input name="<?=$camp?>" type="number" value="<?=$infor?>" >
-            <?php
+<?php
+              }else if ($camp == 'IdContacto'){
+?>
+                <label for="campo-promotor">Promotores</label>
+                <select class="" name="IdContacto" required>
+                  <option value="<?=$promotor_actual[0]['IdContacto']?>" disabled selected><?=$promotor_actual[0]['Nombre']?></option>
+<?php              foreach ($promotores as $columnas=> $valor): ?>
+                    <option value="<?=$valor['IdContacto']?>"><?=$valor['Nombre']?></option>
+<?php              endforeach; ?>
+                </select>
+<?php
               }else{
-            ?>
+?>
               <label for="campo1"><?=$camp?></label>
               <input name="<?=$camp?>" type="text" value="<?=$infor?>" >
             <?php

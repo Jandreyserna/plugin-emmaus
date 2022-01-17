@@ -75,7 +75,8 @@ class Modelo_estudiantes
   ########## Traer informacion bde un estudiante ############
   ###########################################################
 
-  public function informacion_estudiante($id){
+  public function informacion_estudiante($id)
+  {
     $informacion = $this->wpdb->get_results(
       "SELECT *
       FROM `estudiantes`
@@ -86,4 +87,35 @@ class Modelo_estudiantes
     return (isset($informacion[0])) ? $informacion : null;
 
   }
+
+  public function informacion_estudiantes()
+  {
+    $informacion = $this->wpdb->get_results(
+      "SELECT *
+      FROM `mytable`
+      WHERE 1
+      ",
+       'ARRAY_A'
+     );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
+##################################################################
+### funcion para traer el id del ultimo estudiante ###############
+##################################################################
+
+public function last_id()
+{
+  $informacion = $this->wpdb->get_results(
+    "SELECT MAX(IdEstudiante) AS IdEstudiante
+     FROM `estudiantes` 
+     WHERE 1
+    ",
+     'ARRAY_A'
+   );
+  return (isset($informacion[0])) ? $informacion : null;
+
+}
+
 }

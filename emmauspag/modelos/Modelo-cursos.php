@@ -486,6 +486,38 @@ public function table_done_courses(){
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+  #=============================================================
+  #===TRAER TODOS LOS NOMBRES Y EL ID DE PROMOTOR===============
+  #===y traer la iglesia a la que esta asociado ese promotor====
+  #=============================================================
+
+  public function traer_promotores(){
+    $informacion = $this->wpdb->get_results(
+          "SELECT promotores.`IdContacto`,promotores.`Nombre`, promotores.`Ciudad`
+          FROM `promotores`
+          GROUP BY promotores.`IdContacto`
+          ORDER BY promotores.`Ciudad`
+          
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion)) ? $informacion : null;
+  }
+
+  ###########################################################
+  ######### trael el nomre de un promotor ###################
+  ###########################################################
+  public function traer_un_promotor($id){
+    $informacion = $this->wpdb->get_results(
+          "SELECT promotores.`Nombre`
+          FROM `promotores`
+          WHERE promotores.`IdContacto` = $id
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
 
 
   ####################################################
