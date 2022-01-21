@@ -56,12 +56,27 @@ function Information_One_Student_Secund($id)
 
 }
 
-function Last_course_Of_Student($id)
+/*
+funcion para traer la informacion de el ultimo curso realizado por un estudiante 
+*/
+function Last_course_Of_Student($id, $id_curso)
 {
   $modelo_cursos                    = new Modelo_cursos();
-  $ultimo_curso                     = $modelo_cursos->last_course_student($id);
+  $ultimo_curso                     = $modelo_cursos->last_course_student($id, $id_curso);
 
   return $ultimo_curso;
+}
+
+/*
+funcion para traer el ID del ultimo curso hecho por un estudiante 
+*/
+
+function Last_course_Of_Student_register($id)
+{
+  $modelo_cursos                    = new Modelo_cursos();
+  $ultimo_curso                     = $modelo_cursos->last_course_student_register($id);
+
+  return $ultimo_curso[0];
 }
 
 function Column_Course_Done()

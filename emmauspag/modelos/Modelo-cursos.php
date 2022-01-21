@@ -117,15 +117,33 @@ class Modelo_cursos
   ######Obtener el ultimo curso registrado de un estudiante #######
   #################################################################
 
-  public function last_course_student($id){
+  public function last_course_student($id, $id_last_course){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT materiales.`TituloMaterial`, MAX(curso_realizados.`FechaTerminacion`) AS Fecha,
-		          curso_realizados.`Porcentaje`
-	             FROM curso_realizados INNER JOIN materiales
-               WHERE `IdEstudiante` = $id AND
-               (curso_realizados.`IdMaterial` = materiales.`IdMaterial` OR
-                 curso_realizados.`IdMaterial` = materiales.`Short`)
+            "SELECT 
+            materiales.`TituloMaterial`, MAX(curso_realizados.`FechaTerminacion`) AS Fecha,
+            curso_realizados.`Porcentaje` 
+            FROM curso_realizados INNER JOIN materiales
+            WHERE `IdEstudiante` = $id AND 
+            curso_realizados.IdCursoRealizado = $id_last_course AND
+            (curso_realizados.`IdMaterial` = materiales.`IdMaterial` OR
+            curso_realizados.`IdMaterial` = materiales.`Short`)
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+    #################################################################
+  ######Obtener el Id de ultimo curso registrado de un estudiante #######
+  #################################################################
+
+  public function last_course_student_register($id){
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+            "SELECT MAX(curso_realizados.IdCursoRealizado)  AS ultimo
+            FROM curso_realizados 
+            WHERE curso_realizados.IdEstudiante = $id
             ",
            'ARRAY_A'
          );

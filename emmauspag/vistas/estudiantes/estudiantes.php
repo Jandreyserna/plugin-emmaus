@@ -9,7 +9,8 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $principal =  Information_One_Student_First($id);
   $secundario = Information_One_Student_Secund($id);
   $info_estudiante = Information_One_Student($id);
-  $ultimo_curso = Last_course_Of_Student($id);
+  $id_ultimo_curso =  Last_course_Of_Student_register($id);
+  $ultimo_curso = Last_course_Of_Student($id, $id_ultimo_curso['ultimo']);
   $columnas_curso_realizados = Column_Course_Done();
   $materiales = Materials();
   $cursos_hechos = courses_done($id);
