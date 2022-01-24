@@ -39,3 +39,14 @@ function funtion_delete_course($id){
   $modelo = new Modelo_cursos();
   $modelo->delete_course_register($id);
 }
+
+#########################################################
+##### funcion que retorna el ultimo id de estudiantes ###
+#########################################################
+
+function ultimo_id(){
+
+  $modelo = new Modelo_estudiantes();
+  $id = $modelo-> last_id();
+  return $id[0]['IdEstudiante'];
+}

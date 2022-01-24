@@ -2,6 +2,7 @@
 
 use PhpOffice\PhpWord\Element\TextRun;
 
+$modelo = new Modelo_estudiantes();
 if(!empty($_POST['activo'])){
   switch ($_POST['activo']) {
     case 'nuevo-estudiante': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
@@ -11,8 +12,17 @@ if(!empty($_POST['activo'])){
           $_POST[$campo] = 	strtoupper($_POST[$campo]);
         }
         $_POST['FechaSolicitud'] = date("Y-m-d");
+        $ultimoId = ultimo_id();
+        $ultimoId = $ultimoId + 1;
+        $_POST['IdEstudiante'] = $ultimoId;
         insert_funtion('estudiantes', $_POST);
+?>
+        <div class="alert alert-success" role="alert">
+            Se añadio un nuevo estudiante
+        </div>
+<?php
         break;
+
     case 'nuevo-curso': // accion activada por el boton de añadir un nuevo curso de la subpage estudiante
         unset($_POST['activo']);
         if($_POST['Porcentaje'] != 0)
@@ -23,7 +33,13 @@ if(!empty($_POST['activo'])){
           }
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('curso_realizados', $_POST);
+?>
+        <div class="alert alert-success" role="alert">
+            Se añadio un nuevo Curso
+        </div>
+<?php
         break;
+
     case 'Update-students': // accion activada por el boton de actualizar estudiante de la subpage estudiante
         unset($_POST['activo']);
         foreach($_POST as $campo => $valor) // convierto todas las minusculas a mayusculas
@@ -33,7 +49,14 @@ if(!empty($_POST['activo'])){
         $id_student = $_POST['IdEstudiante'];
         unset($_POST['IdEstudiante']);
         update_funtion($_POST, $id_student);
+?>
+
+        <div class="alert alert-success" role="alert">
+          Se actualizo la información del estudiante
+        </div>
+<?php
         break;
+
     case 'Actualizar-nota-unica': // accion activada por el boton de actualizar nota curso de la subpage estudiante
         unset($_POST['activo']);
         if($_POST['Porcentaje'] != 0)
@@ -46,17 +69,34 @@ if(!empty($_POST['activo'])){
         unset($_POST['IdCursoRealizado']);
         $_POST['FechaTerminacion'] = date("Y-m-d");
         update_course($_POST,$id);
-
+?>
+        <div class="alert alert-success" role="alert">
+          Se actualizo la nota
+        </div>
+<?php
         break;
+
     case 'eliminar-curso': // accion activada por el boton de eliminar curso de la subpage estudiante
         unset($_POST['activo']);
         funtion_delete_course($_POST['IdCursoRealizado']);
+?>
+        <div class="alert alert-success" role="alert">
+          se ha eliminado un curso de un estudiante
+        </div>
+<?php
         break;
+
     case 'insertar-diploma': // accion activada por el boton de añadir Diplomado de la subpage estudiante
         unset($_POST['activo']);
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('diplomas', $_POST);
+?>
+        <div class="alert alert-success" role="alert">
+          Se añadio un diplomado a un estudiante
+        </div>
+<?php
         break;
+
     case 'elecion-diploma': // accion activada por el boton de imprimir elección Diplomado de la subpage estudiante
           $fuente = [
             "name" => "Arial",
@@ -89,6 +129,9 @@ if(!empty($_POST['activo'])){
             '_blank'
             );
           </script>
+          <div class="alert alert-success" role="alert">
+            Documento descargado
+          </div>
 <?php
         break;
   }

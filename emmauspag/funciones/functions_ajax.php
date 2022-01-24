@@ -260,7 +260,7 @@ function Call_modal_notes(){
 }
 
 ##########################################################################################
-#########Funcion que descarga el documento de word···················#####################
+#########Funcion que descarga el documento de word   de cursos ganados o perdidos ########
 ##########################################################################################
 
 function Call_print_certificate(){
@@ -348,6 +348,96 @@ function Call_print_certificate(){
 
 function Call_print_diploma()
 {
+  require ABSPATH . '/wp-load.php';
+  require_once dirname(dirname(__DIR__)). '/phpWord/bootstrap.php';
+  require_once dirname(__DIR__) . '/modelos/ModeloDiplomas.php';
+  unset($_POST['action']);
+  $modelo = new ModeloDiplomas();
+  print_r($_POST['id']);
+  $datos = $modelo->datas_for_diploma($_POST['id']);
+  $nombre = $datos[0]['Nombres']." ".$datos[0]['Apellidos'];
+  
+  $fuente = [
+    "name" => "Edwardian Script ITC",
+    "size" => 47,
+    "align"=>'center',
+    "bold" => true,
+  ];
 
+
+  $fuente2 = [
+    "name" => "Tahoma",
+    "size" => 26,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  
+
+  $fuente3 = [
+    "name" => "Times New Roma",
+    "size" => 16,
+    "align"=>'center',
+    "bold" => true,
+  ];
+  if($datos[0]['Porcentaje'] > 69.9)
+  {
+      $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Diplomado.docx');
+      $estudiante = explode(' ',$nombre);
+      $estudiante = implode($estudiante);
+      $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
+      $url = ABSPATH  .'/diplomas/'.$archivo;
+      $nom = new TextRun();
+      $nom->addText($nombre,$fuente);
+      $programa = new TextRun();
+      $programa->addText("\t\t".$datos[0]['Programa'],$fuente2);
+      $fecha = new TextRun();
+      $fecha->addText($datos[0]['FechaTerminacion'],$fuente3);
+      $templateProcessor->setComplexBlock('nombre', $nom);
+      $templateProcessor->setComplexBlock('programa', $programa);
+      $templateProcessor->setComplexBlock('fecha', $fecha);
+      $templateProcessor->saveAs($url);
+      $envio = site_url('diplomas/'.$archivo);
+?>
+      <script>
+        window.open(
+        '<?=$envio?>',
+        '_blank'
+        );
+      </script>
+<?php
+      $dato['Enviado'] = 2;
+      $modelo->Id_Update_state($_POST['id-course'] , $dato);
+  }
+  wp_die();
+}
+
+
+##########################################################################################
+#########Funcion que llama a el modal de la vista inventarios#####################
+##########################################################################################
+
+function inventarios_modal(){
+  unset($_POST['action']);
+
+  print_r($_POST);
+  ?>
+  <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    <form action="" method="post">
+        <input type="hidden" name="IdMaterial" value="">
+        <label for="camp">cantidad</label>
+        <input type="number" name="inventario" value="0" >
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+  </div>
+<?php
   wp_die();
 }

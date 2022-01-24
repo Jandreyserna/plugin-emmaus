@@ -55,6 +55,7 @@ jQuery(document).ready(function ($) {
 		},
 		success: function(result){
 			jQuery('.contenedor-estudiantes').html(result);
+			
 		}
 		});
 });
@@ -405,12 +406,51 @@ $("#table-diplomas").on("click", "#print-note", function(){
 		type: "post",
 		data: {
 			'action' : "event-list-diploma-imprimir",
-			'id-course' : id
+			'id' : id
 		},
 		success: function(result){
 		jQuery('.result').html(result);
 		}
 	});
 });
+
+//-----------------------------------------------------//
+//____TABLA DE INVENTARIO EN LA VISTA DE INVENTARIOS___//
+//-----------------------------------------------------//
+
+	$('#table-inventario').DataTable({
+		language: {
+		url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/inventario_render.php',
+			dataSrc:""
+		},
+		columns:[
+			{data: "TituloMaterial"},
+			{data: "stock"},
+			{"defaultContent": "<button id='modalstock' data-bs-toggle='modal' data-bs-target='#modal-stock' type='button' class='form btn btn-primary btn-xs '> <span class='dashicons dashicons-insert'></span> </button>"}
+		],
+		order: [[0, "desc"]]
+	});
+
+	$("#table-inventario").on("click", "#modalstock", function(){
+
+		var padre = $(this).closest("tr");
+		var id = $('.sorting_1', padre).text();
+		console.log(id);
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'action' : "event-list-inventario",
+				'id' : id
+			},
+			success: function(result){
+			jQuery('.modal-content').html(result);
+			}
+		});
+	});
+
 
 });

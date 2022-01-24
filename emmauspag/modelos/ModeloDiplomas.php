@@ -42,4 +42,36 @@ class ModeloDiplomas
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+  function datas_for_diploma($id)
+  {
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+          "SELECT 
+          (SELECT `Nombres` FROM estudiantes WHERE estudiantes.IdEstudiante = diplomas.IdEstudiante) AS Nombres,
+            (SELECT `Apellidos` FROM estudiantes WHERE estudiantes.IdEstudiante = diplomas.IdEstudiante) AS Apellidos,
+            (SELECT `Nombre` FROM programas WHERE programas.IdPrograma = diplomas.IdPrograma) AS Programa,
+            `FechaTerminacion`,
+            `Porcentaje`
+        FROM `diplomas` WHERE `IdDiploma` = $id
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  #############################################################
+  ######ACTUALIZAR Estado del diploma#####################
+  #############################################################
+
+
+  public function Id_Update_state($id , $datos ){
+    $tabla = 'diplomas';
+    $this->wpdb->show_errors(false);
+      $this->wpdb->update(
+        $tabla, # TABLA
+        $datos, # DATOS
+        array('IdCursoRealizado' => $id)
+      );
+  }
 }

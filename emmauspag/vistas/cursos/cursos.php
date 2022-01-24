@@ -20,12 +20,21 @@ if (!empty($_POST['nuevo-curso'])){
   $Dato3 ['IdNivel'] = $_POST['IdNivel'];
   $modelo_curso->insertar_curso_material($Dato2);
   $modelo_curso->insertar_curso_nivel($Dato3);
-
+?>
+  <div class="alert alert-success" role="alert">
+    nuevo curso registrado
+  </div>
+<?php
 }else if (!empty($_POST['nuevo-material'])){
   unset($_POST['nuevo-material']);
   $id = $modelo_curso->last_material();
   $_POST['IdMaterial'] = $id[0]['id'] + 1;
   $modelo_curso->insertar_material($_POST);
+  ?>
+  <div class="alert alert-success" role="alert">
+    nuevo material registrado
+  </div>
+<?php
 }
  ?>
  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadircurso">

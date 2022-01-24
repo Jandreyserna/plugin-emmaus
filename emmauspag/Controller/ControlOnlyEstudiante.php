@@ -10,7 +10,6 @@ function Information_One_Student($id)
   // echo"</pre>";
 
   unset($info_estudiante[0]['IdEstudiante'] );
-  unset($info_estudiante[0]['IdContacto'] );
 
   return $info_estudiante ;
 }
@@ -27,6 +26,7 @@ function Information_One_Student_First($id)
   $principal['Documento'] = $info_estudiante[0]['DocIdentidad'];
   $principal['Nombres']   = $info_estudiante[0]['Nombres'];
   $principal['Apellidos'] = $info_estudiante[0]['Apellidos'];
+  $principal['IdPromotor'] = $info_estudiante[0]['IdContacto'];
 
   return $principal;
 
@@ -56,12 +56,27 @@ function Information_One_Student_Secund($id)
 
 }
 
-function Last_course_Of_Student($id)
+/*
+funcion para traer la informacion de el ultimo curso realizado por un estudiante 
+*/
+function Last_course_Of_Student($id, $id_curso)
 {
   $modelo_cursos                    = new Modelo_cursos();
-  $ultimo_curso                     = $modelo_cursos->last_course_student($id);
+  $ultimo_curso                     = $modelo_cursos->last_course_student($id, $id_curso);
 
   return $ultimo_curso;
+}
+
+/*
+funcion para traer el ID del ultimo curso hecho por un estudiante 
+*/
+
+function Last_course_Of_Student_register($id)
+{
+  $modelo_cursos                    = new Modelo_cursos();
+  $ultimo_curso                     = $modelo_cursos->last_course_student_register($id);
+
+  return $ultimo_curso[0];
 }
 
 function Column_Course_Done()
@@ -135,4 +150,25 @@ function diplomados_courses()
   $modelo_cursos= new Modelo_cursos();
   $diploms   = $modelo_cursos->diplomados();
   return $diploms ;
+}
+
+#########################################################################
+###### Funcion que llama al modelo de cursos y extrae los promotores ####
+#########################################################################
+
+function promotores(){
+  $modelo_cursos = new Modelo_cursos();
+  $promotores = $modelo_cursos->traer_promotores();
+  return $promotores;
+}
+
+
+#######################################################################################
+###### Funcion que llama al modelo de cursos y extrae el promotor de un estudiante ####
+#######################################################################################
+
+function promotor($id){
+  $modelo_cursos = new Modelo_cursos();
+  $promotor = $modelo_cursos->traer_un_promotor($id);
+  return $promotor;
 }

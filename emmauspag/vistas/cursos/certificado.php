@@ -17,13 +17,25 @@ if(!empty($_POST['activo']))
           }
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('curso_realizados', $_POST);
+?>
+        <script>
+          alert(" Se registro un nuevo curso ");
+        </script>
+<?php
         break;
+
     case 'Update-students':
         unset($_POST['activo']);
         $id_student = $_POST['IdEstudiante'];
         unset($_POST['IdEstudiante']);
         update_funtion($_POST, $id_student);
+?>
+        <script>
+          alert(" Se actualizo un estudiante ");
+        </script>
+<?php
         break;
+
     case 'Actualizar-nota-unica':
         unset($_POST['activo']);
         if($_POST['Porcentaje'] != 0)
@@ -36,17 +48,34 @@ if(!empty($_POST['activo']))
         unset($_POST['IdCursoRealizado']);
         $_POST['FechaTerminacion'] = date("Y-m-d");
         update_course($_POST,$id);
-
+?>
+        <script>
+          alert(" Se actualizo la nota ");
+        </script>
+<?php
         break;
+
     case 'eliminar-curso':
         unset($_POST['activo']);
         funtion_delete_course($_POST['IdCursoRealizado']);
+?>
+        <script>
+          alert(" Se elimino un curso de un estudiante ");
+        </script>
+<?php
         break;
+
     case 'insertar-diploma':
         unset($_POST['activo']);
         $_POST['FechaTerminacion'] = date("Y-m-d");
         insert_funtion('diplomas', $_POST);
+?>
+        <script>
+          alert(" diplomado registrado ");
+        </script>
+<?php
         break;
+
     case 'elecion-diploma': // accion activada por el boton de imprimir elección Diplomado de la subpage estudiante
           $fuente = [
             "name" => "Arial",

@@ -137,6 +137,15 @@ class PrimaryClass
           'dashicons-schedule',
           3
         );
+        add_menu_page(
+          'Inventario',
+          'Inventario',
+          'inventario',
+          'inventarios',
+          [$this, 'stock_admin' ],
+          'dashicons-editor-paste-word',
+          6
+        );
     }
 
     /**
@@ -156,12 +165,17 @@ class PrimaryClass
     
     public function estudent_admin()
     {
+      if(!file_exists(ABSPATH.'diplomas'))
+      {
+        mkdir(ABSPATH.'diplomas', 0775);
+      }
       require_once dirname(__FILE__) . '/phpWord/bootstrap.php';
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
     }
     public function see_students_admin()
     {
+      
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
     }
@@ -213,9 +227,15 @@ class PrimaryClass
         mkdir(ABSPATH.'perdidos', 0775);
         mkdir(ABSPATH.'diplomas', 0775);
 
-      } 
+      }
+
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
+    }
+
+    public function stock_admin()
+    {
+      require_once dirname(__FILE__). '/emmauspag/vistas/inventario.php';
     }
 
 
@@ -229,9 +249,9 @@ class PrimaryClass
     {
         $option = get_role('adminEmmaus');
 
-        echo "<pre>ADMIN EMAUS";
+        /* echo "<pre>ADMIN EMAUS";
         print_r( $option );
-        echo "</pre>";
+        echo "</pre>"; */
         
         $role = get_role('administrator');
         if (empty($option))
@@ -248,6 +268,7 @@ class PrimaryClass
               'calificaciones' => 1,       
               'materiales' => 1,
               'rectificados' => 1,
+              'inventario' =>1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value)
