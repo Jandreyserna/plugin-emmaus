@@ -55,7 +55,26 @@ jQuery(document).ready(function ($) {
 		},
 		success: function(result){
 			jQuery('.contenedor-estudiantes').html(result);
-			
+			$(".formm").on("click", "#formulario", function(){
+				console.log('hello');
+				/* $( "#formulario" ).before( "<input name='activo' type='hidden' value='nuevo-curso' >" );
+				$( "#formulario" ).before( "<input name='IdEstudiante' type='hidden' value='<?=$id?>' >" );
+				$( "#formulario" ).before( "<select class='id_material' name='IdMaterial' required> " );
+				$( "#formulario" ).before( "<option value='' disabled selected>Material</option> " );
+				$( "#formulario" ).before( "<?php foreach ($materiales as $col=> $valor): ?> " );
+				$( "#formulario" ).before( "<option value='<?=$valor['IdMaterial']?>'><?=$valor['TituloMaterial']?></option> " );
+				$( "#formulario" ).before( "<?php endforeach; ?>" );
+				$( "#formulario" ).before( "</select>" );
+
+				$( "#formulario" ).before( "<div class='' style='display-inline'>" );
+				$( "#formulario" ).before( "<label for='campo2'>NOTA :</label>" );
+				$( "#formulario" ).before( "<input name='Porcentaje' type='text' value='0' >" );
+				$( "#formulario" ).before( "</div>" );
+				$( "#formulario" ).before( "<div class='modal-footer'>" );
+				$( "#formulario" ).before( "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>" );
+				$( "#formulario" ).before( "<button type='submit' class='btn btn-primary'>Añadir</button>" ); */
+				/* $( "<input name='activo' type='hidden' value='nuevo-curso' >" ).appendTo( ".formm" ); */
+			});		
 		}
 		});
 });
@@ -427,14 +446,15 @@ $("#table-diplomas").on("click", "#print-note", function(){
 			dataSrc:""
 		},
 		columns:[
+			{data: "IdMaterial"},
 			{data: "TituloMaterial"},
 			{data: "stock"},
-			{"defaultContent": "<button id='modalstock' data-bs-toggle='modal' data-bs-target='#modal-stock' type='button' class='form btn btn-primary btn-xs '> <span class='dashicons dashicons-insert'></span> </button>"}
+			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '> + </button>"}
 		],
 		order: [[0, "desc"]]
 	});
 
-	$("#table-inventario").on("click", "#modalstock", function(){
+	$("#table-inventario").on("click", "#modal-stock", function(){
 
 		var padre = $(this).closest("tr");
 		var id = $('.sorting_1', padre).text();
@@ -448,9 +468,15 @@ $("#table-diplomas").on("click", "#print-note", function(){
 			},
 			success: function(result){
 			jQuery('.modal-content').html(result);
+			/* $( "formm" ).delegate( "#formulario", "click", function() {
+				alert( $( this ).text() ); 
+			  }); */
+			
 			}
 		});
 	});
+
+	
 
 
 });

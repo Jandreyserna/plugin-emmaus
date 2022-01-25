@@ -5,19 +5,21 @@
     <h1>Inventario</h1>
 </div>
 
-<table  class=" table table-bordered  display nowrap" cellspacing="0" width="100%" id="table-inventario">
+<table  class=" display" id="table-inventario">
     <thead>
+        <th>id</th>
         <th>Titulo Material</th>
         <th>Cantidad</th>
-        <th>acciones</th>
+        <th></th>
     </thead>
 </table>
 
+<div class="hola"></div>
 <!-- Modal -->
-<div class="modal fade" id="modal-stock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog"  role="document">
-    <div class="modal-content">
-      
+<div class="modal fade" id="modalStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+      </div>
     </div>
   </div>
-</div>

@@ -191,7 +191,7 @@ if(!empty($_POST['activo'])){
             <select class="id_promotor" name="IdContacto" required>
               <option value="" disabled selected>Escoger promotor</option>
               <?php foreach ($promotores as $col=> $valor): ?>
-                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>)</option>
+                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>) - (<?= $valor['IdContacto']?>)</option>
               <?php endforeach; ?>
             </select>
             <?php

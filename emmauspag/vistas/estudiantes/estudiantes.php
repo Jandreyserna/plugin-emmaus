@@ -2,7 +2,8 @@
 
 require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
-
+require_once dirname(dirname(dirname(__FILE__))) . '/funciones/functions.php';
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/wp-load.php';
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
 
@@ -23,7 +24,10 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $diplomados = diplomados_courses();
   $promotores = promotores();
   $promotor_actual = promotor($info_estudiante[0]['IdContacto']);
+
+
 ?>
+
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>Más sobre el estudiante</h1>
@@ -95,7 +99,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form class = "formm" action="" method="post">
           <input name="activo" type="hidden" value="nuevo-curso" >
           <input name="IdCursoRealizado" type="hidden" value="<?=$ultimo_id?>" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
@@ -112,9 +116,11 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="button" class="btn btn-secondary" id="formulario">+</button>
           </div>
+          <div class="next"></div>
         </form>
-        <button type="submit" class="btn btn-secondary" id="formulario">+</button>
+        
       </div>
     </div>
   </div>
@@ -280,7 +286,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                               {
                                 $bandera = 1;                         
   ?>
-                                <li class="list-win" ><?=$cursos[$z]['Curso'] ?></li>
+                                <li class="list-win" ><?=$cursos[$z]['Curso'] ?> - <?= $cursos_hechos[$w]['Porcentaje']?> ---( <?= $cursos_hechos[$w]['FechaTerminacion']?> ) </li>
   <?php
                               }
                           }

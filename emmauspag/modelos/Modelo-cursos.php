@@ -159,7 +159,7 @@ class Modelo_cursos
     $informacion = $this->wpdb->get_results(
             "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial , 
                     curso_realizados.`Porcentaje` AS Porcentaje, curso_realizados.`IdCursoRealizado` AS IdCursoRealizado,
-                    curso_realizados.`Enviado` AS Enviado 
+                    curso_realizados.`Enviado` AS Enviado, curso_realizados.`FechaTerminacion`
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`

@@ -416,28 +416,28 @@ function Call_print_diploma()
 #########Funcion que llama a el modal de la vista inventarios#####################
 ##########################################################################################
 
-function inventarios_modal(){
+function Inventarios_modal(){
   unset($_POST['action']);
-
-  print_r($_POST);
+  
   ?>
   <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  <div class="modal-body">
-    <form action="" method="post">
-        <input type="hidden" name="IdMaterial" value="">
-        <label for="camp">cantidad</label>
-        <input type="number" name="inventario" value="0" >
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    </form>
-  </div>
+    <?php print_r($_POST); ?>
+          <h5 class="modal-title" id="exampleModalLabel">Calificar Curso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+          <input name="update-nota" type="hidden" value="nuevo" >
+          <input name="IdCursoRealizado" type="hidden" value=<?= $_POST['id-course']?> >
+          <input name="Porcentaje" type="number" value="0" >
+          <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+          </div>
+          </form>
+        </div>
 <?php
   wp_die();
 }
