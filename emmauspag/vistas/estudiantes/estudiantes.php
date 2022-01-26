@@ -103,21 +103,29 @@ require_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/w
           <input name="activo" type="hidden" value="nuevo-curso" >
           <input name="IdCursoRealizado" type="hidden" value="<?=$ultimo_id?>" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
-          <select class="id_material" name="IdMaterial" required>
-              <option value="" disabled selected>Material</option>
-           <?php foreach ($materiales as $col=> $valor): ?>
-              <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
-           <?php endforeach; ?>
-          </select>
-          <div class="" style="display-inline">
-            <label for="campo2">NOTA :</label>
-            <input name="Porcentaje" type="text" value="0" >
+
+          <div class="contenedor-fkm">
+            <select class="id_material" name="curso1[IdMaterial]" required>
+                <option value="" disabled selected>Material</option>
+            <?php foreach ($materiales as $col=> $valor): ?>
+                <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
+            <?php endforeach; ?>
+            </select>
+
+            <div class="" style="display-inline">
+              <label for="curso1[Porcentaje]">NOTA :</label>
+              <input name="curso1[Porcentaje]" type="text" value="0" >
+            </div>
           </div>
+          
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Añadir</button>
             <button type="button" class="btn btn-secondary" id="formulario">+</button>
           </div>
+
           <div class="next"></div>
         </form>
         

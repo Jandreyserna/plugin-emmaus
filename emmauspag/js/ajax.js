@@ -36,9 +36,9 @@ jQuery(document).ready(function ($) {
 			 {"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
 		 ],
 		 order: [[0, "desc"]]
-	 });
+	});
 
-	 $("#tabla1").on("click", "#ruta", function(){
+	$("#tabla1").on("click", "#ruta", function(){
 
 		var padre = $(this).closest("tr");
 		var id = $('.sorting_1', padre).text();
@@ -49,35 +49,32 @@ jQuery(document).ready(function ($) {
 			type: "post",
 			url: ajax_var.url,
 
-		data: {
-			'action'  : "event-vista-student",
-			'id-estudiante' : id
-		},
-		success: function(result){
-			jQuery('.contenedor-estudiantes').html(result);
-			$(".formm").on("click", "#formulario", function(){
-				console.log('hello');
-				/* $( "#formulario" ).before( "<input name='activo' type='hidden' value='nuevo-curso' >" );
-				$( "#formulario" ).before( "<input name='IdEstudiante' type='hidden' value='<?=$id?>' >" );
-				$( "#formulario" ).before( "<select class='id_material' name='IdMaterial' required> " );
-				$( "#formulario" ).before( "<option value='' disabled selected>Material</option> " );
-				$( "#formulario" ).before( "<?php foreach ($materiales as $col=> $valor): ?> " );
-				$( "#formulario" ).before( "<option value='<?=$valor['IdMaterial']?>'><?=$valor['TituloMaterial']?></option> " );
-				$( "#formulario" ).before( "<?php endforeach; ?>" );
-				$( "#formulario" ).before( "</select>" );
+			data: {
+				'action' : "event-vista-student",
+				'id-estudiante' : id
+			},
+			success: function(result){
+				// console.log(result);
+				jQuery('.contenedor-estudiantes').html(result);
 
-				$( "#formulario" ).before( "<div class='' style='display-inline'>" );
-				$( "#formulario" ).before( "<label for='campo2'>NOTA :</label>" );
-				$( "#formulario" ).before( "<input name='Porcentaje' type='text' value='0' >" );
-				$( "#formulario" ).before( "</div>" );
-				$( "#formulario" ).before( "<div class='modal-footer'>" );
-				$( "#formulario" ).before( "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>" );
-				$( "#formulario" ).before( "<button type='submit' class='btn btn-primary'>Añadir</button>" ); */
-				/* $( "<input name='activo' type='hidden' value='nuevo-curso' >" ).appendTo( ".formm" ); */
-			});		
-		}
+				$(".formm").on("click", "#formulario", function(){
+					if ( $('form.formm .contenedor-fkm')[0] ) {
+						const numContainers = $('form.formm .contenedor-fkm').length + 1;
+						let container = $('form.formm .contenedor-fkm').first().html();
+						
+						// Reemplazo de los names de los fields.
+						container = container.replace(/curso1/g, `curso${numContainers}`);
+						container = container.replace(/curso1/g, `curso${numContainers}`);
+		
+						$('form.formm .modal-footer').before('<div class="contenedor-fkm">' + container + '</div>');
+					}
+				});	
+				
+				
+
+			}
 		});
-});
+	});
 
 
 	 
@@ -449,7 +446,7 @@ $("#table-diplomas").on("click", "#print-note", function(){
 			{data: "IdMaterial"},
 			{data: "TituloMaterial"},
 			{data: "stock"},
-			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '> + </button>"}
+			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"}
 		],
 		order: [[0, "desc"]]
 	});

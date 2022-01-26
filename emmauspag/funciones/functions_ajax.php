@@ -213,7 +213,17 @@ function table_student(){
 ####################################################################
 
 function Call_view_students(){
+  // require_once dirname(__DIR__) . '/Controller/ControlOnlyEstudiante.php';
+  // require_once dirname(__DIR__) . '/modelos/Modelo-estudiantes.php';
+
+  // $result['materiales'] = Materials();
+
+  // ob_start();
   require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
+  // $result['html'] = ob_get_clean();
+
+  // echo json_encode($result);
+
   wp_die();
 }
 
