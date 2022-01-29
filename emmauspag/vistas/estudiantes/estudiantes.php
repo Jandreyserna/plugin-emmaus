@@ -309,34 +309,41 @@ require_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/w
                     }
                   }
                 }
+                if($niveles[$y]['IdNivel'] == 5 || $niveles[$y]['IdNivel'] == 25 || $niveles[$y]['IdNivel'] == 17 ) {
+?>
+          
+                  <form action="" method="post">
+                      <input type="hidden" name="activo" value="elecion-diploma">
+                      <input type="hidden" name="IdNivel" value="<?=$niveles[$y]['IdNivel']?>">
+                      <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
+                      <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
+                      <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
+                  </form>
+                  <form action="" method="post">
+                    <input type="hidden" name="activo" value="insertar-diploma">
+                    <input type="hidden" name="IdPrograma" value="<?=$program['IdPrograma']?>">
+                    <input type="hidden" name="IdEstudiante" value="<?=$id?>">
+                    <select class="id_Diploma" name="IdCurso" required>
+                      <option value="" disabled selected>Escoger Diplomado</option>
+<?php           
+                      foreach ($diplomados as $diplomas=> $diploma): 
+                        if ($niveles[$y]['IdNivel'] == $diploma['IdNivel']):
+?>
+                          <option value="<?= $diploma['IdCurso'] ?>"> <?= $diploma['Nombre']?></option>
+<?php
+                        endif;
+                      endforeach;
+?>
+                    </select>
+                    <input type="number" name="Porcentaje" >
+                    <button type="submit" class="btn btn-primary">Registrar Diplomado</button>
+                  </form>
+<?php
               }
             }
-?>
-            <form action="" method="post">
-                <input type="hidden" name="activo" value="elecion-diploma">
-                <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
-                <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
-                <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
-            </form>
-            <form action="" method="post">
-                <input type="hidden" name="activo" value="insertar-diploma">
-                <input type="hidden" name="IdPrograma" value="<?=$program['IdPrograma']?>">
-                <input type="hidden" name="IdEstudiante" value="<?=$id?>">
-                <select class="id_Diploma" name="IdCurso" required>
-                  <option value="" disabled selected>Escoger Diplomado</option>
-<?php           
-                  foreach ($diplomados as $diplomas=> $diploma): 
-?>
-                  <option value="<?= $diploma['IdCurso'] ?>"> <?= $diploma['Nombre']?></option>
-<?php
-                  endforeach;
- ?>
-                </select>
-                <input type="number" name="Porcentaje" >
-                <button type="submit" class="btn btn-primary">Registrar Diplomado</button>
-            </form>
-<?php
           }
+
+        }
 ?>
             </ul>
 <?php

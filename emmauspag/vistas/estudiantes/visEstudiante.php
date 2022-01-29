@@ -107,6 +107,7 @@ if(!empty($_POST['activo'])){
         break;
 
     case 'elecion-diploma': // accion activada por el boton de imprimir elección Diplomado de la subpage estudiante
+          unset($_POST['activo']);
           $fuente = [
             "name" => "Arial",
             "size" => 11,
@@ -117,7 +118,13 @@ if(!empty($_POST['activo'])){
             "size" => 11,
             "bold" => true,
           ];
-          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado.docx');
+          if($_POST['IdNivel'] == 5){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Vida en Libertad.docx'); 
+          }else if($_POST['IdNivel'] == 17){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Camino a Emmaus.docx');   
+          }else {
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Conoce tu Biblia.docx');
+          }
           $archivo = $_POST['Nombre'].' '.'eleccionDiplomado'.'.docx';
           $url = ABSPATH  .'/diplomas/'.$archivo;
           $nom = new TextRun();
