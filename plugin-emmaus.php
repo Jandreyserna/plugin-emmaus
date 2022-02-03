@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-general.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloDiplomas.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloInventario.php';
 
 // IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
@@ -235,6 +236,7 @@ class PrimaryClass
 
     public function stock_admin()
     {
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlInventario.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/inventario.php';
     }
 

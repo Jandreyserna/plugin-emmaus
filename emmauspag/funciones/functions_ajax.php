@@ -423,7 +423,7 @@ function Call_print_diploma()
 
 
 ##########################################################################################
-#########Funcion que llama a el modal de la vista inventarios#####################
+#########Funcion que llama a el modal de la vista inventarios        #####################
 ##########################################################################################
 
 function Inventarios_modal(){
@@ -431,20 +431,20 @@ function Inventarios_modal(){
   
   ?>
   <div class="modal-header">
-    <?php print_r($_POST); ?>
-          <h5 class="modal-title" id="exampleModalLabel">Calificar Curso</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar Inventario</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <form action="" method="post">
-          <input name="update-nota" type="hidden" value="nuevo" >
-          <input name="IdCursoRealizado" type="hidden" value=<?= $_POST['id-course']?> >
-          <input name="Porcentaje" type="number" value="0" >
+          <input name="activo" type="hidden" value="update_stock" >
+          <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
+          <label for="stock">Cantidad</label>
+          <input name="stock" type="number" value="0" >
           <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Añadir</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
           </div>
           </form>
         </div>
