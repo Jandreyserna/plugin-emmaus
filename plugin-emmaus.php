@@ -137,7 +137,7 @@ class PrimaryClass
           'dashicons-schedule',
           3
         );
-        add_menu_page(
+        /* add_menu_page(
           'Inventario',
           'Inventario',
           'inventario',
@@ -145,7 +145,7 @@ class PrimaryClass
           [$this, 'stock_admin' ],
           'dashicons-editor-paste-word',
           6
-        );
+        ); */
     }
 
     /**
