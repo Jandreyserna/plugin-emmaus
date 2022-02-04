@@ -2,8 +2,7 @@
 
 require_once dirname(dirname(dirname(__FILE__))) . '/Controller/ControlOnlyEstudiante.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.php';
-require_once dirname(dirname(dirname(__FILE__))) . '/funciones/functions.php';
-require_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/wp-load.php';
+
   $id = $_POST['id-estudiante'];
   unset($_POST['id-estudiante']);
 
@@ -24,7 +23,6 @@ require_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/w
   $diplomados = diplomados_courses();
   $promotores = promotores();
   $promotor_actual = promotor($info_estudiante[0]['IdContacto']);
-
 
 ?>
 
