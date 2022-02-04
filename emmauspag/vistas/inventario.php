@@ -1,5 +1,14 @@
 <?php
-
+if(!empty($_POST['activo'])){
+    switch($_POST['activo']){
+        case 'update_stock':
+            unset($_POST['activo']);
+            update_stock($_POST);
+        break;
+    }
+    
+}
+    
 ?>
 <div class="titulo text-center">
     <h1>Inventario</h1>
