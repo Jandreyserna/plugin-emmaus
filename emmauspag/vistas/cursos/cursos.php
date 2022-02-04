@@ -24,6 +24,9 @@ if (!empty($_POST['nuevo-curso'])){
   <div class="alert alert-success" role="alert">
     nuevo curso registrado
   </div>
+  <script>
+    location.reload();
+  </script> 
 <?php
 }else if (!empty($_POST['nuevo-material'])){
   unset($_POST['nuevo-material']);
@@ -34,6 +37,9 @@ if (!empty($_POST['nuevo-curso'])){
   <div class="alert alert-success" role="alert">
     nuevo material registrado
   </div>
+  <script>
+    location.reload();
+  </script> 
 <?php
 }
  ?>

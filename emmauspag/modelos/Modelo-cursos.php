@@ -159,7 +159,7 @@ class Modelo_cursos
     $informacion = $this->wpdb->get_results(
             "SELECT cursos.`Nombre`, cursos.`IdCurso`, cursos_materiales.`IdMaterialRel` AS IdMaterial , 
                     curso_realizados.`Porcentaje` AS Porcentaje, curso_realizados.`IdCursoRealizado` AS IdCursoRealizado,
-                    curso_realizados.`Enviado` AS Enviado 
+                    curso_realizados.`Enviado` AS Enviado, curso_realizados.`FechaTerminacion`
 	           FROM cursos INNER JOIN curso_realizados INNER JOIN materiales INNER JOIN cursos_materiales
              WHERE cursos.`IdCurso` = cursos_materiales.`IdCurso`
              AND materiales.`IdMaterial` = cursos_materiales.`IdMaterialRel`
@@ -246,13 +246,12 @@ class Modelo_cursos
   public function diplomados(){
     $this->wpdb->show_errors(false);
     $informacion = $this->wpdb->get_results(
-            "SELECT cursos.IdCurso AS IdCurso, cursos.Nombre
+            "SELECT cursos.IdCurso AS IdCurso, cursos.Nombre, niveles.IdNivel AS IdNivel
               FROM cursos INNER JOIN cursos_niveles INNER JOIN niveles
               WHERE
               cursos.IdCurso = cursos_niveles.IdCurso AND
               cursos_niveles.IdNivel = niveles.IdNivel AND
               (niveles.IdNivel = 5 OR  niveles.IdNivel = 17 OR  niveles.IdNivel = 25)
-              GROUP BY cursos.IdCurso
             ",
            'ARRAY_A'
          );

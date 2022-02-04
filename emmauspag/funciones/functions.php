@@ -148,6 +148,12 @@ add_action('wp_ajax_event-list-doc-imprimir', 'Call_print_certificate');
 add_action('wp_ajax_nopriv_event-list-diploma-imprimir', 'Call_print_diploma');
 add_action('wp_ajax_event-list-diploma-imprimir', 'Call_print_diploma');
 
+# =========================================================================================
+# ========== boton que llama a funcion que abre el modal de inventarios  =====
+# =========================================================================================
+
+add_action('wp_ajax_nopriv_event-list-inventario', 'Inventarios_modal');
+add_action('wp_ajax_event-list-inventario', 'Inventarios_modal');
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 

@@ -23,7 +23,9 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   $diplomados = diplomados_courses();
   $promotores = promotores();
   $promotor_actual = promotor($info_estudiante[0]['IdContacto']);
+
 ?>
+
 <div class="contenedor-estudiantes">
   <div class="titulo text-center">
     <h1>Más sobre el estudiante</h1>
@@ -95,26 +97,36 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form class = "formm" action="" method="post">
           <input name="activo" type="hidden" value="nuevo-curso" >
           <input name="IdCursoRealizado" type="hidden" value="<?=$ultimo_id?>" >
           <input name="IdEstudiante" type="hidden" value="<?=$id?>" >
-          <select class="id_material" name="IdMaterial" required>
-              <option value="" disabled selected>Material</option>
-           <?php foreach ($materiales as $col=> $valor): ?>
-              <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
-           <?php endforeach; ?>
-          </select>
-          <div class="" style="display-inline">
-            <label for="campo2">NOTA :</label>
-            <input name="Porcentaje" type="text" value="0" >
+
+          <div class="contenedor-fkm">
+            <select class="id_material" name="curso1[IdMaterial]" required>
+                <option value="" disabled selected>Material</option>
+            <?php foreach ($materiales as $col=> $valor): ?>
+                <option value="<?=$valor['IdMaterial']?>"><?=$valor['TituloMaterial']?></option>
+            <?php endforeach; ?>
+            </select>
+
+            <div class="" style="display-inline">
+              <label for="curso1[Porcentaje]">NOTA :</label>
+              <input name="curso1[Porcentaje]" type="text" value="0" >
+            </div>
           </div>
+          
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="button" class="btn btn-secondary" id="formulario">+</button>
           </div>
-        </form>
 
+          <div class="next"></div>
+        </form>
+        
       </div>
     </div>
   </div>
@@ -280,7 +292,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                               {
                                 $bandera = 1;                         
   ?>
-                                <li class="list-win" ><?=$cursos[$z]['Curso'] ?></li>
+                                <li class="list-win" ><?=$cursos[$z]['Curso'] ?> - <?= $cursos_hechos[$w]['Porcentaje']?> ---( <?= $cursos_hechos[$w]['FechaTerminacion']?> ) </li>
   <?php
                               }
                           }
@@ -295,34 +307,41 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                     }
                   }
                 }
+                if($niveles[$y]['IdNivel'] == 5 || $niveles[$y]['IdNivel'] == 25 || $niveles[$y]['IdNivel'] == 17 ) {
+?>
+          
+                  <form action="" method="post">
+                      <input type="hidden" name="activo" value="elecion-diploma">
+                      <input type="hidden" name="IdNivel" value="<?=$niveles[$y]['IdNivel']?>">
+                      <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
+                      <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
+                      <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
+                  </form>
+                  <form action="" method="post">
+                    <input type="hidden" name="activo" value="insertar-diploma">
+                    <input type="hidden" name="IdPrograma" value="<?=$program['IdPrograma']?>">
+                    <input type="hidden" name="IdEstudiante" value="<?=$id?>">
+                    <select class="id_Diploma" name="IdCurso" required>
+                      <option value="" disabled selected>Escoger Diplomado</option>
+<?php           
+                      foreach ($diplomados as $diplomas=> $diploma): 
+                        if ($niveles[$y]['IdNivel'] == $diploma['IdNivel']):
+?>
+                          <option value="<?= $diploma['IdCurso'] ?>"> <?= $diploma['Nombre']?></option>
+<?php
+                        endif;
+                      endforeach;
+?>
+                    </select>
+                    <input type="number" name="Porcentaje" >
+                    <button type="submit" class="btn btn-primary">Registrar Diplomado</button>
+                  </form>
+<?php
               }
             }
-?>
-            <form action="" method="post">
-                <input type="hidden" name="activo" value="elecion-diploma">
-                <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
-                <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
-                <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
-            </form>
-            <form action="" method="post">
-                <input type="hidden" name="activo" value="insertar-diploma">
-                <input type="hidden" name="IdPrograma" value="<?=$program['IdPrograma']?>">
-                <input type="hidden" name="IdEstudiante" value="<?=$id?>">
-                <select class="id_Diploma" name="IdCurso" required>
-                  <option value="" disabled selected>Escoger Diplomado</option>
-<?php           
-                  foreach ($diplomados as $diplomas=> $diploma): 
-?>
-                  <option value="<?= $diploma['IdCurso'] ?>"> <?= $diploma['Nombre']?></option>
-<?php
-                  endforeach;
- ?>
-                </select>
-                <input type="number" name="Porcentaje" >
-                <button type="submit" class="btn btn-primary">Registrar Diplomado</button>
-            </form>
-<?php
           }
+
+        }
 ?>
             </ul>
 <?php

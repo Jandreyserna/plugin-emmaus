@@ -213,7 +213,17 @@ function table_student(){
 ####################################################################
 
 function Call_view_students(){
+  // require_once dirname(__DIR__) . '/Controller/ControlOnlyEstudiante.php';
+  // require_once dirname(__DIR__) . '/modelos/Modelo-estudiantes.php';
+
+  // $result['materiales'] = Materials();
+
+  // ob_start();
   require_once dirname(__DIR__) . '/vistas/estudiantes/estudiantes.php';
+  // $result['html'] = ob_get_clean();
+
+  // echo json_encode($result);
+
   wp_die();
 }
 
@@ -408,5 +418,36 @@ function Call_print_diploma()
       $dato['Enviado'] = 2;
       $modelo->Id_Update_state($_POST['id-course'] , $dato);
   }
+  wp_die();
+}
+
+
+##########################################################################################
+#########Funcion que llama a el modal de la vista inventarios        #####################
+##########################################################################################
+
+function Inventarios_modal(){
+  unset($_POST['action']);
+  
+  ?>
+  <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar Inventario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+          <input name="activo" type="hidden" value="update_stock" >
+          <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
+          <label for="stock">Cantidad</label>
+          <input name="stock" type="number" value="0" >
+          <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+          </div>
+          </form>
+        </div>
+<?php
   wp_die();
 }

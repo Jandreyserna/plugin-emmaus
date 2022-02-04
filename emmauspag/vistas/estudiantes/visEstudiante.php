@@ -2,7 +2,6 @@
 
 use PhpOffice\PhpWord\Element\TextRun;
 
-$modelo = new Modelo_estudiantes();
 if(!empty($_POST['activo'])){
   switch ($_POST['activo']) {
     case 'nuevo-estudiante': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
@@ -11,7 +10,7 @@ if(!empty($_POST['activo'])){
         {
           $_POST[$campo] = 	strtoupper($_POST[$campo]);
         }
-        $_POST['FechaSolicitud'] = date("Y-m-d");
+        $_POST ['FechaSolicitud'] = date("Y-m-d");
         $ultimoId = ultimo_id();
         $ultimoId = $ultimoId + 1;
         $_POST['IdEstudiante'] = $ultimoId;
@@ -25,14 +24,24 @@ if(!empty($_POST['activo'])){
 
     case 'nuevo-curso': // accion activada por el boton de añadir un nuevo curso de la subpage estudiante
         unset($_POST['activo']);
-        if($_POST['Porcentaje'] != 0)
+        $datos['IdCursoRealizado'] =  $_POST['IdCursoRealizado'];
+        $datos['IdEstudiante'] = $_POST['IdEstudiante'];
+        unset($_POST['IdCursoRealizado']);
+        unset($_POST['IdEstudiante']);
+        for($i = 1; $i <= sizeof($_POST); $i++ )
+        {
+          $datos['IdMaterial'] = $_POST['curso'.$i]['IdMaterial'];
+          $datos['Porcentaje'] = $_POST['curso'.$i]['Porcentaje'];
+          if($datos['Porcentaje'] != 0)
           {
-            $_POST['Enviado'] = 1;
+            $datos['Enviado'] = 1;
           }else {
-            $_POST['Enviado'] = 0;
+            $datos['Enviado'] = 0;
           }
-        $_POST['FechaTerminacion'] = date("Y-m-d");
-        insert_funtion('curso_realizados', $_POST);
+          $datos['FechaTerminacion'] = date("Y-m-d");
+          insert_funtion('curso_realizados', $datos);
+        }
+        
 ?>
         <div class="alert alert-success" role="alert">
             Se añadio un nuevo Curso
@@ -98,6 +107,7 @@ if(!empty($_POST['activo'])){
         break;
 
     case 'elecion-diploma': // accion activada por el boton de imprimir elección Diplomado de la subpage estudiante
+          unset($_POST['activo']);
           $fuente = [
             "name" => "Arial",
             "size" => 11,
@@ -108,7 +118,13 @@ if(!empty($_POST['activo'])){
             "size" => 11,
             "bold" => true,
           ];
-          $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado.docx');
+          if($_POST['IdNivel'] == 5){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Vida en Libertad.docx'); 
+          }else if($_POST['IdNivel'] == 17){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Camino a Emmaus.docx');   
+          }else {
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(dirname(__DIR__))) . '/plantillasword/Carta elección Diplomado - Programa Conoce tu Biblia.docx');
+          }
           $archivo = $_POST['Nombre'].' '.'eleccionDiplomado'.'.docx';
           $url = ABSPATH  .'/diplomas/'.$archivo;
           $nom = new TextRun();
@@ -191,7 +207,7 @@ if(!empty($_POST['activo'])){
             <select class="id_promotor" name="IdContacto" required>
               <option value="" disabled selected>Escoger promotor</option>
               <?php foreach ($promotores as $col=> $valor): ?>
-                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>)</option>
+                <option value="<?= $valor['IdContacto'] ?>"> <?= $valor['Nombre']?> (<?= $valor['Ciudad']?>) - (<?= $valor['IdContacto']?>)</option>
               <?php endforeach; ?>
             </select>
             <?php
