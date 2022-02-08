@@ -79,7 +79,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
   </div>
 </div>
 <div class="container">
-  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn btn-info">Ver mas...</a>
+  <a  href="#ver_mas_estudiante" data-toggle="collapse" class="btn btn-info">Ver más...</a>
 
   <a href="" class="btn btn-outline-info"> Volver a vista anterior</a>
 </div>
@@ -315,7 +315,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
                       <input type="hidden" name="IdNivel" value="<?=$niveles[$y]['IdNivel']?>">
                       <input type="hidden" name="Nombre" value="<?=$info_estudiante[0]['Nombres']." ".$info_estudiante[0]['Apellidos']?>">
                       <input type="hidden" name="Ciudad" value="<?=$info_estudiante[0]['Ciudad']?>">
-                      <button type="submit" class="btn btn-primary">Implimir formulario de elecion</button>
+                      <button type="submit" class="btn btn-primary">Imprimir formulario de elección</button>
                   </form>
                   <form action="" method="post">
                     <input type="hidden" name="activo" value="insertar-diploma">

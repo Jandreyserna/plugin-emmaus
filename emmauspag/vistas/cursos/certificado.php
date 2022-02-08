@@ -118,7 +118,7 @@ if(!empty($_POST['activo']))
 <div class="container-course">
 
   <div class="titulo text-center">
-    <h1>ADMINISTRACION DE CURSOS</h1>
+    <h1>Administración de cursos</h1>
   </div>
   <div id="boton-calificar">
   <a href="<?= dirname($_SERVER['HTTP_REFERER'])?>/admin.php?page=calificacion"><button type="button" class="btn btn-outline-success">

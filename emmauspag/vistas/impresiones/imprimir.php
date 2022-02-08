@@ -60,12 +60,12 @@ if (!empty($_POST['imprimir-ganados'])){
 }
 ?>
 <div class="titulo text-center">
-<h1>Cursos listos para imprimir</h1>
+<h1>Certificados listos para imprimir</h1>
 </div>
  <!-- Button descargar documento con todos los cursos ganados -->
   <form action="" method="post">
     <input type="hidden" name="imprimir-ganados" value="ganados">
-    <button type="submit" class="btn btn-primary">Imprimir ganados</button>
+    <button type="submit" class="btn btn-primary">Imprimir todos los ganados</button>
   </form>
 
 <table class="display" id="table-print">
