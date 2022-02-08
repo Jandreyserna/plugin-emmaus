@@ -8,14 +8,18 @@
 ?>
 
   <header>
-    <h1 style='text-align: center;'> Sistema de gestion Instituto Emmaus </h/>
+    <h1 style='text-align: center;'> Sistema de gestión Instituto Emmaus </h/>
   </header>
 </div>
-
+<section>
+  <h2>Menu principal</h2>
+</section>
+<br><br>
 <div>
-  <a class="btn btn-primary" href="#" role="button">Link a estudiantes</a>
-  <a class="btn btn-primary" href="#" role="button">Link a imprimir certificados</a>
-  <a class="btn btn-primary" href="#" role="button">Link a certificados</a>
+  <a class="btn btn-primary" href="?page=estudiante" role="button">Estudiantes</a>
+  <a class="btn btn-primary" href="?page=impresiones" role="button">Impresión de certificados</a>
+  <a class="btn btn-primary" href="?page=diploma" role="button">Diplomas</a>
+  <a class="btn btn-primary" href="?page=curso" role="button">Cursos</a>
 </div>
 
 

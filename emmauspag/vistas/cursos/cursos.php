@@ -35,7 +35,7 @@ if (!empty($_POST['nuevo-curso'])){
   $modelo_curso->insertar_material($_POST);
   ?>
   <div class="alert alert-success" role="alert">
-    nuevo material registrado
+    Nuevo material registrado!
   </div>
   <script>
     location.reload();

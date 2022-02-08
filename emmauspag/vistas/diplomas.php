@@ -5,13 +5,13 @@
 <table class="display" id="table-diplomas">
 <thead>
   <tr>
-    <th scope="col">Nro Diploma</th>
-    <th scope="col">Nombre del Diplomado</th>
-    <th scope="col">Programa</th>
-    <th scope="col">Nombre Estudiante</th>
-    <th scope="col">Apellidos Estudiante</th>
+    <th scope="col">Id de diploma</th>
+    <th scope="col">Diplomado</th>
+    <th scope="col">Programa de estudio</th>
+    <th scope="col">Nombre estudiante</th>
+    <th scope="col">Apellidos estudiante</th>
     <th scope="col">Nota</th>
-    <th scope="col">Fecha de Terminacion</th>
+    <th scope="col">Fecha de Terminación</th>
     <th scope="col"></th>
   </tr>
 </thead>
