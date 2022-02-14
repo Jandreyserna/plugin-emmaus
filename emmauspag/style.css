@@ -14,7 +14,7 @@
   display: none;
 }
 
-
+/* General styles */
 :root {
   --main-green:#50a74b;
   --main-blue: #004b7c;
@@ -33,14 +33,29 @@
   border-radius: 2px;
 }
 
+/*principal page styles*/
+.principal{
+  padding: 2vh;
+  border: 1vh;
+}
+
+.title{
+  color: var(--main-blue);
+  width: 100%;
+}
+
+.main-image{
+  height: 400px;
+}
+
 /*Buscador datatable */
 div.dataTables_wrapper div.dataTables_filter input {
   margin-left: 0.5em;
   display: inline;
-  width: 600px;
+  width: 80%;
 }
 
-/*Botones vista estudiantes*/
+/*Botones*/
 .btn-outline-success{
   background-color: var(--light-green);
   color: white;
@@ -50,12 +65,13 @@ div.dataTables_wrapper div.dataTables_filter input {
   background-color: var(--light-green);
 }
 
+.btn-secondary{
+  background-color: var(--main-blue);
+}
+
 .btn-accion{
-  border: 1px solid rgb(92, 92, 92);
-  padding: 2px;
   background-color: rgb(187, 187, 187);
-  color: rgb(0, 0, 0);
-  border-radius: 0.2;
+  border: solid 2px black;
 }
 /* / Botones vista estudiantes*/
 
@@ -68,10 +84,7 @@ a.class_a_href{
   color: white;
 }
 
-div.principal{
-  margin-left:  0px !important;
 
-}
 
 div.lateral{
   display: inline-grid;
@@ -157,12 +170,14 @@ form label{
 estilos de tablas
 */
 table {
+  background-color: var(--light-blue);
   border-radius: 5px;
 }
 
 table thead {
   border: 12px;
-  background-color: #237DD4;
+  background-color:var(--sec-blue);
+  color: #fff;
 }
 
 .dataTables_length select{
