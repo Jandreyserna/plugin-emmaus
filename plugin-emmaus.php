@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: emmaus
-Description: Este plugin sirve para gestionar una base de datos.
-Version: 0.1
-Author: Jandrey Steven Serna & José Mario VAlencia
+Plugin Name: Sistema de Gestion Emmaus
+Description: Plugion diseñado para gestionar la base de datos del instituto Emmaus
+Version: 0.2
+Author: Jandrey Steven Serna & Jose Mario Valencia
 License: private
 */
 
