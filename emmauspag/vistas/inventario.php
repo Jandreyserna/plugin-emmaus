@@ -22,7 +22,8 @@ if(!empty($_POST['activo'])){
                     <th>id</th>
                     <th>Titulo Material</th>
                     <th>Cantidad</th>
-                    <th></th>
+                    <th>actualizar</th>
+                    <th>vender</th>
                 </thead>
             </table>
         </div>
@@ -32,11 +33,25 @@ if(!empty($_POST['activo'])){
     </div>
 </div>
 
+<!-- Modal de ventas -->
+<div class="modal" id="modalStock-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        
+        </div>
+    </div>
+</div>
+
 <!-- Modal -->
-<div class="modal fade" id="modalStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal " id="modalStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         
       </div>
     </div>
   </div>
+
+
+
+
+

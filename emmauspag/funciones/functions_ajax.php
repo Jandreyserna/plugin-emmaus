@@ -423,7 +423,7 @@ function Call_print_diploma()
 
 
 ##########################################################################################
-#########Funcion que llama a el modal de la vista inventarios        #####################
+#########Funcion que llama a el modal de la vista inventarios  para el stock      #####################
 ##########################################################################################
 
 function Inventarios_modal(){
@@ -446,6 +446,35 @@ function Inventarios_modal(){
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
           </div>
+          </form>
+        </div>
+<?php
+  wp_die();
+}
+
+##########################################################################################
+#########Funcion que llama a el modal de la vista inventarios  para las ventas      #####################
+##########################################################################################
+
+function Inventarios_modal_ventas(){
+  unset($_POST['action']);
+  
+  ?>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar a venta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
+            <label for="stock">Cantidad a vender</label>
+            <input name="stock" type="number" value="0" >
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary">Agregar</button>
+            </div>
           </form>
         </div>
 <?php

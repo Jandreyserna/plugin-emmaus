@@ -421,14 +421,15 @@ jQuery(document).ready(function ($) {
 			{data: "IdMaterial"},
 			{data: "TituloMaterial"},
 			{data: "stock"},
-			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"}
+			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"},
+			{"defaultContent": "<button id='modal-ventas' data-toggle='modal' data-target='#modalStock-2' type='button' class='form btn btn-secundary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"}
 		],
 		order: [[0, "desc"]]
 	});
 
 	$("#table-inventario").on("click", "#modal-stock", function(){
 
-		var padre = $(this).closest("tr");
+		var padre = $(this).closest('tr');
 		var id = $('.sorting_1', padre).text();
 		console.log(id);
 		jQuery.ajax({
@@ -436,6 +437,25 @@ jQuery(document).ready(function ($) {
 			type: "post",
 			data: {
 				'action' : "event-list-inventario",
+				'id' : id
+			},
+			success: function(result){
+			jQuery('.modal-content').html(result);
+		
+			}
+		});
+	});
+
+	$("#table-inventario").on("click", "#modal-ventas", function(){
+
+		var padre = $(this).closest('tr');
+		var id = $('.sorting_1', padre).text();
+		
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'action' : "event-list-inventario-ventas",
 				'id' : id
 			},
 			success: function(result){
