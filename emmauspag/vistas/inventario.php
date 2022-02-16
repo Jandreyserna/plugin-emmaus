@@ -27,8 +27,10 @@ if(!empty($_POST['activo'])){
                 </thead>
             </table>
         </div>
-        <div class="col">
-            <p>texto de otra parte</p>
+        <div class="col list-ventas">
+            <ol>
+                
+            </ol>
         </div>
     </div>
 </div>

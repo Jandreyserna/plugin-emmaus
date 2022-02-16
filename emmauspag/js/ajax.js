@@ -422,7 +422,7 @@ jQuery(document).ready(function ($) {
 			{data: "TituloMaterial"},
 			{data: "stock"},
 			{"defaultContent": "<button id='modal-stock' data-toggle='modal' data-target='#modalStock' type='button' class='form btn btn-primary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"},
-			{"defaultContent": "<button id='modal-ventas' data-toggle='modal' data-target='#modalStock-2' type='button' class='form btn btn-secundary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"}
+			{"defaultContent": "<button id='modal-ventas'  type='button' class='form btn btn-secundary btn-xs '><span class='dashicons dashicons-insert'></span> </button>"}
 		],
 		order: [[0, "desc"]]
 	});
@@ -450,19 +450,25 @@ jQuery(document).ready(function ($) {
 
 		var padre = $(this).closest('tr');
 		var id = $('.sorting_1', padre).text();
+		var tab = this.getElementsByTagName("td");
+		var dato = tab.innerHTML;
 		
-		jQuery.ajax({
+		console.log(dato); 
+
+		$('div.list-ventas ol').append('<li>Hola <button class="btn-primary">+</button></li>');
+		
+		/* jQuery.ajax({
 			url: ajax_var.url,
 			type: "post",
 			data: {
 				'action' : "event-list-inventario-ventas",
 				'id' : id
-			},
-			success: function(result){
+			}, */
+			/* success: function(result){
 			jQuery('.modal-content').html(result);
 		
 			}
-		});
+		}); */
 	});
 
 	
