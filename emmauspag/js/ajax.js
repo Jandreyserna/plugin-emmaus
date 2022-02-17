@@ -450,25 +450,18 @@ jQuery(document).ready(function ($) {
 
 		var padre = $(this).closest('tr');
 		var id = $('.sorting_1', padre).text();
-		var tab = this.getElementsByTagName("td");
-		var dato = tab.innerHTML;
-		
-		console.log(dato); 
+		var tab = $(this).closest('tr');
+		var dato = $('td',tab);
+		if ( $('form.formulario-ventas .contenedor-ventas')[0] ) {
+			const numContainers = $('form.formulario-ventas .contenedor-ventas input').length+1;
+			var htmlInsert = '<label for="dato1">'+ id +" "+dato[1].innerHTML+'</label>'+'<input type="number" name="dato1" value = "1">';
 
-		$('div.list-ventas ol').append('<li>Hola <button class="btn-primary">+</button></li>');
-		
-		/* jQuery.ajax({
-			url: ajax_var.url,
-			type: "post",
-			data: {
-				'action' : "event-list-inventario-ventas",
-				'id' : id
-			}, */
-			/* success: function(result){
-			jQuery('.modal-content').html(result);
-		
-			}
-		}); */
+			// Reemplazo de los names de los fields.
+			htmlInsert = htmlInsert.replace(/dato1/g, `curso${numContainers}`);
+			htmlInsert = htmlInsert.replace(/dato1/g, `curso${numContainers}`);
+
+			$('div.contenedor-ventas').append(htmlInsert);
+		}
 	});
 
 	

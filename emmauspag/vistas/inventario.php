@@ -28,7 +28,14 @@ if(!empty($_POST['activo'])){
             </table>
         </div>
         <div class="col list-ventas">
-            <ol>
+            <form action="" method="post" class = "formulario-ventas" style="display: block;">
+                <div class="contenedor-ventas">
+
+                </div>
+                <input type="hidden" name="ventas-insert" value="activo">
+                <button type="submit" >vender</button>
+            </form>
+            <ol class="list-group list-group-numbered">
                 
             </ol>
         </div>
