@@ -438,10 +438,10 @@ function Inventarios_modal(){
         </div>
         <div class="modal-body">
           <form action="" method="post">
-          <input name="activo" type="hidden" value="update_stock" >
+          <input name="activo" type="hidden" value="update_inventario" >
           <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
-          <label for="stock">Cantidad</label>
-          <input name="stock" type="number" value="0" >
+          <label for="inventario">Cantidad</label>
+          <input name="inventario" type="number" value="0" >
           <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -456,24 +456,25 @@ function Inventarios_modal(){
 #########Funcion que llama a el modal de la vista inventarios  para las ventas      #####################
 ##########################################################################################
 
-function Inventarios_modal_ventas(){
+function Inventarios_modal_stock(){
   unset($_POST['action']);
   
   ?>
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar a venta</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar Stock</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="" method="post">
+          <input name="activo" type="hidden" value="update_stock" >
             <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
-            <label for="stock">Cantidad a vender</label>
+            <label for="stock">Cantidad a actualizar</label>
             <input name="stock" type="number" value="0" >
             <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary">Agregar</button>
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
             </div>
           </form>
         </div>

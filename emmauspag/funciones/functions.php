@@ -156,11 +156,11 @@ add_action('wp_ajax_nopriv_event-list-inventario', 'Inventarios_modal');
 add_action('wp_ajax_event-list-inventario', 'Inventarios_modal');
 
 # =========================================================================================
-# ========== boton que llama a funcion que abre el modal de inventarios para las ventas =====
+# ========== boton que llama a funcion que abre el modal de inventarios para el Stock =====
 # =========================================================================================
 
-add_action('wp_ajax_nopriv_event-list-inventario-ventas', 'Inventarios_modal_ventas');
-add_action('wp_ajax_event-list-inventario-ventas', 'Inventarios_modal_ventas');
+add_action('wp_ajax_nopriv_event-list-inventario-stock', 'Inventarios_modal_stock');
+add_action('wp_ajax_event-list-inventario-stock', 'Inventarios_modal_stock');
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 

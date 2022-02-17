@@ -20,7 +20,22 @@ class ModeloInventario
     $informacion = $this->wpdb->get_results(
           "SELECT * 
            FROM `inventarios` 
-           WHERE `inventario` = 0
+           
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+/* Me traigo el inventario actual de un material por Id */
+  
+  public function information_material_inventario($id)
+  {
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+          "SELECT `inventario`
+          FROM `inventarios` 
+          WHERE `IdMaterial` = $id;
             ",
            'ARRAY_A'
          );
@@ -41,10 +56,9 @@ class ModeloInventario
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
-
   /* Actualizar el stock de la tabla inventarios */
 
-  public function Update_stock_material($id , $datos )
+  public function Update_inventario_material($id , $datos )
   {
     $this->wpdb->show_errors(false);
     $tabla = $this->nombre_tabla;

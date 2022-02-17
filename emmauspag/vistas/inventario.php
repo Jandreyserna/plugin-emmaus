@@ -1,6 +1,11 @@
 <?php
 if(!empty($_POST['activo'])){
     switch($_POST['activo']){
+        case 'update_inventario':
+            unset($_POST['activo']);
+            update_inventario($_POST);
+        break;
+
         case 'update_stock':
             unset($_POST['activo']);
             update_stock($_POST);
@@ -15,34 +20,20 @@ if(!empty($_POST['activo'])){
 </div>
 
 <div class="container">
-    <div class="row align-items-start">
-        <div class="col">       
-            <table  class=" display" id="table-inventario">
-                <thead>
-                    <th>id</th>
-                    <th>Titulo Material</th>
-                    <th>Cantidad</th>
-                    <th>actualizar</th>
-                    <th>vender</th>
-                </thead>
-            </table>
-        </div>
-        <div class="col list-ventas">
-            <form action="" method="post" class = "formulario-ventas" style="display: block;">
-                <div class="contenedor-ventas">
         
-                </div>
-                <input type="hidden" name="ventas-insert" value="activo">
-                <button type="submit" >vender</button>
-            </form>
-            <ol class="list-group list-group-numbered">
-                
-            </ol>
-        </div>
-    </div>
+    <table  class=" display" id="table-inventario">
+        <thead>
+            <th>id</th>
+            <th>Titulo material</th>
+            <th>Cantidad inventario</th>
+            <th>Stock</th>
+            <th>Actualizar inventario</th>
+            <th>Actualizar stock</th>
+        </thead>
+    </table>
 </div>
 
-<!-- Modal de ventas -->
+<!-- Modal de stock -->
 <div class="modal" id="modalStock-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -51,7 +42,7 @@ if(!empty($_POST['activo'])){
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal inventario -->
 <div class="modal " id="modalStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
