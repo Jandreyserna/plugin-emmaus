@@ -453,14 +453,28 @@ jQuery(document).ready(function ($) {
 		var tab = $(this).closest('tr');
 		var dato = $('td',tab);
 		if ( $('form.formulario-ventas .contenedor-ventas')[0] ) {
-			const numContainers = $('form.formulario-ventas .contenedor-ventas input').length+1;
-			var htmlInsert = '<label for="dato1">'+ id +" "+dato[1].innerHTML+'</label>'+'<input type="number" name="dato1" value = "1">';
 
-			// Reemplazo de los names de los fields.
-			htmlInsert = htmlInsert.replace(/dato1/g, `curso${numContainers}`);
-			htmlInsert = htmlInsert.replace(/dato1/g, `curso${numContainers}`);
+			const numContainers = $('form.formulario-ventas .contenedor-ventas input').length+2;
+			const contador = numContainers/2;
+			var bandera = 0;
+			var ids = $('form.formulario-ventas .contenedor-ventas input[type="hidden"]');
+			var idBuscado = 0;
+			for(var i = 0; i < contador; i++ ){
+				idBuscado = $(ids[i]).val();
+				if(idBuscado == id){
+					bandera = 1;
+				}
+			}
+			if(bandera == 0){
+				var htmlInsert = '<input class ="material" id = "id-material-'+contador+'" type="hidden" name="id" value="'+id+'"></input>'+
+				'<label for="dato1">'+ id +" "+dato[1].innerHTML+'</label>'+'<input type="number" name="dato1" value = "1">';
 
-			$('div.contenedor-ventas').append(htmlInsert);
+				// Reemplazo de los names de los fields.
+				htmlInsert = htmlInsert.replace(/dato1/g, `curso${contador}`);
+				htmlInsert = htmlInsert.replace(/dato1/g, `curso${contador}`);
+
+				$('div.contenedor-ventas').append(htmlInsert);
+			}			
 		}
 	});
 

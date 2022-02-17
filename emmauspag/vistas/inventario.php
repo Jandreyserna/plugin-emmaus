@@ -30,7 +30,7 @@ if(!empty($_POST['activo'])){
         <div class="col list-ventas">
             <form action="" method="post" class = "formulario-ventas" style="display: block;">
                 <div class="contenedor-ventas">
-
+        
                 </div>
                 <input type="hidden" name="ventas-insert" value="activo">
                 <button type="submit" >vender</button>
