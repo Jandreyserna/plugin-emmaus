@@ -162,6 +162,20 @@ add_action('wp_ajax_event-list-inventario', 'Inventarios_modal');
 add_action('wp_ajax_nopriv_event-list-inventario-stock', 'Inventarios_modal_stock');
 add_action('wp_ajax_event-list-inventario-stock', 'Inventarios_modal_stock');
 
+# ===============================================================
+# ========== boton que abre la vista de facturas de compras =====
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-factura-compras', 'vista_factura_compras');
+add_action('wp_ajax_event-list-factura-compras', 'vista_factura_compras');
+
+# ===============================================================
+# ========== boton que abre la vista de facturas de ventas =====
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-factura-ventas', 'vista_factura_ventas');
+add_action('wp_ajax_event-list-factura-ventas', 'vista_factura_ventas');
+
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
 function urlemma($url){

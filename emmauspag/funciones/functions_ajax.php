@@ -481,3 +481,25 @@ function Inventarios_modal_stock(){
 <?php
   wp_die();
 }
+
+##########################################################################
+######### FUNCION DE LA VISTA DE FACTURAS DE COMPRAS #####################
+##########################################################################
+
+function vista_factura_compras(){  
+  ?>
+        <H1>HELLO</H1>
+<?php
+  wp_die();
+}
+
+##########################################################################
+######### FUNCION DE LA VISTA DE FACTURAS DE VENTAS #####################
+##########################################################################
+
+function vista_factura_ventas(){  
+  ?>
+        <H1>HELLO ventas</H1>
+<?php
+  wp_die();
+}

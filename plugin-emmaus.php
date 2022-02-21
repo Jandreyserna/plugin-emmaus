@@ -22,6 +22,7 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-estudiantes.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloDiplomas.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloInventario.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-facturas.php';
 
 // IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
@@ -147,6 +148,15 @@ class PrimaryClass
           'dashicons-editor-paste-word',
           6
         );
+        add_menu_page(
+          'Facturación',
+          'Facturación',
+          'factura',
+          'facturas',
+          [$this, 'facturas_admin' ],
+          'dashicons-welcome-widgets-menus',
+          7
+        );
     }
 
     /**
@@ -240,6 +250,12 @@ class PrimaryClass
       require_once dirname(__FILE__). '/emmauspag/vistas/inventario.php';
     }
 
+    public function facturas_admin()
+    {
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlFacturas.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/facturas.php';
+    }
+
 
 
     /**
@@ -250,10 +266,6 @@ class PrimaryClass
     public function activation() : void
     {
         $option = get_role('adminEmmaus');
-
-        /* echo "<pre>ADMIN EMAUS";
-        print_r( $option );
-        echo "</pre>"; */
         
         $role = get_role('administrator');
         if (empty($option))
@@ -271,6 +283,7 @@ class PrimaryClass
               'materiales' => 1,
               'rectificados' => 1,
               'inventario' =>1,
+              'factura' =>1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value)
