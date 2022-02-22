@@ -3,15 +3,6 @@
 ?>
 
 <div class="principal">
-
-  <header>
-    <h1 class="title"> Sistema de Gestión Instituto Emmaus </h/>
-  </header>
-
-  <div>
-    <h2>Menu principal</h2>
-  </div>
-
   <div>
   <img class="main-image" src="https://instituto.emmauscolombia.com/wp-content/uploads/2021/07/Nuevo-Logo-Jun-2021-01.png" alt="Nuevo logo emmaus">
   </div>  
