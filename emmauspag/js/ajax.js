@@ -418,6 +418,10 @@ jQuery(document).ready(function ($) {
 		
 	});
 
+//-----------------------------------------------------//
+//____BOTON DE ACTUALIZAR INVENTARIO___________________//
+//-----------------------------------------------------//
+
 	$("#table-inventario").on("click", "#modal-stock", function(){
 
 		var padre = $(this).closest('tr');
@@ -436,7 +440,9 @@ jQuery(document).ready(function ($) {
 			}
 		});
 	});
-
+//-----------------------------------------------------//
+//____BOTON DE ACTUALIZAR STOCK _______________________//
+//-----------------------------------------------------//
 	$("#table-inventario").on("click", "#modal-stock-2", function(){
 
 		var padre = $(this).closest('tr');
@@ -456,5 +462,42 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+//-----------------------------------------------------//
+//____BOTON DE COMPRAS DE LA VISTA FACTURAS____________//
+//-----------------------------------------------------//
+
+	$("#compras").click(function(){
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'action' : "event-list-factura-compras",
+			},
+			success: function(result){
+			jQuery('.contenedor-facturas').html(result);
+		
+			}
+		});
+	});
+
+
+
+//-----------------------------------------------------//
+//____BOTON DE VENTAS DE LA VISTA FACTURAS____________//
+//-----------------------------------------------------//
+
+	$("#ventas").click(function(){
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'action' : "event-list-factura-ventas",
+			},
+			success: function(result){
+			jQuery('.contenedor-facturas').html(result);
+		
+			}
+		});
+	});
 
 });
