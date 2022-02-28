@@ -253,7 +253,7 @@ class PrimaryClass
     public function facturas_admin()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlFacturas.php';
-      require_once dirname(__FILE__). '/emmauspag/vistas/facturas.php';
+      require_once dirname(__FILE__). '/emmauspag/vistas/facturacion/facturas.php';
     }
 
 
