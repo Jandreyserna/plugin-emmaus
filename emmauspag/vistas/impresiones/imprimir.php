@@ -59,6 +59,16 @@ if (!empty($_POST['imprimir-ganados'])){
 <?php
 }
 ?>
+<!-- Menu principal -->
+<div>
+  <ul class="main-menu">
+    <li><a href="?page=emmaus">Inicio</a></li>
+    <li><a href="?page=estudiante">Estudiantes</a></li>
+    <li><a href="?page=impresiones">Impresiones</a></li>
+    <li><a href="?page=diploma">Diplomas</a></li>
+    <li><a href="?page=curso">Cursos</a></li>
+  </ul>
+</div>
 <div class="titulo text-center">
 <h1>Certificados listos para imprimir</h1>
 </div>

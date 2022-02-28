@@ -48,6 +48,37 @@
   height: 400px;
 }
 
+/*Menu principal*/
+.main-menu{
+  background-color: var(--light-green);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li{
+  float: left;
+}
+
+.main-menu li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.main-menu li a:hover{
+  background-color: var(--main-green);
+}
+
+.img-menu{
+  height: 50px;
+  /* background-color: #fff; */
+  align-self: center;
+  color-adjust: white;
+}
+
 /*Buscador datatable */
 div.dataTables_wrapper div.dataTables_filter input {
   margin-left: 0.5em;
