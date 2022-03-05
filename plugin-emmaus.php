@@ -157,6 +157,16 @@ class PrimaryClass
           'dashicons-welcome-widgets-menus',
           7
         );
+        add_submenu_page(
+          'facturas',
+          'Ventas',
+          'Ventas',
+          'ventas',
+          'venta',
+          [$this, 'factura_ventas'],
+          'dashicons-welcome-widgets-menus',
+          4 
+        );
     }
 
     /**
@@ -256,6 +266,11 @@ class PrimaryClass
       require_once dirname(__FILE__). '/emmauspag/vistas/facturacion/facturas.php';
     }
 
+    public function factura_ventas()
+    {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/ventas.php';
+    }
+
 
 
     /**
@@ -284,6 +299,7 @@ class PrimaryClass
               'rectificados' => 1,
               'inventario' =>1,
               'factura' =>1,
+              'ventas' =>1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value)

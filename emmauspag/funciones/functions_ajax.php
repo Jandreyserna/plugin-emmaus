@@ -497,9 +497,7 @@ function vista_factura_compras(){
 ######### FUNCION DE LA VISTA DE FACTURAS DE VENTAS #####################
 ##########################################################################
 
-function vista_factura_ventas(){  
-  ?>
-        <H1>HELLO ventas</H1>
-<?php
+function vista_factura_ventas(){ 
+  require_once dirname(__DIR__) . '/vistas/facturacion/ventas.php';
   wp_die();
 }

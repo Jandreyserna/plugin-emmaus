@@ -97,7 +97,7 @@
   </table>
   <div class="d-md-flex  justify-content-center">
     <button class="btn btn-primary" type="button" name="button">
-      <a href="#" class="class_a_href" >CREAR FACTURA</a>
+      <a href="<?= dirname($_SERVER['HTTP_REFERER'])?>/admin.php?page=ventas" class="class_a_href" >CREAR FACTURA</a>
     </button>
     <button class="btn btn-primary" type="button" name="button">
       <a href="#" class="class_a_href" >PAGAR FACTURA</a>
@@ -118,3 +118,7 @@
     </button>
   </div>
 </div>
+
+<a href="<?= dirname($_SERVER['HTTP_REFERER'])?>/admin.php?page=calificacion"><button type="button" class="btn btn-outline-success">
+    Registrar Notas
+  </button></a>
