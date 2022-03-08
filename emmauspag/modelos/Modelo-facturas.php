@@ -25,4 +25,17 @@ class Modelo_facturas
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+  function information_ventas()
+  {
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+          "SELECT `IdFactura`,`FechaFactura`, `IdPromotor`, `Nombre`, `PrecioTotal`, `Saldo`, `Encargado`
+           FROM `facturas_ventas`
+           GROUP BY `IdFactura`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
 }

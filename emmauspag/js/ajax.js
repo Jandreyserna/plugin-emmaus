@@ -500,4 +500,27 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+//--------------------------------------------------------------//
+//____TABLA DE FACTURAS DE VENTAS EN LA VISTA DE FACTURACION___//
+//-------------------------------------------------------------//
+
+	$('#table-ventas').DataTable({
+		language: {
+		url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/ventas_render.php',
+			dataSrc:""
+		},
+		columns:[
+			{data: "IdFactura"},
+			{data: "FechaFactura"},
+			{data: "IdPromotor"},
+			{data: "Nombre"},
+			{data: "PrecioTotal"},
+			{data: "Saldo"},
+			{data: "Encargado"},
+			],	
+	});
+
 });
