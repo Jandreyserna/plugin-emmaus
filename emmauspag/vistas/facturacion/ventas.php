@@ -1,3 +1,10 @@
+<?php
+require_once dirname(dirname(__DIR__)) . '/Controller/ControlVentas.php';
+/* clase de controlador */
+$controlador = new ControlVentas();
+/* variable materiales */
+$materiales = $controlador->materiales_venta();
+?>
 <div class="titulo text-center">
   <h1>ventas</h1>
 </div>
@@ -39,7 +46,7 @@
 
     <div>
 
-    <h2>
+    <h2 class="text-center">
       Detalle de articulos
     </h2>
 
@@ -80,7 +87,9 @@
         <form action="">
           <select name="Materiles" id="" required>
             <option value="" disabled selected>Material</option>
-            <option value="id">elemental 1</option>
+            <?php foreach($materiales as $material): ?>
+            <option value="<?=$material['IdMaterial']?>"><?= $material['IdMaterial']?>  <?= $material['TituloMaterial']?></option>
+            <?php endforeach; ?>
           </select>
           <!-- contenedor de formulario ventas -->
           <div class="mb-1" style="display:flex">

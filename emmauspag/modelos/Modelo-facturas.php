@@ -1,10 +1,8 @@
 <?php
-
 class Modelo_facturas
 {
   public $wpdb;
   public $nombre_tabla;
-  public $key_foreaneas = null;
 
   function __construct()
   {
@@ -25,7 +23,7 @@ class Modelo_facturas
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
-
+/* Consulta informacion de las facturas */
   function information_ventas()
   {
     $this->wpdb->show_errors(false);
@@ -33,6 +31,20 @@ class Modelo_facturas
           "SELECT `IdFactura`,`FechaFactura`, `IdPromotor`, `Nombre`, `PrecioTotal`, `Saldo`, `Encargado`
            FROM `facturas_ventas`
            GROUP BY `IdFactura`
+            ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+  }
+
+  /* Consulta los materiales existentes */
+  function information_materiales()
+  {
+    $this->wpdb->show_errors(false);
+    $informacion = $this->wpdb->get_results(
+          "SELECT `IdMaterial`,`TituloMaterial`, `ValorVenta`
+           FROM `materiales`
+           GROUP BY `IdMaterial`
             ",
            'ARRAY_A'
          );
