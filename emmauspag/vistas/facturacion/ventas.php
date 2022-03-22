@@ -53,67 +53,63 @@ $materiales = $controlador->materiales_venta();
     <div class="container-fac row">
       <!-- Lista de materiales escogidos -->
       <div class="col">
-        <table cellspacing="0" cellpadding="0" border="0" width="325">
-          <tr>
-            <td>
-              <table cellspacing="0" cellpadding="1" border="1" width="300" >
-                <tr style="color:white;background-color:grey">
-                  <th>Material</th>
-                  <th>Cant.</th>
-                  <th>V.Unitario</th>
-                  <th>Valor Total</th>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div style="width:320px; height:150px; overflow:auto;">
-                <table cellspacing="0" cellpadding="1" border="1" width="300" >
-                  <tr>
-                    <td>Elemental 1</td>
-                    <td>10</td>
-                    <td>3000</td>
-                    <td>30000</td>
-                  </tr>
-                </table>  
-              </div>
-            </td>
-          </tr>
+        <table id="list-fact">
+          <thead>
+            <tr>
+              <th>Id material</th>
+              <th>Titulo Material</th>
+              <th>Cantidad</th>
+              <th>Valor U.</th>
+              <th>Descuento %</th>
+              <th>Valor Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="cuerpo-lista">
+          </tbody>
+
         </table>
       </div>
       <!-- formulario para escoger materiales  -->
       <div class="col">
         <form action="">
-          <select name="Materiles" id="" required>
+          <select name="Materiles" id="ventas-select" required>
             <option value="" disabled selected>Material</option>
             <?php foreach($materiales as $material): ?>
             <option value="<?=$material['IdMaterial']?>"><?= $material['IdMaterial']?>  <?= $material['TituloMaterial']?></option>
             <?php endforeach; ?>
           </select>
           <!-- contenedor de formulario ventas -->
-          <div class="mb-1" style="display:flex">
-            <label for="ValorU" style="width : 24%">Valor Unidad</label>
-            <input type="number" name="ValorU" id="ValorU" Value ="0">  
+          <div id="contenedor-formulario-ventas">
+            <div class="mb-1 " style="display:flex">
+              <label for="ValorU" style="width : 24%">Valor Unidad</label>
+              <input type="number" name="ValorU" id="ValorU" Value ="0">  
+            </div>
+            <div class="mb-1" style="display:flex">
+              <label for="Cant" style="width : 24%">Cantidad</label>
+              <input type="number" name="Cant" id="Cant" Value ="0">
+            </div>
+            <div class="mb-1 valor-total" style="display:flex">
+              <label for="ValorT" style="width : 24%">Valor Total</label>
+              <input type="number" name="ValorT" id="ValorT" Value ="0">
+            </div>
           </div>
-          <div class="mb-1" style="display:flex">
-            <label for="Cant" style="width : 24%">Cantidad</label>
-            <input type="number" name="Cant" id="Cant" Value ="0">
-          </div>
-          <div class="mb-1" style="display:flex">
-            <label for="ValorT" style="width : 24%">Valor Total</label>
-            <input type="number" name="ValorT" id="ValorT" Value ="0">
-          </div>
-          <button type="submit" class="btn btn-info" style="width = 90%">Actualizar lista de articulos</button>
+          <button type="button" class="btn btn-info" id="enviar-lista" style="width = 90%">Actualizar lista de articulos</button>
         </form>
       </div>
 
     </div>
 
-    <button type="submit" class="btn btn-secondary"> Crear Factura</button>
+    <button type="button" class="btn btn-secondary" > Crear Factura</button>
 
 
 
 </section>
+<script>
+  $("#eliminar-lista").click(function(){
+		$(this).closest('tr').remove();
+	});
+
+</script>
 
 

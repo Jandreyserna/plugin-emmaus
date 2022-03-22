@@ -3,7 +3,6 @@
 </div>
 
 <button class="btn btn-primary" id="compras">Compras</button>
-<button class="btn btn-primary" id="ventas">ventas</button>
 
 <div class="contenedor-facturas">
   <div class="container">

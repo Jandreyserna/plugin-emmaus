@@ -523,4 +523,126 @@ jQuery(document).ready(function ($) {
 			],	
 	});
 
+/* funcion ajax de select de facturacion  de ventas  */
+
+	$("#ventas-select").change(function(){
+		
+		var valor = $(this, 'option').val();
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'id' : valor,
+				'action' : "event-list-factura-ventas-select",
+			},
+			success: function(result){
+			jQuery('#contenedor-formulario-ventas').html(result);
+				/* funcion ajax de input de valor unitario de facturacion  de ventas  */
+				$("#ValorU").change(function(){
+						
+					var valor = $(this).val();
+					var cant = $('#Cant').val();
+					jQuery.ajax({
+						url: ajax_var.url,
+						type: "post",
+						data: {
+							'ValorU' : valor,
+							'cantidad' : cant, 
+							'action' : "event-list-factura-ventas-select",
+						},
+						success: function(result){
+							jQuery('.valor-total').html(result);
+								
+						}
+					});
+				});
+				$("#Cant").change(function(){
+						
+					var valor = $(this).val();
+					var cant = $('#ValorU').val();
+					jQuery.ajax({
+						url: ajax_var.url,
+						type: "post",
+						data: {
+							'valor' : valor,
+							'Cant' : cant, 
+							'action' : "event-list-factura-ventas-select",
+						},
+						success: function(result){
+							jQuery('.valor-total').html(result);
+								
+						}
+					});
+				});
+			}
+		});
+	});
+
+	/* copia funcion  */
+	/* funcion ajax de input de valor unitario de facturacion  de ventas  */
+	$("#ValorU").change(function(){
+						
+		var valor = $(this).val();
+		var cant = $('#Cant').val();
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'ValorU' : valor,
+				'cantidad' : cant, 
+				'action' : "event-list-factura-ventas-select",
+			},
+			success: function(result){
+				jQuery('.valor-total').html(result);
+					
+			}
+		});
+	});
+
+	/* funcion aax de input de CAntidad de facturacion ventas vista ventas */
+	$("#Cant").change(function(){
+						
+		var valor = $(this).val();
+		var cant = $('#ValorU').val();
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'valor' : valor,
+				'Cant' : cant, 
+				'action' : "event-list-factura-ventas-select",
+			},
+			success: function(result){
+				jQuery('.valor-total').html(result);
+					
+			}
+		});
+	});
+
+/* boton de enviar informacion a la tabla de la lista de facturas vista facturacion ventas */
+
+	$("#enviar-lista").click(function(){
+		
+		var id_material = $("#ventas-select").val();
+		var cant = $("#Cant").val();
+		var valor = $('#ValorU').val();
+		var total = $("#ValorT").val();
+		var material = $("#Titulo").val();
+		
+		var htmlInsert = '<tr>' +
+		'<th scope="row">'+id_material+'</th>' + 
+		'<td>'+material+'</td>'+
+		'<td>'+cant+'</td>' +
+		'<td>'+valor+'</td>'+
+		'<td>0%</td>'+
+		'<td>'+total+'</td>' + 
+		'<td><button type ="button" class="btn btn-light" id="eliminar-lista"><span class="dashicons dashicons-trash"></span></button></td>'+
+		'</tr>';
+		$('.cuerpo-lista').append(htmlInsert);
+		$("#eliminar-lista").click(function(){
+			$(this).closest('tr').remove();
+		});
+	});
+
+
 });

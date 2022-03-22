@@ -176,6 +176,13 @@ add_action('wp_ajax_event-list-factura-compras', 'vista_factura_compras');
 add_action('wp_ajax_nopriv_event-list-factura-ventas', 'vista_factura_ventas');
 add_action('wp_ajax_event-list-factura-ventas', 'vista_factura_ventas');
 
+# ===============================================================
+# ========== cambio en el select de  la vista de facturas de ventas =====
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-factura-ventas-select', 'vista_factura_ventas');
+add_action('wp_ajax_event-list-factura-ventas-select', 'vista_factura_ventas');
+
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
 function urlemma($url){

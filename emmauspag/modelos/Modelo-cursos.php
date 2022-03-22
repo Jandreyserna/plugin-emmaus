@@ -526,7 +526,7 @@ public function table_done_courses(){
   ###########################################################
   public function traer_un_promotor($id){
     $informacion = $this->wpdb->get_results(
-          "SELECT promotores.`Nombre`
+          "SELECT promotores.`Nombre`, `Ciudad` , `IdContacto`
           FROM `promotores`
           WHERE promotores.`IdContacto` = $id
           ",

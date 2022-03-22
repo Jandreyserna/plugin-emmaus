@@ -19,6 +19,13 @@ class ControlVentas
         $materiales = $modelo->information_materiales();
         return $materiales;
     }
+    /* material segun Id */
+
+    function one_material_venta($id){
+        $modelo = new Modelo_facturas();
+        $material = $this->modelo->information_material($id);
+        return $material;
+    }
 
 }
 

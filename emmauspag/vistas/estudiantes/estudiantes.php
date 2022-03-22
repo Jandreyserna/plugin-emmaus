@@ -166,9 +166,9 @@ require_once dirname(dirname(dirname(__FILE__))) . '/modelos/Modelo-estudiantes.
 ?>
                 <label for="campo-promotor">Promotores</label>
                 <select class="" name="IdContacto" required>
-                  <option value="<?=$promotor_actual[0]['IdContacto']?>" disabled selected><?=$promotor_actual[0]['Nombre']?></option>
-<?php              foreach ($promotores as $columnas=> $valor): ?>
-                    <option value="<?=$valor['IdContacto']?>"><?=$valor['Nombre']?></option>
+                  <option value="<?=$promotor_actual[0]['IdContacto']?>" disabled selected><?=$promotor_actual[0]['IdContacto'] ?>- <?=$promotor_actual[0]['Nombre']?>  (<?=$promotor_actual[0]['Ciudad'] ?>)</option>
+<?php              foreach ($promotores as $columnas=> $promotor): ?>
+                    <option value="<?=$promotor['IdContacto']?>"><?=$promotor['IdContacto'] ?>- <?=$promotor['Nombre']?> (<?=$promotor['Ciudad'] ?>)</option>
 <?php              endforeach; ?>
                 </select>
 <?php

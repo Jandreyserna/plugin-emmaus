@@ -167,6 +167,7 @@ class PrimaryClass
           'dashicons-welcome-widgets-menus',
           4 
         );
+
     }
 
     /**

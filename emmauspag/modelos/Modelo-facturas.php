@@ -50,4 +50,19 @@ class Modelo_facturas
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+    /* Consulta el valor de un material */
+    function information_material($id)
+    {
+      $this->wpdb->show_errors(false);
+      $informacion = $this->wpdb->get_results(
+            "SELECT `IdMaterial`,`TituloMaterial`, `ValorVenta`
+             FROM `materiales`
+             WHERE `IdMaterial` = $id
+             GROUP BY `IdMaterial`
+              ",
+             'ARRAY_A'
+           );
+      return (isset($informacion[0])) ? $informacion : null;
+    }
 }

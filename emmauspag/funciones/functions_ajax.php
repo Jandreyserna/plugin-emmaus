@@ -498,6 +498,47 @@ function vista_factura_compras(){
 ##########################################################################
 
 function vista_factura_ventas(){ 
-  require_once dirname(__DIR__) . '/vistas/facturacion/ventas.php';
+  require_once dirname(__DIR__) . '/controller/ControlVentas.php';
+
+  unset($_POST['action']);
+  if( !empty($_POST['id']) ){
+    /*  consulto valor de material  */
+    $control = new ControlVentas();
+    $material = $control->one_material_venta($_POST['id']) ;
+    /* renuevo los campos input */
+?>
+    <input type="hidden" name="Titulo" id= "Titulo" value ="<?= $material[0]['TituloMaterial'] ?>">
+    <div class="mb-1" style="display:flex">
+      <label for="ValorU" style="width : 24%">Valor Unidad</label>
+      <input type="number" name="ValorU" id="ValorU" Value ="<?= $material[0]['ValorVenta'] ?>">  
+    </div>
+    <div class="mb-1" style="display:flex">
+      <label for="Cant" style="width : 24%">Cantidad</label>
+      <input type="number" name="Cant" id="Cant" Value ="1">
+    </div>
+    <div class="mb-1 valor-total" style="display:flex">
+      <label for="ValorT" style="width : 24%">Valor Total</label>
+      <input type="number" name="ValorT" id="ValorT" Value ="<?= $material[0]['ValorVenta'] ?>">
+    </div>
+<?php
+  } else if ( !empty($_POST['ValorU']) ){
+    /* multiplico la cantidad por el valor unitario */
+    $valort = $_POST['ValorU'] * $_POST['cantidad'];
+?>
+    <!-- cambio los campos del valor total -->
+    <label for="ValorT" style="width : 24%">Valor Total</label>
+    <input type="number" name="ValorT" id="ValorT" Value ="<?= $valort?>">
+
+<?php 
+  } else if ( !empty($_POST['Cant']) ){
+    /* multiplico la cantidad por el valor unitario */
+    $valort = $_POST['valor'] * $_POST['Cant'];
+?>
+    <!-- cambio los campos del valor total -->
+    <label for="ValorT" style="width : 24%">Valor Total</label>
+    <input type="number" name="ValorT" id="ValorT" Value ="<?= $valort?>">
+
+<?php 
+  }
   wp_die();
 }
