@@ -11,23 +11,6 @@ $materiales = $controlador->materiales_venta();
 
 <section class="cont-fact-venta">
 
-<!--   <div class="container">
-
-      <table class=" display" id="table-ventas">
-        <thead>
-          <tr>
-            <td>Numero de factura</td>
-            <td>Fecha</td>
-            <td>Numero de promotor</td>
-            <td>Nombre</td>
-            <td>Precio total</td>
-            <td>Pagado</td>
-            <td>Encargado</td>
-          </tr>
-        </thead>
-      </table>
-  </div> -->
-
   <div>    
       <select name="Promotores" id="" required>
             <option value="" disabled selected>promotor</option>
@@ -35,14 +18,6 @@ $materiales = $controlador->materiales_venta();
       </select>
 
       <input type="text" name="Cliente" placeholder="Nombre del Cliente" style="width:70%">
-
-      <!-- <div class="col-lg-8">
-        <h2 >Informacion de promotor</h5>
-        <p>Nombre</p>
-        <p>Iglesia</p>
-        <p>Ciudad, departamento</p>
-        <p>Phone: 000-2000-000</p>
-      </div> -->
 
     <div>
 
@@ -105,11 +80,6 @@ $materiales = $controlador->materiales_venta();
 
 
 </section>
-<script>
-  $("#eliminar-lista").click(function(){
-		$(this).closest('tr').remove();
-	});
 
-</script>
 
 

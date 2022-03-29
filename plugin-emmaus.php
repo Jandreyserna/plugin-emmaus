@@ -164,7 +164,16 @@ class PrimaryClass
           'ventas',
           'venta',
           [$this, 'factura_ventas'],
-          'dashicons-welcome-widgets-menus',
+          4 
+        );
+
+        add_submenu_page(
+          'facturas',
+          'Compras',
+          'Compras',
+          'compras',
+          'compra',
+          [$this, 'factura_compras'],
           4 
         );
 
@@ -272,6 +281,11 @@ class PrimaryClass
       require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/ventas.php';
     }
 
+    public function factura_compras()
+    {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/compras.php';
+    }
+
 
 
     /**
@@ -301,6 +315,7 @@ class PrimaryClass
               'inventario' =>1,
               'factura' =>1,
               'ventas' =>1,
+              'compras' => 1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value)

@@ -2,8 +2,6 @@
   <h1>FACTURAS</h1>
 </div>
 
-<button class="btn btn-primary" id="compras">Compras</button>
-
 <div class="contenedor-facturas">
   <div class="container">
           
