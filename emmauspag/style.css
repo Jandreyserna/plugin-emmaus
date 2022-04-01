@@ -49,15 +49,19 @@
 }
 
 /*Menu principal*/
-.main-menu{
-  background-color: var(--light-green);
+header {
+  background:  var(--light-green);
   overflow: hidden;
   margin: 0;
   padding: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
 }
 
 .main-menu li{
   float: left;
+  position: static;
 }
 
 .main-menu li a{
@@ -70,6 +74,11 @@
 
 .main-menu li a:hover{
   background-color: var(--main-green);
+}
+
+.post-menu{
+  position: relative;
+  bottom: -100px;
 }
 
 .img-menu{

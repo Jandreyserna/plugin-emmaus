@@ -7,10 +7,10 @@
   <img class="main-image" src="https://instituto.emmauscolombia.com/wp-content/uploads/2021/07/Nuevo-Logo-Jun-2021-01.png" alt="Nuevo logo emmaus">
   </div>  
   
-  <div>
+  <div style>
     <a class="btn btn-primary" href="?page=estudiante"  role="button">Estudiantes</a>
-    <a class="btn btn-primary" href="?page=impresiones"   role="button">Impresión de certificados</a>
-    <a class="btn btn-primary" href="?page=diploma"   role="button">Diplomas</a>
+    <a class="btn btn-primary" href="?page=facturas"   role="button">Facturación</a>
+    <a class="btn btn-primary" href="?page=inventarios"   role="button">Inventario</a>
     <a class="btn btn-primary" href="?page=curso"   role="button">Cursos</a>
   </div>
 

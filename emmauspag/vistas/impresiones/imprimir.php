@@ -60,49 +60,54 @@ if (!empty($_POST['imprimir-ganados'])){
 }
 ?>
 <!-- Menu principal -->
-<div>
-  <ul class="main-menu">
-    <li><a href="?page=emmaus">Inicio</a></li>
-    <li><a href="?page=estudiante">Estudiantes</a></li>
-    <li><a href="?page=impresiones">Impresiones</a></li>
-    <li><a href="?page=diploma">Diplomas</a></li>
-    <li><a href="?page=curso">Cursos</a></li>
-  </ul>
-</div>
-<div class="titulo text-center">
-<h1>Certificados listos para imprimir</h1>
-</div>
+<header>
+  <nav>
+    <ul class="main-menu">
+      <li><a href="?page=emmaus">Inicio</a></li>
+      <li><a href="?page=estudiante">Estudiantes</a></li>
+      <li><a href="?page=impresiones">Impresiones</a></li>
+      <li><a href="?page=diploma">Diplomas</a></li>
+      <li><a href="?page=curso">Cursos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="post-menu container">
+  <div class="titulo text-center">
+    <h1>Certificados listos para imprimir</h1>
+  </div>
  <!-- Button descargar documento con todos los cursos ganados -->
   <form action="" method="post">
     <input type="hidden" name="imprimir-ganados" value="ganados">
     <button type="submit" class="btn btn-primary">Imprimir todos los ganados</button>
   </form>
 
-<table class="display" id="table-print">
-<thead>
-  <tr>
-    <th scope='col'>Id</th>
-    <th scope='col'>Nombres</th>
-    <th scope='col'>Apellidos</th>
-    <th scope='col'>Material</th>
-    <th scope='col'>Porcentaje</th>
-    <th scope='col'>Dirección</th>
-    <th scope='col'>Ciudad</th>
-    <th></th>
-  </tr>
+  <table class="display" id="table-print">
+    <thead>
+      <tr>
+        <th scope='col'>Id</th>
+        <th scope='col'>Nombres</th>
+        <th scope='col'>Apellidos</th>
+        <th scope='col'>Material</th>
+        <th scope='col'>Porcentaje</th>
+        <th scope='col'>Dirección</th>
+        <th scope='col'>Ciudad</th>
+        <th></th>
+      </tr>
 
-</thead>
+    </thead>
 
-</table>
-<div class="result">
+  </table>
+  <div class="result">
 
-</div>
+  </div>
 
 <!-- Modal -->
-<div class="modal fade" id="añadirnota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    
+  <div class="modal fade" id="añadirnota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      
+      </div>
+    </div>
   </div>
-</div>
 </div>

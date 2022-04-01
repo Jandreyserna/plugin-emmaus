@@ -16,20 +16,25 @@ if(!empty($_POST['activo'])){
     
 ?>
 <!-- Menu principal -->
-<div>
-  <ul class="main-menu">
-    <li><a href="?page=emmaus">Inicio</a></li>
-    <li><a href="?page=estudiante">Estudiantes</a></li>
-    <li><a href="?page=impresiones">Impresiones</a></li>
-    <li><a href="?page=diploma">Diplomas</a></li>
-    <li><a href="?page=curso">Cursos</a></li>
-  </ul>
-</div>
-<div class="titulo text-center">
-    <h1>Inventario</h1>
-</div>
+<header>
+  <nav>
+    <ul class="main-menu">
+      <li><a href="?page=emmaus">Inicio</a></li>
+      <li><a href="?page=estudiante">Estudiantes</a></li>
+      <li><a href="?page=impresiones">Impresiones</a></li>
+      <li><a href="?page=diploma">Diplomas</a></li>
+      <li><a href="?page=curso">Cursos</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div class="container">
+
+
+<div class="post-menu container">
+
+    <div class="titulo text-center">
+        <h1>Inventario</h1>
+    </div>
         
     <table  class=" display" id="table-inventario">
         <thead>
