@@ -538,86 +538,11 @@ jQuery(document).ready(function ($) {
 			success: function(result){
 			jQuery('#contenedor-formulario-ventas').html(result);
 				/* funcion ajax de input de valor unitario de facturacion  de ventas  */
-				$("#ValorU").change(function(){
-						
-					var valor = $(this).val();
-					var cant = $('#Cant').val();
-					jQuery.ajax({
-						url: ajax_var.url,
-						type: "post",
-						data: {
-							'ValorU' : valor,
-							'cantidad' : cant, 
-							'action' : "event-list-factura-ventas-select",
-						},
-						success: function(result){
-							jQuery('.valor-total').html(result);
-								
-						}
-					});
-				});
-				$("#Cant").change(function(){
-						
-					var valor = $(this).val();
-					var cant = $('#ValorU').val();
-					jQuery.ajax({
-						url: ajax_var.url,
-						type: "post",
-						data: {
-							'valor' : valor,
-							'Cant' : cant, 
-							'action' : "event-list-factura-ventas-select",
-						},
-						success: function(result){
-							jQuery('.valor-total').html(result);
-								
-						}
-					});
-				});
+				
 			}
 		});
 	});
 
-	/* copia funcion  */
-	/* funcion ajax de input de valor unitario de facturacion  de ventas  */
-	$("#ValorU").change(function(){
-						
-		var valor = $(this).val();
-		var cant = $('#Cant').val();
-		jQuery.ajax({
-			url: ajax_var.url,
-			type: "post",
-			data: {
-				'ValorU' : valor,
-				'cantidad' : cant, 
-				'action' : "event-list-factura-ventas-select",
-			},
-			success: function(result){
-				jQuery('.valor-total').html(result);
-					
-			}
-		});
-	});
-
-	/* funcion aax de input de CAntidad de facturacion ventas vista ventas */
-	$("#Cant").change(function(){
-						
-		var valor = $(this).val();
-		var cant = $('#ValorU').val();
-		jQuery.ajax({
-			url: ajax_var.url,
-			type: "post",
-			data: {
-				'valor' : valor,
-				'Cant' : cant, 
-				'action' : "event-list-factura-ventas-select",
-			},
-			success: function(result){
-				jQuery('.valor-total').html(result);
-					
-			}
-		});
-	});
 
 /* boton de enviar informacion a la tabla de la lista de facturas vista facturacion ventas */
 
