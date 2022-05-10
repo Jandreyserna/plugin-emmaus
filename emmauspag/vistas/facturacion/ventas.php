@@ -65,6 +65,10 @@ $materiales = $controlador->materiales_venta();
               <label for="Cant" style="width : 24%">Cantidad</label>
               <input type="number" name="Cant" id="Cant" Value ="0">
             </div>
+            <div class="mb-1 valor" style="display:flex">
+		  			 	<label for="Cant" style="width : 24%">Descuento (%)</label>
+		  			 	<input type="number" name="Cant" id="Cant" Value ="0">
+					  </div>
             <div class="mb-1 valor-total valor" style="display:flex">
               <label for="ValorT" style="width : 24%">Valor Total</label>
               <input type="number" name="ValorT" id="ValorT" Value ="0">

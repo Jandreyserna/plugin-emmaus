@@ -522,6 +522,10 @@ jQuery(document).ready(function ($) {
 		  			 	'<label for="Cant" style="width : 24%">Cantidad</label>' +
 		  			 	'<input type="number" name="Cant" id="Cant" Value ="1">' +
 					'</div>' +
+					'<div class="mb-1 valor" style="display:flex">' +
+		  			 	'<label for="Desc" style="width : 24%">Descuento (%)</label>' +
+		  			 	'<input type="number" name="Desc" id="Desc" Value ="0">' +
+					'</div>' +
 					'<div class="mb-1 valor-total valor" style="display:flex">' +
 		  			 	'<label for="ValorT" style="width : 24%">Valor Total</label>' +
 		  			 	'<input type="number" name="ValorT" id="ValorT" Value ="'+costo+'">' +
@@ -534,8 +538,17 @@ jQuery(document).ready(function ($) {
 		$('#ValorU').change(function(){
 			let valor = $(this).val();
 			let cant = $('#Cant').val();
-			let total = valor * cant;
-			let html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			let desc = $('#Desc').val();
+			let html = '';
+			let total = valor * cant ;
+			if(desc > 0 && desc <= 100){
+				desc = desc / 100;
+				let valorMenos = total * desc;
+				total = total - valorMenos;
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			} else{
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			}
 			$('#ValorT').remove();
 			$('.valor-total').append(html);
 	
@@ -545,14 +558,40 @@ jQuery(document).ready(function ($) {
 		$('#Cant').change(function(){
 			let cant = $(this).val();
 			let valor = $('#ValorU').val();
-			let total = valor * cant;
-			let html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			let desc = $('#Desc').val();
+			let html = '';
+			let total = valor * cant ;
+			if(desc > 0 && desc <= 100){
+				desc = desc / 100;
+				let valorMenos = total * desc;
+				total = total - valorMenos;
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			} else{
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			}
 			$('#ValorT').remove();
 			$('.valor-total').append(html);
-	
-		
 		});
-		
+
+		/* CAMBIO EN EL DESCUENTO */
+		$('#Desc').change(function(){
+			let desc = $(this).val();
+			let valor = $('#ValorU').val();
+			let cant = $('#Cant').val();
+			let html = '';
+			let total = valor * cant ;
+			if(desc > 0 && desc <= 100){
+				desc = desc / 100;
+				let valorMenos = total * desc;
+				total = total - valorMenos;
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			} else{
+				html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			}
+			$('#ValorT').remove();
+			$('.valor-total').append(html);
+		});
+
 	});
 
 
@@ -565,13 +604,14 @@ jQuery(document).ready(function ($) {
 		var valor = $('#ValorU').val();
 		var total = $("#ValorT").val();
 		var material = $("#Titulo").val();
+		let desc = $('#Desc').val();
 		
 		var htmlInsert = '<tr>' +
 		'<th scope="row">'+id_material[1]+'</th>' + 
 		'<td>'+material+'</td>'+
 		'<td>'+cant+'</td>' +
 		'<td>'+valor+'</td>'+
-		'<td>0%</td>'+
+		'<td>'+desc+'%</td>'+
 		'<td>'+total+'</td>' + 
 		'<td><button type ="button" class="btn btn-light" id="eliminar-lista"><span class="dashicons dashicons-trash"></span></button></td>'+
 		'</tr>';
@@ -580,6 +620,5 @@ jQuery(document).ready(function ($) {
 			$(this).closest('tr').remove();
 		});
 	});
-
 
 });
