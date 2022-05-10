@@ -482,24 +482,6 @@ jQuery(document).ready(function ($) {
 
 
 
-//-----------------------------------------------------//
-//____BOTON DE VENTAS DE LA VISTA FACTURAS____________//
-//-----------------------------------------------------//
-
-	$("#ventas").click(function(){
-		jQuery.ajax({
-			url: ajax_var.url,
-			type: "post",
-			data: {
-				'action' : "event-list-factura-ventas",
-			},
-			success: function(result){
-			jQuery('.contenedor-facturas').html(result);
-		
-			}
-		});
-	});
-
 //--------------------------------------------------------------//
 //____TABLA DE FACTURAS DE VENTAS EN LA VISTA DE FACTURACION___//
 //-------------------------------------------------------------//
@@ -523,24 +505,54 @@ jQuery(document).ready(function ($) {
 			],	
 	});
 
-/* funcion ajax de select de facturacion  de ventas  */
+/* funcion de select de facturacion  de ventas  */
 
 	$("#ventas-select").change(function(){
 		
-		var valor = $(this, 'option').val();
-		jQuery.ajax({
-			url: ajax_var.url,
-			type: "post",
-			data: {
-				'id' : valor,
-				'action' : "event-list-factura-ventas-select",
-			},
-			success: function(result){
-			jQuery('#contenedor-formulario-ventas').html(result);
-				/* funcion ajax de input de valor unitario de facturacion  de ventas  */
-				
-			}
+		var valor = $(this, 'option').val().split('-');
+		let costo = valor[0];
+		let id = valor[1];
+		let titulo = valor[2];
+		let html = '<input type="hidden" name="Titulo" id= "Titulo" value ="'+titulo+'">' +
+					'<div class="mb-1 valor" style="display:flex">' +
+		  				'<label for="ValorU" style="width : 24%">Valor Unidad</label>' +
+		  			   	'<input type="number" name="ValorU" id="ValorU" Value ="'+costo+'">' +  
+					'</div>' +
+					'<div class="mb-1 valor" style="display:flex">' +
+		  			 	'<label for="Cant" style="width : 24%">Cantidad</label>' +
+		  			 	'<input type="number" name="Cant" id="Cant" Value ="1">' +
+					'</div>' +
+					'<div class="mb-1 valor-total valor" style="display:flex">' +
+		  			 	'<label for="ValorT" style="width : 24%">Valor Total</label>' +
+		  			 	'<input type="number" name="ValorT" id="ValorT" Value ="'+costo+'">' +
+					'</div>';
+		$('#Titulo').remove();
+		$('.valor').remove();
+		$('#contenedor-formulario-ventas').append(html);
+
+		/* cambio de input de factura de ventas valor unitario */
+		$('#ValorU').change(function(){
+			let valor = $(this).val();
+			let cant = $('#Cant').val();
+			let total = valor * cant;
+			let html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			$('#ValorT').remove();
+			$('.valor-total').append(html);
+	
+		
 		});
+		/* cambio de input de factura de ventas cantidad*/
+		$('#Cant').change(function(){
+			let cant = $(this).val();
+			let valor = $('#ValorU').val();
+			let total = valor * cant;
+			let html = '<input type="number" name="ValorT" id="ValorT" Value ="'+total+'">';
+			$('#ValorT').remove();
+			$('.valor-total').append(html);
+	
+		
+		});
+		
 	});
 
 
@@ -548,14 +560,14 @@ jQuery(document).ready(function ($) {
 
 	$("#enviar-lista").click(function(){
 		
-		var id_material = $("#ventas-select").val();
+		var id_material = $("#ventas-select").val().split('-');
 		var cant = $("#Cant").val();
 		var valor = $('#ValorU').val();
 		var total = $("#ValorT").val();
 		var material = $("#Titulo").val();
 		
 		var htmlInsert = '<tr>' +
-		'<th scope="row">'+id_material+'</th>' + 
+		'<th scope="row">'+id_material[1]+'</th>' + 
 		'<td>'+material+'</td>'+
 		'<td>'+cant+'</td>' +
 		'<td>'+valor+'</td>'+

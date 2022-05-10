@@ -51,20 +51,21 @@ $materiales = $controlador->materiales_venta();
           <select name="Materiles" id="ventas-select" required>
             <option value="" disabled selected>Material</option>
             <?php foreach($materiales as $material): ?>
-            <option value="<?=$material['IdMaterial']?>"><?= $material['IdMaterial']?>  <?= $material['TituloMaterial']?></option>
+            <option value="<?=$material['ValorVenta']?>-<?=$material['IdMaterial']?>-<?= $material['TituloMaterial']?>"><?= $material['IdMaterial']?> - <?= $material['TituloMaterial']?></option>
             <?php endforeach; ?>
           </select>
           <!-- contenedor de formulario ventas -->
           <div id="contenedor-formulario-ventas">
-            <div class="mb-1 " style="display:flex">
+            <input type="hidden" name="Titulo" id= "Titulo" value ="">
+            <div class="mb-1 valor " style="display:flex">
               <label for="ValorU" style="width : 24%">Valor Unidad</label>
               <input type="number" name="ValorU" id="ValorU" Value ="0">  
             </div>
-            <div class="mb-1" style="display:flex">
+            <div class="mb-1 valor" style="display:flex">
               <label for="Cant" style="width : 24%">Cantidad</label>
               <input type="number" name="Cant" id="Cant" Value ="0">
             </div>
-            <div class="mb-1 valor-total" style="display:flex">
+            <div class="mb-1 valor-total valor" style="display:flex">
               <label for="ValorT" style="width : 24%">Valor Total</label>
               <input type="number" name="ValorT" id="ValorT" Value ="0">
             </div>
