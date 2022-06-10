@@ -65,4 +65,18 @@ class Modelo_facturas
            );
       return (isset($informacion[0])) ? $informacion : null;
     }
+
+    /* consulta por el id de la ultima factura registrada  en ventas*/
+    function id_ultima_factura()
+    {
+      $this->wpdb->show_errors(false);
+      $informacion = $this->wpdb->get_results(
+            "SELECT IdFactura
+             FROM `facturas_ventas` 
+             ORDER BY `IdFactura` DESC LIMIT 1
+              ",
+             'ARRAY_A'
+           );
+      return (isset($informacion[0])) ? $informacion : null;
+    }
 }

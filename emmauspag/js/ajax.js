@@ -607,7 +607,7 @@ jQuery(document).ready(function ($) {
 		let desc = $('#Desc').val();
 		
 		var htmlInsert = '<tr>' +
-		'<th scope="row">'+id_material[1]+'</th>' + 
+		'<td scope="row">'+id_material[1]+'</td>' + 
 		'<td>'+material+'</td>'+
 		'<td>'+cant+'</td>' +
 		'<td>'+valor+'</td>'+
@@ -619,6 +619,59 @@ jQuery(document).ready(function ($) {
 		$("#eliminar-lista").click(function(){
 			$(this).closest('tr').remove();
 		});
+	});
+
+/* boton de imprimir la factura de venta */
+
+	$('.crear-factura').click(function(){
+		let promotor = $('#promotor-select').val();
+		let nombreU = $('#nombreCliente').val();
+		let documento = $('#cedula').val();
+		let direccion = $('#direccion').val();
+		let ciudad = $('#ciudad').val();
+		let telefono = $('#telefono').val();
+		let tabla = document.getElementsByTagName('td');
+		let tamaño = tabla.length / 7;
+		let titulo = [];
+		let idmaterial = [];
+		let cant = [];
+		let valorU = [];
+		let desc = [];
+		let valort = [];	
+ 		for(let i = 0; i < tamaño ; i++ ){
+			let lugar = 7 * i;
+			idmaterial[i] = tabla[lugar].innerHTML;
+			titulo[i] = tabla[lugar+1].innerHTML;
+			cant[i] = tabla[lugar+2].innerHTML;
+			valorU[i] = tabla[lugar+3].innerHTML;
+			desc[i] = tabla[lugar+4].innerHTML;
+			valort[i] = tabla[lugar+5].innerHTML; 
+		}
+		if(promotor != 'no' || nombreU != '') {
+			jQuery.ajax({
+				url: '../wp-content/plugins/plugin-emmaus/emmauspag/impresiones/imprimir-venta.php',
+				type: "post",
+				data: {
+					'cliente' : nombreU,
+					'promotor' : promotor,
+					'documento' : documento,
+					'direccion' : direccion,
+					'ciudad': ciudad,
+					'telefono': telefono,
+					'titulos' : titulo,
+					'ids' : idmaterial,
+					'cants' : cant,
+					'valoresU' : valorU,
+					'descts' : desc,
+					'valorest' : valort,
+				},
+				success: function(result){
+				console.log('lo hice');
+				jQuery('.muestra').html(result);
+				}
+			});
+		}
+
 	});
 
 });

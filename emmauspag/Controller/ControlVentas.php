@@ -27,5 +27,21 @@ class ControlVentas
         return $material;
     }
 
+    /* todos los promotores */
+
+    function promotores () {
+        $modelo = new Modelo_promotor();
+        $promotores = $modelo->traer_promotor();
+        return $promotores;
+    }
+
+    /* id de la ultima factura */
+
+    function ultima_factura(){
+        $modelo = new Modelo_facturas();
+        $idfactura = $modelo-> id_ultima_factura();
+        return $idfactura[0]['IdFactura'];
+    }
+
 }
 

@@ -259,6 +259,10 @@ class PrimaryClass
         mkdir(ABSPATH.'diplomas', 0775);
 
       }
+      if (!file_exists(ABSPATH.'facturaVentas'))
+      {
+        mkdir(ABSPATH.'facturaVentas', 0775);
+      }
 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
@@ -278,6 +282,7 @@ class PrimaryClass
 
     public function factura_ventas()
     {
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlVentas.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/ventas.php';
     }
 
@@ -295,6 +300,17 @@ class PrimaryClass
      **/
     public function activation() : void
     {
+      if(!file_exists(ABSPATH.'certificados'))
+      {
+        mkdir(ABSPATH.'certificados', 0775);
+        mkdir(ABSPATH.'perdidos', 0775);
+        mkdir(ABSPATH.'diplomas', 0775);
+
+      }
+      if (!file_exists(ABSPATH.'facturaVentas'))
+      {
+        mkdir(ABSPATH.'facturaVentas', 0775);
+      }
         $option = get_role('adminEmmaus');
         
         $role = get_role('administrator');
