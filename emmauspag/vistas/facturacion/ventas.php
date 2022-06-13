@@ -11,6 +11,7 @@ $promotores = $controlador-> promotores();
 <section class="cont-fact-venta">
 
   <div>
+    <form action="" method="post">
       <select name="Promotores" id="promotor-select" required style="margin-bottom: 6px;">
             <option value="no"  selected>Promotor</option>
             <?php foreach($promotores as $promotor): ?>
@@ -34,7 +35,11 @@ $promotores = $controlador-> promotores();
         <label for="telefono">Teléfono</label>
         <input type="text" id="telefono" placeholder="Teléfono">
       </div>
-    <div>
+      <div class="resto">
+        
+      </div>
+    </form>
+  <div>
       <h2 class="text-center">
         Detalle de articulos
       </h2>
@@ -103,6 +108,7 @@ $promotores = $controlador-> promotores();
 
 
 </section>
+
 
 
 

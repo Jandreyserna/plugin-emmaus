@@ -605,6 +605,16 @@ jQuery(document).ready(function ($) {
 		var total = $("#ValorT").val();
 		var material = $("#Titulo").val();
 		let desc = $('#Desc').val();
+		/* datos para completar el formulario */
+		let tabla = document.getElementsByTagName('td');
+		let tamaño = tabla.length / 7;
+	 	tamaño = tamaño + 1;
+		var html2 ='<input type="hidden" name="IdMaterial-'+tamaño+'" value="'+id_material[1]+'"></input>'+
+					'<input type="hidden" name="Titulo-'+tamaño+'" value="'+material+'"></input>'+
+					'<input type="hidden" name="Cantidad-'+tamaño+'" value="'+cant+'"></input>'+
+					'<input type="hidden" name="ValorU-'+tamaño+'" value="'+valor+'"></input>'+
+					'<input type="hidden" name="Descuento-'+tamaño+'" value="'+desc+'"></input>'+
+					'<input type="hidden" name="Total-'+tamaño+'" value="'+total+'"></input>';
 		
 		var htmlInsert = '<tr>' +
 		'<td scope="row">'+id_material[1]+'</td>' + 
@@ -616,6 +626,7 @@ jQuery(document).ready(function ($) {
 		'<td><button type ="button" class="btn btn-light" id="eliminar-lista"><span class="dashicons dashicons-trash"></span></button></td>'+
 		'</tr>';
 		$('.cuerpo-lista').append(htmlInsert);
+		$('.resto').append(html2);
 		$("#eliminar-lista").click(function(){
 			$(this).closest('tr').remove();
 		});
@@ -647,13 +658,16 @@ jQuery(document).ready(function ($) {
 			desc[i] = tabla[lugar+4].innerHTML;
 			valort[i] = tabla[lugar+5].innerHTML; 
 		}
-		if(promotor != 'no' || nombreU != '') {
-			jQuery.ajax({
+		let urls = window.location.pathname;
+		let direcc =  urls.split('/');
+		urls = window.location.origin+'/'+direcc[1]+'/wp-content/plugins/plugin-emmaus/emmauspag/impresiones/imprimir-venta.php'
+		console.log(urls);
+		/* if(promotor != 'no' || nombreU != '') { */
+			$.post({
 				url: '../wp-content/plugins/plugin-emmaus/emmauspag/impresiones/imprimir-venta.php',
-				type: "post",
 				data: {
 					'cliente' : nombreU,
-					'promotor' : promotor,
+					/* 'promotor' : promotor,
 					'documento' : documento,
 					'direccion' : direccion,
 					'ciudad': ciudad,
@@ -663,14 +677,10 @@ jQuery(document).ready(function ($) {
 					'cants' : cant,
 					'valoresU' : valorU,
 					'descts' : desc,
-					'valorest' : valort,
+					'valorest' : valort, */
 				},
-				success: function(result){
-				console.log('lo hice');
-				jQuery('.muestra').html(result);
-				}
 			});
-		}
+		/* s */
 
 	});
 

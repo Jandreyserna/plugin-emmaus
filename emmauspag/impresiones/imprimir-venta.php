@@ -1,9 +1,10 @@
 <?php
+/* volver al contexto */
+require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
 /* cargar las dependencias del phpword */
 require_once dirname(dirname(__DIR__)).'/phpWord/bootstrap.php';
 
-/* volver al contexto */
-require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
+
 /* cargar clase controlador de facturas de venta  */
 require_once dirname(__DIR__).'/Controller/ControlVentas.php';
 
@@ -26,17 +27,30 @@ $fuente2 = [
     "size" => 11,
     "bold" => true,
 ];
- 
-$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/documento.docx');
+ echo "<pre>";
+ print_r( dirname(dirname(__DIR__)).'/phpWord/bootstrap.php' );
+ echo "</pre>";
+$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/plant.docx');
 $archivo = $_POST['cliente'].date("d-D-m-Y").'.docx';
 $url = ABSPATH  .'facturaVentas/'.$archivo;
 echo "<pre>";
+print_r( dirname(dirname(__DIR__)) . '/plantillasword/plant.docx' );
+echo "</pre>";
+echo "<pre>";
+print_r( $_POST );
+echo "</pre>";
+echo "<pre>";
 print_r( $url );
 echo "</pre>";
+echo "<pre>";
+print_r( site_url('facturaVentas/'.$archivo) );
+echo "</pre>";
+$nom = $_POST['cliente'];
+
 /*
 $nom = new TextRun();
 $nom->addText($_POST['cliente'], $fuente); 
-/*
+
 $fecha = new TextRun();
 $fecha->addText(date("d-m-Y"));
 /*
@@ -64,7 +78,7 @@ $iva = new TextRun();
 $iva->addText('0');
 $valort = new TextRun();
 $valort->addText($_POST['valorest'][0]);
-
+*/
 $templateProcessor->setComplexBlock('cliente', $nom);
 /*
 $templateProcessor->setComplexBlock('fecha', $fecha);
@@ -79,10 +93,10 @@ $templateProcessor->setComplexBlock('valoru', $valoru);
 $templateProcessor->setComplexBlock('desc', $desc);
 $templateProcessor->setComplexBlock('iva', $iva);
 $templateProcessor->setComplexBlock('valort', $valort);
-
-$templateProcessor->saveAs($url);
-$envio = site_url('facturasVentas/'.$archivo); 
 */
+$templateProcessor->saveAs($url);
+/* $envio = site_url('facturaVentas/'.$archivo);  */
+
 
 
 echo "<pre>";
