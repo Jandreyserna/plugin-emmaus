@@ -1,9 +1,12 @@
 <?php
+/* manejo de datos */
+require_once dirname(dirname(__DIR__)).'/impresiones/imprimir-venta.php';
 /* clase de controlador */
 $controlador = new ControlVentas();
 /* variable materiales */
 $materiales = $controlador->materiales_venta();
 $promotores = $controlador-> promotores();
+/*  */
 ?>
 <div class="titulo text-center">
   <h1>ventas</h1>
@@ -38,6 +41,7 @@ $promotores = $controlador-> promotores();
       <div class="resto">
         
       </div>
+      <button type="submit" class="btn btn-secondary " > Crear Factura</button>
     </form>
   <div>
       <h2 class="text-center">
@@ -98,8 +102,6 @@ $promotores = $controlador-> promotores();
         </div>
 
       </div>
-
-      <button type="button" class="btn btn-secondary crear-factura" > Crear Factura</button>
 
     <div class="muestra">
 

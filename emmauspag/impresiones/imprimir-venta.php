@@ -1,21 +1,30 @@
 <?php
-/* volver al contexto */
-require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/wp-load.php';
-/* cargar las dependencias del phpword */
-require_once dirname(dirname(__DIR__)).'/phpWord/bootstrap.php';
-
-
 /* cargar clase controlador de facturas de venta  */
 require_once dirname(__DIR__).'/Controller/ControlVentas.php';
 
-/* preguntar por el ultimo id de factura */
+class ControlImpresiones
+{
+  public $wpdb;
+  public $modelo;
 
-$controlador = new ControlVentas();
-$ultimaFactura = $controlador->ultima_factura();
-$ultimaFactura += 1;
-echo "<pre>";
-print_r( $ultimaFactura );
-echo "</pre>";
+  function __construct()
+  {
+      global $wpdb;
+      $this->wpdb = $wpdb;
+      $this->modelo; 
+  }
+  /* preguntar por el ultimo id de factura */
+  function id_final_factura(){
+    $controlador = new ControlVentas();
+    $ultimaFactura = $controlador->ultima_factura();
+    $ultimaFactura += 1;
+    return $ultimaFactura;
+  }
+
+}
+
+
+
 
 $fuente = [
     "name" => "Arial",
