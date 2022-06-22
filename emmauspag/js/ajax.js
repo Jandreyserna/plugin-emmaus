@@ -607,6 +607,13 @@ jQuery(document).ready(function ($) {
 		let desc = $('#Desc').val();
 		/* datos para completar el formulario */
 		let tabla = document.getElementsByTagName('td');
+		let descuentoFactura = $('#descFactura').val();
+		let totalFactura = $('#valFactura').val();
+		let porcentaje = (total * descuentoFactura)/100;
+		let total2 = total - porcentaje;
+		totalFactura = Number(totalFactura) + Number(total2);
+		let sinPorcentaje = $('#sinPorcentaje').val();
+		sinPorcentaje = Number(sinPorcentaje) + Number(total);
 		let tamaño = tabla.length / 7;
 	 	tamaño = tamaño + 1;
 		var html2 ='<input type="hidden" name="IdMaterial-'+tamaño+'" value="'+id_material[1]+'"></input>'+
@@ -614,7 +621,7 @@ jQuery(document).ready(function ($) {
 					'<input type="hidden" name="Cantidad-'+tamaño+'" value="'+cant+'"></input>'+
 					'<input type="hidden" name="ValorU-'+tamaño+'" value="'+valor+'"></input>'+
 					'<input type="hidden" name="Descuento-'+tamaño+'" value="'+desc+'"></input>'+
-					'<input type="hidden" name="Total-'+tamaño+'" value="'+total+'"></input>';
+					'<input type="hidden" id="total" name="Total-'+tamaño+'" value="'+total+'"></input>';
 		
 		var htmlInsert = '<tr>' +
 		'<td scope="row">'+id_material[1]+'</td>' + 
@@ -625,11 +632,38 @@ jQuery(document).ready(function ($) {
 		'<td>'+total+'</td>' + 
 		'<td><button type ="button" class="btn btn-light" id="eliminar-lista"><span class="dashicons dashicons-trash"></span></button></td>'+
 		'</tr>';
+		var html3 = '<div class="valFactura">'+
+						'<label for="valFactura">Valor Factura: </label>'+
+						'<input type="number" name="valFactura" id="valFactura" min="0" value="'+totalFactura+'">'+
+					'</div>';
+		var html4 = '<input type="hidden" name ="porcentaje" id="sinPorcentaje" value="'+sinPorcentaje+'">';
+		$('.valFactura').remove();
+		$('#sinPorcentaje').remove();
+		$('.totalsinporcentaje').append(html4);
+		$('.totales').append(html3);
 		$('.cuerpo-lista').append(htmlInsert);
 		$('.resto').append(html2);
 		$("#eliminar-lista").click(function(){
 			$(this).closest('tr').remove();
 		});
+	});
+	$('#descFactura').change(function(){
+		let descuentoFactura = $('#descFactura').val();
+		let totalAnterior = $('#sinPorcentaje').val();
+		let porcentaje = (totalAnterior * descuentoFactura)/100;
+		let total = totalAnterior - porcentaje;
+		var html = '<input type="hidden" name ="porcentaje" id="sinPorcentaje" value="'+totalAnterior+'">';
+		var html2 = '<div class="valFactura">'+
+						'<label for="valFactura">Valor Factura: </label>'+
+						'<input type="number" name="valFactura" id="valFactura" min="0" value="'+total+'">'+
+					'</div>';
+							
+		$('#sinPorcentaje').remove();
+		$('.valFactura').remove();
+		$('.totales').append(html2);
+		$('.totalsinporcentaje').append(html);
+		
+
 	});
 
 });

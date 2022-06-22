@@ -1,6 +1,26 @@
 <?php
 /* manejo de datos */
 require_once dirname(dirname(__DIR__)).'/impresiones/imprimir-venta.php';
+/* crear factura */
+if(isset($_POST['post']))
+{
+  $datos['cliente'] = $_POST['cliente'];
+  $datos['cedula'] = $_POST['cedula'];
+  $datos['promotores'] = $_POST['promotores'];
+  $datos['direccion'] = $_POST['direccion'];
+  $datos['ciudad'] = $_POST['ciudad'];
+  $datos['telefono'] = $_POST['telefono'];
+  unset($_POST['cliente']);
+  unset($_POST['cedula']);
+  unset($_POST['promotores']);
+  unset($_POST['direccion']);
+  unset($_POST['ciudad']);
+  unset($_POST['telefono']);
+  unset($_POST['post']);
+  $controlFactura = new ControlImpresiones;
+  $controlFactura-> crear_factura_venta($datos, $_POST);
+}
+
 /* clase de controlador */
 $controlador = new ControlVentas();
 /* variable materiales */
@@ -15,28 +35,29 @@ $promotores = $controlador-> promotores();
 
   <div>
     <form action="" method="post">
-      <select name="Promotores" id="promotor-select" required style="margin-bottom: 6px;">
+      <input type="hidden" name="post" value="si">
+      <select name="promotores" id="promotor-select" required style="margin-bottom: 6px;">
             <option value="no"  selected>Promotor</option>
             <?php foreach($promotores as $promotor): ?>
             <option value="<?=$promotor['IdContacto']?>">(<?=$promotor['IdContacto']?>) - <?= $promotor['Nombre']?> - <?=$promotor['Ciudad']?></option>
             <?php endforeach; ?>
           </select>    
-      <input type="text" name="Cliente" id="nombreCliente" placeholder="Nombre del Cliente" style="width:70%; margin-bottom: 6px;">
+      <input type="text" name="cliente" id="nombreCliente" placeholder="Nombre del Cliente" style="width:70%; margin-bottom: 6px;">
       <div class="documento">
         <label for="cedula"> Documento:</label>
         <input type="number" name="cedula" id="cedula" pattern="[0-9]+" minlength="10" maxlength="10" required>
       </div>
       <div>
         <label for="direccion">Dirección</label>
-        <input type="text" id="direccion" placeholder="direccion">
+        <input type="text" name="direccion" id="direccion" placeholder="Direccion">
       </div>
       <div>
         <label for="ciudad">Ciudad</label>
-        <input type="text" id="ciudad" placeholder="Ciudad">
+        <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
       </div>
       <div>
         <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" placeholder="Teléfono">
+        <input type="text" name="telefono" id="telefono" placeholder="Teléfono">
       </div>
       <div class="resto">
         
@@ -67,6 +88,19 @@ $promotores = $controlador-> promotores();
             </tbody>
 
           </table>
+          <div class="totales">
+            <div class="valFactura">
+              <label for="valFactura">Valor Factura: </label>
+              <input type="number" name="valFactura" id="valFactura" min="0" value="0">
+            </div>  
+            <div class="descFactura">
+              <label for="descFactura">Descuento Factura: </label>
+              <input type="number" name="descFactura" id="descFactura" min="0" value="0" >  
+            </div>
+            <div class="totalsinporcentaje">
+              <input type="hidden" name="porcentaje" id="sinPorcentaje" min="0" value="0">
+            </div>
+          </div>
         </div>
         <!-- formulario para escoger materiales  -->
         <div class="col">
@@ -86,7 +120,7 @@ $promotores = $controlador-> promotores();
               </div>
               <div class="mb-1 valor" style="display:flex">
                 <label for="Cant" style="width : 24%">Cantidad</label>
-                <input type="number" name="Cant" id="Cant" Value ="0">
+                <input type="number" name="Cant" id="Cant" Value ="0" min="0">
               </div>
               <div class="mb-1 valor" style="display:flex">
                 <label for="Cant" style="width : 24%">Descuento (%)</label>

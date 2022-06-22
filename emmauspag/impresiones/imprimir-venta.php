@@ -1,4 +1,8 @@
 <?php
+/* usar la clase TextRun */
+use PhpOffice\PhpWord\Element\TextRun;
+use PhpOffice\PhpWord\Shared\Converter;
+use PhpOffice\PhpWord\Style\TablePosition;
 /* cargar clase controlador de facturas de venta  */
 require_once dirname(__DIR__).'/Controller/ControlVentas.php';
 
@@ -21,93 +25,51 @@ class ControlImpresiones
     return $ultimaFactura;
   }
 
+  function crear_factura_venta($datos, $datos2){
+    echo "<pre>";
+    print_r( $datos2 );
+    echo "</pre>";
+    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/Factura venta.docx');
+    $archivo = $datos['cliente'].date("d-D-m-Y").'.docx';
+    $url = ABSPATH  .'facturaVentas/'.$archivo;
+
+    $nom = new TextRun();
+    $nom->addText('NOMBRE Y APELLIDO: '.$datos['cliente']); 
+    $fecha = new TextRun();
+    $fecha->addText('FECHA: '.date("d-m-Y"));
+    $direccion = new TextRun();
+    $direccion->addText('DIRECCIÒN: '.$datos['direccion']);
+    $ciudad = new TextRun();
+    $ciudad->addText('CIUDAD:'.$datos['ciudad']);
+    $cedula = new TextRun();
+    $cedula->addText('NIT / C.C: '.$datos['cedula']);
+    $telefono = new TextRun();
+    $telefono->addText('TELEFONO: '.$datos['telefono']);
+/*     $factura = new TextRun();
+    $factura->addText($ultimaFactura); */
+    
+    $templateProcessor->setComplexBlock('cliente', $nom);
+    $templateProcessor->setComplexBlock('fecha', $fecha);
+    $templateProcessor->setComplexBlock('direccion', $direccion);
+    $templateProcessor->setComplexBlock('ciudad', $ciudad);
+    $templateProcessor->setComplexBlock('cedula', $cedula);
+    $templateProcessor->setComplexBlock('telefono', $telefono);
+    $tam = sizeof($datos2) / 6;
+    $templateProcessor->cloneRow('titulo', $tam);
+    for($i = 1; $i <= $tam; $i++){
+      $templateProcessor->setValue('titulo#'.$i, $datos2['Titulo-'.$i]);
+      $templateProcessor->setValue('cant#'.$i, $datos2['Cantidad-'.$i]);
+      $templateProcessor->setValue('valoru#'.$i, $datos2['ValorU-'.$i]);
+      $templateProcessor->setValue('desc#'.$i, $datos2['Descuento-'.$i]);
+      $templateProcessor->setValue('iva#'.$i, '0');
+      $templateProcessor->setValue('valort#'.$i, $datos2['Total-'.$i]);
+    }
+    $templateProcessor->saveAs($url);
+    $envio = site_url('facturaVentas/'.$archivo);
+    
+  } 
+
 }
 
 
 
-
-$fuente = [
-    "name" => "Arial",
-    "size" => 11,
-    "bold" => false,
-];
-$fuente2 = [
-    "name" => "arial",
-    "size" => 11,
-    "bold" => true,
-];
- echo "<pre>";
- print_r( dirname(dirname(__DIR__)).'/phpWord/bootstrap.php' );
- echo "</pre>";
-$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/plant.docx');
-$archivo = $_POST['cliente'].date("d-D-m-Y").'.docx';
-$url = ABSPATH  .'facturaVentas/'.$archivo;
-echo "<pre>";
-print_r( dirname(dirname(__DIR__)) . '/plantillasword/plant.docx' );
-echo "</pre>";
-echo "<pre>";
-print_r( $_POST );
-echo "</pre>";
-echo "<pre>";
-print_r( $url );
-echo "</pre>";
-echo "<pre>";
-print_r( site_url('facturaVentas/'.$archivo) );
-echo "</pre>";
-$nom = $_POST['cliente'];
-
-/*
-$nom = new TextRun();
-$nom->addText($_POST['cliente'], $fuente); 
-
-$fecha = new TextRun();
-$fecha->addText(date("d-m-Y"));
-/*
-$direccion = new TextRun();
-$direccion->addText($_POST['direccion']);
-$ciudad = new TextRun();
-$ciudad->addText($_POST['ciudad']);
-/*
-$cedula = new TextRun();
-$cedula->addText($_POST['documento']);
-$telefono = new TextRun();
-$telefono->addText($_POST['telefono']);
-$factura = new TextRun();
-$factura->addText($ultimaFactura);
-/*
-$titulo = new TextRun();
-$titulo->addText($_POST['titulos'][0]);
-$cant = new TextRun();
-$cant->addText($_POST['cants'][0]);
-$valoru = new TextRun();
-$valoru->addText($_POST['valoresU'][0]);
-$desc = new TextRun();
-$desc->addText($_POST['descts'][0]);
-$iva = new TextRun();
-$iva->addText('0');
-$valort = new TextRun();
-$valort->addText($_POST['valorest'][0]);
-*/
-$templateProcessor->setComplexBlock('cliente', $nom);
-/*
-$templateProcessor->setComplexBlock('fecha', $fecha);
-$templateProcessor->setComplexBlock('direccion', $direccion);
-$templateProcessor->setComplexBlock('ciudad', $ciudad);
-$templateProcessor->setComplexBlock('fecha', $cedula);
-$templateProcessor->setComplexBlock('telefono', $telefono);
-$templateProcessor->setComplexBlock('IdFactura', $factura);
-$templateProcessor->setComplexBlock('titulo', $titulo);
-$templateProcessor->setComplexBlock('cant', $cant);
-$templateProcessor->setComplexBlock('valoru', $valoru);
-$templateProcessor->setComplexBlock('desc', $desc);
-$templateProcessor->setComplexBlock('iva', $iva);
-$templateProcessor->setComplexBlock('valort', $valort);
-*/
-$templateProcessor->saveAs($url);
-/* $envio = site_url('facturaVentas/'.$archivo);  */
-
-
-
-echo "<pre>";
-print_r( $_POST );
-echo "</pre>";
