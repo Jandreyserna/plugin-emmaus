@@ -637,12 +637,20 @@ jQuery(document).ready(function ($) {
 						'<input type="number" name="valFactura" id="valFactura" min="0" value="'+totalFactura+'">'+
 					'</div>';
 		var html4 = '<input type="hidden" name ="porcentaje" id="sinPorcentaje" value="'+sinPorcentaje+'">';
+
+		var html5 =	'<input type="hidden" name ="descuentoFactura" id="descuentoFactura" value="'+descuentoFactura+'">'+
+					'<input type="hidden" name ="totalFactura" id="totalFactura" value="'+totalFactura+'">'+
+					'<input type="hidden" name ="totalsinporcentaje" id="totalsinporcentaje" value="'+sinPorcentaje+'">';
+		$('#totalsinporcentaje').remove();
+		$('#totalFactura').remove();
+		$('#descuentoFactura').remove();
 		$('.valFactura').remove();
 		$('#sinPorcentaje').remove();
 		$('.totalsinporcentaje').append(html4);
 		$('.totales').append(html3);
 		$('.cuerpo-lista').append(htmlInsert);
 		$('.resto').append(html2);
+		$('.valoresGeneral').append(html5);
 		$("#eliminar-lista").click(function(){
 			$(this).closest('tr').remove();
 		});
@@ -657,9 +665,15 @@ jQuery(document).ready(function ($) {
 						'<label for="valFactura">Valor Factura: </label>'+
 						'<input type="number" name="valFactura" id="valFactura" min="0" value="'+total+'">'+
 					'</div>';
-							
+		var html3 =	'<input type="hidden" name ="descuentoFactura" id="descuentoFactura" value="'+descuentoFactura+'">'+
+					'<input type="hidden" name ="totalFactura" id="totalFactura" value="'+total+'">'+
+					'<input type="hidden" name ="totalsinporcentaje" id="totalsinporcentaje" value="'+totalAnterior+'">';
+		$('#totalsinporcentaje').remove();
+		$('#totalFactura').remove();
+		$('#descuentoFactura').remove();
 		$('#sinPorcentaje').remove();
 		$('.valFactura').remove();
+		$('.valoresGeneral').append(html3);
 		$('.totales').append(html2);
 		$('.totalsinporcentaje').append(html);
 		

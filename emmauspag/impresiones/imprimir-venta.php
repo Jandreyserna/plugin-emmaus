@@ -26,9 +26,7 @@ class ControlImpresiones
   }
 
   function crear_factura_venta($datos, $datos2){
-    echo "<pre>";
-    print_r( $datos2 );
-    echo "</pre>";
+    $final = $this->id_final_factura();
     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/Factura venta.docx');
     $archivo = $datos['cliente'].date("d-D-m-Y").'.docx';
     $url = ABSPATH  .'facturaVentas/'.$archivo;
@@ -38,13 +36,24 @@ class ControlImpresiones
     $fecha = new TextRun();
     $fecha->addText('FECHA: '.date("d-m-Y"));
     $direccion = new TextRun();
-    $direccion->addText('DIRECCIÒN: '.$datos['direccion']);
+    $direccion->addText('DIRECCIÓN: '.$datos['direccion']);
     $ciudad = new TextRun();
     $ciudad->addText('CIUDAD:'.$datos['ciudad']);
     $cedula = new TextRun();
     $cedula->addText('NIT / C.C: '.$datos['cedula']);
     $telefono = new TextRun();
-    $telefono->addText('TELEFONO: '.$datos['telefono']);
+    $telefono->addText('TELÉFONO: '.$datos['telefono']);
+    $descuento = new TextRun();
+    $descuento->addText($datos['descuentoFactura']);
+    $costo = new TextRun();
+    $costo->addText($datos['totalFactura']);
+    $costosinporcentaje = new TextRun();
+    $costosinporcentaje->addText($datos['totalsinporcentaje']);
+    $factura = new TextRun();
+    $factura->addText($final);
+
+
+    
 /*     $factura = new TextRun();
     $factura->addText($ultimaFactura); */
     
@@ -54,6 +63,11 @@ class ControlImpresiones
     $templateProcessor->setComplexBlock('ciudad', $ciudad);
     $templateProcessor->setComplexBlock('cedula', $cedula);
     $templateProcessor->setComplexBlock('telefono', $telefono);
+    $templateProcessor->setComplexBlock('descg', $descuento);
+    $templateProcessor->setComplexBlock('total', $costo);
+    $templateProcessor->setComplexBlock('val', $costosinporcentaje);
+    $templateProcessor->setComplexBlock('IdFactura', $factura);
+    
     $tam = sizeof($datos2) / 6;
     $templateProcessor->cloneRow('titulo', $tam);
     for($i = 1; $i <= $tam; $i++){
@@ -66,6 +80,14 @@ class ControlImpresiones
     }
     $templateProcessor->saveAs($url);
     $envio = site_url('facturaVentas/'.$archivo);
+?>
+<script>
+      window.open(
+      '<?=$envio?>',
+      '_blank'
+      );
+</script>
+<?php
     
   } 
 

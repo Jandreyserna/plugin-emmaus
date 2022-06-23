@@ -10,6 +10,9 @@ if(isset($_POST['post']))
   $datos['direccion'] = $_POST['direccion'];
   $datos['ciudad'] = $_POST['ciudad'];
   $datos['telefono'] = $_POST['telefono'];
+  $datos['totalFactura'] = $_POST['totalFactura'];
+  $datos['descuentoFactura'] = $_POST['descuentoFactura'];
+  $datos['totalsinporcentaje'] = $_POST['totalsinporcentaje'];
   unset($_POST['cliente']);
   unset($_POST['cedula']);
   unset($_POST['promotores']);
@@ -17,6 +20,9 @@ if(isset($_POST['post']))
   unset($_POST['ciudad']);
   unset($_POST['telefono']);
   unset($_POST['post']);
+  unset($_POST['descuentoFactura']);
+  unset($_POST['totalFactura']);
+  unset($_POST['totalsinporcentaje']);
   $controlFactura = new ControlImpresiones;
   $controlFactura-> crear_factura_venta($datos, $_POST);
 }
@@ -48,21 +54,27 @@ $promotores = $controlador-> promotores();
         <input type="number" name="cedula" id="cedula" pattern="[0-9]+" minlength="10" maxlength="10" required>
       </div>
       <div>
-        <label for="direccion">Dirección</label>
+        <label for="direccion">Dirección: </label>
         <input type="text" name="direccion" id="direccion" placeholder="Direccion">
       </div>
       <div>
-        <label for="ciudad">Ciudad</label>
+        <label for="ciudad">Ciudad: </label>
         <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
       </div>
       <div>
-        <label for="telefono">Teléfono</label>
+        <label for="telefono">Teléfono: </label>
         <input type="text" name="telefono" id="telefono" placeholder="Teléfono">
       </div>
       <div class="resto">
         
       </div>
-      <button type="submit" class="btn btn-secondary " > Crear Factura</button>
+      <div class="valoresGeneral">
+        <input type="hidden" name ="descuentoFactura" id="descuentoFactura">
+				<input type="hidden" name ="totalFactura" id="totalFactura">
+        <input type="hidden" name ="totalsinporcentaje" id="totalsinporcentaje">
+      </div>
+
+      <button type="submit" class="btn btn-secondary center " > Crear Factura</button>
     </form>
   <div>
       <h2 class="text-center">
