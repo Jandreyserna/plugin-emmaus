@@ -32,7 +32,17 @@ add_action('widgets_init', 'sidebar');
 
 
 
-//echo get_stylesheet_uri();
+/* funcion para saber que usuario esta registrado */
+function cod_get_role_current_user(){
+  if( is_user_logged_in() ) {
+    $user = wp_get_current_user();
+    $role = ( array ) $user->roles;
+    return $role[0];
+  } 
+  else{
+    return false;
+  }
+}
 
 #####################################################
 ###registro de los style para los css de la pagina###
@@ -66,6 +76,12 @@ function enqueue_styles() {
 
  wp_register_style('table-responsive-css', 'https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css', array(), time());
  wp_enqueue_style('table-responsive-css');
+
+ $rol = cod_get_role_current_user();
+if($rol != 'administrator'){
+  wp_register_style('admin_style', plugins_url('plugin-emmaus/emmauspag/css/plataforma.css'), array(), time());
+  wp_enqueue_style('admin_style');
+}
 
 }
 add_action('admin_enqueue_scripts', 'enqueue_styles');

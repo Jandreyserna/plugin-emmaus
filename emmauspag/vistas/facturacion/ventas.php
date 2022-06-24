@@ -32,6 +32,7 @@ $controlador = new ControlVentas();
 /* variable materiales */
 $materiales = $controlador->materiales_venta();
 $promotores = $controlador-> promotores();
+
 /*  */
 ?>
 <div class="titulo text-center">
@@ -43,7 +44,7 @@ $promotores = $controlador-> promotores();
     <form action="" method="post">
       <input type="hidden" name="post" value="si">
       <select name="promotores" id="promotor-select" required style="margin-bottom: 6px;">
-            <option value="no"  selected>Promotor</option>
+            <option value="no" disabled selected>Promotor</option>
             <?php foreach($promotores as $promotor): ?>
             <option value="<?=$promotor['IdContacto']?>">(<?=$promotor['IdContacto']?>) - <?= $promotor['Nombre']?> - <?=$promotor['Ciudad']?></option>
             <?php endforeach; ?>
@@ -51,7 +52,7 @@ $promotores = $controlador-> promotores();
       <input type="text" name="cliente" id="nombreCliente" placeholder="Nombre del Cliente" style="width:70%; margin-bottom: 6px;">
       <div class="documento">
         <label for="cedula"> Documento:</label>
-        <input type="number" name="cedula" id="cedula" pattern="[0-9]+" minlength="10" maxlength="10" required>
+        <input type="number" name="cedula" id="cedula" pattern="[0-9]+" minlength="10" maxlength="10" placeholder="Documento">
       </div>
       <div>
         <label for="direccion">Dirección: </label>

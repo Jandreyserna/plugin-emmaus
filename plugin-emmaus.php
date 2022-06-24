@@ -12,6 +12,7 @@ License: private
 if (!defined('ABSPATH')) {
 	exit;
 }
+
 require_once 'phpWord/bootstrap.php';
 
 // importando los modelos
