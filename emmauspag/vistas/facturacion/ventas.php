@@ -56,7 +56,7 @@ $promotores = $controlador-> promotores();
       </div>
       <div>
         <label for="direccion">Dirección: </label>
-        <input type="text" name="direccion" id="direccion" placeholder="Direccion">
+        <input type="text" name="direccion" id="direccion" placeholder="Dirección">
       </div>
       <div>
         <label for="ciudad">Ciudad: </label>
@@ -99,7 +99,6 @@ $promotores = $controlador-> promotores();
             </thead>
             <tbody class="cuerpo-lista">
             </tbody>
-
           </table>
           <div class="totales">
             <div class="valFactura">
@@ -114,6 +113,8 @@ $promotores = $controlador-> promotores();
               <input type="hidden" name="porcentaje" id="sinPorcentaje" min="0" value="0">
             </div>
           </div>
+          <button id="eliminar-lista" class="btn btn-warning">eliminar de la lista </button>
+          <input type="number" id="identificador" placeholder="Identificador Del Material" min="0" >
         </div>
         <!-- formulario para escoger materiales  -->
         <div class="col">

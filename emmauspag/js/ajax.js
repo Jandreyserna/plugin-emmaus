@@ -630,7 +630,6 @@ jQuery(document).ready(function ($) {
 		'<td>'+valor+'</td>'+
 		'<td>'+desc+'%</td>'+
 		'<td>'+total+'</td>' + 
-		'<td><button type ="button" class="btn btn-light" id="eliminar-lista"><span class="dashicons dashicons-trash"></span></button></td>'+
 		'</tr>';
 		var html3 = '<div class="valFactura">'+
 						'<label for="valFactura">Valor Factura: </label>'+
@@ -651,10 +650,20 @@ jQuery(document).ready(function ($) {
 		$('.cuerpo-lista').append(htmlInsert);
 		$('.resto').append(html2);
 		$('.valoresGeneral').append(html5);
-		$("#eliminar-lista").click(function(){
-			$(this).closest('tr').remove();
-		});
 	});
+
+	$("#eliminar-lista").click(function(){
+		let valorEliminar= $('#identificador').val();
+		let valoresTabla = document.getElementsByTagName('td');
+		if(valorEliminar.length != 0 && valoresTabla.length != 0){
+			console.log(valoresTabla[0].childNodes);
+			console.log(valoresTabla[0]);
+			console.log(valoresTabla[0].childNodes.values);
+			console.log(valorEliminar);
+		}
+		
+	});
+
 	$('#descFactura').change(function(){
 		let descuentoFactura = $('#descFactura').val();
 		let totalAnterior = $('#sinPorcentaje').val();
