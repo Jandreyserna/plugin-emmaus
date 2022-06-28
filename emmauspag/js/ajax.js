@@ -623,8 +623,8 @@ jQuery(document).ready(function ($) {
 					'<input type="hidden" name="Descuento-'+tamaño+'" value="'+desc+'"></input>'+
 					'<input type="hidden" id="total" name="Total-'+tamaño+'" value="'+total+'"></input>';
 		
-		var htmlInsert = '<tr>' +
-		'<td scope="row">'+id_material[1]+'</td>' + 
+		var htmlInsert = '<tr id="'+id_material[1]+'">' +
+		'<td scope="row" >'+id_material[1]+'</td>' + 
 		'<td>'+material+'</td>'+
 		'<td>'+cant+'</td>' +
 		'<td>'+valor+'</td>'+
@@ -655,11 +655,21 @@ jQuery(document).ready(function ($) {
 	$("#eliminar-lista").click(function(){
 		let valorEliminar= $('#identificador').val();
 		let valoresTabla = document.getElementsByTagName('td');
+		let tamaño = valoresTabla.length/ 6;
+		var bandera = 0;
 		if(valorEliminar.length != 0 && valoresTabla.length != 0){
-			console.log(valoresTabla[0].childNodes);
-			console.log(valoresTabla[0]);
-			console.log(valoresTabla[0].childNodes.values);
-			console.log(valorEliminar);
+			/* console.log(valoresTabla[(6* x ) - 6].innerText); */
+			console.log(valoresTabla);
+			for(let x = 1; x <= tamaño ; x++){
+				if(valoresTabla[(6* x ) - 6].innerText = valorEliminar){
+					bandera = 1;
+					console.log('lo encontre');
+					/* console.log(valoresTabla[(6* x ) - 6].innerText); */
+				}
+			}
+			if(bandera  = 1){
+				$("#"+valorEliminar).remove();
+			}
 		}
 		
 	});
