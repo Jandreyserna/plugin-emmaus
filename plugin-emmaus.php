@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+
 require_once 'phpWord/bootstrap.php';
 
 // importando los modelos
@@ -28,7 +29,7 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-facturas.php';
 // IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions_ajax.php';
-
+/* require_once dirname(__FILE__) . '/emmauspag/vistas/header.php'; */
 class PrimaryClass  
 {
     public function __construct()
@@ -46,6 +47,7 @@ class PrimaryClass
     public function init() : void
     {
         add_action('admin_menu', [$this, 'menu_pages']); 
+        $rol = cod_get_role_current_user(); 
     }
 
     public function menu_pages() : void
@@ -192,6 +194,7 @@ class PrimaryClass
     }
 
     public function core_emmaus(){
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/principal.php';
     }
     
@@ -203,17 +206,19 @@ class PrimaryClass
       }
       require_once dirname(__FILE__) . '/phpWord/bootstrap.php';
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/visEstudiante.php';
     }
     public function see_students_admin()
     {
-      
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
     }
     
     public function material_admin()
     {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/cursos.php';
     }
     
@@ -225,29 +230,34 @@ class PrimaryClass
 
       } 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlDiplomas.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/diplomas.php';
     }
     
     public function validacion_admin()
     {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/validacion.php';
     }
     
     public function curso_admin()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlCertificate.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/certificado.php';
     }
     
     public function See_Notes_course()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/notas.php';
     }
     
     public function See_Lost_course()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/cursos/perdidos.php';
     }
     
@@ -266,29 +276,34 @@ class PrimaryClass
       }
 
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlNotes.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/impresiones/imprimir.php';
     }
 
     public function stock_admin()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlInventario.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/inventario.php';
     }
 
     public function facturas_admin()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlFacturas.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__). '/emmauspag/vistas/facturacion/facturas.php';
     }
 
     public function factura_ventas()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlVentas.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/ventas.php';
     }
 
     public function factura_compras()
     {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/compras.php';
     }
 

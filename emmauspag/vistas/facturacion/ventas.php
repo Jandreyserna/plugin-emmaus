@@ -44,11 +44,11 @@ $promotores = $controlador-> promotores();
     <form action="" method="post">
       <input type="hidden" name="post" value="si">
       <select name="promotores" id="promotor-select" required style="margin-bottom: 6px;">
-            <option value="no" disabled selected>Promotor</option>
-            <?php foreach($promotores as $promotor): ?>
-            <option value="<?=$promotor['IdContacto']?>">(<?=$promotor['IdContacto']?>) - <?= $promotor['Nombre']?> - <?=$promotor['Ciudad']?></option>
-            <?php endforeach; ?>
-          </select>    
+        <option value="no" disabled selected>Promotor</option>
+        <?php foreach($promotores as $promotor): ?>
+        <option value="<?=$promotor['IdContacto']?>">(<?=$promotor['IdContacto']?>) - <?= $promotor['Nombre']?> - <?=$promotor['Ciudad']?></option>
+        <?php endforeach; ?>
+      </select>    
       <input type="text" name="cliente" id="nombreCliente" placeholder="Nombre del Cliente" style="width:70%; margin-bottom: 6px;">
       <div class="documento">
         <label for="cedula"> Documento:</label>

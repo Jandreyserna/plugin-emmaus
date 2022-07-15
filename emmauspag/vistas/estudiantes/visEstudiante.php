@@ -157,7 +157,7 @@ if(!empty($_POST['activo'])){
   $promotores = Information_Promotors();
 ?>
 <!-- Menu principal -->
-<header>
+<!--<header>
   <nav>
     <ul class="main-menu">
       <li><a href="?page=emmaus">Inicio</a></li>
@@ -167,7 +167,7 @@ if(!empty($_POST['activo'])){
       <li><a href="?page=curso">Cursos</a></li>
     </ul>
   </nav>
-</header>
+</header> -->
 
 <div class="post-menu contenedor-estudiantes">
   
