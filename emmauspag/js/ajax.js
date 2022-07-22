@@ -614,7 +614,8 @@ jQuery(document).ready(function ($) {
 		totalFactura = Number(totalFactura) + Number(total2);
 		let sinPorcentaje = $('#sinPorcentaje').val();
 		sinPorcentaje = Number(sinPorcentaje) + Number(total);
-		let tamaño = tabla.length / 7;
+		let tamaño = tabla.length / 6;
+		let tamaño2 = tabla.length / 6;
 	 	tamaño = tamaño + 1;
 		var html2 ='<input type="hidden" name="IdMaterial-'+tamaño+'" value="'+id_material[1]+'"></input>'+
 					'<input type="hidden" name="Titulo-'+tamaño+'" value="'+material+'"></input>'+
@@ -640,35 +641,62 @@ jQuery(document).ready(function ($) {
 		var html5 =	'<input type="hidden" name ="descuentoFactura" id="descuentoFactura" value="'+descuentoFactura+'">'+
 					'<input type="hidden" name ="totalFactura" id="totalFactura" value="'+totalFactura+'">'+
 					'<input type="hidden" name ="totalsinporcentaje" id="totalsinporcentaje" value="'+sinPorcentaje+'">';
-		$('#totalsinporcentaje').remove();
-		$('#totalFactura').remove();
-		$('#descuentoFactura').remove();
-		$('.valFactura').remove();
-		$('#sinPorcentaje').remove();
-		$('.totalsinporcentaje').append(html4);
-		$('.totales').append(html3);
-		$('.cuerpo-lista').append(htmlInsert);
-		$('.resto').append(html2);
-		$('.valoresGeneral').append(html5);
+		let bandera = 0;
+		for(let x = 1; x <= tamaño2 ; x++){
+			
+			if(tabla.length != 0 && tabla[(6* x ) - 6].innerText == id_material[1]){
+				bandera = 1;
+				
+			}
+		}
+		if(bandera == 0){
+			$('#totalsinporcentaje').remove();
+			$('#totalFactura').remove();
+			$('#descuentoFactura').remove();
+			$('.valFactura').remove();
+			$('#sinPorcentaje').remove();
+			$('.totalsinporcentaje').append(html4);
+			$('.totales').append(html3);
+			$('.cuerpo-lista').append(htmlInsert);
+			$('.resto').append(html2);
+			$('.valoresGeneral').append(html5);
+		}
+			
 	});
 
 	$("#eliminar-lista").click(function(){
 		let valorEliminar= $('#identificador').val();
 		let valoresTabla = document.getElementsByTagName('td');
 		let tamaño = valoresTabla.length/ 6;
-		var bandera = 0;
+		let valortotal = $('#totalsinporcentaje').val();
+		let descuento = $('#descuentoFactura').val();
+		let total = $('#totalFactura').val();
+		let des = 0;
 		if(valorEliminar.length != 0 && valoresTabla.length != 0){
-			/* console.log(valoresTabla[(6* x ) - 6].innerText); */
-			console.log(valoresTabla);
 			for(let x = 1; x <= tamaño ; x++){
-				if(valoresTabla[(6* x ) - 6].innerText = valorEliminar){
-					bandera = 1;
-					console.log('lo encontre');
-					/* console.log(valoresTabla[(6* x ) - 6].innerText); */
+				if(valoresTabla[(6* x ) - 6].innerText == valorEliminar){
+					let valoractual = valoresTabla[(6 * x)-1].innerText;
+					$("#"+valorEliminar).remove();
+					valortotal = valortotal - Number(valoractual);
+					des = (valortotal * descuento) / 100;
+					total = valortotal - des;
+					var html = '<input type="hidden" name ="porcentaje" id="sinPorcentaje" value="'+valortotal+'">';
+					var html2 = '<div class="valFactura">'+
+									'<label for="valFactura">Valor Factura: </label>'+
+									'<input type="number" name="valFactura" id="valFactura" min="0" value="'+total+'">'+
+								'</div>';
+					var html3 =	'<input type="hidden" name ="descuentoFactura" id="descuentoFactura" value="'+descuento+'">'+
+								'<input type="hidden" name ="totalFactura" id="totalFactura" value="'+total+'">'+
+								'<input type="hidden" name ="totalsinporcentaje" id="totalsinporcentaje" value="'+valortotal+'">';
+					$('#totalsinporcentaje').remove();
+					$('#totalFactura').remove();
+					$('#descuentoFactura').remove();
+					$('#sinPorcentaje').remove();
+					$('.valFactura').remove();
+					$('.valoresGeneral').append(html3);
+					$('.totales').append(html2);
+					$('.totalsinporcentaje').append(html);
 				}
-			}
-			if(bandera  = 1){
-				$("#"+valorEliminar).remove();
 			}
 		}
 		

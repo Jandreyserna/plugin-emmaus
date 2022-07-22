@@ -11,6 +11,7 @@ class Modelo_facturas
       $this->nombre_tabla = '';
   }
 
+
   function Materials_and_title()
   {
     $this->wpdb->show_errors(false);
@@ -23,7 +24,10 @@ class Modelo_facturas
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
+
+
 /* Consulta informacion de las facturas */
+
   function information_ventas()
   {
     $this->wpdb->show_errors(false);
@@ -37,7 +41,9 @@ class Modelo_facturas
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+
   /* Consulta los materiales existentes */
+
   function information_materiales()
   {
     $this->wpdb->show_errors(false);
@@ -51,7 +57,9 @@ class Modelo_facturas
     return (isset($informacion[0])) ? $informacion : null;
   }
 
+
     /* Consulta el valor de un material */
+
     function information_material($id)
     {
       $this->wpdb->show_errors(false);
@@ -66,7 +74,9 @@ class Modelo_facturas
       return (isset($informacion[0])) ? $informacion : null;
     }
 
+
     /* consulta por el id de la ultima factura registrada  en ventas*/
+
     function id_ultima_factura()
     {
       $this->wpdb->show_errors(false);
@@ -78,5 +88,27 @@ class Modelo_facturas
              'ARRAY_A'
            );
       return (isset($informacion[0])) ? $informacion : null;
+    }
+
+
+    /* añadir factura a tabla facturas_ventas */
+
+    function añadir_factura_venta($datos){
+      $this->wpdb->show_errors(false);
+      $this->wpdb->insert(
+        'facturas_ventas', # TABLA
+        $datos # DATOS
+      );
+    }
+
+
+    /* registrar materiales salida */
+
+    function registrar_materiales_venta($datos){
+      $this->wpdb->show_errors(false);
+      $this->wpdb->insert(
+        'material_salidas', # TABLA
+        $datos # DATOS
+      );
     }
 }

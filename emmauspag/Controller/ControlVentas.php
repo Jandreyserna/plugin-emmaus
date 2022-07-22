@@ -19,6 +19,8 @@ class ControlVentas
         $materiales = $modelo->information_materiales();
         return $materiales;
     }
+
+
     /* material segun Id */
 
     function one_material_venta($id){
@@ -26,6 +28,7 @@ class ControlVentas
         $material = $this->modelo->information_material($id);
         return $material;
     }
+
 
     /* todos los promotores */
 
@@ -35,6 +38,7 @@ class ControlVentas
         return $promotores;
     }
 
+
     /* id de la ultima factura */
 
     function ultima_factura(){
@@ -42,6 +46,23 @@ class ControlVentas
         $idfactura = $modelo-> id_ultima_factura();
         return $idfactura[0]['IdFactura'];
     }
+
+
+    /* añadir datos a facturas_ventas */
+
+    function nueva_factura_venta($datos){
+        $modelo = new Modelo_facturas();
+        $modelo->añadir_factura_venta($datos);
+    }
+
+
+    /* registrar materiales salidas */
+
+    function registrar_materiales_salida($datos){
+        $modelo = new Modelo_facturas();
+        $modelo->registrar_materiales_venta($datos);
+    }
+
 
 }
 

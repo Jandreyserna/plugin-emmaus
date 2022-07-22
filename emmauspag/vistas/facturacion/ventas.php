@@ -25,6 +25,7 @@ if(isset($_POST['post']))
   unset($_POST['totalsinporcentaje']);
   $controlFactura = new ControlImpresiones;
   $controlFactura-> crear_factura_venta($datos, $_POST);
+  $controlFactura-> añadir_factura_venta($datos, $_POST);
 }
 
 /* clase de controlador */
@@ -94,7 +95,6 @@ $promotores = $controlador-> promotores();
                 <th>Valor U.</th>
                 <th>Descuento %</th>
                 <th>Valor Total</th>
-                <th></th>
               </tr>
             </thead>
             <tbody class="cuerpo-lista">
