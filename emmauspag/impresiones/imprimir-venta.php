@@ -20,7 +20,6 @@ class ControlImpresiones
 
 
   /* preguntar por el ultimo id de factura */
-
   function id_final_factura(){
     $controlador = new ControlVentas();
     $ultimaFactura = $controlador->ultima_factura();
@@ -29,14 +28,21 @@ class ControlImpresiones
   }
 
 
+  /* consultar nombre de un promotor */
+
+
   function crear_factura_venta($datos, $datos2){
     $final = $this->id_final_factura();
     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(dirname(dirname(__DIR__)) . '/plantillasword/Factura venta.docx');
     $archivo = $datos['cliente'].date("d-D-m-Y").'.docx';
     $url = ABSPATH  .'facturaVentas/'.$archivo;
-
-    $nom = new TextRun();
-    $nom->addText('NOMBRE Y APELLIDO: '.$datos['cliente']); 
+    if($datos['cliente'] == ''){
+      $nom = new TextRun();
+      $nom->addText('NOMBRE Y APELLIDO: '.$datos['promotores']); 
+    } else{
+      $nom = new TextRun();
+      $nom->addText('NOMBRE Y APELLIDO: '.$datos['cliente']); 
+    }
     $fecha = new TextRun();
     $fecha->addText('FECHA: '.date("d-m-Y"));
     $direccion = new TextRun();
@@ -93,21 +99,21 @@ class ControlImpresiones
 
 
   /* enviar datos a modelo facturas para añadir facturas de venta */
-
   function añadir_factura_venta($datos, $libros){
     $final = $this->id_final_factura();
     $usuario = wp_get_current_user();
     $controlador = new ControlVentas();
     $datosFactura['FechaFactura'] = date("d-m-Y");
     $datosFactura['IdFactura'] = $final;
-    $datosFactura['IdPromotor'] = $datos['promotores'];
+    $datosFactura['IdContacto'] = $datos['promotores'];
     $datosFactura['PrecioTotal'] = $datos['totalFactura'];
-    $datosFactura['Descuento'] = $datos['tdescuentoFactura'];
+    $datosFactura['Descuento'] = $datos['descuentoFactura'];
     $datosFactura['Saldo'] = 0;
     $datosFactura['Nombre'] = $datos['cliente'];
     $datosFactura['OtrosCargos'] = 0;
     $datosFactura['Encargado'] = $usuario->data->user_login;
     $datosFactura['Observaciones'] = '';
+    $controlador->nueva_factura_venta($datosFactura);
     for($i = 1 ; $i <= sizeof($libros) / 6; $i++){
       $datoslibro['IdFactura'] = $final;
       $datoslibro['IdMaterial'] = $libros['IdMaterial-'.$i];
@@ -116,8 +122,10 @@ class ControlImpresiones
       $datoslibro['CostoTotal'] = $libros['Total-'.$i]; 
       $datoslibro['Descuento'] = $libros['Descuento-'.$i]; 
       $controlador->registrar_materiales_salida($datoslibro);
+      $stock = $controlador->consultar_inventario($datoslibro['IdMaterial']);
+      $stock = $stock - $datoslibro['Cantidad'];
+      $controlador->actualizar_inventario($datoslibro['IdMaterial'], $stock );
     }
-    $controlador->nueva_factura_venta($datosFactura);
   }
 
 }

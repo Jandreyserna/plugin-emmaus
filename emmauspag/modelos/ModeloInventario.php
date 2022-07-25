@@ -12,8 +12,8 @@ class ModeloInventario
       $this->nombre_tabla = 'inventarios';
   }
 
-  /* Me traigo todos los materiales de inventario donde el campo inventario sea igual a 0 */
 
+  /* Consulta todos los materiales de inventario donde el campo inventario sea igual a 0 */
   public function information_inventario()
   {
     $this->wpdb->show_errors(false);
@@ -27,8 +27,8 @@ class ModeloInventario
     return (isset($informacion[0])) ? $informacion : null;
   }
 
-/* Me traigo el inventario actual de un material por Id */
-  
+
+/* consulta el inventario actual de un material por Id */
   public function information_material_inventario($id)
   {
     $this->wpdb->show_errors(false);
@@ -42,8 +42,9 @@ class ModeloInventario
     return (isset($informacion[0])) ? $informacion : null;
   }
 
-/* Me traigo el stock actual de un material por Id */
   
+
+/* Consulta el stock actual de un material por Id */
   public function information_material_stock($id)
   {
     $this->wpdb->show_errors(false);
@@ -56,8 +57,9 @@ class ModeloInventario
          );
     return (isset($informacion[0])) ? $informacion : null;
   }
-  /* Actualizar el stock de la tabla inventarios */
 
+
+  /* Actualizar el stock de la tabla inventarios */
   public function Update_inventario_material($id , $datos )
   {
     $this->wpdb->show_errors(false);
@@ -70,5 +72,15 @@ class ModeloInventario
   }
 
 
+    /* Actualizar Inventario de un libro */
+  function actualizar_cantidad_libro($id, $cantidad){
+    $this->wpdb->show_errors(TRUE);
+    $tabla = $this->nombre_tabla;
+      $this->wpdb->update(
+        'inventarios', 
+        $cantidad, # DATOS
+        array('IdMaterial' => $id)
+      );
+  }
 
 }
