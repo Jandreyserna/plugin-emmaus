@@ -1,16 +1,3 @@
-<!-- Menu principal -->
-<header>
-  <nav>
-    <ul class="main-menu">
-      <li><a href="?page=emmaus">Inicio</a></li>
-      <li><a href="?page=estudiante">Estudiantes</a></li>
-      <li><a href="?page=impresiones">Impresiones</a></li>
-      <li><a href="?page=diploma">Diplomas</a></li>
-      <li><a href="?page=curso">Cursos</a></li>
-    </ul>
-  </nav>
-</header>
-
 <div class="post-menu container">
   <div class="titulo text-center">
     <h1>Diplomas Y Actas</h1>
