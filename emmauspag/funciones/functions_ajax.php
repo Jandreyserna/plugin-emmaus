@@ -304,11 +304,23 @@ function Call_print_certificate(){
   if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Plantilla_CERTIFICADO.docx');
       $estudiante = explode(' ',$nombre);
-      $estudiante = implode($estudiante);
+      $estudiante = implode(' ', $estudiante);
       $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
+      /* 
+      evaluo que el nombre no sea muy largo para ocupar el espacio del diploma
+      */
+      if(strlen($nombre) > 20){
+        $nombreCorto = explode(' ',$nombre);
+        unset($nombreCorto[3]);
+        $nombreCorto = implode(' ',$nombreCorto);
+        $nom = new TextRun();
+        $nom->addText($nombreCorto,$fuente);
+      }else{
+        $nom = new TextRun();
+        $nom->addText($nombre,$fuente);
+      }
+      
       $url = ABSPATH  .'/certificados/'.$archivo;
-      $nom = new TextRun();
-      $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
       $porcentaje->addText("\t\t".$datos[0]['Porcentaje'],$fuente2);
       $material = new TextRun();

@@ -727,4 +727,26 @@ jQuery(document).ready(function ($) {
 
 	});
 
+	/* tabla de facturas */
+	$('#table-facturas').DataTable({
+		language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/facturas.php',
+			dataSrc:"",
+		},
+		columns:[
+			{data: "IdFactura"},
+			{data: "Vendedor"},
+			{data: "Comprador"},
+			{data: "Fecha"},
+			{data: "Precio"},
+			{data: "Tipo"},
+			{data: "Deuda"},
+			{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
+		],
+		order: [[0, "desc"]]
+	});
+
 });

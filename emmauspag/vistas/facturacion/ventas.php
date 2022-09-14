@@ -23,9 +23,16 @@ if(isset($_POST['post']))
   unset($_POST['descuentoFactura']);
   unset($_POST['totalFactura']);
   unset($_POST['totalsinporcentaje']);
-  $controlFactura = new ControlImpresiones;
-  $controlFactura-> crear_factura_venta($datos, $_POST);
-  $controlFactura-> añadir_factura_venta($datos, $_POST);
+  /* 
+  anade la factura al documento word
+  */
+  $controlImpresionFactura = new ControlImpresiones;
+  $controlImpresionFactura-> crear_factura_venta($datos, $_POST);
+  $controlImpresionFactura-> añadir_factura_venta($datos, $_POST);
+  /* 
+  anade las facturas a las tablas
+  */
+  $controlTables = new ControlVentas();
 ?>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">

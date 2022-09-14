@@ -61,8 +61,10 @@ class ControlImpresiones
     $costosinporcentaje->addText($datos['totalsinporcentaje']);
     $factura = new TextRun();
     $factura->addText($final);
-    /*     $factura = new TextRun();
-    $factura->addText($ultimaFactura); */
+    /*     
+    $factura = new TextRun();
+    $factura->addText($ultimaFactura);
+    */
     $templateProcessor->setComplexBlock('cliente', $nom);
     $templateProcessor->setComplexBlock('fecha', $fecha);
     $templateProcessor->setComplexBlock('direccion', $direccion);
@@ -87,12 +89,12 @@ class ControlImpresiones
     $templateProcessor->saveAs($url);
     $envio = site_url('facturaVentas/'.$archivo);
 ?>
-<script>
-      window.open(
-      '<?=$envio?>',
-      '_blank'
-      );
-</script>
+    <script>
+          window.open(
+          '<?=$envio?>',
+          '_blank'
+          );
+    </script>
 <?php
     
   }

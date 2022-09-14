@@ -74,6 +74,8 @@ class ControlVentas
         $modelo->actualizar_cantidad_libro($id, $cant);
     }
 
+    
+
 
 }
 
