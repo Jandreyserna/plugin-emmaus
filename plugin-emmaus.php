@@ -180,6 +180,16 @@ class PrimaryClass
           4 
         );
 
+        add_menu_page(
+          'ADMINISTRACION',
+          'ADMINISTRACION',
+          'administraciones',
+          'administracion',
+          [$this, 'general_admin'],
+          'dashicons-book-alt',
+          4
+      );
+
     }
 
     /**
@@ -307,6 +317,12 @@ class PrimaryClass
       require_once dirname(__FILE__) . '/emmauspag/vistas/facturacion/compras.php';
     }
 
+    public function general_admin()
+    {
+      require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
+      require_once dirname(__FILE__) . '/emmauspag/vistas/administracion.php';
+    }
+
 
 
     /**
@@ -339,7 +355,7 @@ class PrimaryClass
               'estudiantes' => 1,
               'certificados' => 1,
               'emmaus' => 1,
-              'validacione' => 1,
+              'validaciones' => 1,
               'impresion'=>1,
               'calificaciones' => 1,       
               'materiales' => 1,
@@ -348,6 +364,7 @@ class PrimaryClass
               'factura' =>1,
               'ventas' =>1,
               'compras' => 1,
+              'administraciones' => 1,
             ];
             add_role('adminEmmaus', 'Admin Emmaus', $adminEmmaus );
             foreach( $adminEmmaus as $cap => $value)
