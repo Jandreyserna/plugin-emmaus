@@ -35,8 +35,8 @@
 
 /*principal page styles*/
 .principal{
-  padding: 2vh;
-  border: 1vh;
+  /* padding: 2vh;
+  border: 1vh; */
   display: flex;
   /* background-color: #560bad; */
   /* flex-direction: column-reverse; */
@@ -55,7 +55,7 @@
 }
 
 .main-image{
-  height: 400px;
+  height: 300px;
   align-items: center;
 }
 
