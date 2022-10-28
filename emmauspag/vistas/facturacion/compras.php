@@ -22,7 +22,7 @@ if (!empty($_POST['nuevo-material'])){
 ?>
 
 <div class="container-facture">
-    <div class="text-center"><h1>Factura de compra</h1></div>
+    <div class="text-center"><h1>Crear factura de compra</h1></div>
     <div></div>
 </div>
 
@@ -69,7 +69,7 @@ if (!empty($_POST['nuevo-material'])){
     <form action="" method="post"> 
       <input type="hidden" name="post" value="si">   
       <select name="Proovedores" id="" required>
-            <option value="" disabled selected>proveedor</option>
+            <option value="" disabled selected>Proveedor</option>
             <option value="id">Jhon Edwar Trehos </option>
       </select>
 
@@ -88,7 +88,7 @@ if (!empty($_POST['nuevo-material'])){
   <div>
 
     <h2 class="text-center">
-      Detalle de articulos
+      Detalle de materiales
     </h2>
 
     <div class="container-fac row">
@@ -122,7 +122,7 @@ if (!empty($_POST['nuevo-material'])){
             <input type="hidden" name="porcentaje" id="sinPorcentaje" min="0" value="0">
           </div>
         </div>
-          <button id="eliminar-lista" class="btn btn-warning">eliminar de la lista </button>
+          <button id="eliminar-lista" class="btn btn-warning">Eliminar de la lista </button>
           <input type="number" id="identificador" placeholder="Identificador Del Material" min="0" >
       </div>
       <!-- formulario para escoger materiales  -->

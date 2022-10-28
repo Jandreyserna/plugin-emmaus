@@ -63,7 +63,7 @@ $promotores = $controlador-> promotores();
 /*  */
 ?>
 <div class="titulo text-center">
-  <h1>ventas</h1>
+  <h1>Crear factura de venta</h1>
 </div>
 <section class="cont-fact-venta">
 
@@ -106,7 +106,7 @@ $promotores = $controlador-> promotores();
     </form>
   <div>
       <h2 class="text-center">
-        Detalle de articulos
+        Detalle de materiales
       </h2>
 
       <div class="container-fac row">
@@ -115,11 +115,11 @@ $promotores = $controlador-> promotores();
           <table id="list-fact">
             <thead>
               <tr>
-                <th>Id material</th>
-                <th>Titulo Material</th>
+                <th>Id_material</th>
+                <th>Titulo</th>
                 <th>Cantidad</th>
-                <th>Valor U.</th>
-                <th>Descuento %</th>
+                <th>Valor Unidad</th>
+                <th>Descuento (%)</th>
                 <th>Valor Total</th>
               </tr>
             </thead>
@@ -139,7 +139,7 @@ $promotores = $controlador-> promotores();
               <input type="hidden" name="porcentaje" id="sinPorcentaje" min="0" value="0">
             </div>
           </div>
-          <button id="eliminar-lista" class="btn btn-warning">eliminar de la lista </button>
+          <button id="eliminar-lista" class="btn btn-warning">Eliminar de la lista </button>
           <input type="number" id="identificador" placeholder="Identificador Del Material" min="0" >
         </div>
         <!-- formulario para escoger materiales  -->

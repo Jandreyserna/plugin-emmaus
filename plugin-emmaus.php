@@ -321,8 +321,8 @@ class PrimaryClass
     {
       require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/administracion.php';
-      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
-      require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
+      // require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
+      // require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
     }
 
 
