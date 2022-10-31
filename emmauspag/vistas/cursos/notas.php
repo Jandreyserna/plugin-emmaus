@@ -55,15 +55,9 @@ if (!empty($_POST['nueva-nota'])){
    
   </table>
 
-<!-- Modal -->
-<div class="modal fade" id="añadirnota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        
-      </div>
-    </div>
-  </div>
-
+<?php
+  /* MOdal para calificar curso */
+  require_once dirname(__DIR__).'/modales/modalCalificarCurso.php';
 
 
 
