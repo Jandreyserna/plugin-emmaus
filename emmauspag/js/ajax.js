@@ -368,10 +368,53 @@ jQuery(document).ready(function ($) {
 			{data: "Apellidos"},
 			{data: "Porcentaje"},
 			{data: "FechaTerminacion"},
-			{"defaultContent": "<button id='print-note' type='button' class='form btn btn-primary btn-xs '> imprimir </button>"}
+			{"defaultContent": "<div class='container' style='display: flex;'>"+
+									"<div class='col'>"+
+										"<button id='update-note-diploma' class='boton-hover' type='button'>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAStJREFUSEu1lf0RATEQxX8qQQWoABWgAkqgAjpABaiADlABOqAS5pGYXLgPkduZ/HFzyb63L7svFUqOSsn5KQLQB3pA06wiZ968szZ3gBVQ86qMAjADpibxDVgAB+D8q6Tf2IyBuUk0Mcl/zZsqkWTZm78DYBec2Rz0K7gCVeBv5paYC6Bu2QLS3L/Y4EJcgDUwjMlerFwAdUgDaIV0S1qJLsA95V6C5fEriAWQyBNbItnJCbgYW0ncQYxLtkO6AUa+RLZNNQv1QOHtHL2HNOagWfaJOfIBQq1Ccsh5FV1jjM+PPLMTq2WOXJnmmObt7iHpKrs+OgOobmkD2mdt5at/5T046iyZX1ZIc0mk9+IjirxO6i4tsZaVKNTnshbZeaalFwEI7NjXsdIBHg00OhlQ1YTKAAAAAElFTkSuQmCC'/>"+	
+										"</button>"+
+									"</div>"+
+									"<div class='col'>"+
+										"<button id='print-note' class='boton-hover' type='button'>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<span></span>"+
+											"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMtJREFUSEvVlWENwjAQhb8pQALgABzgAAs4wAI4QMKk4GCTAA5wALmES8pl69orJWM/m977+q59t4bKX1NZnxjgmQkf1JoFYKqN6tTt4L8AF2APrDIvWLffgBY460JoX8SPTmFbJoCTLIaAB7AAtkDvBG2ADhAnawuIvoYBoM2JHvZDJ3QwO8BYF7/moBjgnUXJDn4GyB0Vow40B7a3qYCw7q7TICzevWO+NIRcgIgfgKsNmj15ai6Kx3Xq1HD/D6oBUoWj+6YusBjyAkqyMBlM3PP1AAAAAElFTkSuQmCC'/>"+	
+										"</button>"+
+									"</div>"+
+								"</div>"
+			}
 		],
 		order: [[0, "desc"]]
 	});
+
+/* 
+	Update Nota de diplomado 
+*/
+
+	$('#table-diplomas').on("click", "#update-note-diploma", function(){
+		var padre = $(this).closest('tr');
+		var id = $('.sorting_1', padre).text();
+		
+		jQuery.ajax({
+			url: ajax_var.url,
+			type: "post",
+			data: {
+				'action' : "event-list-update-diplomado",
+				'id' : id
+			},
+			success: function(result){
+			jQuery('.modal-content').html(result);
+		
+			}
+		});
+	});
+
 
 /*
 		BOTON DE TABLA DE LA VISTA Diplomas, PARA Diplomas Hechos, uno por uno

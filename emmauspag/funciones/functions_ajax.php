@@ -544,3 +544,11 @@ function vista_factura_ventas(){
   }
   wp_die();
 }
+
+##########################################################################
+#################### FUNCION DE ACTUALIZAR DIPLOMADO #####################
+##########################################################################
+
+function update_diplomado(){
+  require_once dirname(__DIR__).'/vistas/modales/modalActualizarDiplomado.php';
+}

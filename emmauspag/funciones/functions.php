@@ -74,6 +74,11 @@ function enqueue_styles() {
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
+ /* registrar css de uiverse stylos nativos */
+
+ wp_register_style('uiverse', plugins_url('plugin-emmaus/emmauspag/css/styleNativeUiverse.css'), array(), time());
+ wp_enqueue_style('uiverse');
+
  wp_register_style('table-responsive-css', 'https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css', array(), time());
  wp_enqueue_style('table-responsive-css');
 
@@ -192,6 +197,14 @@ add_action('wp_ajax_event-list-factura-compras', 'vista_factura_compras');
 
 add_action('wp_ajax_nopriv_event-list-factura-ventas-select', 'vista_factura_ventas');
 add_action('wp_ajax_event-list-factura-ventas-select', 'vista_factura_ventas');
+
+
+# ===============================================================
+# ========== Actualizar nota de diplomado =======================
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-update-diplomado', 'update_diplomado');
+add_action('wp_ajax_event-list-update-diplomado', 'update_diplomado');
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 
