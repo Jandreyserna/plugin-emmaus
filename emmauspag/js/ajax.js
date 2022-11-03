@@ -370,7 +370,7 @@ jQuery(document).ready(function ($) {
 			{data: "FechaTerminacion"},
 			{"defaultContent": "<div class='container' style='display: flex;'>"+
 									"<div class='col'>"+
-										"<button id='update-note-diploma' class='boton-hover' type='button'>"+
+										"<button id='update-note-diploma' data-toggle='modal' data-target='#updateNoteDiploma' class='boton-hover' type='button'>"+
 											"<span></span>"+
 											"<span></span>"+
 											"<span></span>"+
@@ -410,7 +410,6 @@ jQuery(document).ready(function ($) {
 			},
 			success: function(result){
 			jQuery('.modal-content').html(result);
-		
 			}
 		});
 	});
