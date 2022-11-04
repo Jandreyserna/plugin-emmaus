@@ -75,27 +75,27 @@
             <!-- Second card  -->
             <div class="col-md-6 mb-4 text-center">
                 <div class="card h-100">
-                    <h4 class="card-header">Card 2 Title</h4>
+                    <h4 class="card-header">Administracion</h4>
                     <div class="card-body">
-                        <p class="card-text">Placeholder content for the scrollspy example. If you wanna dance, if you
-                            want
-                            it all, you know that I'm the girl that you should call. Walk through the storm I would. So
-                            let
-                            me get you in your birthday suit. The one that got away.</p>
+                        <p class="card-text">
+                            Pestaña de administracion, el boton   <span style=" padding: 5px; background-color: green; color: white; "> Facturacion </span>   
+                            dirige a la seccion de facturas <br> En la seccion del desplegable <span style=" padding: 5px; background-color: #17a2b8; color: white; "> > </span> 
+                            hay opciones para <strong> Imprimir certificados </strong>, tambien para <strong>Ver Diplomas</strong>
+                        </p>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Primary</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle px-3 waves-effect waves-light"
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Facturacion</button>
+                            <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">Materiales</a>
+                                <a class="dropdown-item" href="#">Proveedores</a>
+                                <!-- <a class="dropdown-item" href="#">Something else here</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                                <a class="dropdown-item" href="#">Separated link</a> -->
                             </div>
                         </div>
                     </div>
