@@ -6,35 +6,35 @@
 } */
 
 /*Variables*/
-#footer-thankyou{
+#footer-thankyou {
   display: none;
 }
 
-#wpfooter{
+#wpfooter {
   display: none;
 }
 
 /* General styles */
 :root {
-  --main-green:#50a74b;
+  --main-green: #50a74b;
   --main-blue: #004b7c;
   --sec-blue: #0061a0;
   --light-green: #289241;
   --light-blue: #88aad7;
 }
 
-.list-win{
+.list-win {
   border-radius: 2px;
-  background: #BCFCA2;
+  background: #bcfca2;
 }
 
-.list-lost{
-  background: #FD8A51;
+.list-lost {
+  background: #fd8a51;
   border-radius: 2px;
 }
 
 /*principal page styles*/
-.principal{
+.principal {
   /* padding: 2vh;
   border: 1vh; */
   display: flex;
@@ -44,20 +44,20 @@
   flex-wrap: wrap; */
   flex-flow: row wrap;
   justify-content: center;
-  height: 300px;
+  height: 100%;
   align-items: stretch;
   /* align-content: center; */
 }
 
-.title{
+.title {
   color: var(--main-blue);
   width: 100%;
 }
 
-.main-image{
+/* .main-image{
   height: 300px;
   align-items: center;
-}
+} */
 
 /*Menu principal*/
 /* header {
@@ -87,12 +87,12 @@
   background-color: var(--main-green);
 } */
 
-.post-menu{
+.post-menu {
   position: relative;
   bottom: -100px;
 }
 
-.img-menu{
+.img-menu {
   height: 50px;
   /* background-color: #fff; */
   align-self: center;
@@ -107,45 +107,42 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 /*Botones*/
-.btn-outline-success{
+.btn-outline-success {
   background-color: var(--light-green);
   color: white;
 }
 
-.btn-primary{
+.btn-primary {
   background-color: var(--light-green);
 }
 
-.btn-secondary{
+.btn-secondary {
   background-color: var(--main-blue);
 }
 
-.btn-accion{
+.btn-accion {
   background-color: rgb(187, 187, 187);
   border: solid 2px black;
 }
 /* / Botones vista estudiantes*/
 
-#wpfooter{
+#wpfooter {
   position: relative;
 }
 
-a.class_a_href{
+a.class_a_href {
   cursor: default;
   color: white;
 }
 
-
-
-div.lateral{
+div.lateral {
   display: inline-grid;
   padding: 5%;
   width: 50%;
   position: relative;
-
 }
 
-div.otro-lado{
+div.otro-lado {
   display: inline-flex;
   padding: 5%;
   margin-top: 50px;
@@ -153,63 +150,60 @@ div.otro-lado{
   width: 30%;
 }
 
-button.btn{
+button.btn {
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 5px;
 }
 
-a.btn-crudd{
+a.btn-crudd {
   cursor: default;
   color: var(--main-blue);
 }
 
-button.boton_para_volver{
+button.boton_para_volver {
   margin-bottom: 5px;
 }
 
-blockquote.blockquote{
+blockquote.blockquote {
   margin-top: 20%;
   margin-left: 10% !important;
 }
 
-table.table{
+table.table {
   margin-top: 20px;
 }
 
-div.crudd{
+div.crudd {
   display: inline-flex;
   margin: 20px;
   width: 70%;
   margin-left: 10px !important;
 }
 
-
-form select{
+form select {
   border-radius: 10px;
 }
 
-
-
-form label{
-    margin-right: 40px;
-    margin-left: 20px;
+form label {
+  margin-right: 40px;
+  margin-left: 20px;
 }
 
-.selecc-Factura{
-  margin-left:20px;
+.selecc-Factura {
+  margin-left: 20px;
 }
 
-.logo{
+.logo {
   display: block;
   margin: auto;
 }
 
- .buscador{
+.buscador {
   border-radius: 6px;
 }
 
-.boton-volver .boton_para_volver{
+.boton-volver .boton_para_volver {
   border-radius: 6px;
 }
 
@@ -227,11 +221,11 @@ table {
 
 table thead {
   border: 12px;
-  background-color:var(--sec-blue);
+  background-color: var(--sec-blue);
   color: #fff;
 }
 
-.dataTables_length select{
+.dataTables_length select {
   width: 50px;
 }
 
@@ -249,7 +243,7 @@ div.admin_contenedor {
   padding-top: 100px;
 }
 
-div.admin_contenedor > button{
+div.admin_contenedor > button {
   background-color: #4895ef;
   color: #f1feae;
   margin: 20px;
