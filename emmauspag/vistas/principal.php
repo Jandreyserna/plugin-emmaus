@@ -44,63 +44,44 @@
 
             <!-- Fist card -->
             <div class="col-md-6 mb-4 text-center">
-                <div class="card h-100">
-                    <h4 class="card-header ">Inicio Estudiantes</h4>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Seccion con las acciones principales, el boton   <span style=" padding: 5px; background-color: green; color: white; "> Estudiantes </span>   
-                            dirige a la administracion de estudiantes. <br> En la seccion del desplegable <span style=" padding: 5px; background-color: #004b7c; color: white; "> > </span> 
-                            hay opciones para <strong> Imprimir certificados </strong>, tambien para <strong>Ver Diplomas</strong>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn-group">
+                <!-- <div class="card h-100"> -->
+                    <p>
+                        <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse"
+                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Button with data-target
+                        </button>
+                    </p>
+                    <div class="card-footer collapse" id="collapseExample">
+                        <div class="card card-body">
                             <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-                            <button type="button" class="btn btn-secondary dropdown-toggle px-3 waves-effect waves-light"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Imprimir certificado</a>
-                                <a class="dropdown-item" href="#">Ver diplomas</a>
-                                <!-- <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a> -->
-                            </div>
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
 
-            <!-- Second card  -->
+            <!-- Second card -->
             <div class="col-md-6 mb-4 text-center">
-                <div class="card h-100">
-                    <h4 class="card-header">Administracion</h4>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Pestaña de administracion, el boton   <span style=" padding: 5px; background-color: green; color: white; "> Facturacion </span>   
-                            dirige a la seccion de facturas <br> En la seccion del desplegable <span style=" padding: 5px; background-color: #17a2b8; color: white; "> > </span> 
-                            hay opciones para <strong> Imprimir certificados </strong>, tambien para <strong>Ver Diplomas</strong>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Facturacion</button>
-                            <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Materiales</a>
-                                <a class="dropdown-item" href="#">Proveedores</a>
-                                <!-- <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a> -->
-                            </div>
+                <!-- <div class="card h-100"> -->
+                    <p>
+                        <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse"
+                            data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                            Button with data-target
+                        </button>
+                    </p>
+                    <div class="card-footer collapse" id="collapseExample2">
+                        <div class="card card-body">
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
+
         </div>
     </div>
 </section>
