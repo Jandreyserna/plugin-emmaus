@@ -43,45 +43,78 @@
         <div class="row">
 
             <!-- Fist card -->
-            <div class="col-md-6 mb-4 text-center">
+            <div class="col-md-4 mb-4 text-center">
                 <!-- <div class="card h-100"> -->
-                    <p>
-                        <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse"
-                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Button with data-target
-                        </button>
-                    </p>
-                    <div class="card-footer collapse" id="collapseExample">
-                        <div class="card card-body">
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
+                <p>
+                    <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="collapse"
+                        data-target="#collapseEstudiantes" aria-expanded="false" aria-controls="collapseEstudiantes">
+                        Estudiantes
+                    </button>
+                </p>
+                <div class="card-footer collapse" id="collapseEstudiantes">
+                    <div class="card card-body">
 
-                        </div>
+                        <a href="?page=estudiante" class="btn btn-primary waves-effect waves-light" role="button" aria-disabled="true">Administrar Estudiantes</a>
+                        <a href="?page=impresiones" class="btn btn-primary waves-effect waves-light"  role="button">Certificaciones</a>
+                        <a href="?page=diploma" class="btn btn-primary waves-effect waves-light"  role="button">Diplomas</a>
+
                     </div>
+                </div>
                 <!-- </div> -->
             </div>
 
             <!-- Second card -->
-            <div class="col-md-6 mb-4 text-center">
+            <div class="col-md-4 mb-4 text-center">
                 <!-- <div class="card h-100"> -->
-                    <p>
-                        <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse"
-                            data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-                            Button with data-target
-                        </button>
-                    </p>
-                    <div class="card-footer collapse" id="collapseExample2">
-                        <div class="card card-body">
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-                            <button type="button" class="btn btn-primary waves-effect waves-light">Estudiantes</button>
-
-                        </div>
+                <p>
+                    <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-toggle="collapse"
+                        data-target="#collapseMateriales" aria-expanded="false" aria-controls="collapseMateriales">
+                        Materiales
+                    </button>
+                </p>
+                <div class="card-footer collapse" id="collapseMateriales">
+                    <div class="card card-body">
+                        <a href="?page=material" class="btn btn-secondary waves-effect waves-light" role="button" aria-disabled="true">Administrar materiales</a>
+                        <a class="btn btn-secondary waves-effect waves-light" href="?page=curso"  role="button">Cursos</a>
+                        <a class="btn btn-secondary waves-effect waves-light" href="?page=inventarios"  role="button">Inventario</a>
                     </div>
+                </div>
+                <!-- </div> -->
+            </div>
+
+            <!-- Third card -->
+            <div class="col-md-4 mb-4 text-center">
+                <!-- <div class="card h-100"> -->
+                <p>
+                    <button class="btn btn-lg dropdown-toggle btn-info" type="button" data-toggle="collapse"
+                        data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                        Administracion
+                    </button>
+
+                    <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item btn">Ir a administración</a>
+                            <!-- <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a> -->
+                        </div>
+                    </button>
+                </p>
+                <div class="card-footer collapse" id="collapseExample3">
+                    <div class="card card-body">
+                        <button type="button" class="btn btn-info waves-effect waves-light">Facturacion</button>
+                        <button type="button" class="btn btn-info waves-effect waves-light">Cartera</button>
+                        <button type="button" class="btn btn-info waves-effect waves-light">Usuarios administrativos</button>
+
+                    </div>
+                </div>
                 <!-- </div> -->
             </div>
 
         </div>
     </div>
+
 </section>

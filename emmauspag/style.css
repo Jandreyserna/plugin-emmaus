@@ -44,9 +44,13 @@
   flex-wrap: wrap; */
   flex-flow: row wrap;
   justify-content: center;
-  height: 150px;
-  align-items: stretch;
+  height: 288px;
+  align-items: center;
   /* align-content: center; */
+}
+
+div.principal img {
+  width: 95%;
 }
 
 .title {
