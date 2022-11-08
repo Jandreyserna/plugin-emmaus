@@ -39,7 +39,7 @@
 </div>
 
 <section>
-    <div class="container-fluid">
+    <div class="container p-5 bg-secondary" >
         <div class="row">
 
             <!-- Fist card -->
