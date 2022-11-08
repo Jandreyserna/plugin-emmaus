@@ -91,24 +91,23 @@
                         Administracion
                     </button>
 
-                    <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"
+                    <!-- <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                         <div class="dropdown-menu">
                             <a class="dropdown-item btn">Ir a administración</a>
-                            <!-- <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a> -->
+                            <a class="dropdown-item" href="#">Separated link</a>
                         </div>
-                    </button>
+                    </button> -->
                 </p>
                 <div class="card-footer collapse" id="collapseExample3">
                     <div class="card card-body">
-                        <button type="button" class="btn btn-info waves-effect waves-light">Facturacion</button>
-                        <button type="button" class="btn btn-info waves-effect waves-light">Cartera</button>
-                        <button type="button" class="btn btn-info waves-effect waves-light">Usuarios administrativos</button>
-
+                        <a class="btn btn-info waves-effect waves-light" href="?page=facturas"  role="button">Facturacion</a>
+                        <a class="btn btn-info waves-effect waves-light" href="#"  role="button">Cartera</a>
+                        <a class="btn btn-info waves-effect waves-light" href="?page=administracion"  role="button">Usuarios administrativos</a>
                     </div>
                 </div>
                 <!-- </div> -->
