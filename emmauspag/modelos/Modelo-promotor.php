@@ -18,12 +18,13 @@ class Modelo_promotor
   #===y traer la iglesia a la que esta asociado ese promotor====
   #=============================================================
 
+
   public function traer_promotor(){
     $informacion = $this->wpdb->get_results(
           "SELECT promotores.`IdContacto`,promotores.`Nombre`, promotores.`Ciudad`
           FROM `promotores`
           GROUP BY promotores.`IdContacto`
-          ORDER BY promotores.`Ciudad`
+          ORDER BY promotores.`Ciudad` 
           
           ",
            'ARRAY_A'
@@ -37,6 +38,18 @@ class Modelo_promotor
           "SELECT promotores.`Nombre`
           FROM `promotores`
           WHERE promotores.`IdContacto` = $id
+          ",
+           'ARRAY_A'
+         );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
+
+  public function traer_iglesias(){
+    $informacion = $this->wpdb->get_results(
+          "SELECT iglesias.`IdIglesia`, iglesias.`NombreIglesia` as Nombre
+          FROM `iglesias`
+          GROUP BY iglesias.`IdIglesia`
           ",
            'ARRAY_A'
          );

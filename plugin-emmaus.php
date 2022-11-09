@@ -1,4 +1,5 @@
 <?php
+use function mysql_xdevapi\expression;
 /*
 Plugin Name: Sistema de Gestion Emmaus
 Description: Plugion diseñado para gestionar la base de datos del instituto Emmaus
@@ -319,11 +320,10 @@ class PrimaryClass
 
     public function general_admin()
     {
-      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlEstudiantes.php';
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlPromotor.php';
+
       require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/administracion.php';
-      // require_once dirname(__FILE__) . '/emmauspag/Controller/ControlOnlyEstudiante.php';
-      // require_once dirname(__FILE__) . '/emmauspag/vistas/estudiantes/estudiantes.php';
     }
 
 

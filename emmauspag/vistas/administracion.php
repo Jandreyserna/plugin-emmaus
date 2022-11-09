@@ -1,3 +1,10 @@
+<?php 
+
+
+
+
+?>
+
 <div class="titulo text-center p-2">
     <h1>Administracion de usuarios</h1>
 </div>
@@ -141,6 +148,9 @@
 </div>
 
 <!-- Modal -->
+<?php
+    $iglesias = Information_iglesias();
+?>
 
 <!-- Modal crear promotor -->
 <div class="modal fade" id="añadirPromotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -158,10 +168,16 @@
                     <form>
                         <div class="form-group row">
                             <label for="inputSelectIglesia">Iglesia</label>
-                            <select id="inputSelectIglesia" class="form-control">
-                                <option selected>Seleccione a la iglesia relacionada</option>
-                                <option>(13) Dosquebradas</option>
-                                <option>(22) Pereira</option>
+                            <select id="inputSelectIglesia" name="IdIglesia" class="form-control">
+                                <option value="" disabled selected>Seleccione a la iglesia relacionada</option>
+                            <?php
+                                foreach ($iglesias as $iglesia => $valor):
+                            ?>
+                                <option value="<?= $valor['IdIglesia'] ?>"><?= $valor['Nombre']?></option>
+                                  
+                            <?php
+                                endforeach;
+                            ?>
 
                             </select>
                         </div>
