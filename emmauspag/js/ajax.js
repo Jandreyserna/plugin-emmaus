@@ -769,7 +769,10 @@ jQuery(document).ready(function ($) {
 
 	});
 
-	/* tabla de facturas */
+/* 
+	tabla de facturas
+*/
+
 	$('#table-facturas').DataTable({
 		language: {
 			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
@@ -779,13 +782,12 @@ jQuery(document).ready(function ($) {
 			dataSrc:"",
 		},
 		columns:[
-			{data: "IdFactura"},
-			{data: "Vendedor"},
-			{data: "Comprador"},
-			{data: "Fecha"},
-			{data: "Precio"},
 			{data: "Tipo"},
-			{data: "Deuda"},
+			{data: "IdFactura"},
+			{data: "Promotor"}, {data: "Proovedor"},
+			{data: "FechaFactura"},
+			{data: "PrecioTotal"},
+			{data: "Saldo"},
 			{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
 		],
 		order: [[0, "desc"]]

@@ -111,4 +111,35 @@ class Modelo_facturas
         $datos # DATOS
       );
     }
+
+/* pedir informacion de facturas de ventas */
+
+    function get_facturas_ventas(){
+      $this->wpdb->show_errors(false);
+      $informacion = $this->wpdb->get_results(
+            "SELECT  `facturas_ventas`.`IdFactura` AS 'IdFactura', `promotores`.`Nombre` AS 'Promotor', 
+            `facturas_ventas`.`FechaFactura`, `facturas_ventas`.`PrecioTotal`,`facturas_ventas`.`Saldo`
+            FROM `facturas_ventas` INNER JOIN `promotores`
+            WHERE `promotores`.`IdContacto` = `facturas_ventas`.`IdContacto`
+            ",
+            'ARRAY_A'
+          );
+      return (isset($informacion[0])) ? $informacion : null;
+    }
+
+/* pedir informacion de facturas de compras */
+
+    function get_facturas_compras(){
+      $this->wpdb->show_errors(false);
+      $informacion = $this->wpdb->get_results(
+            "SELECT `facturas_compras`.`IdFacturaCompra` AS 'IdFactura', `proovedores`.`proovedor` as 'Proovedor',
+            `facturas_compras`.`FechaFactura`,
+            `facturas_compras`.`PrecioTotal`,`facturas_compras`.`Saldo` 
+            FROM `facturas_compras`INNER JOIN `proovedores`
+            WHERE `proovedores`.`IdProovedor` = `facturas_compras`.`IdProveedor`
+            ",
+            'ARRAY_A'
+          );
+      return (isset($informacion[0])) ? $informacion : null;
+    }
 }

@@ -20,7 +20,7 @@ class ModeloInventario
     $informacion = $this->wpdb->get_results(
           "SELECT * 
            FROM `inventarios` 
-           
+           WHERE ´inventario´ = 0
             ",
            'ARRAY_A'
          );

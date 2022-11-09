@@ -9,12 +9,16 @@
           
       <table  class=" display" id="table-facturas">
           <thead>
-              <th>id</th>
-              <th>Vendedor</th>
+              <th>Tipo Factura</th>
+              <th>IdFactura</th>
               <th>Comprador</th>
-              <th>Fecha</th>
+              <th>Proovedor</th>
+              <th>Fecha Factura</th>
               <th>Precio factura</th>
-              <th>estado</th>
+              <th>Saldo</th>
+              <th></th>
+              
+            
           </thead>
       </table>
   </div>
