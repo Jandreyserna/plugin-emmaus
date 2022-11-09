@@ -90,3 +90,5 @@ require_once dirname(__DIR__).'/modales/modalActualizarEstudiante.php';
 require_once dirname(__DIR__).'/modales/modalCursoRealizado.php';
 require_once dirname(__DIR__).'/modales/modalPlanEstudiosEstudiante.php';
 require_once dirname(__DIR__).'/modales/modalRegistrarCursoEstudiante.php';
+
+?>
