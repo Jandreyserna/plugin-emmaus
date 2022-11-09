@@ -142,6 +142,8 @@
 
 </div>
 
+
+<!-- Modal crear promotor -->
 <!-- Modal -->
 <div class="modal fade" id="añadirPromotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -196,31 +198,6 @@
 
                     </form>
                 </div>
-
-
-                <!-- <form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Example label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Another label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-  </div>
-</form> -->
-
-                <!-- <form class="form-inline">
-                    <div class="form-group mb-2">
-                        <label for="staticEmail2">Email</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2"
-                            value="email@example.com">
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Password</label>
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                    </div>
-                </form> -->
-
             </div>
 
         </div>
