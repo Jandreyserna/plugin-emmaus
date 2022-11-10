@@ -6,14 +6,14 @@
   <table class="display" id="table-diplomas">
   <thead>
     <tr>
-      <th scope="col">Id de diploma</th>
-      <th scope="col">Diplomado</th>
+      <th scope="col"># Diploma</th>
+      <th scope="col">Nombre Diplomado</th>
       <th scope="col">Programa de estudio</th>
       <th scope="col">Nombre estudiante</th>
       <th scope="col">Apellidos estudiante</th>
       <th scope="col">Nota</th>
       <th scope="col">Fecha de Terminación</th>
-      <th scope="col"></th>
+      <th scope="col">Actualizar | Imprimir</th>
     </tr>
   </thead>
 

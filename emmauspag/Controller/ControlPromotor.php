@@ -10,4 +10,9 @@ function Information_iglesias()
   return $datas;
 }
 
-?>
+function ultimo_id(){
+
+  $modelo = new Modelo_promotor();
+  $id = $modelo-> last_id();
+  return $id[0]['IdContacto'];
+}

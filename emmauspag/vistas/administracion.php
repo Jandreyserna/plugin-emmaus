@@ -9,10 +9,10 @@
                 {
                     $_POST[$campo] = 	strtoupper($_POST[$campo]);
                 }
-                // $_POST ['FechaSolicitud'] = date("Y-m-d");
-                // $ultimoId = ultimo_id();
-                // $ultimoId = $ultimoId + 1;
-                // $_POST['IdEstudiante'] = $ultimoId;
+                $_POST ['FechaInscripcion'] = date("Y-m-d");
+                $ultimoId = ultimo_id();
+                $ultimoId = $ultimoId + 1;
+                $_POST['IdEstudiante'] = $ultimoId;
                 insert_funtion('promotores', $_POST);
         }
     }

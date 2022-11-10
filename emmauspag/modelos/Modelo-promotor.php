@@ -56,4 +56,17 @@ class Modelo_promotor
     return (isset($informacion[0])) ? $informacion : null;
 
   }
+
+  public function last_id()
+  {
+    $informacion = $this->wpdb->get_results(
+      "SELECT MAX(IdContacto) AS IdContacto
+      FROM `promotores` 
+      WHERE 1
+      ",
+      'ARRAY_A'
+    );
+    return (isset($informacion[0])) ? $informacion : null;
+
+  }
 }
