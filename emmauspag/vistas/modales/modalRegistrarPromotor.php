@@ -25,13 +25,13 @@
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Nombre:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputName" placeholder="Nombre promotor">
+                                <input type="text" class="form-control" id="inputName" placeholder="Nombre promotor">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputCiudad" class="col-sm-2 col-form-label">Nombre:</label>
+                            <label for="inputCiudad" class="col-sm-2 col-form-label">Ciudad:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputCiudad" placeholder="Ciudad promotor">
+                                <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad promotor">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -43,7 +43,7 @@
                         <div class="form-group row">
                             <label for="inputTelefono" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input type="phone" class="form-control" id="inputTelefono" placeholder="Telefono">
+                                <input type="text" class="form-control" id="inputTelefono" placeholder="Telefono">
                             </div>
                         </div>
                         <div class="modal-footer">

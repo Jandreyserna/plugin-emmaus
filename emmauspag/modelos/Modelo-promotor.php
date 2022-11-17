@@ -33,6 +33,7 @@ class Modelo_promotor
 
   }
 
+  #=== trae la informacion de un solo promotor segun su id====
   public function traer_un_promotor($id){
     $informacion = $this->wpdb->get_results(
           "SELECT promotores.`Nombre`
@@ -45,6 +46,7 @@ class Modelo_promotor
 
   }
 
+  #=== trae la informacion de todas las iglesias====
   public function traer_iglesias(){
     $informacion = $this->wpdb->get_results(
           "SELECT iglesias.`IdIglesia`, iglesias.`NombreIglesia` as Nombre
@@ -57,6 +59,7 @@ class Modelo_promotor
 
   }
 
+  #=== trae la informacion del ultimo id registrado para promotor====
   public function last_id()
   {
     $informacion = $this->wpdb->get_results(

@@ -54,29 +54,38 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Iglesia</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Cupo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td>Jose Manuel</td>
+                        <td>Pereira</td>
+                        <td>1</td>
+                        <td></td>
+                        <td>1000</td>
                     </tr>
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
+                        <th scope="row">11</th>
+                        <td>FERNANDO RAMIREZ</td>
+                        <td>Florida</td>
+                        <td>3</td>
+                        <td>fercho0825@hotmail.com</td>
+                        <td>1000</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
+                        <td>Jose Manuel</td>
+                        <td>Pereira</td>
+                        <td>1</td>
+                        <td></td>
+                        <td>1000</td>
                     </tr>
                 </tbody>
             </table>
@@ -187,7 +196,7 @@
                         <div class="form-group row">
                             <label for="inputSelectIglesia">Iglesia</label>
                             <select id="inputSelectIglesia" name="IdIglesia" class="form-control">
-                                <option value="" disabled selected>Seleccione a la iglesia relacionada</option>
+                                <option value="" disabled selected>Seleccione la iglesia relacionada</option>
                             <?php
                                 foreach ($iglesias as $iglesia => $valor):
                             ?>
@@ -253,7 +262,7 @@
                         <div class="form-group row">
                             <label for="inputSelectIglesia">Iglesia</label>
                             <select id="inputSelectIglesia" class="form-control">
-                                <option selected>Seleccione a la iglesia relacionada</option>
+                                <option selected>Seleccione la iglesia relacionada</option>
                                 <option>(13) Dosquebradas</option>
                                 <option>(22) Pereira</option>
 
