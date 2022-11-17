@@ -143,29 +143,32 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Id</th>                        
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Correo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td>Colaborador</td>
+                        <td>Velasques</td>
+                        <td>9555555</td>
+                        <td>45555555</td>
+                        <td>Direccion de prueba</td>
+                        <td>prueba@mdo.com</td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
+                        <td>Proveedor prueba</td>
+                        <td>Contacto de prueba</td>
+                        <td>Direccion de prueba</td>
+                        <td>45555555</td>
+                        <td>prueba@#mdo.com</td>
                     </tr>
                 </tbody>
             </table>
@@ -315,7 +318,7 @@
                         <div class="form-group row">
                             <label for="inputCorreo" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email del contacto p de proveedor">
+                                <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email del contacto o del proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -353,7 +356,7 @@
                 <div class="content">
                     <form action="" method="post">
                     <input name="activo" type="hidden" value="nuevo-colaborador" >
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="inputSelectIglesia">Iglesia</label>
                             <select id="inputSelectIglesia" class="form-control">
                                 <option selected>Seleccione a la iglesia relacionada</option>
@@ -361,29 +364,47 @@
                                 <option>(22) Pereira</option>
 
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Nombre:</label>
+                            <label for="inputName" class="col-sm-2 col-form-label">Nombres</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputName" placeholder="Nombre promotor">
+                                <input type="text" name="Nombre" class="form-control" id="inputName" placeholder="Nombre del colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputCiudad" class="col-sm-2 col-form-label">Nombre:</label>
+                            <label for="inputLastname" class="col-sm-2 col-form-label">Apellido</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputCiudad" placeholder="Ciudad promotor">
+                                <input type="text" name="ShortNombre" class="form-control" id="inputLastname" placeholder="Apellido del colaborador">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDocument" class="col-sm-2 col-form-label">Documento</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="NombreContacto" class="form-control" id="inputDocument" placeholder="Documento del colaborador">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputTelefono" class="col-xl-2 col-form-label">Telefono</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Telefono" class="form-control" id="inputTelefono" placeholder="Telefono de colaborador">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDireccion" class="col-sm-2 col-form-label">Direccion</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Direccion" class="form-control" id="inputDireccion" placeholder="Direccion del colaborador">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputVinculacion" class="col-sm-2 col-form-label">Vinculacion</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Ciudad" class="form-control" id="inputVinculacion" placeholder="Tipo vinculacion colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputCorreo" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputCorreo" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputTelefono" class="col-sm-2 col-form-label">Telefono</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputTelefono" placeholder="Telefono">
+                                <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email del colaborador">
                             </div>
                         </div>
                         <div class="modal-footer">
