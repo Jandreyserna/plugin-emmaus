@@ -1,5 +1,6 @@
 <?php 
 $controller = new ControlPromotor;
+
     if(!empty($_POST['activo'])){
         switch ($_POST['activo']) {
             case 'nuevo-promotor': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
@@ -22,6 +23,35 @@ $controller = new ControlPromotor;
                 $datosPromotor['IdIglesiaRel'] = $_POST['IdIglesia'];
                 $datosPromotor['Inscriptor'] = $userData->user_login; 
                 $controller->insert_promotor($datosPromotor);
+                break;
+
+            case 'nuevo-proveedor':
+                $controllerProveedor = new ControlProveedor;
+
+                unset($_POST['activo']);
+                foreach($_POST as $campo => $valor) // convierto todas las minusculas a mayusculas
+                {
+                    $_POST[$campo] = 	strtoupper($_POST[$campo]);
+                }
+                $userData = wp_get_current_user();
+                /* traer el ultimo id de la tabla proveedores */
+                $ultimoId = $controllerProveedor->ultimo_id();
+                $ultimoId = $ultimoId + 1;
+                /* datos para la bd */
+                $datosProveedor['IdProovedor'] = $ultimoId;
+                $datosProveedor['Nombrecorto'] = $_POST['Nombrecorto'];
+                $datosProveedor['proovedor'] = $_POST['proovedor'];
+                $datosProveedor['contacto'] = $_POST['contacto'];
+                $datosProveedor['direccion'] = $_POST['direccion'];
+                $datosProveedor['ciudad/pais'] = $_POST['ciudad/pais'];
+                $datosProveedor['telefono'] = $_POST['telefono'];
+                $datosProveedor['celularContacto'] = $_POST['celularContacto'];
+                $datosProveedor['correoContacto'] = $_POST['correoContacto'];
+                $datosProveedor['NIT'] = $_POST['NIT'];
+                $datosProveedor['inscriptor'] = $userData->user_login; 
+                $controllerProveedor->insert_proveedor($datosProveedor);
+                break;
+
         }
     }
 ?>
@@ -82,7 +112,7 @@ $controller = new ControlPromotor;
                     Nuevo Proveedor
                 </button>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="table-proveedores">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>                        
@@ -91,25 +121,12 @@ $controller = new ControlPromotor;
                         <th scope="col">Direccion</th>
                         <th scope="col">Celular</th>
                         <th scope="col">Correo</th>
+                        <!-- <th></th> -->
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Proveedor prueba</td>
-                        <td>Contacto de prueba</td>
-                        <td>Direccion de prueba</td>
-                        <td>45555555</td>
-                        <td>prueba@mdo.com</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Proveedor prueba</td>
-                        <td>Contacto de prueba</td>
-                        <td>Direccion de prueba</td>
-                        <td>45555555</td>
-                        <td>prueba@#mdo.com</td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>

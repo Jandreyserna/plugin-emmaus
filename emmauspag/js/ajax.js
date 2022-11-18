@@ -817,4 +817,43 @@ jQuery(document).ready(function ($) {
 		order: [[0, "asc"]]
 	});
 
+/*
+	tabla de proveedores
+*/
+
+	$('#table-proveedores').DataTable({
+		language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/proveedores.php',
+			dataSrc:"",
+		},
+		columns:[
+			{data: "IdProovedor"},
+			{data: "proovedor"},
+			{data: "contacto"},
+			{data: "direccion"},
+			{data: "celularContacto"},
+			{data: "correoContacto"},
+			 	 	 	 	 	 	 	 	 	 	 	
+			// {data: "IdProovedor"},
+			// {data: "Nombrecorto"},
+			// {data: "proovedor"},
+			// {data: "contacto"},
+			// {data: "direccion"},
+			// {data: "ciudad/pais"},
+			// {data: "telefono"},
+			// {data: "celularContacto"},
+			// {data: "correoContacto"},
+			// {data: "NIT"},
+			// {data: "inscriptor"},
+
+
+			//{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
+		],
+		order: [[0, "asc"]]
+	})
+
+
 });
