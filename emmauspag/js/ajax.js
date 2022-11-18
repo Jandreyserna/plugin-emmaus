@@ -793,4 +793,28 @@ jQuery(document).ready(function ($) {
 		order: [[0, "desc"]]
 	});
 
+/* 
+	tabla de promotores
+*/
+
+	$('#table-promotores').DataTable({
+		language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/promotores.php',
+			dataSrc:"",
+		},
+		columns:[
+			{data: "IdContacto"},
+			{data: "Nombre"},
+			{data: "Ciudad"},
+			{data: "NombreIglesia"},
+			{data: "CorreoElectronico"},
+			{data: "CupoCredito"},
+			//{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
+		],
+		order: [[0, "asc"]]
+	});
+
 });

@@ -1,6 +1,5 @@
 <?php 
-
-    print_r($_POST);
+$controller = new ControlPromotor;
     if(!empty($_POST['activo'])){
         switch ($_POST['activo']) {
             case 'nuevo-promotor': // accion activada por el boton de añadir un nuevo estudiante de la page estudiante
@@ -9,17 +8,22 @@
                 {
                     $_POST[$campo] = 	strtoupper($_POST[$campo]);
                 }
-                $_POST ['FechaInscripcion'] = date("Y-m-d");
-                $ultimoId = ultimo_id();
+                $userData = wp_get_current_user();
+                /* traer el ultimo id de la tabla promotores */
+                $ultimoId = $controller->ultimo_id();
                 $ultimoId = $ultimoId + 1;
-                $_POST['IdEstudiante'] = $ultimoId;
-                insert_funtion('promotores', $_POST);
+                /* datos para la bd */
+                $datosPromotor['FechaInscripcion'] = date('d-m-Y');
+                $datosPromotor['IdContacto'] = $ultimoId;
+                $datosPromotor['Nombre'] = $_POST['Nombre'];
+                $datosPromotor['Ciudad'] = $_POST['Ciudad'];
+                $datosPromotor['CorreoElectronico'] = $_POST['CorreoElectronico'];
+                $datosPromotor['Celular'] = $_POST['Celular'];
+                $datosPromotor['IdIglesiaRel'] = $_POST['IdIglesia'];
+                $datosPromotor['Inscriptor'] = $userData->user_login; 
+                $controller->insert_promotor($datosPromotor);
         }
     }
-
-
-
-
 ?>
 
 <div class="titulo text-center p-2">
@@ -51,7 +55,7 @@
                     Nuevo Promotor
                 </button>
             </div>
-            <table class="table table-bordered">
+            <table class="display  table-bordered" id="table-promotores">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
@@ -60,33 +64,11 @@
                         <th scope="col">Iglesia</th>
                         <th scope="col">Email</th>
                         <th scope="col">Cupo</th>
+                        <!-- <th></th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Jose Manuel</td>
-                        <td>Pereira</td>
-                        <td>1</td>
-                        <td></td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">11</th>
-                        <td>FERNANDO RAMIREZ</td>
-                        <td>Florida</td>
-                        <td>3</td>
-                        <td>fercho0825@hotmail.com</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Jose Manuel</td>
-                        <td>Pereira</td>
-                        <td>1</td>
-                        <td></td>
-                        <td>1000</td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -179,7 +161,7 @@
 
 <!-- Modal -->
 <?php
-    $iglesias = Information_iglesias();
+    $iglesias = $controller->Information_iglesias();
 ?>
 
 <!-- Modal crear promotor -->
@@ -205,11 +187,9 @@
                                 foreach ($iglesias as $iglesia => $valor):
                             ?>
                                 <option value="<?= $valor['IdIglesia'] ?>"><?= $valor['Nombre']?></option>
-                                  
                             <?php
                                 endforeach;
                             ?>
-
                             </select>
                         </div>
                         <div class="form-group row">
@@ -225,20 +205,20 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputCorreo" class="col-sm-2 col-form-label">Email</label>
+                            <label for="inputCorreo" class="col-sm-2 col-form-label">Email:</label>
                             <div class="col-sm-10">
                                 <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputTelefono" class="col-sm-2 col-form-label">Telefono</label>
+                            <label for="inputTelefono" class="col-sm-2 col-form-label">Celular:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="Celular" class="form-control" id="inputTelefono" placeholder="Telefono">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Añadir promotor</button>
                         </div>
 
                     </form>

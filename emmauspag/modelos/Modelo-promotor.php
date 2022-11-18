@@ -72,4 +72,28 @@ class Modelo_promotor
     return (isset($informacion[0])) ? $informacion : null;
 
   }
+
+  /*
+   insertar un nuevo promotor
+  */
+  function insert_promotor($datas){
+    $this->wpdb->insert(
+      $this->nombre_tabla, # TABLA
+      $datas # DATOS
+    );
+  }
+  /* consultar todo de promotores */
+  function get_promotores(){
+      $informacion = $this->wpdb->get_results(
+        "SELECT promotores.`IdContacto`,promotores.`Nombre`, promotores.`Ciudad`, iglesias.`NombreIglesia`,
+        promotores.`CorreoElectronico`, promotores.`CupoCredito`
+        FROM `promotores` INNER JOIN `iglesias`
+        WHERE iglesias.`IdIglesia` = promotores.`IdIglesiaRel` 
+        GROUP BY promotores.`IdContacto`
+        ",
+        'ARRAY_A'
+      );
+    return (isset($informacion)) ? $informacion : null;
+  }
+
 }
