@@ -23,7 +23,7 @@ class ControlPromotor
   
     $modelo = new Modelo_promotor();
     $id = $modelo-> last_id();
-    return $id[0]['IdContacto'];
+    return (isset($id[0]['IdPromotor'])) ? $informacion : null;
   }
 
   function insert_promotor($datas){

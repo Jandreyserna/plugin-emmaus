@@ -27,7 +27,6 @@ $controller = new ControlPromotor;
 
             case 'nuevo-proveedor':
                 $controllerProveedor = new ControlProveedor;
-
                 unset($_POST['activo']);
                 foreach($_POST as $campo => $valor) // convierto todas las minusculas a mayusculas
                 {
@@ -38,18 +37,27 @@ $controller = new ControlPromotor;
                 $ultimoId = $controllerProveedor->ultimo_id();
                 $ultimoId = $ultimoId + 1;
                 /* datos para la bd */
+                $datosProveedor = $_POST;
                 $datosProveedor['IdProovedor'] = $ultimoId;
-                $datosProveedor['Nombrecorto'] = $_POST['ShortNombre'];
-                $datosProveedor['proovedor'] = $_POST['Nombre'];
-                $datosProveedor['contacto'] = $_POST['NombreContacto'];
-                $datosProveedor['direccion'] = $_POST['Direccion'];
-                $datosProveedor['ciudad/pais'] = $_POST['Ciudad'];
-                $datosProveedor['telefono'] = $_POST['Telefono'];
-                $datosProveedor['celularContacto'] = $_POST['Celular'];
-                $datosProveedor['correoContacto'] = $_POST['CorreoElectronico'];
-                $datosProveedor['NIT'] = $_POST['Nit'];
                 $datosProveedor['inscriptor'] = $userData->user_login; 
                 $controllerProveedor->insert_proveedor($datosProveedor);
+                break;
+            
+            case 'nuevo-colaborador':
+                $controllerColaborador = new ControlColaborador;
+                unset($_POST['activo']);
+                foreach ($_POST as $campo => $valor):
+                    $_POST[$campo] = strtoupper($_POST[$campo]);
+                endforeach;
+                $userData = wp_get_current_user();
+                /* traer el ultimo id de la tabla proveedores */
+                $ultimoId = $controllerColaborador->ultimo_id();
+                $ultimoId = $ultimoId + 1;
+                /* datos para la bd */
+                $datosColaborador = $_POST;
+                $datosColaborador['IdColaborador'] = $ultimoId;
+                $datosColaborador['Inscriptor'] = $userData->user_login; 
+                $controllerColaborador->insert_colaborador($datosColaborador);
                 break;
 
         }
@@ -139,7 +147,7 @@ $controller = new ControlPromotor;
                     Nuevo Colaborador
                 </button>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="table-colaboradores">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>                        
@@ -152,23 +160,6 @@ $controller = new ControlPromotor;
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Colaborador</td>
-                        <td>Velasques</td>
-                        <td>9555555</td>
-                        <td>45555555</td>
-                        <td>Direccion de prueba</td>
-                        <td>prueba@mdo.com</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Proveedor prueba</td>
-                        <td>Contacto de prueba</td>
-                        <td>Direccion de prueba</td>
-                        <td>45555555</td>
-                        <td>prueba@#mdo.com</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -261,72 +252,63 @@ $controller = new ControlPromotor;
                 <div class="content">
                     <form action="" method="post">
                     <input name="activo" type="hidden" value="nuevo-proveedor" >
-                        <!-- <div class="form-group row">
-                            <label for="inputSelectIglesia">Iglesia</label>
-                            <select id="inputSelectIglesia" class="form-control">
-                                <option selected>Seleccione la iglesia relacionada</option>
-                                <option>(13) Dosquebradas</option>
-                                <option>(22) Pereira</option>
-
-                            </select> 
-                        </div>-->
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
+                            <label for="inputName" class="col-sm-2 col-form-label">Nombre proveedor</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Nombre" class="form-control" id="inputName" placeholder="Nombre proveedor">
+                                <input type="text" name="proovedor" class="form-control" id="inputName" placeholder="Nombre proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputShortName" class="col-sm-2 col-form-label">Corto</label>
+                            <label for="inputShortName" class="col-sm-2 col-form-label">Nombre corto</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ShortNombre" class="form-control" id="inputShortName" placeholder="Nombre corto de proveedor">
+                                <input type="text" name="Nombrecorto" class="form-control" id="inputShortName" placeholder="Nombre corto de proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputContactName" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input type="text" name="NombreContacto" class="form-control" id="inputContactName" placeholder="Nombre contacto">
+                                <input type="text" name="contacto" class="form-control" id="inputContactName" placeholder="Nombre contacto">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputDireccion" class="col-sm-2 col-form-label">Direccion:</label>
+                            <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Direccion" class="form-control" id="inputDireccion" placeholder="Direccion del proveedor">
+                                <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Dirección del proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputCiudad" class="col-sm-2 col-form-label">Ciudad:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Ciudad" class="form-control" id="inputCiudad" placeholder="Ciudad del proveedor">
+                                <input type="text" name="ciudad/pais" class="form-control" id="inputCiudad" placeholder="Ciudad del proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputTelefono" class="col-xl-2 col-form-label">Telefono de contacto</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Telefono" class="form-control" id="inputTelefono" placeholder="Telefono de contacto">
+                                <input type="number" name="telefono" class="form-control" id="inputTelefono" placeholder="Telefono de contacto" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputCelular" class="col-xl-2 col-form-label">Celular de contacto</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Celular" class="form-control" id="inputCelular" placeholder="Celular de contacto">
+                                <input type="number" name="celularContacto" class="form-control" id="inputCelular" placeholder="Celular de contacto" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputCorreo" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email del contacto o del proveedor">
+                                <input type="email" name="correoContacto" class="form-control" id="inputCorreo" placeholder="Email del contacto o del proveedor">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputNit" class="col-xl-2 col-form-label">NIT proveedor</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Nit" class="form-control" id="inputNit" placeholder="NIT del proveedor">
+                                <input type="text" name="NIT" class="form-control" id="inputNit" placeholder="NIT del proveedor">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar proveedor</button>
                         </div>
 
                     </form>
@@ -353,62 +335,52 @@ $controller = new ControlPromotor;
                 <div class="content">
                     <form action="" method="post">
                     <input name="activo" type="hidden" value="nuevo-colaborador" >
-                        <!-- <div class="form-group row">
-                            <label for="inputSelectIglesia">Iglesia</label>
-                            <select id="inputSelectIglesia" class="form-control">
-                                <option selected>Seleccione a la iglesia relacionada</option>
-                                <option>(13) Dosquebradas</option>
-                                <option>(22) Pereira</option>
-
-                            </select>
-                        </div> -->
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Nombres</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Nombre" class="form-control" id="inputName" placeholder="Nombre del colaborador">
+                                <input type="text" name="Nombres" class="form-control" id="inputName" placeholder="Nombre del colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputLastname" class="col-sm-2 col-form-label">Apellido</label>
+                            <label for="inputLastname" class="col-sm-2 col-form-label">Apellidos</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ShortNombre" class="form-control" id="inputLastname" placeholder="Apellido del colaborador">
+                                <input type="text" name="Apellidos" class="form-control" id="inputLastname" placeholder="Apellido del colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputDocument" class="col-sm-2 col-form-label">Documento</label>
                             <div class="col-sm-10">
-                                <input type="text" name="NombreContacto" class="form-control" id="inputDocument" placeholder="Documento del colaborador">
+                                <input type="number" name="documento" class="form-control" id="inputDocument" placeholder="Documento del colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputTelefono" class="col-xl-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Telefono" class="form-control" id="inputTelefono" placeholder="Telefono de colaborador">
+                                <input type="number" name="telefono" class="form-control" id="inputTelefono" placeholder="Telefono de colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputDireccion" class="col-sm-2 col-form-label">Direccion</label>
+                            <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Direccion" class="form-control" id="inputDireccion" placeholder="Direccion del colaborador">
+                                <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Dirección del colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputVinculacion" class="col-sm-2 col-form-label">Vinculacion</label>
+                            <label for="inputVinculacion" class="col-sm-2 col-form-label">Vinculación</label>
                             <div class="col-sm-10">
-                                <input type="text" name="Ciudad" class="form-control" id="inputVinculacion" placeholder="Tipo vinculacion colaborador">
+                                <input type="text" name="vinculacion" class="form-control" id="inputVinculacion" placeholder="Tipo vinculacion colaborador">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputCorreo" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="CorreoElectronico" class="form-control" id="inputCorreo" placeholder="Email del colaborador">
+                                <input type="email" name="correo" class="form-control" id="inputCorreo" placeholder="Email del colaborador">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar Colaborador</button>
                         </div>
-
                     </form>
                 </div>
             </div>

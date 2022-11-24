@@ -17,7 +17,7 @@ class ControlProveedor
     
         $modelo = new Modelo_proveedor();
         $id = $modelo-> last_id();
-        return $id[0]['IdProovedor'];
+        return (isset($id[0]['IdProovedor'])) ? $informacion : null;
     }
     
     function insert_proveedor($datas){

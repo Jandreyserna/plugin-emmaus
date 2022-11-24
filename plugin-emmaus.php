@@ -26,6 +26,8 @@ require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-material.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloDiplomas.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/ModeloInventario.php';
 require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-facturas.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-proveedor.php';
+require_once dirname(__FILE__) . '/emmauspag/modelos/Modelo-colaborador.php';
 
 // IMPORTANDO LAS FUNTIONS
 require_once dirname(__FILE__) . '/emmauspag/funciones/functions.php';
@@ -321,7 +323,8 @@ class PrimaryClass
     public function general_admin()
     {
       require_once dirname(__FILE__) . '/emmauspag/Controller/ControlPromotor.php';
-
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlProveedor.php';
+      require_once dirname(__FILE__) . '/emmauspag/Controller/ControlColaborador.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/header.php';
       require_once dirname(__FILE__) . '/emmauspag/vistas/administracion.php';
     }

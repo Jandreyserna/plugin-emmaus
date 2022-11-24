@@ -88,7 +88,7 @@ class Modelo_promotor
 
     );
   }
-  /* consultar todo de promotores */
+  /* consultar datos para tabla de promotores */
   function get_promotores()
   {
     $informacion = $this->wpdb->get_results(

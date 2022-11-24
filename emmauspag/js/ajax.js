@@ -836,24 +836,32 @@ jQuery(document).ready(function ($) {
 			{data: "direccion"},
 			{data: "celularContacto"},
 			{data: "correoContacto"},
-			 	 	 	 	 	 	 	 	 	 	 	
-			// {data: "IdProovedor"},
-			// {data: "Nombrecorto"},
-			// {data: "proovedor"},
-			// {data: "contacto"},
-			// {data: "direccion"},
-			// {data: "ciudad/pais"},
-			// {data: "telefono"},
-			// {data: "celularContacto"},
-			// {data: "correoContacto"},
-			// {data: "NIT"},
-			// {data: "inscriptor"},
-
-
-			//{"defaultContent": "<button id='ruta' type='button' class='form btn btn-primary btn-xs '>Más...</button>"}
 		],
 		order: [[0, "asc"]]
-	})
+	});
 
+	/*
+	tabla de Colaboradores
+	*/
+
+	$('#table-colaboradores').DataTable({
+		language: {
+			url:'../wp-content/plugins/plugin-emmaus/emmauspag/js/Spanish.json'
+		},
+		ajax:{
+			url: '../wp-content/plugins/plugin-emmaus/emmauspag/js/render-table/colaboradores.php',
+			dataSrc:"",
+		},
+		columns:[
+			{data: "IdColaborador"},
+			{data: "Nombres"},
+			{data: "Apellidos"},
+			{data: "documento"},
+			{data: "telefono"},
+			{data: "direccion"},
+			{data: "correo"},
+		],
+		order: [[0, "asc"]]
+	});
 
 });

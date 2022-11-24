@@ -5,7 +5,6 @@ require dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/wp-loa
 
 $modelo = new Modelo_proveedor();
 $datos = $modelo->get_proveedores();
-
 echo json_encode($datos);
 
 ?>

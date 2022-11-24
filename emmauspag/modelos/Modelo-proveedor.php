@@ -77,13 +77,9 @@ class Modelo_proveedor
     function get_proveedores()
     {
         $informacion = $this->wpdb->get_results(
-            "SELECT proveedores.`IdProovedor`, proveedores.`Nombrecorto`, proveedores.`proovedor`, proveedores.`contacto`, 
-            proveedores.`direccion`, proveedores.`ciudad/pais`, proveedores.`telefono`, proveedores.`celularContacto`, proveedores.`correoContacto`, 
-            proveedores.`NIT`, proveedores.`inscriptor`
-          FROM `proveedores`
-          GROUP BY proveedores.`IdProovedor`
-          ORDER BY proveedores.`Nombre` 
-          
+            "SELECT `IdProovedor`,`proovedor`,`contacto`,`direccion`,`celularContacto`,`correoContacto`
+            FROM `proveedores`
+            ORDER BY `IdProovedor`
           ",
             'ARRAY_A'
         );
