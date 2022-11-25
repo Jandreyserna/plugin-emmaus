@@ -234,6 +234,10 @@ table thead {
   width: 50px;
 }
 
+.dataTable {
+  width: 95%!important;
+}
+
 /* Vista de administracion */
 div.admin_contenedor {
   display: flex;

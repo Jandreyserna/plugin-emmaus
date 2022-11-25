@@ -88,7 +88,7 @@
                 <p>
                     <button class="btn btn-lg dropdown-toggle btn-info" type="button" data-toggle="collapse"
                         data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-                        Administracion
+                        Administración
                     </button>
 
                     <!-- <button type="button" class="btn btn-info dropdown-toggle px-3 waves-effect waves-light"

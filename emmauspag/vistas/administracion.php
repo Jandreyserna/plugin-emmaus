@@ -65,7 +65,7 @@ $controller = new ControlPromotor;
 ?>
 
 <div class="titulo text-center p-2">
-    <h1>Administracion de usuarios</h1>
+    <h1>Administración de usuarios</h1>
 </div>
 
 <div class="container">
@@ -88,7 +88,7 @@ $controller = new ControlPromotor;
         <div class="tab-pane container active" id="navPillPromotores">
             <!-- Listar Promotores -->
             <div class="titulo p-1">
-                <h3>Administracion de Promotores</h3>
+                <h3>Administración de Promotores</h3>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirPromotor">
                     Nuevo Promotor
                 </button>
@@ -115,7 +115,7 @@ $controller = new ControlPromotor;
 
             <!-- Listar Proveedores -->
             <div class="titulo p-1">
-                <h3>Administracion de Proveedores</h3>
+                <h3>Administración de Proveedores</h3>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirProveedor">
                     Nuevo Proveedor
                 </button>
@@ -142,7 +142,7 @@ $controller = new ControlPromotor;
 
             <!-- Listar Colaboradores -->
             <div class="titulo p-1">
-                <h3>Administracion de Colaboradores</h3>
+                <h3>Administración de Colaboradores</h3>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#añadirColaborador">
                     Nuevo Colaborador
                 </button>
