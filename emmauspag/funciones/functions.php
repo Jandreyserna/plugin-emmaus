@@ -32,7 +32,17 @@ add_action('widgets_init', 'sidebar');
 
 
 
-//echo get_stylesheet_uri();
+/* funcion para saber que usuario esta registrado */
+function cod_get_role_current_user(){
+  if( is_user_logged_in() ) {
+    $user = wp_get_current_user();
+    $role = ( array ) $user->roles;
+    return $role[0];
+  } 
+  else{
+    return false;
+  }
+}
 
 #####################################################
 ###registro de los style para los css de la pagina###
@@ -64,8 +74,19 @@ function enqueue_styles() {
  wp_register_style('emmaus_style', plugins_url('plugin-emmaus/emmauspag/style.css'), array(), time());
  wp_enqueue_style('emmaus_style');
 
+ /* registrar css de uiverse stylos nativos */
+
+ wp_register_style('uiverse', plugins_url('plugin-emmaus/emmauspag/css/styleNativeUiverse.css'), array(), time());
+ wp_enqueue_style('uiverse');
+
  wp_register_style('table-responsive-css', 'https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css', array(), time());
  wp_enqueue_style('table-responsive-css');
+
+ $rol = cod_get_role_current_user();
+if($rol != 'administrator'){
+  wp_register_style('admin_style', plugins_url('plugin-emmaus/emmauspag/css/plataforma.css'), array(), time());
+  wp_enqueue_style('admin_style');
+}
 
 }
 add_action('admin_enqueue_scripts', 'enqueue_styles');
@@ -149,11 +170,41 @@ add_action('wp_ajax_nopriv_event-list-diploma-imprimir', 'Call_print_diploma');
 add_action('wp_ajax_event-list-diploma-imprimir', 'Call_print_diploma');
 
 # =========================================================================================
-# ========== boton que llama a funcion que abre el modal de inventarios  =====
+# ========== boton que llama a funcion que abre el modal de inventarios para el stock  =====
 # =========================================================================================
 
 add_action('wp_ajax_nopriv_event-list-inventario', 'Inventarios_modal');
 add_action('wp_ajax_event-list-inventario', 'Inventarios_modal');
+
+# =========================================================================================
+# ========== boton que llama a funcion que abre el modal de inventarios para el Stock =====
+# =========================================================================================
+
+add_action('wp_ajax_nopriv_event-list-inventario-stock', 'Inventarios_modal_stock');
+add_action('wp_ajax_event-list-inventario-stock', 'Inventarios_modal_stock');
+
+# ===============================================================
+# ========== boton que abre la vista de facturas de compras =====
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-factura-compras', 'vista_factura_compras');
+add_action('wp_ajax_event-list-factura-compras', 'vista_factura_compras');
+
+
+# ===============================================================
+# ========== cambio en el select de  la vista de facturas de ventas =====
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-factura-ventas-select', 'vista_factura_ventas');
+add_action('wp_ajax_event-list-factura-ventas-select', 'vista_factura_ventas');
+
+
+# ===============================================================
+# ========== Actualizar nota de diplomado =======================
+# ===============================================================
+
+add_action('wp_ajax_nopriv_event-list-update-diplomado', 'update_diplomado');
+add_action('wp_ajax_event-list-update-diplomado', 'update_diplomado');
 
 //funcion que retorna la url del servidor hasta la carpeta emmauspag
 

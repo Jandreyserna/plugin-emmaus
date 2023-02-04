@@ -115,7 +115,7 @@ if(!empty($_POST['activo']))
 
 ?>
 
-<div class="container-course">
+<div class="post-menu container">
 
   <div class="titulo text-center">
     <h1>Administración de cursos</h1>

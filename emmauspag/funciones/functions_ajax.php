@@ -304,11 +304,23 @@ function Call_print_certificate(){
   if($datos[0]['Porcentaje'] > 69.9){
       $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor (dirname(dirname(__DIR__)) . '/plantillasword/Plantilla_CERTIFICADO.docx');
       $estudiante = explode(' ',$nombre);
-      $estudiante = implode($estudiante);
+      $estudiante = implode(' ', $estudiante);
       $archivo = $estudiante.date("Y-m-d-B-A").'.docx';
+      /* 
+      evaluo que el nombre no sea muy largo para ocupar el espacio del diploma
+      */
+      if(strlen($nombre) > 20){
+        $nombreCorto = explode(' ',$nombre);
+        unset($nombreCorto[3]);
+        $nombreCorto = implode(' ',$nombreCorto);
+        $nom = new TextRun();
+        $nom->addText($nombreCorto,$fuente);
+      }else{
+        $nom = new TextRun();
+        $nom->addText($nombre,$fuente);
+      }
+      
       $url = ABSPATH  .'/certificados/'.$archivo;
-      $nom = new TextRun();
-      $nom->addText($nombre,$fuente);
       $porcentaje = new TextRun();
       $porcentaje->addText("\t\t".$datos[0]['Porcentaje'],$fuente2);
       $material = new TextRun();
@@ -423,7 +435,7 @@ function Call_print_diploma()
 
 
 ##########################################################################################
-#########Funcion que llama a el modal de la vista inventarios        #####################
+#########Funcion que llama a el modal de la vista inventarios  para el stock      #####################
 ##########################################################################################
 
 function Inventarios_modal(){
@@ -438,10 +450,10 @@ function Inventarios_modal(){
         </div>
         <div class="modal-body">
           <form action="" method="post">
-          <input name="activo" type="hidden" value="update_stock" >
+          <input name="activo" type="hidden" value="update_inventario" >
           <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
-          <label for="stock">Cantidad</label>
-          <input name="stock" type="number" value="0" >
+          <label for="inventario">Cantidad</label>
+          <input name="inventario" type="number" value="0" >
           <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -450,4 +462,93 @@ function Inventarios_modal(){
         </div>
 <?php
   wp_die();
+}
+
+##########################################################################################
+#########Funcion que llama a el modal de la vista inventarios  para las ventas      #####################
+##########################################################################################
+
+function Inventarios_modal_stock(){
+  unset($_POST['action']);
+  
+  ?>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar Stock</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+          <input name="activo" type="hidden" value="update_stock" >
+            <input name="IdMaterial" type="hidden" value=<?= $_POST['id']?> >
+            <label for="stock">Cantidad a actualizar</label>
+            <input name="stock" type="number" value="0" >
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+        </div>
+<?php
+  wp_die();
+}
+
+
+##########################################################################
+######### FUNCION DE LA VISTA DE FACTURAS DE VENTAS #####################
+##########################################################################
+
+function vista_factura_ventas(){ 
+  require_once dirname(__DIR__) . '/controller/ControlVentas.php';
+
+  unset($_POST['action']);
+  if( !empty($_POST['id']) ){
+    /*  consulto valor de material  */
+    $control = new ControlVentas();
+    $material = $control->one_material_venta($_POST['id']) ;
+    /* renuevo los campos input */
+?>
+    <input type="hidden" name="Titulo" id= "Titulo" value ="<?= $material[0]['TituloMaterial'] ?>">
+    <div class="mb-1" style="display:flex">
+      <label for="ValorU" style="width : 24%">Valor Unidad</label>
+      <input type="number" name="ValorU" id="ValorU" Value ="<?= $material[0]['ValorVenta'] ?>">  
+    </div>
+    <div class="mb-1" style="display:flex">
+      <label for="Cant" style="width : 24%">Cantidad</label>
+      <input type="number" name="Cant" id="Cant" Value ="1">
+    </div>
+    <div class="mb-1 valor-total" style="display:flex">
+      <label for="ValorT" style="width : 24%">Valor Total</label>
+      <input type="number" name="ValorT" id="ValorT" Value ="<?= $material[0]['ValorVenta'] ?>">
+    </div>
+<?php
+  } else if ( !empty($_POST['ValorU']) ){
+    /* multiplico la cantidad por el valor unitario */
+    $valort = $_POST['ValorU'] * $_POST['cantidad'];
+?>
+    <!-- cambio los campos del valor total -->
+    <label for="ValorT" style="width : 24%">Valor Total</label>
+    <input type="number" name="ValorT" id="ValorT" Value ="<?= $valort?>">
+
+<?php 
+  } else if ( !empty($_POST['Cant']) ){
+    /* multiplico la cantidad por el valor unitario */
+    $valort = $_POST['valor'] * $_POST['Cant'];
+?>
+    <!-- cambio los campos del valor total -->
+    <label for="ValorT" style="width : 24%">Valor Total</label>
+    <input type="number" name="ValorT" id="ValorT" Value ="<?= $valort?>">
+
+<?php 
+  }
+  wp_die();
+}
+
+##########################################################################
+#################### FUNCION DE ACTUALIZAR DIPLOMADO #####################
+##########################################################################
+
+function update_diplomado(){
+  require_once dirname(__DIR__).'/vistas/modales/modalActualizarDiplomado.php';
 }
